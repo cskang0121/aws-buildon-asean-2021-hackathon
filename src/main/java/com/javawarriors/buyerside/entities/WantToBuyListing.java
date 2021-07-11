@@ -1,28 +1,29 @@
 package com.javawarriors.buyerside.entities;
 
 import javax.persistence.*;
+import java.util.*;
 
 /**
  * Java class that represents users in the database
  */
 @Entity
-@Table(name = "wantToBuyListing")
+@Table(name = "want_to_buy_listing")
 public class WantToBuyListing {
 
     @Id
+    @Column(name="wtb_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long wtbId;
 
     @ManyToOne
     @JoinColumn(name = "uid")
-    @Column(nullable = false, unique = true, length = 45)
-    private Long user;
+    private User user;
 
     private String picUri;
 
     private String title;
 
-    private String desc;
+    private String description;
 
     private Character status;
 
@@ -38,7 +39,7 @@ public class WantToBuyListing {
     @JoinTable(
         name="wtb_tags",
         joinColumns= {
-            @JoinColumn(name="wtb_id", referencedColumnName ="wtb_id")
+            @JoinColumn(name="wtb_id", referencedColumnName = "wtb_id")
         },
         inverseJoinColumns = {
             @JoinColumn(name="tag_category_name", referencedColumnName = "tag_category_name"),
@@ -49,21 +50,21 @@ public class WantToBuyListing {
 
     /** getters and setters for the variables of the WTBlisting */
 
-    public Long getWtbid() {
-        return this.wtbid;
-    }
+	public Long getWtbId() {
+		return this.wtbId;
+	}
 
-    public void setWtbid(Long wtbid) {
-        this.wtbid = wtbid;
-    }
+	public void setWtbId(Long wtbId) {
+		this.wtbId = wtbId;
+	}
     
-    public Long getUid() {
-        return this.uid;
-    }
+    public User getUser() {
+		return this.user;
+	}
 
-    public void setUid(Long uid) {
-        this.uid = uid;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
     public String getPicUri() {
         return this.picUri;
@@ -81,12 +82,12 @@ public class WantToBuyListing {
         this.title = title;
     }
 
-    public String getDesc() {
-        return this.desc;
+    public String getDescription() {
+        return this.description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Character getStatus() {

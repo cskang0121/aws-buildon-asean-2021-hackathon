@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class BuyerQnAPK implements Serializable {
-    private Long wtbId;
+    private Long wtbListing;
     private Long qnaId;
 
     /**
@@ -14,8 +14,8 @@ public class BuyerQnAPK implements Serializable {
 
     }
 
-    public BuyerQnAPK(Long wtbId, Long qnaId) {
-        this.wtbId = wtbId;
+    public BuyerQnAPK(Long wtbListing, Long qnaId) {
+        this.wtbListing = wtbListing;
         this.qnaId = qnaId;
     }
 
@@ -36,7 +36,7 @@ public class BuyerQnAPK implements Serializable {
         if (o == null || getClass() != o.getClass())
             return false;
         BuyerQnAPK buyerQnaKey = (BuyerQnAPK) o;
-        return wtbId.equals(buyerQnaKey.wtbId) && qnaId.equals(buyerQnaKey.qnaId);
+        return wtbListing.equals(buyerQnaKey.wtbListing) && qnaId.equals(buyerQnaKey.qnaId);
     }
 
     /**
@@ -46,6 +46,6 @@ public class BuyerQnAPK implements Serializable {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(wtbId, qnaId);
+        return Objects.hash(wtbListing, qnaId);
     }
 }

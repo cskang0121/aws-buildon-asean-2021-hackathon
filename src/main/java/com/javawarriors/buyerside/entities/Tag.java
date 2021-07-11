@@ -14,11 +14,12 @@ public class Tag {
     private TagCategory tagCategoryName;
 
     @Id
+    @Column(name="tag_value")
     private String tagValue;
 
     @ManyToMany(mappedBy="tags")
     private Collection<ItemForSaleListing> ifsListings;
 
     @ManyToMany(mappedBy="tags")
-    private Collection <WantToBuyListing> wtbListings;
+    private Collection<WantToBuyListing> wtbListings;
 }

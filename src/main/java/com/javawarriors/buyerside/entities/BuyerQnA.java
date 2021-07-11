@@ -9,7 +9,6 @@ import com.javawarriors.buyerside.entities.compositeKeys.*;
 public class BuyerQnA {
     @ManyToOne
     @JoinColumn(name = "wtb_id")
-    @Column(name="wtb_id", nullable = false, unique = true, length = 45)
     @Id
     private WantToBuyListing wtbListing;
     

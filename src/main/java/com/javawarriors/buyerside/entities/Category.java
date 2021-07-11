@@ -9,6 +9,6 @@ public class Category {
     @Id
     private String categoryName;
 
-    @OneToMany(mappedby="category")
+    @OneToMany(mappedBy="category")
     private Collection<ItemForSaleListing> ifsListings;
 }

@@ -3,6 +3,7 @@ package com.javawarriors.buyerside.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.javawarriors.buyerside.entities.compositeKeys.*;
 import javax.persistence.*;
+import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true) // Ignores any unknown field when parsing JSON
 @Entity
@@ -10,12 +11,13 @@ import javax.persistence.*;
 public class ItemForSaleListing {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="ifs_id")
     private Long ifsId; 
 
     @ManyToOne
     @JoinColumn(name="uid")
-    private User user; 
-
+    private User user;
+ 
     private String picUri;
 
     private String title;
@@ -53,12 +55,12 @@ public class ItemForSaleListing {
 		this.ifsId = ifsId;
 	}
 
-	public User getUserId() {
-		return this.userId;
+    public User getUser() {
+		return this.user;
 	}
 
-	public void setUserId(User userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getPicUri() {
@@ -89,7 +91,7 @@ public class ItemForSaleListing {
 		return this.status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Character status) {
 		this.status = status;
 	}
 
@@ -101,11 +103,11 @@ public class ItemForSaleListing {
 		this.listingType = listingType;
 	}
 
-	public String getCategory() {
+	public Category getCategory() {
 		return this.category;
 	}
 
-	public void setCategory(String category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 

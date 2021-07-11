@@ -11,13 +11,11 @@ import javax.persistence.*;
 public class Offer {
     @ManyToOne
     @JoinColumn(name = "uid")
-    @Column(name="buyer_id", nullable = false, unique = true, length = 45)
     @Id
     private User buyer;
     
     @ManyToOne
     @JoinColumn(name = "ifs_id")
-    @Column(name = "ifs_id", nullable = false, unique = true, length = 45)
     @Id
     private ItemForSaleListing ifsListing;
 

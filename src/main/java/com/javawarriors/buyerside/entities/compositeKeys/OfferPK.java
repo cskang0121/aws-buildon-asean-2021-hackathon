@@ -7,8 +7,8 @@ import java.util.Objects;
  * Java class that represents the composite primary key of History
  */
 public class OfferPK implements Serializable {
-    private Long buyerId;
-    private Long ifsListingId;
+    private Long buyer;
+    private Long ifsListing;
 
     /**
      * No argument constructor
@@ -17,9 +17,9 @@ public class OfferPK implements Serializable {
 
     }
 
-    public OfferPK(Long buyerId, Long ifsListingId) {
-        this.buyerId = buyerId;
-        this.ifsListingId = ifsListingId;
+    public OfferPK(Long buyer, Long ifsListing) {
+        this.buyer = buyer;
+        this.ifsListing = ifsListing;
     }
 
     /**
@@ -39,7 +39,7 @@ public class OfferPK implements Serializable {
         if (o == null || getClass() != o.getClass())
             return false;
         OfferPK offerKey = (OfferPK) o;
-        return buyerId.equals(offerKey.buyerId) && ifsListingId.equals(offerKey.ifsListingId);
+        return buyer.equals(offerKey.buyer) && ifsListing.equals(offerKey.ifsListing);
     }
 
     /**
@@ -49,6 +49,6 @@ public class OfferPK implements Serializable {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(buyerId, ifsListingId);
+        return Objects.hash(buyer, ifsListing);
     }
 }

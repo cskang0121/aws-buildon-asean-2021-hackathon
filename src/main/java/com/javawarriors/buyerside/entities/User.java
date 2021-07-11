@@ -58,13 +58,14 @@ public class User {
     /**
      * getters and setters for the variables of the user
      */
-    public Long getId() {
-        return this.id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Long getUid() {
+		return this.uid;
+	}
+
+	public void setUid(Long uid) {
+		this.uid = uid;
+	}
 
     public String getEmail() {
         return this.email;

@@ -1,38 +1,33 @@
-package com.javawarriors.buyerside.entities;
+// package com.javawarriors.buyerside.entities;
 
-import javax.persistence.*;
+// import javax.persistence.*;
 
-import com.javawarriors.buyerside.entities.BuyerQnA;
+// import com.javawarriors.buyerside.entities.BuyerQnA;
 
-@Entity
-@Table(name = "AnswerQnA")
-public class AnswerQnA {
-    @ManyToOne
-    @JoinColumn(name = "wtb_id")
-    @Column(nullable = false, unique = true, length = 45)
-    private BuyerQnA buyerQnA;
+// @Entity
+// @Table(name = "AnswerQnA")
+// public class AnswerQnA {
+//     @ManyToOne
+//     @JoinColumn(name = "wtb_id")
+//     private BuyerQnA buyerQnA;
     
-    @ManyToOne
-    @JoinColumn(name = "wtb_id")
-    @Column(nullable = false, unique = true, length = 45)
-    private Long qnaId;
+//     @ManyToOne
+//     @JoinColumn(name = "wtb_id")
+//     private Long qnaId;
 
-    ManyToOne
-    @JoinColumn(name = "seller_id")
-    @Column(nullable = false, unique = true, length = 45)
-    private Long sellerId;
+//     @ManyToOne
+//     @JoinColumn(name = "seller_id")
+//     private Long sellerId;
     
-    @ManyToOne
-    @JoinColumn(name = "wtb_id")
-    @Column(nullable = false, unique = true, length = 45)
-    private Long wtbId;
+//     @ManyToOne
+//     @JoinColumn(name = "wtb_id")
+//     private Long wtbId;
 
-    @ManyToOne
-    @JoinColumn(name = "ifs_id")
-    @Column(nullable = false, unique = true, length = 45)
-    private Long ifsId;
+//     @ManyToOne
+//     @JoinColumn(name = "ifs_id")
+//     private Long ifsId;
 
-    /** getters and setters for the variables of the AnswerQnA */
+//     /** getters and setters for the variables of the AnswerQnA */
 
    
-}
+// }
