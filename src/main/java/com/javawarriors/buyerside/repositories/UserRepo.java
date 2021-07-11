@@ -13,7 +13,7 @@ import org.springframework.data.repository.query.Param;
  * Spring JPA Repository programming model for users
  */
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepo extends JpaRepository<User, Long> {
     /**
      * used to find a user using their email
      * @param email is the email of the user
@@ -25,7 +25,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * used to find a user using their verification code
      * @param code contains the verification code that is needed to verify the user's account
      */
-    @Query("SELECT u FROM User u WHERE u.verification_code = ?1")
+    @Query("SELECT u FROM User u WHERE u.verificationCode = ?1")
     public User findByVerificationCode(String code);
     
     /**
