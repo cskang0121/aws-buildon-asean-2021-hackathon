@@ -23,8 +23,6 @@ public class Offer {
 
     private Date dateOfOffer;
 
-    private String desc;
-
     private Character status;
 
     /** getters and setters for the variables of the Offer */
@@ -59,14 +57,6 @@ public class Offer {
 
     public void setDateOfOffer(Date dateOfOffer) {
         this.dateOfOffer = dateOfOffer;
-    }
-
-    public String getDesc() {
-        return this.desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
     }
 
     public Character getStatus() {
