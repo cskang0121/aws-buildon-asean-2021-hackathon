@@ -26,7 +26,26 @@ public class WantToBuyListing {
 
     private Character status;
 
-    private String category;
+    private Double priceUpper;
+
+    private Double priceLower;
+
+    @ManyToOne
+    @JoinColumn(name="category_name")
+    private Category category;
+
+    @ManyToMany
+    @JoinTable(
+        name="wtb_tags",
+        joinColumns= {
+            @JoinColumn(name="wtb_id", referencedColumnName ="wtb_id")
+        },
+        inverseJoinColumns = {
+            @JoinColumn(name="tag_category_name", referencedColumnName = "tag_category_name"),
+            @JoinColumn(name="tag_value", referencedColumnName = "tag_value")
+        }
+    )
+    private Collection<Tag> tags;
 
     /** getters and setters for the variables of the WTBlisting */
 
@@ -78,13 +97,29 @@ public class WantToBuyListing {
         this.status = status;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return this.category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
+
+    public Double getPriceUpper() {
+		return this.priceUpper;
+	}
+
+	public void setPriceUpper(Double priceUpper) {
+		this.priceUpper = priceUpper;
+	}
+
+	public Double getPriceLower() {
+		return this.priceLower;
+	}
+
+	public void setPriceLower(Double priceLower) {
+		this.priceLower = priceLower;
+	}
     
 
 }
