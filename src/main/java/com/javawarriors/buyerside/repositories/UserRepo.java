@@ -20,6 +20,12 @@ public interface UserRepo extends JpaRepository<User, Long> {
      */ 
     @Query("SELECT u FROM User u WHERE u.email = ?1")
     public User findByEmail(String email);
+
+    /**
+     * used to find a user using their username
+     * @param username is the username of the user
+     */ 
+    public User findByUsername(String username);
      
     /**
      * used to find a user using their verification code
