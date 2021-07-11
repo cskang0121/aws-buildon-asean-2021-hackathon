@@ -41,7 +41,7 @@ public class ItemForSaleListing {
             @JoinColumn(name="tag_value", referencedColumnName = "tag_value")
         }
     )
-    private Collection<Tag> tags;
+    private Set<Tag> tags;
 
     @ManyToOne
     @JoinColumn(name="category_name")

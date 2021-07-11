@@ -46,7 +46,7 @@ public class WantToBuyListing {
             @JoinColumn(name="tag_value", referencedColumnName = "tag_value")
         }
     )
-    private Collection<Tag> tags;
+    private Set<Tag> tags;
 
     /** getters and setters for the variables of the WTBlisting */
 

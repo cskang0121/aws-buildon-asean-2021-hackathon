@@ -18,8 +18,8 @@ public class Tag {
     private String tagValue;
 
     @ManyToMany(mappedBy="tags")
-    private Collection<ItemForSaleListing> ifsListings;
+    private Set<ItemForSaleListing> ifsListings;
 
     @ManyToMany(mappedBy="tags")
-    private Collection<WantToBuyListing> wtbListings;
+    private Set<WantToBuyListing> wtbListings;
 }
