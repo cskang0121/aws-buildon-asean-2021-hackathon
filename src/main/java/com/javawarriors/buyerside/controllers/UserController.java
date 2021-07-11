@@ -38,18 +38,39 @@ public class UserController {
     }
 
     /**
-     * Save user information from signup form to database
+     * Save user information from signup form to database.
      * 
-     * @param user to set
-     * 
-     * @return path to "register_successful.html"
+     * @param user to set.
+     * @return path to user/register_successful.html.
      */
     @PostMapping("/process_register")
     public String processRegistration(User user) {
-        userService.addUser(user);
-
+        try {
+            userService.addUser(user);
+        } catch (Exception e) {
+            return "register_fail";
+        }
         return "register_success";
     }
+
+    @GetMapping("/register/error")
+    public String error() {
+        return "error";
+    }
+
+    // /**
+    //  * Save user information from signup form to database
+    //  * 
+    //  * @param user to set
+    //  * 
+    //  * @return path to "register_successful.html"
+    //  */
+    // @PostMapping("/process_register")
+    // public String processRegistration(User user) {
+    //     userService.addUser(user);
+
+    //     return "register_success";
+    // }
 
     /**
      * Open home page
@@ -67,8 +88,13 @@ public class UserController {
      * @return path to "index.html"
      */
     @PostMapping("/delete_account")
+    public String confirmDeleteUser() {
+        return "confirm_delete";
+    }
+
+    @GetMapping("/confirm_delete")
     public String deleteUser() {
         userService.deleteByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
-        return "index";
-    } 
+        return "delete_success";
+    }
 }
