@@ -1,6 +1,6 @@
 package com.javawarriors.buyerside.entities;
 
-import java.util.Date;
+import java.util.*;
 import com.javawarriors.buyerside.entities.compositeKeys.*;
 
 import javax.persistence.*;
@@ -27,6 +27,9 @@ public class Deal {
     private Double priceToSellFor;
 
     private Date dateOfDeal;
+
+    @OneToMany(mappedBy="deal")
+    private Collection<AnswerQnA> answers;
 
     /** getters and setters for the variables of the Deal */
 
