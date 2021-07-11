@@ -14,9 +14,8 @@ public class User {
      * user's unique user id which is automatically generated
      */
     @Id
-    @Column(name = "UID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long uid;
 
     /**
      * user's registered email
