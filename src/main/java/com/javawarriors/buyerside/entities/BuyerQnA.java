@@ -1,14 +1,17 @@
 package com.javawarriors.buyerside.entities;
 
 import javax.persistence.*;
+import com.javawarriors.buyerside.entities.compositeKeys.*;
 
 @Entity
 @Table(name = "buyerQnA")
+@IdClass(BuyerQnAPK.class)
 public class BuyerQnA {
     @ManyToOne
     @JoinColumn(name = "wtb_id")
-    @Column(nullable = false, unique = true, length = 45)
-    private Long wtbId;
+    @Column(name="wtb_id", nullable = false, unique = true, length = 45)
+    @Id
+    private WantToBuyListing wtbListing;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,13 +21,13 @@ public class BuyerQnA {
 
     /** getters and setters for the variables of the BuyerQnA */
 
-    public Long getWtbId() {
-        return this.wtbId;
-    }
+    public WantToBuyListing getWtbListing() {
+		return this.wtbListing;
+	}
 
-    public void setWtbId(Long wtbId) {
-        this.wtbId = wtbId;
-    }
+	public void setWtbListing(WantToBuyListing wtbListing) {
+		this.wtbListing = wtbListing;
+	}
 
     public Long getQnaId() {
         return this.qnaId;

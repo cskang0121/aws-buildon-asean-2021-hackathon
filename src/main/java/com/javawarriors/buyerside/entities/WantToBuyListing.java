@@ -16,7 +16,7 @@ public class WantToBuyListing {
     @ManyToOne
     @JoinColumn(name = "uid")
     @Column(nullable = false, unique = true, length = 45)
-    private Long uid;
+    private Long user;
 
     private String picUri;
 

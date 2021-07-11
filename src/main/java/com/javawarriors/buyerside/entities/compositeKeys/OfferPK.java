@@ -6,20 +6,20 @@ import java.util.Objects;
 /*
  * Java class that represents the composite primary key of History
  */
-public class TagPK implements Serializable {
-    private String tagCategoryName;
-    private String tagValue;
+public class OfferPK implements Serializable {
+    private Long buyerId;
+    private Long ifsListingId;
 
     /**
      * No argument constructor
      */
-    public TagPK() {
+    public OfferPK() {
 
     }
 
-    public TagPK(String tagCategoryName, String tagValue) {
-        this.tagCategoryName = tagCategoryName;
-        this.tagValue = tagValue;
+    public OfferPK(Long buyerId, Long ifsListingId) {
+        this.buyerId = buyerId;
+        this.ifsListingId = ifsListingId;
     }
 
     /**
@@ -38,8 +38,8 @@ public class TagPK implements Serializable {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        TagPK tagKey = (TagPK) o;
-        return tagCategoryName.equals(tagKey.tagCategoryName) && tagValue.equals(tagKey.tagValue);
+        OfferPK offerKey = (OfferPK) o;
+        return buyerId.equals(offerKey.buyerId) && ifsListingId.equals(offerKey.ifsListingId);
     }
 
     /**
@@ -49,6 +49,6 @@ public class TagPK implements Serializable {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(tagCategoryName, tagValue);
+        return Objects.hash(buyerId, ifsListingId);
     }
 }

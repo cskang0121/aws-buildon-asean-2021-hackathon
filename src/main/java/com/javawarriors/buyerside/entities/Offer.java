@@ -2,22 +2,26 @@ package com.javawarriors.buyerside.entities;
 
 import java.util.Date;
 
+import com.javawarriors.buyerside.entities.compositeKeys.*;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "offer")
+@IdClass(OfferPK.class)
 public class Offer {
     @ManyToOne
     @JoinColumn(name = "uid")
-    @Column(nullable = false, unique = true, length = 45)
-    private Long buyerId;
+    @Column(name="buyer_id", nullable = false, unique = true, length = 45)
+    @Id
+    private User buyer;
     
     @ManyToOne
     @JoinColumn(name = "ifs_id")
-    @Column(nullable = false, unique = true, length = 45)
-    private Long ifsId;
+    @Column(name = "ifs_id", nullable = false, unique = true, length = 45)
+    @Id
+    private ItemForSaleListing ifsListing;
 
-    private Integer offeredPrice;
+    private Double offeredPrice;
 
     private Date dateOfOffer;
 
@@ -27,29 +31,29 @@ public class Offer {
 
     /** getters and setters for the variables of the Offer */
 
-    public Long getBuyerId() {
-        return this.buyerId;
-    }
+    public User getBuyer() {
+		return this.buyer;
+	}
 
-    public void setBuyerId(Long buyerId) {
-        this.buyerId = buyerId;
-    }
+	public void setBuyer(User buyer) {
+		this.buyer = buyer;
+	}
 
-    public Long getIfsId() {
-        return this.ifsId;
-    }
+    public ItemForSaleListing getIfsListing() {
+		return this.ifsListing;
+	}
 
-    public void setIfsId(Long ifsId) {
-        this.ifsId = ifsId;
-    }
+	public void setIfsListing(ItemForSaleListing ifsListing) {
+		this.ifsListing = ifsListing;
+	}
 
-    public Integer getOfferedPrice() {
-        return this.offeredPrice;
-    }
+	public Double getOfferedPrice() {
+		return this.offeredPrice;
+	}
 
-    public void setOfferedPrice(Integer offeredPrice) {
-        this.offeredPrice = offeredPrice;
-    }
+	public void setOfferedPrice(Double offeredPrice) {
+		this.offeredPrice = offeredPrice;
+	}
 
     public Date getDateOfOffer() {
         return this.dateOfOffer;

@@ -13,8 +13,8 @@ public class ItemForSaleListing {
     private Long ifsId; 
 
     @ManyToOne
-    @JoinColumn(name="id")
-    private User userId; 
+    @JoinColumn(name="uid")
+    private User user; 
 
     private String picUri;
 

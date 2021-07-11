@@ -3,23 +3,20 @@ package com.javawarriors.buyerside.entities.compositeKeys;
 import java.io.Serializable;
 import java.util.Objects;
 
-/*
- * Java class that represents the composite primary key of History
- */
-public class TagPK implements Serializable {
-    private String tagCategoryName;
-    private String tagValue;
+public class BuyerQnAPK implements Serializable {
+    private Long wtbId;
+    private Long qnaId;
 
     /**
      * No argument constructor
      */
-    public TagPK() {
+    public BuyerQnAPK() {
 
     }
 
-    public TagPK(String tagCategoryName, String tagValue) {
-        this.tagCategoryName = tagCategoryName;
-        this.tagValue = tagValue;
+    public BuyerQnAPK(Long wtbId, Long qnaId) {
+        this.wtbId = wtbId;
+        this.qnaId = qnaId;
     }
 
     /**
@@ -38,8 +35,8 @@ public class TagPK implements Serializable {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        TagPK tagKey = (TagPK) o;
-        return tagCategoryName.equals(tagKey.tagCategoryName) && tagValue.equals(tagKey.tagValue);
+        BuyerQnAPK buyerQnaKey = (BuyerQnAPK) o;
+        return wtbId.equals(buyerQnaKey.wtbId) && qnaId.equals(buyerQnaKey.qnaId);
     }
 
     /**
@@ -49,6 +46,6 @@ public class TagPK implements Serializable {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(tagCategoryName, tagValue);
+        return Objects.hash(wtbId, qnaId);
     }
 }
