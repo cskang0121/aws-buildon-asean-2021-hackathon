@@ -32,13 +32,13 @@ public class User {
     /**
      * user's registered first name
      */
-    @Column(name = "firstName", nullable = false, length = 20)
+    @Column(name = "first_name", nullable = false, length = 20)
     private String firstName;
 
     /**
      * user's registered last name
      */
-    @Column(name = "lastName", nullable = false, length = 20)
+    @Column(name = "last_name", nullable = false, length = 20)
     private String lastName;
 
     /**
