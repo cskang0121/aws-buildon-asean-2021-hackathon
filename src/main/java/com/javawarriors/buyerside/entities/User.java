@@ -1,6 +1,5 @@
 package com.javawarriors.buyerside.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 
 /**
@@ -40,6 +39,18 @@ public class User {
      */
     @Column(name = "last_name", nullable = false, length = 20)
     private String lastName;
+
+    /**
+     * user's registered location
+     */
+    @Column(name = "location", nullable = false, length = 64)
+    private String location;
+
+    /**
+     * user's unique username
+     */
+    @Column(name = "username", nullable = false, length = 20)
+    private String username;
 
     /**
      * user's verification code that is needed to enable their account
@@ -97,6 +108,22 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getLocation() {
+        return this.location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getVerificationCode() {

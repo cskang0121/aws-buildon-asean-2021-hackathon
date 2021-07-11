@@ -33,4 +33,12 @@ public interface UserRepo extends JpaRepository<User, Long> {
      * @param token is the password reset token that has been sent to the user's email
      */
     public User findByResetPasswordToken(String token);
+
+    /**
+     * Use an SQL query to delete user from database where email is matched.
+     * 
+     * @param email of user.
+     * @return number of rows deleted.
+     */
+    long deleteByEmail(String email);
 }

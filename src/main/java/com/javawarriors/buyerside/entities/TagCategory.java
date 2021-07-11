@@ -1,7 +1,6 @@
 package com.javawarriors.buyerside.entities;
 
 import java.util.*;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 
 @Entity
