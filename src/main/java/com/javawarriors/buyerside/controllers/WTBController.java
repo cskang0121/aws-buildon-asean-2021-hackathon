@@ -12,16 +12,20 @@ import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.security.core.Authentication;
 // import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 /**
  * Controller for want to buy listings
  */
-@Controller
-@RequestMapping("api/wtb-listing")
+
+
+@CrossOrigin(origins={ "http://localhost:3000" })
+@RestController
+@RequestMapping("/api/v1/")
 public class WTBController {
     /**
      * Connects to the service layer for want to buy listings
@@ -31,7 +35,12 @@ public class WTBController {
 
     Logger logger = LoggerFactory.getLogger(WTBController.class);
 
-    @PostMapping("/post")
+    @GetMapping("/wtb-listing")
+    public List<WantToBuyListing> getAllWTBListings() {
+        return wtbService.findAll();
+    }
+
+    @PostMapping("/wtb-listing/post")
     public WantToBuyListing postWTBListing(@RequestBody WantToBuyListing newWTBListing) {
         wtbService.save(newWTBListing);
         return newWTBListing;

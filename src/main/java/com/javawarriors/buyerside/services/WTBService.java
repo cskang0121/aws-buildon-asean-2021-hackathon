@@ -21,6 +21,10 @@ public class WTBService {
         return wtbRepo.saveAll(entities);
     }
 
+    public List<WantToBuyListing> findAll() {
+        return wtbRepo.findAll();
+    }
+
     public WantToBuyListing save(WantToBuyListing entity) {
         return wtbRepo.save(entity);
     }
