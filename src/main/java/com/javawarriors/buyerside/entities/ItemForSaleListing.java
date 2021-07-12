@@ -111,6 +111,12 @@ public class ItemForSaleListing {
 		this.category = category;
 	}
 
+	public Double getPrice() {
+		return this.price;
+	}
 
+	public void setPrice(Double price) {
+		this.price = price;
+	}
 
 }
