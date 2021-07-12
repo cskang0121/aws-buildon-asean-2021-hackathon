@@ -8,6 +8,7 @@ export default function NavigationBar() {
       <Nav className="mr-auto">
         <Nav.Link href="/home">Home</Nav.Link>
         <Nav.Link href="/wtb">WTB Listings</Nav.Link>
+        <Nav.Link href="/ifs">IFS Listings</Nav.Link>
         <Nav.Link href="/register">Sign Up</Nav.Link>
       </Nav>
     </Navbar>
