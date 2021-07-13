@@ -16,6 +16,8 @@ public class WTBService {
 
     @Autowired
     private WTBRepo wtbRepo;
+    @Autowired
+    private JwtUserDetailsService userService;
 
     // public List<WantToBuyListing> saveAll(Iterable<WantToBuyListing> entities) {
     //     return wtbRepo.saveAll(entities);
@@ -23,6 +25,11 @@ public class WTBService {
 
     public List<WantToBuyListing> findAll() {
         return wtbRepo.findAll();
+    }
+
+    public List<WantToBuyListing> findByUser(Long userId) {
+        User user = userService.findInRepoById(userId);
+        return wtbRepo.findByUser(user);
     }
 
     public WantToBuyListing save(WantToBuyListing entity) {

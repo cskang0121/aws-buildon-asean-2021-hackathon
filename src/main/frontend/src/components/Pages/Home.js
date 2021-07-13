@@ -6,8 +6,7 @@ export default function Home() {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    UserService.getProfile().then((res) => setUser(res.data));
-    console.log(user);
+    setUser(UserService.getProfile());
   }, []);
 
   return (

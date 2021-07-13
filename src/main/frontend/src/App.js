@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -15,14 +15,41 @@ import Search from "./components/Pages/Search";
 import WTBListingDetails from "./components/Pages/WTBListingDetails";
 import WTBOffer from "./components/Pages/WTBOffer";
 
-import { Container, Row, Col } from "react-bootstrap";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import AuthenticationService from "./services/AuthenticationService";
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const user = AuthenticationService.getCurrentUserToken();
+
+    if (user && user.token) {
+      setLoggedIn(true);
+    }
+  }, []);
+
   return (
     <div className="App">
       <Router>
         <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => {
+              return loggedIn ? (
+                <Redirect to="/home" />
+              ) : (
+                <Redirect to="/login" />
+              );
+            }}
+          />
           <PrivateRoute path="/home" exact component={Home} />
           <Route path="/register" exact component={Register} />
           <Route path="/login" exact component={Login} />

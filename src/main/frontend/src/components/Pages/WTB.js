@@ -3,20 +3,21 @@ import { Button } from "react-bootstrap";
 import { useHistory } from "react-router";
 import WTBService from "../../services/WTBService";
 import NavigationBar from "../Navbar/NavigationBar";
+import UserService from "../../services/UserService";
 
 const WTBListings = () => {
   const [listings, setListings] = useState([]);
 
+  useEffect(() => {
+    fetchListings();
+  }, []);
+
   const fetchListings = () => {
-    WTBService.getAllWTBListings().then((res) => {
+    WTBService.getCurrentUserWTBListings(UserService.getProfile().uid).then((res) => {
       console.log(res.data);
       setListings(res.data);
     });
   };
-
-  useEffect(() => {
-    fetchListings();
-  }, []);
 
   function deleteWTB(listing) {
     WTBService.postDeleteWTB(listing).then((res) => {
