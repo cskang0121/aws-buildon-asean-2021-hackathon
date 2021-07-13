@@ -26,7 +26,6 @@ const IFSListings = () => {
     // Make something less ugly lmao
     return (
       <div>
-        <NavigationBar />
         <h2>{listing.title}</h2>
         <p>{listing.description}</p>
         <p>
@@ -49,6 +48,7 @@ export default function IFS(props) {
 
   return (
     <div>
+      <NavigationBar />
       <Button onClick={addIFS}>Add New</Button>
       <h1>Item For Sale Listings</h1>
       <IFSListings />

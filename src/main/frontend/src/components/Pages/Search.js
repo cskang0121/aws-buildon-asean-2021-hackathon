@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useHistory } from "react-router";
 import WTBService from "../../services/WTBService";
+import NavigationBar from "../Navbar/NavigationBar";
 
 const WTBListings = (props) => {
   const [listings, setListings] = useState([]);
@@ -36,6 +37,7 @@ export default function Home() {
 
   return (
     <div>
+        <NavigationBar />
         <h1>Search</h1>
         <div className="ui search">
           <div className="ui icon input">

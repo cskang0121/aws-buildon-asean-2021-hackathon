@@ -11,6 +11,7 @@ import IFS from "./components/Pages/IFS";
 import CreateIFS from "./components/Pages/CreateIFS";
 import Login from "./components/Pages/Login";
 import { PrivateRoute } from "./components/PrivateRoute";
+import Search from "./components/Pages/Search";
 
 import AuthenticationService from "./services/AuthenticationService";
 
@@ -54,6 +55,7 @@ function App() {
           <PrivateRoute path="/add-wtb" exact component={CreateWTB} />
           <PrivateRoute path="/ifs" exact component={IFS} />
           <PrivateRoute path="/add-ifs" exact component={CreateIFS} />
+          <PrivateRoute path="/search" exact component={Search} />
         </Switch>
       </Router>
     </div>
