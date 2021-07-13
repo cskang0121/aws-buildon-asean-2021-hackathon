@@ -13,6 +13,7 @@ import Login from "./components/Pages/Login";
 import { PrivateRoute } from "./components/PrivateRoute";
 import Search from "./components/Pages/Search";
 import WTBListingDetails from "./components/Pages/WTBListingDetails";
+import IFSListingDetails from "./components/Pages/IFSListingDetails";
 import Deal from "./components/Pages/Deal";
 
 import AuthenticationService from "./services/AuthenticationService";
@@ -59,7 +60,7 @@ function App() {
           <PrivateRoute path="/add-ifs" exact component={CreateIFS} />
           <PrivateRoute path="/search" exact component={Search} />
           <PrivateRoute path="/wtb-listing-details" exact component={WTBListingDetails} />
-          <PrivateRoute path="/wtb-listing-details" exact component={WTBListingDetails} />
+          <PrivateRoute path="/ifs-listing-details" exact component={IFSListingDetails} />
           <PrivateRoute path="/deal" exact component={Deal} />
         </Switch>
       </Router>

@@ -15,4 +15,8 @@ import org.springframework.data.repository.query.Param;
 @Repository
 public interface IFSRepo extends JpaRepository<ItemForSaleListing, Long> {
 
+    public List<ItemForSaleListing> findByTitleContaining(String keyword);
+
+    public List<ItemForSaleListing> findByUser(User user);
+
 }

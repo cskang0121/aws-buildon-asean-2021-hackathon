@@ -32,4 +32,8 @@ public class IFSService {
     public void deleteById(Long ifsId) {
         ifsRepo.deleteById(ifsId);
     }
+
+    public List<ItemForSaleListing> getSearchResults(String keyword) {
+        return ifsRepo.findByTitleContaining(keyword);
+    }
 }
