@@ -17,15 +17,15 @@ const WTBListings = (props) => {
 
   useEffect(() => {
     fetchListings();
-  }, [listings]);
+  }, [props.keyword]);
 
   return listings.map((listing, index) => {
     const wtbDetails = (listing) => {
-    history.push({
-      pathname: "/wtb-listing-details",
-      state: {listing: listing}
-    });
-  };
+      history.push({
+        pathname: "/wtb-listing-details",
+        state: { listing: listing },
+      });
+    };
     // Make something less ugly lmao
     return (
       <div onClick={() => wtbDetails(listing)}>
@@ -44,16 +44,22 @@ export default function Home() {
 
   return (
     <div>
-        <NavigationBar />
-        <h1>Search</h1>
-        <div className="ui search">
-          <div className="ui icon input">
-            <input type="text" placeholder="Search WTB Listings" onChange={event => {setSearchTerm(event.target.value)}}></input>
-          </div>
+      <NavigationBar />
+      <h1>Search</h1>
+      <div className="ui search">
+        <div className="ui icon input">
+          <input
+            type="text"
+            placeholder="Search WTB Listings"
+            onChange={(event) => {
+              setSearchTerm(event.target.value);
+            }}
+          ></input>
         </div>
+      </div>
 
-        <h2>Want To Buy Listings</h2>
-        <WTBListings keyword={searchTerm}/>
+      <h2>Want To Buy Listings</h2>
+      <WTBListings keyword={searchTerm} />
     </div>
-  )
+  );
 }

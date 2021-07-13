@@ -13,7 +13,7 @@ public class BuyerQnA {
     private WantToBuyListing wtbListing;
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long qnaId;
 
     private String question;
