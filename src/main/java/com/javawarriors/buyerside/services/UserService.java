@@ -31,13 +31,13 @@
 //         repo.save(user);
 //     }
     
-//     /**
-//      * Takes in the email of the user and deletes the information of the user from the database
-//      * Logs out user from account
-//      */
-//     @Transactional
-//     public void deleteByEmail(String email) {
-//         repo.deleteByEmail(email); // Delete user
-//         SecurityContextHolder.getContext().setAuthentication(null); // Log out user
-//     }
+//     // /**
+//     //  * Takes in the email of the user and deletes the information of the user from the database
+//     //  * Logs out user from account
+//     //  */
+//     // @Transactional
+//     // public void deleteByEmail(String email) {
+//     //     repo.deleteByEmail(email); // Delete user
+//     //     SecurityContextHolder.getContext().setAuthentication(null); // Log out user
+//     // }
 // }

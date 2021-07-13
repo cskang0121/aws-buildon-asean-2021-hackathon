@@ -10,6 +10,7 @@ import {
 } from "react-bootstrap";
 
 import { useHistory } from "react-router";
+import NavigationBar from "../Navbar/NavigationBar";
 
 import WTBService from "../../services/WTBService";
 
@@ -33,7 +34,7 @@ export default function CreateWTB(props) {
       categoryName: null,
       uid: null,
     };
-    
+
     WTBService.postWTBListing(listing).then((res) => {
       history.push({
         pathname: "/wtb",
@@ -42,78 +43,81 @@ export default function CreateWTB(props) {
   };
 
   return (
-    <Row className="justify-content-md-center">
-      <Col lg={12}>
-        <Form.Row>
-          <Form.Group>
-            <InputGroup>
-              <InputGroup.Prepend>
-                <InputGroup.Text>Title:</InputGroup.Text>
-              </InputGroup.Prepend>
-              <FormControl
-                required
-                autoComplete="off"
-                type="text"
-                name="title"
-                value={title}
-                onChange={(event) => setTitle(event.target.value)}
-              />
-            </InputGroup>
-          </Form.Group>
-        </Form.Row>
-        <Form.Row>
-          <Form.Group>
-            <InputGroup>
-              <InputGroup.Prepend>
-                <InputGroup.Text>Description:</InputGroup.Text>
-              </InputGroup.Prepend>
-              <FormControl
-                required
-                autoComplete="off"
-                type="text"
-                name="description"
-                value={description}
-                onChange={(event) => setDescription(event.target.value)}
-              />
-            </InputGroup>
-          </Form.Group>
-        </Form.Row>
-        <Form.Row>
-          <Form.Group>
-            <InputGroup>
-              <InputGroup.Prepend>
-                <InputGroup.Text>Price Lower:</InputGroup.Text>
-              </InputGroup.Prepend>
-              <FormControl
-                required
-                autoComplete="off"
-                type="number"
-                name="priceLower"
-                value={priceLower}
-                onChange={(event) => setPriceLower(event.target.value)}
-              />
-            </InputGroup>
-          </Form.Group>
-        </Form.Row>
-        <Form.Row>
-          <Form.Group>
-            <InputGroup>
-              <InputGroup.Prepend>
-                <InputGroup.Text>Price Upper:</InputGroup.Text>
-              </InputGroup.Prepend>
-              <FormControl
-                required
-                autoComplete="off"
-                type="number"
-                name="priceUpper"
-                value={priceUpper}
-                onChange={(event) => setPriceUpper(event.target.value)}
-              />
-            </InputGroup>
-          </Form.Group>
-        </Form.Row>
-        <Button onClick={createListing}> Submit </Button>
-      </Col>
-    </Row>
+    <div>
+      <NavigationBar />
+      <Row className="justify-content-md-center">
+        <Col lg={12}>
+          <Form.Row>
+            <Form.Group>
+              <InputGroup>
+                <InputGroup.Prepend>
+                  <InputGroup.Text>Title:</InputGroup.Text>
+                </InputGroup.Prepend>
+                <FormControl
+                  required
+                  autoComplete="off"
+                  type="text"
+                  name="title"
+                  value={title}
+                  onChange={(event) => setTitle(event.target.value)}
+                />
+              </InputGroup>
+            </Form.Group>
+          </Form.Row>
+          <Form.Row>
+            <Form.Group>
+              <InputGroup>
+                <InputGroup.Prepend>
+                  <InputGroup.Text>Description:</InputGroup.Text>
+                </InputGroup.Prepend>
+                <FormControl
+                  required
+                  autoComplete="off"
+                  type="text"
+                  name="description"
+                  value={description}
+                  onChange={(event) => setDescription(event.target.value)}
+                />
+              </InputGroup>
+            </Form.Group>
+          </Form.Row>
+          <Form.Row>
+            <Form.Group>
+              <InputGroup>
+                <InputGroup.Prepend>
+                  <InputGroup.Text>Price Lower:</InputGroup.Text>
+                </InputGroup.Prepend>
+                <FormControl
+                  required
+                  autoComplete="off"
+                  type="number"
+                  name="priceLower"
+                  value={priceLower}
+                  onChange={(event) => setPriceLower(event.target.value)}
+                />
+              </InputGroup>
+            </Form.Group>
+          </Form.Row>
+          <Form.Row>
+            <Form.Group>
+              <InputGroup>
+                <InputGroup.Prepend>
+                  <InputGroup.Text>Price Upper:</InputGroup.Text>
+                </InputGroup.Prepend>
+                <FormControl
+                  required
+                  autoComplete="off"
+                  type="number"
+                  name="priceUpper"
+                  value={priceUpper}
+                  onChange={(event) => setPriceUpper(event.target.value)}
+                />
+              </InputGroup>
+            </Form.Group>
+          </Form.Row>
+          <Button onClick={createListing}> Submit </Button>
+        </Col>
+      </Row>
+    </div>
   );
 }
