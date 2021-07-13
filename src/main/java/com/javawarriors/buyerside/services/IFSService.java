@@ -17,9 +17,9 @@ public class IFSService {
     @Autowired
     private IFSRepo ifsRepo;
 
-    public List<ItemForSaleListing> saveAll(Iterable<ItemForSaleListing> entities) {
-        return ifsRepo.saveAll(entities);
-    }
+    // public List<ItemForSaleListing> saveAll(Iterable<ItemForSaleListing> entities) {
+    //     return ifsRepo.saveAll(entities);
+    // }
 
     public List<ItemForSaleListing> findAll() {
         return ifsRepo.findAll();

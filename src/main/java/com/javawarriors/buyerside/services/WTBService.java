@@ -17,9 +17,9 @@ public class WTBService {
     @Autowired
     private WTBRepo wtbRepo;
 
-    public List<WantToBuyListing> saveAll(Iterable<WantToBuyListing> entities) {
-        return wtbRepo.saveAll(entities);
-    }
+    // public List<WantToBuyListing> saveAll(Iterable<WantToBuyListing> entities) {
+    //     return wtbRepo.saveAll(entities);
+    // }
 
     public List<WantToBuyListing> findAll() {
         return wtbRepo.findAll();

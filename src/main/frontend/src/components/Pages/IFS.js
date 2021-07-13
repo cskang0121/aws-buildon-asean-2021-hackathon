@@ -7,7 +7,7 @@ const IFSListings = () => {
   const [listings, setListings] = useState([]);
 
   const fetchListings = () => {
-    IFSService.getIFSListings().then((res) => {
+    IFSService.getAllIFSListings().then((res) => {
       console.log(res.data);
       setListings(res.data);
     });
@@ -15,7 +15,11 @@ const IFSListings = () => {
 
   useEffect(() => {
     fetchListings();
-  }, []);
+  }, [listings]);
+
+  function deleteIFS(listing) {
+    IFSService.postDeleteIFS(listing);
+  }
 
   return listings.map((listing, index) => {
     // Make something less ugly lmao
@@ -26,6 +30,7 @@ const IFSListings = () => {
         <p>
           Price: {listing.price}
         </p>
+        <p><Button onClick={() => deleteIFS(listing)}>Delete Listing</Button></p>
       </div>
     );
   });

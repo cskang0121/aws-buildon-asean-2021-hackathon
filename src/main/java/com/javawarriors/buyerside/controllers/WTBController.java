@@ -35,7 +35,7 @@ public class WTBController {
 
     Logger logger = LoggerFactory.getLogger(WTBController.class);
 
-    @GetMapping("/wtb-listing")
+    @GetMapping("/wtb-listing/getAll")
     public List<WantToBuyListing> getAllWTBListings() {
         return wtbService.findAll();
     }
@@ -45,5 +45,15 @@ public class WTBController {
         wtbService.save(newWTBListing);
         return newWTBListing;
     }
+
+    @PostMapping("/wtb-listing/deleteWTB/post")
+    public void deleteWTB(@RequestBody WantToBuyListing toDeleteWTBListing) {
+        wtbService.deleteById(toDeleteWTBListing.getWtbId());
+    }
+
+    // @PostMapping("/wtb-listing/editWTB/post")
+    // public void deleteWTB(@RequestBody WantToBuyListing toDeleteWTBListing) {
+    //     wtbService.deleteById(toDeleteWTBListing.getWtbId());
+    // }
 
 }

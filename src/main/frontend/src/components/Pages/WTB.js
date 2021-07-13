@@ -7,7 +7,7 @@ const WTBListings = () => {
   const [listings, setListings] = useState([]);
 
   const fetchListings = () => {
-    WTBService.getWTBListings().then((res) => {
+    WTBService.getAllWTBListings().then((res) => {
       console.log(res.data);
       setListings(res.data);
     });
@@ -15,7 +15,15 @@ const WTBListings = () => {
 
   useEffect(() => {
     fetchListings();
-  }, []);
+  }, [listings]);
+
+  function deleteWTB(listing) {
+    WTBService.postDeleteWTB(listing);
+  }
+
+  function editWTB(listing) {
+    WTBService.postEditWTB(listing);
+  }
 
   return listings.map((listing, index) => {
     // Make something less ugly lmao
@@ -26,6 +34,8 @@ const WTBListings = () => {
         <p>
           Price: {listing.priceLower} - {listing.priceUpper}
         </p>
+        <p><Button onClick={() => editWTB(listing)}>Edit Listing</Button></p>
+        <p><Button onClick={() => deleteWTB(listing)}>Delete Listing</Button></p>
       </div>
     );
   });

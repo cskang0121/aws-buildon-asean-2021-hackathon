@@ -35,7 +35,7 @@ public class IFSController {
 
     Logger logger = LoggerFactory.getLogger(IFSController.class);
 
-    @GetMapping("/ifs-listing")
+    @GetMapping("/ifs-listing/getAll")
     public List<ItemForSaleListing> getAllIFSListings() {
         return ifsService.findAll();
     }
@@ -44,6 +44,11 @@ public class IFSController {
     public ItemForSaleListing postIFSListing(@RequestBody ItemForSaleListing newIFSListing) {
         ifsService.save(newIFSListing);
         return newIFSListing;
+    }
+
+    @PostMapping("/ifs-listing/deleteIFS/post")
+    public void deleteIFS(@RequestBody ItemForSaleListing toDeleteIFSListing) {
+        ifsService.deleteById(toDeleteIFSListing.getIfsId());
     }
 
 }
