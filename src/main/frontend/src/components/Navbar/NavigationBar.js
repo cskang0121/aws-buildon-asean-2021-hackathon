@@ -8,6 +8,7 @@ export default function NavigationBar() {
 
   const history = useHistory();
 
+  // Detect if user logged in
   useEffect(() => {
     const user = AuthenticationService.getCurrentUserToken();
 
@@ -30,7 +31,7 @@ export default function NavigationBar() {
         {loggedIn ? (
           <div class="d-flex flex-row">
             <Nav.Link href="/home">Home</Nav.Link>
-            <Nav.Link href="/wtb">WTB Listings</Nav.Link>
+            <Nav.Link href="/wtb">My WTB Listings</Nav.Link>
             <Nav.Link href="/ifs">IFS Listings</Nav.Link>
             <Nav.Link href="/search">Search</Nav.Link>
             <Nav.Link onClick={logout}>Logout</Nav.Link>

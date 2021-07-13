@@ -17,4 +17,6 @@ public interface WTBRepo extends JpaRepository<WantToBuyListing, Long> {
     
     public List<WantToBuyListing> findByTitleContaining(String keyword);
 
+    public List<WantToBuyListing> findByUser(User user);
+
 }

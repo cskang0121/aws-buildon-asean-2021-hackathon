@@ -1,5 +1,4 @@
 import axios from "axios";
-
 const REGISTER_API_URL = "http://localhost:8080/api/v1/register";
 const AUTH_API_URL = "http://localhost:8080/api/v1/authenticate";
 
@@ -12,10 +11,10 @@ class AuthenticationService {
     return axios
       .post(AUTH_API_URL, userCredentials)
       .then((response) => {
-        if (response.data.token) {
-          localStorage.setItem("user", JSON.stringify(response.data));
-        }
-        return response.data;
+          if (response.data.token) {
+            localStorage.setItem("user", JSON.stringify(response.data));
+          }
+          return response.data;
       })
       .catch((err) => {
         console.log(err);
@@ -25,6 +24,7 @@ class AuthenticationService {
 
   signOut() {
     localStorage.removeItem("user");
+    localStorage.removeItem("userProfile");
   }
 
   getCurrentUserToken() {

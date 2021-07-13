@@ -13,12 +13,19 @@ import { useHistory } from "react-router";
 import NavigationBar from "../Navbar/NavigationBar";
 
 import WTBService from "../../services/WTBService";
+import UserService from "../../services/UserService";
 
 export default function CreateWTB(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priceLower, setPriceLower] = useState(0);
   const [priceUpper, setPriceUpper] = useState(0);
+
+  // Get user
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    setUser(UserService.getProfile());
+  }, []);
 
   const history = useHistory();
 
@@ -32,7 +39,7 @@ export default function CreateWTB(props) {
       priceUpper: priceUpper,
       status: "a",
       categoryName: null,
-      uid: null,
+      user: user,
     };
 
     WTBService.postWTBListing(listing).then((res) => {

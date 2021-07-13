@@ -1,33 +1,27 @@
 import axios from "axios";
+import authHeader from "../util/authHeader";
 
 const WTB_API_BASE_URL = "http://localhost:8080/api/v1/wtb-listing";
 
-axios.interceptors.request.use((config) => {
-  const user = JSON.parse(localStorage.getItem("user"));
-
-  if (user && user.token) {
-    const token = "Bearer " + user.token;
-    config.headers.Authorization = token;
-    console.log(user.token);
-  }
-  return config;
-});
-
 class WTBService {
   getAllWTBListings() {
-    return axios.get(WTB_API_BASE_URL + "/getAll");
+    return axios.get(WTB_API_BASE_URL + "/get", {headers: authHeader()});
   }
 
   postWTBListing(listing) {
-    return axios.post(WTB_API_BASE_URL + "/post", listing);
+    return axios.post(WTB_API_BASE_URL + "/post", listing, {headers: authHeader()});
   }
 
   postDeleteWTB(listing) {
-    return axios.post(WTB_API_BASE_URL + "/deleteWTB/post", listing);
+    return axios.post(WTB_API_BASE_URL + "/deleteWTB/post", listing, {headers: authHeader()});
   }
 
   getSearchListings(keyword) {
-    return axios.get(WTB_API_BASE_URL + "/searchWTB/get", { params : { keyword: keyword }});
+    return axios.get(WTB_API_BASE_URL + "/searchWTB/get", { params : { keyword: keyword }, headers: authHeader()});
+  }
+
+  getCurrentUserWTBListings(uid) {
+    return axios.get(WTB_API_BASE_URL + "/get/" + uid, {headers: authHeader()});
   }
 }
 

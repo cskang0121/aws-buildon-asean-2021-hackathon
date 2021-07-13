@@ -35,9 +35,14 @@ public class WTBController {
 
     Logger logger = LoggerFactory.getLogger(WTBController.class);
 
-    @GetMapping("/wtb-listing/getAll")
+    @GetMapping("/wtb-listing/get")
     public List<WantToBuyListing> getAllWTBListings() {
         return wtbService.findAll();
+    }
+
+    @GetMapping("/wtb-listing/get/{id}")
+    public List<WantToBuyListing> getWTBListingsById(@PathVariable Long id) {
+        return wtbService.findByUser(id);
     }
 
     @PostMapping("/wtb-listing/post")
