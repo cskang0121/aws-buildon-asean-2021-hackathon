@@ -30,6 +30,7 @@ const IFSListings = () => {
         <p>
           Price: {listing.price}
         </p>
+        <p><Button>Edit Listing</Button></p>
         <p><Button onClick={() => deleteIFS(listing)}>Delete Listing</Button></p>
       </div>
     );

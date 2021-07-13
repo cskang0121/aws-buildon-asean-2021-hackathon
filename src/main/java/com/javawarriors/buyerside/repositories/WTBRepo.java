@@ -14,5 +14,7 @@ import org.springframework.data.repository.query.Param;
  */
 @Repository
 public interface WTBRepo extends JpaRepository<WantToBuyListing, Long> {
+    
+    public List<WantToBuyListing> findByTitleContaining(String keyword);
 
 }

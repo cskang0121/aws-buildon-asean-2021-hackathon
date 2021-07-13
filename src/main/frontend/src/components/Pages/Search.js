@@ -3,11 +3,11 @@ import { Button } from "react-bootstrap";
 import { useHistory } from "react-router";
 import WTBService from "../../services/WTBService";
 
-const WTBListings = () => {
+const WTBListings = (props) => {
   const [listings, setListings] = useState([]);
 
   const fetchListings = () => {
-    WTBService.getAllWTBListings().then((res) => {
+    WTBService.getSearchListings(props.keyword).then((res) => {
       console.log(res.data);
       setListings(res.data);
     });
@@ -16,14 +16,6 @@ const WTBListings = () => {
   useEffect(() => {
     fetchListings();
   }, [listings]);
-
-  function deleteWTB(listing) {
-    WTBService.postDeleteWTB(listing);
-  }
-
-  // function editWTB(listing) {
-  //   WTBService.postEditWTB(listing);
-  // }
 
   return listings.map((listing, index) => {
     // Make something less ugly lmao
@@ -34,26 +26,25 @@ const WTBListings = () => {
         <p>
           Price: {listing.priceLower} - {listing.priceUpper}
         </p>
-        <p><Button>Edit Listing</Button></p>
-        <p><Button onClick={() => deleteWTB(listing)}>Delete Listing</Button></p>
       </div>
     );
   });
 };
 
-export default function WTB(props) {
-  const history = useHistory();
-  const addWTB = () => {
-    history.push({
-      pathname: "/add-wtb",
-    });
-  };
+export default function Home() {
+  const [searchTerm, setSearchTerm] = useState("");
 
   return (
     <div>
-      <Button onClick={addWTB}>Add New</Button>
-      <h1>Want To Buy Listings</h1>
-      <WTBListings />
+        <h1>Search</h1>
+        <div className="ui search">
+          <div className="ui icon input">
+            <input type="text" placeholder="Search WTB Listings" onChange={event => {setSearchTerm(event.target.value)}}></input>
+          </div>
+        </div>
+
+        <h2>Want To Buy Listings</h2>
+        <WTBListings keyword={searchTerm}/>
     </div>
-  );
+  )
 }

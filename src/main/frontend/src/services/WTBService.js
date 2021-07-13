@@ -14,6 +14,10 @@ class WTBService {
   postDeleteWTB(listing) {
     return axios.post(WTB_API_BASE_URL + "/deleteWTB/post", listing);
   }
+
+  getSearchListings(keyword) {
+    return axios.get(WTB_API_BASE_URL + "/searchWTB/get", { params : { keyword: keyword }});
+  }
 }
 
 export default new WTBService();

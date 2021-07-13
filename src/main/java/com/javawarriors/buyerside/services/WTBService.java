@@ -32,4 +32,8 @@ public class WTBService {
     public void deleteById(Long wtbId) {
         wtbRepo.deleteById(wtbId);
     }
+
+    public List<WantToBuyListing> getSearchResults(String keyword) {
+        return wtbRepo.findByTitleContaining(keyword);
+    }
 }

@@ -52,8 +52,13 @@ public class WTBController {
     }
 
     // @PostMapping("/wtb-listing/editWTB/post")
-    // public void deleteWTB(@RequestBody WantToBuyListing toDeleteWTBListing) {
-    //     wtbService.deleteById(toDeleteWTBListing.getWtbId());
+    // public void editWTB(@RequestBody WantToBuyListing toEditWTBListing) {
     // }
+
+    @GetMapping("/wtb-listing/searchWTB/get")
+    public List<WantToBuyListing> searchWTB(@RequestParam(name = "keyword") String Keyword) {
+        List<WantToBuyListing> listings = wtbService.getSearchResults(Keyword);
+        return listings;
+    }
 
 }

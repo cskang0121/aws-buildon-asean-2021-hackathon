@@ -9,6 +9,7 @@ import WTB from "./components/Pages/WTB";
 import CreateWTB from "./components/Pages/CreateWTB";
 import IFS from "./components/Pages/IFS";
 import CreateIFS from "./components/Pages/CreateIFS";
+import Search from "./components/Pages/Search";
 
 import { Container, Row, Col } from "react-bootstrap";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -28,6 +29,7 @@ function App() {
                 <Route path="/add-wtb" exact component={CreateWTB} />
                 <Route path="/ifs" exact component={IFS} />
                 <Route path="/add-ifs" exact component={CreateIFS} />
+                <Route path="/search" exact component={Search} />
               </Switch>
             </Router>
           </Col>
