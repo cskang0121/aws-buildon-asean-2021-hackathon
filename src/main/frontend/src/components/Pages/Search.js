@@ -6,6 +6,7 @@ import NavigationBar from "../Navbar/NavigationBar";
 
 const WTBListings = (props) => {
   const [listings, setListings] = useState([]);
+  const history = useHistory();
 
   const fetchListings = () => {
     WTBService.getSearchListings(props.keyword).then((res) => {
@@ -19,9 +20,15 @@ const WTBListings = (props) => {
   }, [listings]);
 
   return listings.map((listing, index) => {
+    const wtbDetails = (listing) => {
+    history.push({
+      pathname: "/wtb-listing-details",
+      state: {listing: listing}
+    });
+  };
     // Make something less ugly lmao
     return (
-      <div>
+      <div onClick={() => wtbDetails(listing)}>
         <h2>{listing.title}</h2>
         <p>{listing.description}</p>
         <p>
