@@ -28,17 +28,17 @@ export default function NavigationBar() {
       <Navbar.Brand href="/home">Navbar</Navbar.Brand>
       <Nav className="mr-auto">
         {loggedIn ? (
-          <Nav.Item className="d-flex flex-column">
+          <div class="d-flex flex-row">
             <Nav.Link href="/home">Home</Nav.Link>
             <Nav.Link href="/wtb">WTB Listings</Nav.Link>
             <Nav.Link href="/ifs">IFS Listings</Nav.Link>
             <Nav.Link onClick={logout}>Logout</Nav.Link>
-          </Nav.Item>
+          </div>
         ) : (
-          <Nav.Item className="d-flex flex-column">
+          <div class="d-flex flex-row">
             <Nav.Link href="/register">Sign Up</Nav.Link>
             <Nav.Link href="/login">Login</Nav.Link>
-          </Nav.Item>
+          </div>
         )}
       </Nav>
     </Navbar>
