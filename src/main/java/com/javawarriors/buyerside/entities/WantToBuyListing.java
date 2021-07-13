@@ -12,7 +12,7 @@ public class WantToBuyListing {
 
     @Id
     @Column(name="wtb_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long wtbId;
 
     @ManyToOne

@@ -49,6 +49,10 @@ export default function CreateWTB(props) {
     });
   };
 
+  // const changeSelectOptionHandler = (event) => {
+  //   setCategoryName(event.target.value);
+  // };
+
   return (
     <div>
       <NavigationBar />
@@ -122,6 +126,20 @@ export default function CreateWTB(props) {
               </InputGroup>
             </Form.Group>
           </Form.Row>
+          <div>
+            <label>
+              Category:
+              <select>
+                {/* onChange={changeSelectOptionHandler} */}
+                <option value="electronics">Electronics</option>
+                <option value="clothes">Clothes</option>
+                <option value="toys">Toys</option>
+                <option value="idfk">Its2.30amKMN</option>
+              </select>
+            </label>
+          </div>
+          
+
           <Button onClick={createListing}> Submit </Button>
         </Col>
       </Row>

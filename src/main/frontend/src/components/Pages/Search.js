@@ -79,7 +79,6 @@ export default function Search() {
 
   const changeSelectOptionHandler = (event) => {
     setSelected(event.target.value);
-    console.log("changed");
   };
 
   if (selected == "wtb") {
