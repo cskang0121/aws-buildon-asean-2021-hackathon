@@ -38,7 +38,7 @@ const WTBListings = () => {
           Price: {listing.priceLower} - {listing.priceUpper}
         </p>
         <p>
-          <Button onClick={() => editWTB(listing)}>Edit Listing</Button>
+          <Button>Edit Listing</Button>
         </p>
         <p>
           <Button onClick={() => deleteWTB(listing)}>Delete Listing</Button>
