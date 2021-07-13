@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useHistory } from "react-router";
 import IFSService from "../../services/IFSService";
+import NavigationBar from "../Navbar/NavigationBar";
 
 const IFSListings = () => {
   const [listings, setListings] = useState([]);
@@ -15,7 +16,7 @@ const IFSListings = () => {
 
   useEffect(() => {
     fetchListings();
-  }, [listings]);
+  }, []);
 
   function deleteIFS(listing) {
     IFSService.postDeleteIFS(listing);
@@ -25,6 +26,7 @@ const IFSListings = () => {
     // Make something less ugly lmao
     return (
       <div>
+        <NavigationBar />
         <h2>{listing.title}</h2>
         <p>{listing.description}</p>
         <p>
