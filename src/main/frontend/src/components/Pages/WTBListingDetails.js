@@ -38,7 +38,7 @@ export default function WTB(props) {
 
   const offer = (listing) => {
   history.push({
-    pathname: "/offer-for-wtb",
+    pathname: "/deal",
     state: {listing: listing}
     });
   };
@@ -55,7 +55,7 @@ export default function WTB(props) {
         Price: {location.state.listing.priceLower} - {location.state.listing.priceUpper}
       </p>
       <p>
-          <Button onClick={() => offer(location.state.listing)}>Make Offer</Button>
+          <Button onClick={() => offer(location.state.listing)}>Propose Deal</Button>
         </p>
     </div>
   );

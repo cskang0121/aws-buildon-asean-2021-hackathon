@@ -13,7 +13,7 @@ import Login from "./components/Pages/Login";
 import { PrivateRoute } from "./components/PrivateRoute";
 import Search from "./components/Pages/Search";
 import WTBListingDetails from "./components/Pages/WTBListingDetails";
-import WTBOffer from "./components/Pages/WTBOffer";
+import Deal from "./components/Pages/Deal";
 
 import AuthenticationService from "./services/AuthenticationService";
 
@@ -60,7 +60,7 @@ function App() {
           <PrivateRoute path="/search" exact component={Search} />
           <PrivateRoute path="/wtb-listing-details" exact component={WTBListingDetails} />
           <PrivateRoute path="/wtb-listing-details" exact component={WTBListingDetails} />
-          <PrivateRoute path="/offer-for-wtb" exact component={WTBOffer} />
+          <PrivateRoute path="/deal" exact component={Deal} />
         </Switch>
       </Router>
     </div>

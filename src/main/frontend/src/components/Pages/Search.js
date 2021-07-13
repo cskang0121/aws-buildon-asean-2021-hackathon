@@ -39,7 +39,7 @@ const WTBListings = (props) => {
   });
 };
 
-export default function Home() {
+export default function Search() {
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
@@ -55,6 +55,12 @@ export default function Home() {
               setSearchTerm(event.target.value);
             }}
           ></input>
+        </div>
+        <div>
+          <select>
+            <option selected value="ifs">Items for Sale Listings</option>
+            <option value="wtb">Want to Buy Listings</option>
+          </select>
         </div>
       </div>
 
