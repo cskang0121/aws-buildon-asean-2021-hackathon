@@ -13,6 +13,7 @@ import { useHistory } from "react-router";
 import NavigationBar from "../Navbar/NavigationBar";
 
 import WTBService from "../../services/WTBService";
+import UserService from "../../services/UserService";
 
 export default function WTBOffer(props) {
   const [title, setTitle] = useState("");
@@ -22,9 +23,16 @@ export default function WTBOffer(props) {
 
   const history = useHistory();
 
-  const createListing = (e) => {
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    UserService.getProfile().then((res) => setUser(res.data));
+    console.log(user);
+  }, []);
+
+  const createOffer = (e) => {
     e.preventDefault();
-    let listing = {
+    let offer = {
       title: title,
       description: description,
       picUri: null,
