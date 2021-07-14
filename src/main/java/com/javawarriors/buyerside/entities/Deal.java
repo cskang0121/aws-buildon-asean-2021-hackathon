@@ -24,8 +24,6 @@ public class Deal {
     @JoinColumn(name = "ifs_id")
     private ItemForSaleListing ifsId;
 
-    private Double priceToSellFor;
-
     private Date dateOfDeal;
 
     @OneToMany(mappedBy="deal")
@@ -56,14 +54,6 @@ public class Deal {
 	public void setIfsId(ItemForSaleListing ifsId) {
 		this.ifsId = ifsId;
 	}
-    
-    public Double getPriceToSellFor() {
-        return this.priceToSellFor;
-    }
-
-    public void setPriceToSellFor(Double priceToSellFor) {
-        this.priceToSellFor = priceToSellFor;
-    }
 
     public Date getDateOfDeal() {
         return this.dateOfDeal;

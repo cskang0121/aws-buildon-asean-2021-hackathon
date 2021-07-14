@@ -50,7 +50,6 @@ export default function ProposeDeal(props) {
   const history = useHistory();
   const location = useLocation();
 
-  const [priceToSellFor, setPriceToSellFor] = useState(0);
   const [useExistingListing, setUseExistingListing] = useState("");
   const [ifsListing, setIfsListing] = useState({});
 
@@ -67,7 +66,6 @@ export default function ProposeDeal(props) {
       seller: user,
       wtbId: location.state.listing,
       ifsId: ifsListing,
-      priceToSellFor: priceToSellFor,
       dateOfDeal: null,
     };
 

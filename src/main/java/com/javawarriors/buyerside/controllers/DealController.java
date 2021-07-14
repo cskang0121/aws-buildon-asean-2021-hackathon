@@ -15,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import java.util.Date;
+
 /**
  * Controller for Deals
  */
@@ -28,6 +30,7 @@ public class DealController {
 
     @PostMapping("/deal/post")
     public Deal postDeal(@RequestBody Deal newDeal) {
+        newDeal.setDateOfDeal(new Date());
         dealService.saveDeal(newDeal);
         return newDeal;
     }

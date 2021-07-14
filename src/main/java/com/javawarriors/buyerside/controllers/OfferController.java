@@ -15,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import java.util.Date;
+
 /**
  * Controller for Offers
  */
@@ -29,6 +31,7 @@ public class OfferController {
 
     @PostMapping("/offer/post")
     public Offer postOffer(@RequestBody Offer newOffer) {
+        newOffer.setDateOfOffer(new Date());
         offerService.saveOffer(newOffer);
         return newOffer;
     }
