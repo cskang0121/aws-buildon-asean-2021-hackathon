@@ -31,9 +31,7 @@ public class WantToBuyListing {
 
     private Double priceLower;
 
-    @ManyToOne
-    @JoinColumn(name="category_name")
-    private Category category;
+    private String categoryName;
 
     @ManyToMany
     @JoinTable(
@@ -98,12 +96,12 @@ public class WantToBuyListing {
         this.status = status;
     }
 
-    public Category getCategory() {
-        return this.category;
+    public String getCategoryName() {
+        return this.categoryName;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public Double getPriceUpper() {

@@ -15,11 +15,14 @@ import NavigationBar from "../Navbar/NavigationBar";
 import WTBService from "../../services/WTBService";
 import UserService from "../../services/UserService";
 
+import { CATEGORIES } from "../../util/categories";
+
 export default function CreateWTB(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priceLower, setPriceLower] = useState(0);
   const [priceUpper, setPriceUpper] = useState(0);
+  const [categoryName, setCategoryName] = useState("");
 
   // Get user
   const [user, setUser] = useState({});
@@ -38,7 +41,7 @@ export default function CreateWTB(props) {
       priceLower: priceLower,
       priceUpper: priceUpper,
       status: "a",
-      categoryName: null,
+      categoryName: categoryName,
       user: user,
     };
 
@@ -49,9 +52,11 @@ export default function CreateWTB(props) {
     });
   };
 
-  // const changeSelectOptionHandler = (event) => {
-  //   setCategoryName(event.target.value);
-  // };
+  const createCategoryDropdownOptions = () => {
+    return CATEGORIES.map((category, index) => {
+      return <option value={category}>{category}</option>;
+    });
+  };
 
   return (
     <div>
@@ -129,16 +134,11 @@ export default function CreateWTB(props) {
           <div>
             <label>
               Category:
-              <select>
-                {/* onChange={changeSelectOptionHandler} */}
-                <option value="electronics">Electronics</option>
-                <option value="clothes">Clothes</option>
-                <option value="toys">Toys</option>
-                <option value="idfk">Its2.30amKMN</option>
+              <select onClick={(event) => setCategoryName(event.target.value)}>
+                {createCategoryDropdownOptions()}
               </select>
             </label>
           </div>
-          
 
           <Button onClick={createListing}> Submit </Button>
         </Col>
