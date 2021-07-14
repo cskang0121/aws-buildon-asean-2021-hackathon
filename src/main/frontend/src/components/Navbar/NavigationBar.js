@@ -35,6 +35,7 @@ export default function NavigationBar() {
             <Nav.Link href="/ifs">My IFS Listings</Nav.Link>
             <Nav.Link href="/search">Search</Nav.Link>
             <Nav.Link href="/post-listing">Buy / Sell</Nav.Link>
+            <Nav.Link href="/received-offers">View All Offers</Nav.Link>
             <Nav.Link onClick={logout}>Logout</Nav.Link>
           </div>
         ) : (

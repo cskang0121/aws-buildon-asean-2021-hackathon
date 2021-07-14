@@ -15,5 +15,7 @@ import org.springframework.data.repository.query.Param;
  */
 @Repository
 public interface OfferRepo extends JpaRepository<Offer, OfferPK> {
+    public List<Offer> findByBuyer(User user);
 
+    public List<Offer> findByIfsListingIn(Collection<ItemForSaleListing> ifsListings);
 }

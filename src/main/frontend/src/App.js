@@ -17,6 +17,7 @@ import WTBListingDetails from "./components/Pages/WTBListingDetails";
 import IFSListingDetails from "./components/Pages/IFSListingDetails";
 import Deal from "./components/Pages/ProposeDeal";
 import Offer from "./components/Pages/MakeOffer";
+import ViewAllReceivedOffers from "./components/Pages/ViewAllReceivedOffers";
 
 import AuthenticationService from "./services/AuthenticationService";
 
@@ -72,6 +73,11 @@ function App() {
           />
           <PrivateRoute path="/deal" exact component={Deal} />
           <PrivateRoute path="/offer" exact component={Offer} />
+          <PrivateRoute
+            path="/received-offers"
+            exact
+            component={ViewAllReceivedOffers}
+          />
         </Switch>
       </Router>
     </div>

@@ -12,7 +12,7 @@ const WTBListings = (props) => {
   const history = useHistory();
 
   const fetchListings = () => {
-    WTBService.getSearchListings(props.keyword, props.category).then((res) => {
+    WTBService.getSearchListings(props.keyword, props.categoryName).then((res) => {
       console.log(res.data);
       setListings(res.data);
     });
@@ -20,7 +20,7 @@ const WTBListings = (props) => {
 
   useEffect(() => {
     fetchListings();
-  }, [props.keyword, props.category]);
+  }, [props.keyword, props.categoryName]);
 
   return listings.map((listing, index) => {
     const wtbDetails = (listing) => {
@@ -46,7 +46,7 @@ const IFSListings = (props) => {
   const history = useHistory();
 
   const fetchListings = () => {
-    IFSService.getSearchListings(props.keyword, props.category).then((res) => {
+    IFSService.getSearchListings(props.keyword, props.categoryName).then((res) => {
       console.log(res.data);
       setListings(res.data);
     });
@@ -54,7 +54,7 @@ const IFSListings = (props) => {
 
   useEffect(() => {
     fetchListings();
-  }, [props.keyword, props.category]);
+  }, [props.keyword, props.categoryName]);
 
   return listings.map((listing, index) => {
     const ifsDetails = (listing) => {
@@ -116,7 +116,7 @@ export default function Search() {
         </div>
   
         <h2>Want To Buy Listings</h2>
-        <WTBListings keyword={searchTerm} category={categoryName}/>
+        <WTBListings keyword={searchTerm} categoryName={categoryName}/>
       </div>
     );
   } else {
@@ -151,7 +151,7 @@ export default function Search() {
         </div>
   
         <h2>Items for Sale Listings</h2>
-        <IFSListings keyword={searchTerm} categoryName ={categoryName} />
+        <IFSListings keyword={searchTerm} categoryName={categoryName} />
       </div>
     );
   }

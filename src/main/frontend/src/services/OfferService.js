@@ -9,6 +9,12 @@ class OfferService {
       headers: authHeader(),
     });
   }
+
+  getCurrentUserReceivedOffers(uid) {
+    return axios.get(OFFER_API_BASE_URL + "/get/receivedby=" + uid, {
+      headers: authHeader(),
+    });
+  }
 }
 
 export default new OfferService();

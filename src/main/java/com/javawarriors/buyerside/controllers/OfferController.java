@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Controller for Offers
@@ -27,13 +28,27 @@ import java.util.Date;
 public class OfferController {
 
     @Autowired
-    OfferService offerService;
+    private OfferService offerService;
+
+    @Autowired
+    private IFSController ifsController;
 
     @PostMapping("/offer/post")
     public Offer postOffer(@RequestBody Offer newOffer) {
         newOffer.setDateOfOffer(new Date());
         offerService.saveOffer(newOffer);
         return newOffer;
+    }
+
+    @GetMapping("/offer/get/madeby={id}")
+    public List<Offer> getOffersMadeByUser(@PathVariable Long id) {
+        return offerService.findByUser(id);
+    }
+
+    @GetMapping("/offer/get/receivedby={id}")
+    public List<Offer> getOffersReceivedByUser(@PathVariable Long id) {
+        List<ItemForSaleListing> ifsListings = ifsController.getIFSListingsByUser(id);
+        return offerService.findByIfsListingIn(ifsListings);
     }
     
 }
