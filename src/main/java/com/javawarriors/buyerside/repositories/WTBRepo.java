@@ -17,6 +17,9 @@ public interface WTBRepo extends JpaRepository<WantToBuyListing, Long> {
     
     public List<WantToBuyListing> findByTitleContaining(String keyword);
 
+    @Query(value = "select * from want_to_buy_listing wtb where wtb.title like %:keyword% and wtb.category_name like %:categoryName%", nativeQuery = true)
+    public List<WantToBuyListing> findByTitleAndCategoryContaining(@Param("keyword") String keyword, @Param("categoryName") String categoryName);
+
     public List<WantToBuyListing> findByUser(User user);
 
 }

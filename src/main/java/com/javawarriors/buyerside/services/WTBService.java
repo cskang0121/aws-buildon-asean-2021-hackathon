@@ -40,7 +40,8 @@ public class WTBService {
         wtbRepo.deleteById(wtbId);
     }
 
-    public List<WantToBuyListing> getSearchResults(String keyword) {
-        return wtbRepo.findByTitleContaining(keyword);
+    public List<WantToBuyListing> getSearchResults(String keyword, String categoryName) {
+        // return wtbRepo.findByTitleContaining(keyword);
+        return wtbRepo.findByTitleAndCategoryContaining(keyword, categoryName);
     }
 }

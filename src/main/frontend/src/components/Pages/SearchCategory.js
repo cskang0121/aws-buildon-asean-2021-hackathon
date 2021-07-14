@@ -4,15 +4,13 @@ import { useHistory } from "react-router";
 import WTBService from "../../services/WTBService";
 import IFSService from "../../services/IFSService";
 import NavigationBar from "../Navbar/NavigationBar";
-import { categoryDropdownOptions } from "../../util/categories";
-import Select from "react-select";
 
 const WTBListings = (props) => {
   const [listings, setListings] = useState([]);
   const history = useHistory();
 
   const fetchListings = () => {
-    WTBService.getSearchListings(props.keyword, props.category).then((res) => {
+    WTBService.getSearchListings(props.keyword).then((res) => {
       console.log(res.data);
       setListings(res.data);
     });
@@ -20,7 +18,7 @@ const WTBListings = (props) => {
 
   useEffect(() => {
     fetchListings();
-  }, [props.keyword, props.category]);
+  }, [props.keyword]);
 
   return listings.map((listing, index) => {
     const wtbDetails = (listing) => {
@@ -77,14 +75,13 @@ const IFSListings = (props) => {
 
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedListingType, setSelectedListingType] = useState("");
-  const [categoryName, setCategoryName] = useState("") 
+  const [selected, setSelected] = useState("");
 
   const changeSelectOptionHandler = (event) => {
-    setSelectedListingType(event.target.value);
+    setSelected(event.target.value);
   };
 
-  if (selectedListingType == "wtb") {
+  if (selected == "wtb") {
     return (
       <div>
         <NavigationBar />
@@ -94,15 +91,7 @@ export default function Search() {
               <option value="wtb">Want to Buy Listings</option>
             </select>
         </div>
-        <div style={{ width: 600 }}>
-          <Select
-            options={categoryDropdownOptions}
-            onChange={(value) => {
-              setCategoryName(value.value);
-            }}
-          />
-        </div>
-        <h1>Search</h1>
+        {/* <h1>Search</h1>
         <div className="ui search">
           <div className="ui icon input">
             <input
@@ -113,7 +102,7 @@ export default function Search() {
               }}
             ></input>
           </div>
-        </div>
+        </div> */}
   
         <h2>Want To Buy Listings</h2>
         <WTBListings keyword={searchTerm} />
@@ -143,7 +132,7 @@ export default function Search() {
         </div>
   
         <h2>Items for Sale Listings</h2>
-        <IFSListings keyword={searchTerm} categoryName ={categoryName} />
+        <IFSListings keyword={searchTerm} />
       </div>
     );
   }

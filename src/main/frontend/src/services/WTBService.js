@@ -20,9 +20,12 @@ class WTBService {
     });
   }
 
-  getSearchListings(keyword) {
+  getSearchListings(keyword, categoryName) {
     return axios.get(WTB_API_BASE_URL + "/searchWTB/get", {
-      params: { keyword: keyword },
+      params: { 
+        keyword: keyword, 
+        categoryName: categoryName,
+      },
       headers: authHeader(),
     });
   }

@@ -44,4 +44,9 @@ public class IFSService {
         User user = userService.findInRepoById(userId);
         return ifsRepo.findByUser(user);
     }
+
+    public List<ItemForSaleListing> getSearchResults(String keyword, String categoryName) {
+        // return ifsRepo.findByTitleContaining(keyword);
+        return ifsRepo.findByTitleAndCategoryContaining(keyword, categoryName);
+    }
 }
