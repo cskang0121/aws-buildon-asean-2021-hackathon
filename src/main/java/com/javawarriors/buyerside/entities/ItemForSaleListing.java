@@ -10,7 +10,7 @@ import java.util.*;
 @Table(name="item_for_sale_listing")
 public class ItemForSaleListing {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name="ifs_id")
     private Long ifsId; 
 
@@ -43,9 +43,7 @@ public class ItemForSaleListing {
     )
     private Set<Tag> tags;
 
-    @ManyToOne
-    @JoinColumn(name="category_name")
-    private Category category;
+    private String categoryName;
 
     public Long getIfsId() {
 		return this.ifsId;
@@ -103,12 +101,12 @@ public class ItemForSaleListing {
 		this.listingType = listingType;
 	}
 
-	public Category getCategory() {
-		return this.category;
+	public String getCategoryName() {
+		return this.categoryName;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 	public Double getPrice() {

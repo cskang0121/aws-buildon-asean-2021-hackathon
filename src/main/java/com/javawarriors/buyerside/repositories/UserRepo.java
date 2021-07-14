@@ -47,4 +47,5 @@ public interface UserRepo extends JpaRepository<User, Long> {
      * @return number of rows deleted.
      */
     long deleteByEmail(String email);
+
 }

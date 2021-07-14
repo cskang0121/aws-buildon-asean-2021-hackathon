@@ -2,6 +2,8 @@ package com.javawarriors.buyerside.entities;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Java class that represents users in the database
  */
@@ -13,7 +15,7 @@ public class User {
      * user's unique user id which is automatically generated
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long uid;
 
     /**
@@ -55,15 +57,18 @@ public class User {
     /**
      * user's verification code that is needed to enable their account
      */
+    @JsonIgnore
     @Column(name = "verification_code", length = 64, updatable = false)
     private String verificationCode;
 
     /**
      * user's reset password token when they request to reset their passsword
      */
+    @JsonIgnore
     @Column(name = "reset_password_token", length = 30)
     private String resetPasswordToken;
 
+    @JsonIgnore
     private boolean enabled;
 
     /**
