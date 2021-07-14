@@ -37,21 +37,24 @@ export default function CreateIFS(props) {
       picUri: null,
       price: price,
       status: "a",
-      listingType: "b",
+      listingType: props.listingType,
       categoryName: null,
       user: user,
     };
 
     IFSService.postIFSListing(listing).then((res) => {
-      history.push({
-        pathname: "/ifs",
-      });
+      if (props.listingType === "s") {
+        history.push({
+          pathname: "/ifs",
+        });
+      } else {
+        props.setDeal(res.data, e);
+      }
     });
   };
 
   return (
     <div>
-      <NavigationBar />
       <Row className="justify-content-md-center">
         <Col lg={12}>
           <Form.Row>

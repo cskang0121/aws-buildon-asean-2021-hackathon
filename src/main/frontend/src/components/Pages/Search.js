@@ -84,7 +84,7 @@ export default function Search() {
     setSelectedListingType(event.target.value);
   };
 
-  if (selectedListingType == "wtb") {
+  if (selectedListingType === "wtb") {
     return (
       <div>
         <NavigationBar />

@@ -44,17 +44,9 @@ const IFSListings = () => {
 };
 
 export default function IFS(props) {
-  const history = useHistory();
-  const addIFS = () => {
-    history.push({
-      pathname: "/add-ifs",
-    });
-  };
-
   return (
     <div>
       <NavigationBar />
-      <Button onClick={addIFS}>Add New</Button>
       <h1>Item For Sale Listings</h1>
       <IFSListings />
     </div>

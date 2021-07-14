@@ -34,6 +34,7 @@ export default function NavigationBar() {
             <Nav.Link href="/wtb">My WTB Listings</Nav.Link>
             <Nav.Link href="/ifs">My IFS Listings</Nav.Link>
             <Nav.Link href="/search">Search</Nav.Link>
+            <Nav.Link href="/post-listing">Buy / Sell</Nav.Link>
             <Nav.Link onClick={logout}>Logout</Nav.Link>
           </div>
         ) : (

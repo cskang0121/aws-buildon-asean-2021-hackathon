@@ -50,17 +50,9 @@ const WTBListings = () => {
 };
 
 export default function WTB(props) {
-  const history = useHistory();
-  const addWTB = () => {
-    history.push({
-      pathname: "/add-wtb",
-    });
-  };
-
   return (
     <div>
       <NavigationBar />
-      <Button onClick={addWTB}>Add New</Button>
       <h1>Want To Buy Listings</h1>
       <WTBListings />
     </div>
