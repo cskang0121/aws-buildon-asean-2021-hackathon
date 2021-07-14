@@ -14,6 +14,7 @@ import { useHistory } from "react-router";
 import NavigationBar from "../Navbar/NavigationBar";
 
 import IFSService from "../../services/IFSService";
+import UserService from "../../services/UserService";
 
 export default function CreateIFS(props) {
   const [title, setTitle] = useState("");
@@ -21,6 +22,12 @@ export default function CreateIFS(props) {
   const [price, setPrice] = useState(0);
 
   const history = useHistory();
+
+  // Get user
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    setUser(UserService.getProfile());
+  }, []);
 
   const createListing = (e) => {
     e.preventDefault();
@@ -32,7 +39,7 @@ export default function CreateIFS(props) {
       status: "a",
       listingType: "b",
       categoryName: null,
-      uid: null,
+      user: user,
     };
 
     IFSService.postIFSListing(listing).then((res) => {

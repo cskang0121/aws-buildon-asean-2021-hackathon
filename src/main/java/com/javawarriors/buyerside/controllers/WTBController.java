@@ -40,8 +40,8 @@ public class WTBController {
         return wtbService.findAll();
     }
 
-    @GetMapping("/wtb-listing/get/{id}")
-    public List<WantToBuyListing> getWTBListingsById(@PathVariable Long id) {
+    @GetMapping("/wtb-listing/get/user={id}")
+    public List<WantToBuyListing> getWTBListingsByUser(@PathVariable Long id) {
         return wtbService.findByUser(id);
     }
 
@@ -64,12 +64,6 @@ public class WTBController {
     public List<WantToBuyListing> searchWTB(@RequestParam(name = "keyword") String Keyword) {
         List<WantToBuyListing> listings = wtbService.getSearchResults(Keyword);
         return listings;
-    }
-
-    @PostMapping("/deal/post")
-    public Deal postDeal(@RequestBody Deal newDeal) {
-        wtbService.saveDeal(newDeal);
-        return newDeal;
     }
 
 }

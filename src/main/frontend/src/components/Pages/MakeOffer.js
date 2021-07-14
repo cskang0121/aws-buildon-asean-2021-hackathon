@@ -12,14 +12,14 @@ import {
 import { useHistory, useLocation } from "react-router";
 import NavigationBar from "../Navbar/NavigationBar";
 
-import WTBService from "../../services/WTBService";
+import OfferService from "../../services/OfferService";
 import UserService from "../../services/UserService";
 
-export default function Deal(props) {
+export default function MakeOffer(props) {
   const history = useHistory();
   const location = useLocation();
 
-  const [priceToSellFor, setPriceToSellFor] = useState(0);
+  const [priceToBuyFor, setPriceToBuyFor] = useState(0);
 
   const [user, setUser] = useState({});
   useEffect(() => {
@@ -27,19 +27,19 @@ export default function Deal(props) {
     console.log(location.state.listing);
   }, []);
 
-  const createDeal = (e) => {
+  const createOffer = (e) => {
     e.preventDefault();
-    let deal = {
-      seller: user,
-      wtbListingId: location.state.listing.wtbId,
-      ifsListingId: 1,
-      priceToSellFor: priceToSellFor,
-      dateOfDeal: null,
+    let offer = {
+      buyer: user,
+      ifsListing: location.state.listing,
+      offeredPrice: priceToBuyFor,
+      dateOfOffer: null,
+      status: "p",
     };
 
-    WTBService.postDeal(deal).then((res) => {
+    OfferService.postOffer(offer).then((res) => {
       history.push({
-        pathname: "/wtb",
+        pathname: "/home",
       });
     });
   };
@@ -47,28 +47,26 @@ export default function Deal(props) {
   return (
     <div>
       <NavigationBar />
-      <h1>Propose Deal for:</h1>
-      <h2>{location.state.listing.title}</h2>
       <Row className="justify-content-md-center">
         <Col lg={12}>
           <Form.Row>
             <Form.Group>
               <InputGroup>
                 <InputGroup.Prepend>
-                  <InputGroup.Text>Proposed Price:</InputGroup.Text>
+                  <InputGroup.Text>Price Offer:</InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl
                   required
                   autoComplete="off"
                   type="number"
-                  name="priceToSellFor"
-                  value={priceToSellFor}
-                  onChange={(event) => setPriceToSellFor(event.target.value)}
+                  name="priceToBuyFor"
+                  value={priceToBuyFor}
+                  onChange={(event) => setPriceToBuyFor(event.target.value)}
                 />
               </InputGroup>
             </Form.Group>
           </Form.Row>
-          <Button onClick={createDeal}> Submit </Button>
+          <Button onClick={createOffer}> Submit </Button>
         </Col>
       </Row>
     </div>

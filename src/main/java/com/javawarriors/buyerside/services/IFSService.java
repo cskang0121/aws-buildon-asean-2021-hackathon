@@ -16,9 +16,12 @@ public class IFSService {
 
     @Autowired
     private IFSRepo ifsRepo;
+    @Autowired
+    private JwtUserDetailsService userService;
 
-    // public List<ItemForSaleListing> saveAll(Iterable<ItemForSaleListing> entities) {
-    //     return ifsRepo.saveAll(entities);
+    // public List<ItemForSaleListing> saveAll(Iterable<ItemForSaleListing>
+    // entities) {
+    // return ifsRepo.saveAll(entities);
     // }
 
     public List<ItemForSaleListing> findAll() {
@@ -35,5 +38,10 @@ public class IFSService {
 
     public List<ItemForSaleListing> getSearchResults(String keyword) {
         return ifsRepo.findByTitleContaining(keyword);
+    }
+
+    public List<ItemForSaleListing> findByUser(Long userId) {
+        User user = userService.findInRepoById(userId);
+        return ifsRepo.findByUser(user);
     }
 }

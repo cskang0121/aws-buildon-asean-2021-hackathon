@@ -3,15 +3,18 @@ import { Button } from "react-bootstrap";
 import { useHistory } from "react-router";
 import IFSService from "../../services/IFSService";
 import NavigationBar from "../Navbar/NavigationBar";
+import UserService from "../../services/UserService";
 
 const IFSListings = () => {
   const [listings, setListings] = useState([]);
 
   const fetchListings = () => {
-    IFSService.getAllIFSListings().then((res) => {
-      console.log(res.data);
-      setListings(res.data);
-    });
+    IFSService.getCurrentUserIFSListings(UserService.getProfile().uid).then(
+      (res) => {
+        console.log(res.data);
+        setListings(res.data);
+      }
+    );
   };
 
   useEffect(() => {
@@ -28,11 +31,13 @@ const IFSListings = () => {
       <div>
         <h2>{listing.title}</h2>
         <p>{listing.description}</p>
+        <p>Price: {listing.price}</p>
         <p>
-          Price: {listing.price}
+          <Button>Edit Listing</Button>
         </p>
-        <p><Button>Edit Listing</Button></p>
-        <p><Button onClick={() => deleteIFS(listing)}>Delete Listing</Button></p>
+        <p>
+          <Button onClick={() => deleteIFS(listing)}>Delete Listing</Button>
+        </p>
       </div>
     );
   });

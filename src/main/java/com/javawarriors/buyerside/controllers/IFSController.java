@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.javawarriors.buyerside.entities.*;
 import com.javawarriors.buyerside.services.*;
 
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.slf4j.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +36,14 @@ public class IFSController {
 
     Logger logger = LoggerFactory.getLogger(IFSController.class);
 
-    @GetMapping("/ifs-listing/getAll")
+    @GetMapping("/ifs-listing/get")
     public List<ItemForSaleListing> getAllIFSListings() {
         return ifsService.findAll();
+    }
+
+    @GetMapping("/ifs-listing/get/user={id}")
+    public List<ItemForSaleListing> getIFSListingsByUser(@PathVariable Long id) {
+        return ifsService.findByUser(id);
     }
 
     @PostMapping("/ifs-listing/post")
