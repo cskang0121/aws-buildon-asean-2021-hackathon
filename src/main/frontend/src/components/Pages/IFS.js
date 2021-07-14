@@ -8,6 +8,10 @@ import UserService from "../../services/UserService";
 const IFSListings = () => {
   const [listings, setListings] = useState([]);
 
+  useEffect(() => {
+    fetchListings();
+  }, []);
+
   const fetchListings = () => {
     IFSService.getCurrentUserIFSListings(UserService.getProfile().uid).then(
       (res) => {
@@ -17,12 +21,10 @@ const IFSListings = () => {
     );
   };
 
-  useEffect(() => {
-    fetchListings();
-  }, []);
-
   function deleteIFS(listing) {
-    IFSService.postDeleteIFS(listing);
+    IFSService.postDeleteIFS(listing).then((res) => {
+      fetchListings();
+    });
   }
 
   return listings.map((listing, index) => {

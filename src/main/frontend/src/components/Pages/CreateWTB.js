@@ -11,7 +11,6 @@ import {
 } from "react-bootstrap";
 
 import { useHistory } from "react-router";
-import NavigationBar from "../Navbar/NavigationBar";
 
 import WTBService from "../../services/WTBService";
 import UserService from "../../services/UserService";
@@ -52,12 +51,6 @@ export default function CreateWTB(props) {
       });
     });
   };
-
-  // const createCategoryDropdownOptions = () => {
-  //   return CATEGORIES.map((category, index) => {
-  //     return <option value={category}>{category}</option>;
-  //   });
-  // };
 
   return (
     <div>
@@ -131,14 +124,6 @@ export default function CreateWTB(props) {
               </InputGroup>
             </Form.Group>
           </Form.Row>
-          {/* {<div>
-            <label>
-              Category:
-              <select onClick={(event) => setCategoryName(event.target.value)}>
-                {createCategoryDropdownOptions()}
-              </select>
-            </label>
-          </div>} */}
           <div style={{ width: 600 }}>
             <Select
               options={categoryDropdownOptions}

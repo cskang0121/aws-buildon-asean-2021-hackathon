@@ -14,9 +14,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class BuyersideApplicationTests {
 	@Autowired 
-	WTBRepo wtbRepo;
+	IFSRepo ifsRepo;
 	@Autowired 
-	WTBService wtbService;
+	IFSService ifsService;
 
 	@Test
 	void contextLoads() {
@@ -24,9 +24,9 @@ class BuyersideApplicationTests {
 
 	@Test
 	public void testCustomQuery() {
-		String keyword = "chair";
+		String keyword = "p";
 		String categoryName = "Electronics";
-		List<WantToBuyListing> listings = wtbService.getSearchResults(keyword, categoryName);
+		List<ItemForSaleListing> listings = ifsService.getSearchResults(keyword, categoryName);
 
 		System.out.println();
 		System.out.println();

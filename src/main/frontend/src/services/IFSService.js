@@ -20,9 +20,12 @@ class IFSService {
     });
   }
 
-  getSearchListings(keyword) {
+  getSearchListings(keyword, categoryName) {
     return axios.get(IFS_API_BASE_URL + "/searchIFS/get", {
-      params: { keyword: keyword },
+      params: { 
+        keyword: keyword,
+        categoryName: categoryName,
+      },
       headers: authHeader(),
     });
   }

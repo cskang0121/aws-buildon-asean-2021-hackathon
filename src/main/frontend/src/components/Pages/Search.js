@@ -46,7 +46,7 @@ const IFSListings = (props) => {
   const history = useHistory();
 
   const fetchListings = () => {
-    IFSService.getSearchListings(props.keyword).then((res) => {
+    IFSService.getSearchListings(props.keyword, props.category).then((res) => {
       console.log(res.data);
       setListings(res.data);
     });
@@ -54,7 +54,7 @@ const IFSListings = (props) => {
 
   useEffect(() => {
     fetchListings();
-  }, [props.keyword]);
+  }, [props.keyword, props.category]);
 
   return listings.map((listing, index) => {
     const ifsDetails = (listing) => {
@@ -128,6 +128,14 @@ export default function Search() {
               <option selected value="ifs">Items for Sale Listings</option>
               <option value="wtb">Want to Buy Listings</option>
             </select>
+        </div>
+        <div style={{ width: 600 }}>
+          <Select
+            options={categoryDropdownOptions}
+            onChange={(value) => {
+              setCategoryName(value.value);
+            }}
+          />
         </div>
         <h1>Search</h1>
         <div className="ui search">

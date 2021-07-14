@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Select from "react-select";
 
 import {
   Row,
@@ -11,15 +12,16 @@ import {
 
 import { useHistory } from "react-router";
 
-import NavigationBar from "../Navbar/NavigationBar";
-
 import IFSService from "../../services/IFSService";
 import UserService from "../../services/UserService";
+
+import { categoryDropdownOptions } from "../../util/categories";
 
 export default function CreateIFS(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
+  const [categoryName, setCategoryName] = useState("");
 
   const history = useHistory();
 
@@ -38,7 +40,7 @@ export default function CreateIFS(props) {
       price: price,
       status: "a",
       listingType: props.listingType,
-      categoryName: null,
+      categoryName: categoryName,
       user: user,
     };
 
@@ -108,6 +110,14 @@ export default function CreateIFS(props) {
               </InputGroup>
             </Form.Group>
           </Form.Row>
+          <div style={{ width: 600 }}>
+            <Select
+              options={categoryDropdownOptions}
+              onChange={(value) => {
+                setCategoryName(value.value);
+              }}
+            />
+          </div>
           <Button onClick={createListing}> Submit </Button>
         </Col>
       </Row>

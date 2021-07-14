@@ -58,8 +58,8 @@ public class IFSController {
     }
 
     @GetMapping("/ifs-listing/searchIFS/get")
-    public List<ItemForSaleListing> searchIFS(@RequestParam(name = "keyword") String Keyword) {
-        List<ItemForSaleListing> listings = ifsService.getSearchResults(Keyword);
+    public List<ItemForSaleListing> searchIFS(@RequestParam(name = "keyword") String Keyword, @RequestParam(name = "categoryName") String CategoryName) {
+        List<ItemForSaleListing> listings = ifsService.getSearchResults(Keyword, CategoryName);
         return listings;
     }
 
