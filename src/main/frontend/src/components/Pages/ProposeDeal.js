@@ -15,9 +15,11 @@ import NavigationBar from "../Navbar/NavigationBar";
 import DealService from "../../services/DealService";
 import UserService from "../../services/UserService";
 import IFSService from "../../services/IFSService";
+import CreateIFS from "./CreateIFS";
 
 function UseExistingListing({ user, setIfsListing }) {
   const [listings, setListings] = useState([]);
+  const [currentListing, setCurrentListing] = useState({});
 
   const fetchListings = () => {
     console.log(user);
@@ -39,7 +41,7 @@ function UseExistingListing({ user, setIfsListing }) {
         <p>{listing.description}</p>
         <p>Price: {listing.price}</p>
         <p>
-          <Button onClick={setIfsListing(listing)}>Select Listing</Button>
+          <Button onClick={(event) => setIfsListing(listing)}>Select Listing</Button>
         </p>
       </div>
     );
@@ -69,6 +71,25 @@ export default function ProposeDeal(props) {
       dateOfDeal: null,
     };
 
+    console.log(deal);
+
+    DealService.postDeal(deal).then((res) => {
+      history.push({
+        pathname: "/home",
+      });
+    });
+  };
+
+  const createDealListing = (listing) => {
+    let deal = {
+      seller: user,
+      wtbId: location.state.listing,
+      ifsId: listing,
+      dateOfDeal: null,
+    };
+
+    console.log(deal);
+
     DealService.postDeal(deal).then((res) => {
       history.push({
         pathname: "/home",
@@ -87,7 +108,12 @@ export default function ProposeDeal(props) {
           </div>
         );
       case "N":
-        return <h1>Create new listing</h1>;
+        return (
+          <div>
+            <h1>Create new listing</h1>
+            <CreateIFS listingType="d" setDeal={createDealListing} />
+          </div>
+        );
       default:
         return (
           <div>
@@ -108,28 +134,6 @@ export default function ProposeDeal(props) {
       <h1>Propose Deal for:</h1>
       <h2>{location.state.listing.title}</h2>
       {showFormOrList()}
-      {/* {<Row className="justify-content-md-center">
-        <Col lg={12}>
-          <Form.Row>
-            <Form.Group>
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text>Proposed Price:</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                  required
-                  autoComplete="off"
-                  type="number"
-                  name="priceToSellFor"
-                  value={priceToSellFor}
-                  onChange={(event) => setPriceToSellFor(event.target.value)}
-                />
-              </InputGroup>
-            </Form.Group>
-          </Form.Row>
-          <Button onClick={createDeal}> Submit </Button>
-        </Col>
-      </Row>} */}
     </div>
   );
 }

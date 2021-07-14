@@ -10,7 +10,7 @@ const OPTIONS = [
 ];
 
 function Toggler({ selected }) {
-  return selected === "wtb" ? <CreateWTB /> : <CreateIFS />;
+  return selected === "wtb" ? <CreateWTB /> : <CreateIFS listingType="s" />;
 }
 
 export default function CreateListing() {
