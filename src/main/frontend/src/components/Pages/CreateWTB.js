@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Select from "react-select";
 
 import {
   Row,
@@ -15,7 +16,7 @@ import NavigationBar from "../Navbar/NavigationBar";
 import WTBService from "../../services/WTBService";
 import UserService from "../../services/UserService";
 
-import { CATEGORIES } from "../../util/categories";
+import { categoryDropdownOptions } from "../../util/categories";
 
 export default function CreateWTB(props) {
   const [title, setTitle] = useState("");
@@ -52,11 +53,11 @@ export default function CreateWTB(props) {
     });
   };
 
-  const createCategoryDropdownOptions = () => {
-    return CATEGORIES.map((category, index) => {
-      return <option value={category}>{category}</option>;
-    });
-  };
+  // const createCategoryDropdownOptions = () => {
+  //   return CATEGORIES.map((category, index) => {
+  //     return <option value={category}>{category}</option>;
+  //   });
+  // };
 
   return (
     <div>
@@ -131,15 +132,22 @@ export default function CreateWTB(props) {
               </InputGroup>
             </Form.Group>
           </Form.Row>
-          <div>
+          {/* {<div>
             <label>
               Category:
               <select onClick={(event) => setCategoryName(event.target.value)}>
                 {createCategoryDropdownOptions()}
               </select>
             </label>
+          </div>} */}
+          <div style={{ width: 600 }}>
+            <Select
+              options={categoryDropdownOptions}
+              onChange={(value) => {
+                setCategoryName(value.value);
+              }}
+            />
           </div>
-
           <Button onClick={createListing}> Submit </Button>
         </Col>
       </Row>

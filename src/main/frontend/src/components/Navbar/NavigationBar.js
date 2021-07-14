@@ -29,7 +29,7 @@ export default function NavigationBar() {
       <Navbar.Brand href="/home">Navbar</Navbar.Brand>
       <Nav className="mr-auto">
         {loggedIn ? (
-          <div class="d-flex flex-row">
+          <div className="d-flex flex-row">
             <Nav.Link href="/home">Home</Nav.Link>
             <Nav.Link href="/wtb">My WTB Listings</Nav.Link>
             <Nav.Link href="/ifs">IFS Listings</Nav.Link>
@@ -37,7 +37,7 @@ export default function NavigationBar() {
             <Nav.Link onClick={logout}>Logout</Nav.Link>
           </div>
         ) : (
-          <div class="d-flex flex-row">
+          <div className="d-flex flex-row">
             <Nav.Link href="/register">Sign Up</Nav.Link>
             <Nav.Link href="/login">Login</Nav.Link>
           </div>

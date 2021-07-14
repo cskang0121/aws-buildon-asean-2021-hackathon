@@ -18,19 +18,20 @@ import UserService from "../../services/UserService";
 export default function Deal(props) {
   const history = useHistory();
   const location = useLocation();
-  
+
   const [priceToSellFor, setPriceToSellFor] = useState(0);
 
   const [user, setUser] = useState({});
   useEffect(() => {
     setUser(UserService.getProfile());
+    console.log(location.state.listing);
   }, []);
 
   const createDeal = (e) => {
     e.preventDefault();
     let deal = {
       seller: user,
-      wtbListingId: location.state.listing.title,
+      wtbListingId: location.state.listing.wtbId,
       ifsListingId: 1,
       priceToSellFor: priceToSellFor,
       dateOfDeal: null,
