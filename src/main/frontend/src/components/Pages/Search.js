@@ -81,7 +81,7 @@ export default function Search() {
     setSelected(event.target.value);
   };
 
-  if (selected == "wtb") {
+  if (selected === "wtb") {
     return (
       <div>
         <NavigationBar />

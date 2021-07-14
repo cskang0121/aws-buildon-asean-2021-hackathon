@@ -51,7 +51,6 @@ export default function CreateIFS(props) {
 
   return (
     <div>
-      <NavigationBar />
       <Row className="justify-content-md-center">
         <Col lg={12}>
           <Form.Row>
