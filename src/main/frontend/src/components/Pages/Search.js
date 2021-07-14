@@ -116,7 +116,7 @@ export default function Search() {
         </div>
   
         <h2>Want To Buy Listings</h2>
-        <WTBListings keyword={searchTerm} />
+        <WTBListings keyword={searchTerm} category={categoryName}/>
       </div>
     );
   } else {
