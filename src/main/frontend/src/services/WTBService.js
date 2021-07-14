@@ -23,6 +23,10 @@ class WTBService {
   getCurrentUserWTBListings(uid) {
     return axios.get(WTB_API_BASE_URL + "/get/" + uid, {headers: authHeader()});
   }
+
+  postDeal(deal) {
+    return axios.post(WTB_API_BASE_URL + "/deal/post", deal, {headers: authHeader()});
+  }
 }
 
 export default new WTBService();

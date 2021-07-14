@@ -15,6 +15,7 @@ import Search from "./components/Pages/Search";
 import WTBListingDetails from "./components/Pages/WTBListingDetails";
 import IFSListingDetails from "./components/Pages/IFSListingDetails";
 import Deal from "./components/Pages/Deal";
+import Offer from "./components/Pages/Offer";
 
 import AuthenticationService from "./services/AuthenticationService";
 
@@ -62,6 +63,7 @@ function App() {
           <PrivateRoute path="/wtb-listing-details" exact component={WTBListingDetails} />
           <PrivateRoute path="/ifs-listing-details" exact component={IFSListingDetails} />
           <PrivateRoute path="/deal" exact component={Deal} />
+          <PrivateRoute path="/offer" exact component={Offer} />
         </Switch>
       </Router>
     </div>

@@ -18,6 +18,8 @@ public class WTBService {
     private WTBRepo wtbRepo;
     @Autowired
     private JwtUserDetailsService userService;
+    @Autowired
+    private DealRepo dealRepo;
 
     // public List<WantToBuyListing> saveAll(Iterable<WantToBuyListing> entities) {
     //     return wtbRepo.saveAll(entities);
@@ -42,5 +44,9 @@ public class WTBService {
 
     public List<WantToBuyListing> getSearchResults(String keyword) {
         return wtbRepo.findByTitleContaining(keyword);
+    }
+
+    public Deal saveDeal(Deal entity) {
+        return dealRepo.save(entity);
     }
 }

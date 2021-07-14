@@ -9,73 +9,67 @@ import {
   Button,
 } from "react-bootstrap";
 
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import NavigationBar from "../Navbar/NavigationBar";
 
 import WTBService from "../../services/WTBService";
 import UserService from "../../services/UserService";
 
 export default function Deal(props) {
-//   const [title, setTitle] = useState("");
-//   const [description, setDescription] = useState("");
-//   const [priceLower, setPriceLower] = useState(0);
-//   const [priceUpper, setPriceUpper] = useState(0);
+  const history = useHistory();
+  const location = useLocation();
+  
+  const [priceToSellFor, setPriceToSellFor] = useState(0);
 
-//   const history = useHistory();
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    setUser(UserService.getProfile());
+  }, []);
 
-//   const [user, setUser] = useState({});
+  const createDeal = (e) => {
+    e.preventDefault();
+    let deal = {
+      seller: user,
+      wtbListingId: location.state.listing.title,
+      ifsListingId: 1,
+      priceToSellFor: priceToSellFor,
+      dateOfDeal: null,
+    };
 
-//   useEffect(() => {
-//     UserService.getProfile().then((res) => setUser(res.data));
-//     console.log(user);
-//   }, []);
-
-//   const createOffer = (e) => {
-//     e.preventDefault();
-//     let offer = {
-//       title: title,
-//       description: description,
-//       picUri: null,
-//       priceLower: priceLower,
-//       priceUpper: priceUpper,
-//       status: "a",
-//       categoryName: null,
-//       uid: null,
-//     };
-
-//     WTBService.postWTBListing(listing).then((res) => {
-//       history.push({
-//         pathname: "/wtb",
-//       });
-//     });
-//   };
+    WTBService.postDeal(deal).then((res) => {
+      history.push({
+        pathname: "/wtb",
+      });
+    });
+  };
 
   return (
     <div>
       <NavigationBar />
-      <h1>deal stuff</h1>
-      {/* <Row className="justify-content-md-center">
+      <h1>Propose Deal for:</h1>
+      <h2>{location.state.listing.title}</h2>
+      <Row className="justify-content-md-center">
         <Col lg={12}>
           <Form.Row>
             <Form.Group>
               <InputGroup>
                 <InputGroup.Prepend>
-                  <InputGroup.Text>Price Upper:</InputGroup.Text>
+                  <InputGroup.Text>Proposed Price:</InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl
                   required
                   autoComplete="off"
                   type="number"
-                  name="priceUpper"
-                  value={priceUpper}
-                  onChange={(event) => setPriceUpper(event.target.value)}
+                  name="priceToSellFor"
+                  value={priceToSellFor}
+                  onChange={(event) => setPriceToSellFor(event.target.value)}
                 />
               </InputGroup>
             </Form.Group>
           </Form.Row>
-          <Button onClick={createListing}> Submit </Button>
+          <Button onClick={createDeal}> Submit </Button>
         </Col>
-      </Row> */}
+      </Row>
     </div>
   );
 }

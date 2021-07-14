@@ -66,4 +66,10 @@ public class WTBController {
         return listings;
     }
 
+    @PostMapping("/deal/post")
+    public Deal postDeal(@RequestBody Deal newDeal) {
+        wtbService.saveDeal(newDeal);
+        return newDeal;
+    }
+
 }

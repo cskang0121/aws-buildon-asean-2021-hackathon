@@ -10,7 +10,7 @@ export default function IFSListing(props) {
 
   const offer = (listing) => {
   history.push({
-    pathname: "/deal",
+    pathname: "/offer",
     state: {listing: listing}
     });
   };
@@ -27,7 +27,7 @@ export default function IFSListing(props) {
         Price: {location.state.listing.price}
       </p>
       <p>
-          <Button onClick={() => offer(location.state.listing)}>Propose Deal</Button>
+          <Button onClick={() => offer(location.state.listing)}>Make Offer</Button>
         </p>
     </div>
   );
