@@ -15,8 +15,22 @@ import java.util.*;
 public class BuyerQnAService {
     @Autowired
     private BuyerQnARepo buyerQnARepo;
+    @Autowired
+    private WTBService wtbService;
 
     public List<BuyerQnA> saveManyBuyerQnAs(Iterable<BuyerQnA> buyerQnAs) {
         return buyerQnARepo.saveAll(buyerQnAs);
+    }
+
+    public List<BuyerQnA> findByWtbId(Long wtbId) {
+        WantToBuyListing wtbListing = wtbService.findById(wtbId);
+        return buyerQnARepo.findByWtbListing(wtbListing);
+    }
+
+    public void deleteByWtbId(Long wtbId) {
+        List<BuyerQnA> toDeleteQnA = findByWtbId(wtbId);
+        for (BuyerQnA buyerQnA : toDeleteQnA) {
+            buyerQnARepo.delete(buyerQnA);
+        }
     }
 }

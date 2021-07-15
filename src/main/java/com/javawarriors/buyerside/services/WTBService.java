@@ -18,6 +18,10 @@ public class WTBService {
     private WTBRepo wtbRepo;
     @Autowired
     private JwtUserDetailsService userService;
+    @Autowired
+    private BuyerQnAService buyerQnAService;
+    @Autowired
+    private DealService dealService;
 
     // public List<WantToBuyListing> saveAll(Iterable<WantToBuyListing> entities) {
     // return wtbRepo.saveAll(entities);
@@ -41,6 +45,8 @@ public class WTBService {
     }
 
     public void deleteById(Long wtbId) {
+        dealService.deleteByWtbId(wtbId);
+        buyerQnAService.deleteByWtbId(wtbId);
         wtbRepo.deleteById(wtbId);
     }
 

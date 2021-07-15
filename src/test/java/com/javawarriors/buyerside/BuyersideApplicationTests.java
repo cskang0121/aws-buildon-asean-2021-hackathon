@@ -18,6 +18,11 @@ class BuyersideApplicationTests {
 	@Autowired 
 	IFSService ifsService;
 
+	@Autowired
+	BuyerQnARepo buyerQnARepo;
+	@Autowired
+	BuyerQnAService buyerQnAService;
+
 	@Test
 	void contextLoads() {
 	}
@@ -32,6 +37,19 @@ class BuyersideApplicationTests {
 		System.out.println();
 		System.out.println();
 		System.out.println(listings);
+		System.out.println();
+		System.out.println();
+		System.out.println();
+	}
+
+	@Test
+	public void testBuyerQnACustomQuery() {
+		Long wtbId = (long) 1;
+		List<BuyerQnA> list = buyerQnAService.findByWtbId(wtbId);
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println(list);
 		System.out.println();
 		System.out.println();
 		System.out.println();

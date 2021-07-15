@@ -37,4 +37,11 @@ public class DealService {
     public List<Deal> saveManyDeals(Iterable<Deal> deals) {
         return dealRepo.saveAll(deals);
     }
+
+    public void deleteByWtbId(Long wtbId) {
+        List<Deal> toDeleteDeal = findByWtbId(wtbId);
+        for (Deal deal : toDeleteDeal) {
+            dealRepo.delete(deal);
+        }
+    }
 }
