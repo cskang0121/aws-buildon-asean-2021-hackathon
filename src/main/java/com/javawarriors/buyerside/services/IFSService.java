@@ -49,4 +49,8 @@ public class IFSService {
         // return ifsRepo.findByTitleContaining(keyword);
         return ifsRepo.findByTitleAndCategoryContaining(keyword, categoryName);
     }
+
+    public ItemForSaleListing findByListingId(Long id) {
+        return ifsRepo.findById(id).get();
+    }
 }

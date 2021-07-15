@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Collection;
 
 /**
  * Controller for Offers
@@ -32,6 +33,8 @@ public class OfferController {
 
     @Autowired
     private IFSController ifsController;
+
+    Logger logger = LoggerFactory.getLogger(OfferController.class);
 
     @PostMapping("/offer/post")
     public Offer postOffer(@RequestBody Offer newOffer) {
@@ -49,6 +52,20 @@ public class OfferController {
     public List<Offer> getOffersReceivedByUser(@PathVariable Long id) {
         List<ItemForSaleListing> ifsListings = ifsController.getIFSListingsByUser(id);
         return offerService.findByIfsListingIn(ifsListings);
+    }
+
+    @GetMapping("/offer/get/ifslisting={id}")
+    public List<Offer> getOffersByIfsListing(@PathVariable Long id) {
+        return offerService.findByIfsListing(id);
+    }
+
+    @PostMapping("/offer/post/accept")
+    public List<Offer> postAcceptedOffers(@RequestBody List<Offer> offers) {
+        ItemForSaleListing ifsListing = offers.get(0).getIfsListing();
+        ifsListing.setStatus('p');
+        ifsController.postIFSListing(ifsListing);
+        //logger.info(String.valueOf(ifsListing.getStatus()));
+        return offerService.saveManyOffers(offers);
     }
     
 }

@@ -15,6 +15,12 @@ class OfferService {
       headers: authHeader(),
     });
   }
+
+  postAcceptedOffers(offers) {
+    return axios.post(OFFER_API_BASE_URL + "/post/accept", offers, {
+      headers: authHeader(),
+    });
+  }
 }
 
 export default new OfferService();

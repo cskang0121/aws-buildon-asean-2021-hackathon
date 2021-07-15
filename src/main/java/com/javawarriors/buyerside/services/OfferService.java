@@ -20,6 +20,9 @@ public class OfferService {
     @Autowired
     private JwtUserDetailsService userService;
 
+    @Autowired
+    private IFSService ifsService;
+
     public Offer saveOffer(Offer entity) {
         return offerRepo.save(entity);
     }
@@ -31,5 +34,14 @@ public class OfferService {
 
     public List<Offer> findByIfsListingIn(Collection<ItemForSaleListing> ifsListings) {
         return offerRepo.findByIfsListingIn(ifsListings);
+    }
+
+    public List<Offer> findByIfsListing(Long id) {
+        ItemForSaleListing ifsListing = ifsService.findByListingId(id);
+        return offerRepo.findByIfsListing(ifsListing);
+    }
+
+    public List<Offer> saveManyOffers(Iterable<Offer> offers) {
+        return offerRepo.saveAll(offers);
     }
 }

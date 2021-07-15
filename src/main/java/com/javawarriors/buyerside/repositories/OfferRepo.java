@@ -18,4 +18,6 @@ public interface OfferRepo extends JpaRepository<Offer, OfferPK> {
     public List<Offer> findByBuyer(User user);
 
     public List<Offer> findByIfsListingIn(Collection<ItemForSaleListing> ifsListings);
+
+    public List<Offer> findByIfsListing(ItemForSaleListing ifsListing);
 }

@@ -12,10 +12,12 @@ const WTBListings = (props) => {
   const history = useHistory();
 
   const fetchListings = () => {
-    WTBService.getSearchListings(props.keyword, props.categoryName).then((res) => {
-      console.log(res.data);
-      setListings(res.data);
-    });
+    WTBService.getSearchListings(props.keyword, props.categoryName).then(
+      (res) => {
+        console.log(res.data);
+        setListings(res.data);
+      }
+    );
   };
 
   useEffect(() => {
@@ -46,10 +48,12 @@ const IFSListings = (props) => {
   const history = useHistory();
 
   const fetchListings = () => {
-    IFSService.getSearchListings(props.keyword, props.categoryName).then((res) => {
-      console.log(res.data);
-      setListings(res.data);
-    });
+    IFSService.getSearchListings(props.keyword, props.categoryName).then(
+      (res) => {
+        console.log(res.data);
+        setListings(res.data);
+      }
+    );
   };
 
   useEffect(() => {
@@ -67,9 +71,7 @@ const IFSListings = (props) => {
       <div onClick={() => ifsDetails(listing)}>
         <h2>{listing.title}</h2>
         <p>{listing.description}</p>
-        <p>
-          Price: {listing.price}
-        </p>
+        <p>Price: {listing.price}</p>
       </div>
     );
   });
@@ -78,7 +80,7 @@ const IFSListings = (props) => {
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedListingType, setSelectedListingType] = useState("");
-  const [categoryName, setCategoryName] = useState("") 
+  const [categoryName, setCategoryName] = useState("");
 
   const changeSelectOptionHandler = (event) => {
     setSelectedListingType(event.target.value);
@@ -89,10 +91,12 @@ export default function Search() {
       <div>
         <NavigationBar />
         <div>
-            <select onChange={changeSelectOptionHandler}>
-              <option selected value="ifs">Items for Sale Listings</option>
-              <option value="wtb">Want to Buy Listings</option>
-            </select>
+          <select onChange={changeSelectOptionHandler}>
+            <option selected value="ifs">
+              Items for Sale Listings
+            </option>
+            <option value="wtb">Want to Buy Listings</option>
+          </select>
         </div>
         <div style={{ width: 600 }}>
           <Select
@@ -114,9 +118,9 @@ export default function Search() {
             ></input>
           </div>
         </div>
-  
+
         <h2>Want To Buy Listings</h2>
-        <WTBListings keyword={searchTerm} categoryName={categoryName}/>
+        <WTBListings keyword={searchTerm} categoryName={categoryName} />
       </div>
     );
   } else {
@@ -124,10 +128,12 @@ export default function Search() {
       <div>
         <NavigationBar />
         <div>
-            <select onChange={changeSelectOptionHandler}>
-              <option selected value="ifs">Items for Sale Listings</option>
-              <option value="wtb">Want to Buy Listings</option>
-            </select>
+          <select onChange={changeSelectOptionHandler}>
+            <option selected value="ifs">
+              Items for Sale Listings
+            </option>
+            <option value="wtb">Want to Buy Listings</option>
+          </select>
         </div>
         <div style={{ width: 600 }}>
           <Select
@@ -149,11 +155,10 @@ export default function Search() {
             ></input>
           </div>
         </div>
-  
+
         <h2>Items for Sale Listings</h2>
         <IFSListings keyword={searchTerm} categoryName={categoryName} />
       </div>
     );
   }
-
 }
