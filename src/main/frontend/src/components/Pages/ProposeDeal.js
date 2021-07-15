@@ -16,6 +16,7 @@ import DealService from "../../services/DealService";
 import UserService from "../../services/UserService";
 import IFSService from "../../services/IFSService";
 import CreateIFS from "../CreateIFS";
+import BuyerQnAService from "../../services/BuyerQnAService";
 
 function UseExistingListing({ user, setIfsListing }) {
   const [listings, setListings] = useState([]);
@@ -56,6 +57,7 @@ export default function ProposeDeal(props) {
 
   const [useExistingListing, setUseExistingListing] = useState("");
   const [ifsListing, setIfsListing] = useState({});
+  const [buyerQnAs, setBuyerQnAs] = useState([]);
 
   const [user, setUser] = useState({});
 
@@ -64,10 +66,24 @@ export default function ProposeDeal(props) {
     console.log(location.state.listing);
   }, []);
 
-  // const fetchBuyerQnAs = () => {
+  // QnA things
+  const fetchBuyerQnAs = () => {
+    BuyerQnAService.getQnAsForWtbListing(location.state.listing.wtbId).then(
+      (res) => {
+        setBuyerQnAs(res);
+      }
+    );
+  };
 
-  // }
+  const renderBuyerQnAs = () => {
+    return (<div>
+      
+    </div>)
+  }
 
+  // Post the deal
+
+  // Create using existing listing
   const createDeal = (e) => {
     e.preventDefault();
     let deal = {
@@ -87,6 +103,7 @@ export default function ProposeDeal(props) {
     });
   };
 
+  // Create a new listing
   const createDealListing = (listing) => {
     let deal = {
       seller: user,
@@ -105,6 +122,7 @@ export default function ProposeDeal(props) {
     });
   };
 
+  // Use Existing Listing or Create New One
   const showFormOrList = () => {
     switch (useExistingListing) {
       case "Y":
