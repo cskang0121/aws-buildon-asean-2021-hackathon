@@ -11,9 +11,8 @@ public class BuyerQnA {
     @JoinColumn(name = "wtb_id")
     @Id
     private WantToBuyListing wtbListing;
-    
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long qnaId;
 
     private String question;
@@ -21,12 +20,12 @@ public class BuyerQnA {
     /** getters and setters for the variables of the BuyerQnA */
 
     public WantToBuyListing getWtbListing() {
-		return this.wtbListing;
-	}
+        return this.wtbListing;
+    }
 
-	public void setWtbListing(WantToBuyListing wtbListing) {
-		this.wtbListing = wtbListing;
-	}
+    public void setWtbListing(WantToBuyListing wtbListing) {
+        this.wtbListing = wtbListing;
+    }
 
     public Long getQnaId() {
         return this.qnaId;

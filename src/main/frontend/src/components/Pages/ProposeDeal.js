@@ -64,6 +64,10 @@ export default function ProposeDeal(props) {
     console.log(location.state.listing);
   }, []);
 
+  // const fetchBuyerQnAs = () => {
+
+  // }
+
   const createDeal = (e) => {
     e.preventDefault();
     let deal = {
