@@ -1,4 +1,5 @@
 package com.javawarriors.buyerside.controllers;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.javawarriors.buyerside.entities.*;
@@ -29,6 +30,11 @@ public class DealController {
     @Autowired
     private DealService dealService;
 
+    @Autowired
+    private IFSController ifsController;
+    @Autowired
+    private WTBController wtbController;
+
     @PostMapping("/deal/post")
     public Deal postDeal(@RequestBody Deal newDeal) {
         newDeal.setDateOfDeal(new Date());
@@ -48,9 +54,14 @@ public class DealController {
 
     @PostMapping("/deal/post/accept")
     public List<Deal> postAcceptedDeals(@RequestBody List<Deal> deals) {
-        //logger.info(String.valueOf(ifsListing.getStatus()));
+        // logger.info(String.valueOf(ifsListing.getStatus()));
+        ItemForSaleListing ifsListing = deals.get(0).getIfsId();
+        ifsListing.setStatus('p');
+        ifsController.postIFSListing(ifsListing);
+        WantToBuyListing wtbListing = deals.get(0).getWtbId();
+        wtbListing.setStatus('p');
+        wtbController.postWTBListing(wtbListing);
         return dealService.saveManyDeals(deals);
     }
-    
 
 }
