@@ -15,8 +15,26 @@ import java.util.*;
 public class DealService {
     @Autowired
     private DealRepo dealRepo;
+    @Autowired
+    private WTBService wtbService;
+    @Autowired
+    private IFSService ifsService;
 
     public Deal saveDeal(Deal entity) {
         return dealRepo.save(entity);
+    }
+
+    public List<Deal> findByWtbId(Long id) {
+        WantToBuyListing wtbListing = wtbService.findById(id);
+        return dealRepo.findByWtbId(wtbListing);
+    }
+
+    public List<Deal> findByIfsId(Long id) {
+        ItemForSaleListing ifsListing = ifsService.findByListingId(id);
+        return dealRepo.findByIfsId(ifsListing);
+    }
+
+    public List<Deal> saveManyDeals(Iterable<Deal> deals) {
+        return dealRepo.saveAll(deals);
     }
 }

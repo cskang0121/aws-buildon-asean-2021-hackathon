@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Select from "react-select";
-import CreateIFS from "./CreateIFS";
-import CreateWTB from "./CreateWTB";
+import CreateIFS from "../CreateIFS";
+import CreateWTB from "../CreateWTB";
 import NavigationBar from "../Navbar/NavigationBar";
 
 const OPTIONS = [

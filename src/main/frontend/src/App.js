@@ -6,9 +6,7 @@ import NavigationBar from "./components/Navbar/NavigationBar";
 import Home from "./components/Pages/Home";
 import Register from "./components/Pages/Register";
 import WTB from "./components/Pages/WTB";
-import CreateWTB from "./components/Pages/CreateWTB";
 import IFS from "./components/Pages/IFS";
-import CreateIFS from "./components/Pages/CreateIFS";
 import CreateListing from "./components/Pages/CreateListing";
 import Login from "./components/Pages/Login";
 import { PrivateRoute } from "./components/PrivateRoute";
@@ -18,6 +16,8 @@ import IFSListingDetails from "./components/Pages/IFSListingDetails";
 import Deal from "./components/Pages/ProposeDeal";
 import Offer from "./components/Pages/MakeOffer";
 import ViewAllReceivedOffers from "./components/Pages/ViewAllReceivedOffers";
+import ViewListingOffers from "./components/Pages/ViewListingOffers";
+import ViewListingDeals from "./components/Pages/ViewListingDeals";
 
 import AuthenticationService from "./services/AuthenticationService";
 
@@ -77,6 +77,16 @@ function App() {
             path="/received-offers"
             exact
             component={ViewAllReceivedOffers}
+          />
+          <PrivateRoute
+            path="/view-listing-offers"
+            exact
+            component={ViewListingOffers}
+          />
+          <PrivateRoute
+            path="/view-listing-deals"
+            exact
+            component={ViewListingDeals}
           />
         </Switch>
       </Router>

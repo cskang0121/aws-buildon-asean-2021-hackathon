@@ -64,7 +64,7 @@ const IFSListings = (props) => {
     const ifsDetails = (listing) => {
       history.push({
         pathname: "/ifs-listing-details",
-        state: { listing: listing },
+        state: { listing: listing, deal: {} },
       });
     };
     return (

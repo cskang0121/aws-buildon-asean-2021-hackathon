@@ -13,7 +13,6 @@ class UserService {
 
   // Get profile
   getProfile() {
-    console.log(localStorage.getItem("userProfile"));
     return JSON.parse(localStorage.getItem("userProfile"));
   }
 }

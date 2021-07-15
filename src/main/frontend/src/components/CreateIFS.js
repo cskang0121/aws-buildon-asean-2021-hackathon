@@ -12,10 +12,10 @@ import {
 
 import { useHistory } from "react-router";
 
-import IFSService from "../../services/IFSService";
-import UserService from "../../services/UserService";
+import IFSService from "../services/IFSService";
+import UserService from "../services/UserService";
 
-import { categoryDropdownOptions } from "../../util/categories";
+import { categoryDropdownOptions } from "../util/categories";
 
 export default function CreateIFS(props) {
   const [title, setTitle] = useState("");

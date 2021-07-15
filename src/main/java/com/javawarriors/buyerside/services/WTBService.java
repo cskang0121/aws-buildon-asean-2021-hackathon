@@ -20,8 +20,12 @@ public class WTBService {
     private JwtUserDetailsService userService;
 
     // public List<WantToBuyListing> saveAll(Iterable<WantToBuyListing> entities) {
-    //     return wtbRepo.saveAll(entities);
+    // return wtbRepo.saveAll(entities);
     // }
+
+    public WantToBuyListing findById(Long id) {
+        return wtbRepo.findById(id).get();
+    }
 
     public List<WantToBuyListing> findAll() {
         return wtbRepo.findAll();

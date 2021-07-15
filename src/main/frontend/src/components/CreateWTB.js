@@ -12,10 +12,10 @@ import {
 
 import { useHistory } from "react-router";
 
-import WTBService from "../../services/WTBService";
-import UserService from "../../services/UserService";
+import WTBService from "../services/WTBService";
+import UserService from "../services/UserService";
 
-import { categoryDropdownOptions } from "../../util/categories";
+import { categoryDropdownOptions } from "../util/categories";
 
 export default function CreateWTB(props) {
   const [title, setTitle] = useState("");

@@ -26,6 +26,8 @@ public class Deal {
 
     private Date dateOfDeal;
 
+    private String status;
+
     @OneToMany(mappedBy="deal")
     private Collection<AnswerQnA> answers;
 
@@ -61,6 +63,14 @@ public class Deal {
 
     public void setDateOfDeal(Date dateOfDeal) {
         this.dateOfDeal = dateOfDeal;
+    }
+
+    public String getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }

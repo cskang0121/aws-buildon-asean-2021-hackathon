@@ -21,6 +21,12 @@ class OfferService {
       headers: authHeader(),
     });
   }
+
+  getOffersForListing(ifsId) {
+    return axios.get(OFFER_API_BASE_URL + "/get/ifslisting=" + ifsId, {
+      headers: authHeader(),
+    });
+  }
 }
 
 export default new OfferService();

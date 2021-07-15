@@ -9,6 +9,24 @@ class DealService {
       headers: authHeader(),
     });
   }
+
+  getDealsForWtbListing(wtbId) {
+    return axios.get(DEAL_API_BASE_URL + "/get/wtblisting=" + wtbId, {
+      headers: authHeader(),
+    });
+  }
+
+  getDealsForIfsListing(ifsId) {
+    return axios.get(DEAL_API_BASE_URL + "/get/ifslisting=" + ifsId, {
+      headers: authHeader(),
+    });
+  }
+
+  postAcceptedDeals(deals) {
+    return axios.post(DEAL_API_BASE_URL + "/post/accept", deals, {
+      headers: authHeader(),
+    });
+  }
 }
 
 export default new DealService();

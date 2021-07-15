@@ -46,6 +46,11 @@ public class IFSController {
         return ifsService.findByUser(id);
     }
 
+    @GetMapping("/ifs-listing/get/id={id}")
+    public ItemForSaleListing getIFSListingsById(@PathVariable Long id) {
+        return ifsService.findByListingId(id);
+    }
+
     @PostMapping("/ifs-listing/post")
     public ItemForSaleListing postIFSListing(@RequestBody ItemForSaleListing newIFSListing) {
         ifsService.save(newIFSListing);

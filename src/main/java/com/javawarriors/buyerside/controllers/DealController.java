@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Controller for Deals
@@ -34,4 +35,22 @@ public class DealController {
         dealService.saveDeal(newDeal);
         return newDeal;
     }
+
+    @GetMapping("/deal/get/wtblisting={id}")
+    public List<Deal> getDealsByWtbId(@PathVariable Long id) {
+        return dealService.findByWtbId(id);
+    }
+
+    @GetMapping("/deal/get/ifslisting={id}")
+    public List<Deal> getDealsByIfsId(@PathVariable Long id) {
+        return dealService.findByIfsId(id);
+    }
+
+    @PostMapping("/deal/post/accept")
+    public List<Deal> postAcceptedDeals(@RequestBody List<Deal> deals) {
+        //logger.info(String.valueOf(ifsListing.getStatus()));
+        return dealService.saveManyDeals(deals);
+    }
+    
+
 }

@@ -15,7 +15,7 @@ import NavigationBar from "../Navbar/NavigationBar";
 import DealService from "../../services/DealService";
 import UserService from "../../services/UserService";
 import IFSService from "../../services/IFSService";
-import CreateIFS from "./CreateIFS";
+import CreateIFS from "../CreateIFS";
 
 function UseExistingListing({ user, setIfsListing }) {
   const [listings, setListings] = useState([]);
@@ -41,7 +41,9 @@ function UseExistingListing({ user, setIfsListing }) {
         <p>{listing.description}</p>
         <p>Price: {listing.price}</p>
         <p>
-          <Button onClick={(event) => setIfsListing(listing)}>Select Listing</Button>
+          <Button onClick={(event) => setIfsListing(listing)}>
+            Select Listing
+          </Button>
         </p>
       </div>
     );
@@ -69,6 +71,7 @@ export default function ProposeDeal(props) {
       wtbId: location.state.listing,
       ifsId: ifsListing,
       dateOfDeal: null,
+      status: "p",
     };
 
     console.log(deal);
@@ -86,6 +89,7 @@ export default function ProposeDeal(props) {
       wtbId: location.state.listing,
       ifsId: listing,
       dateOfDeal: null,
+      status: "p",
     };
 
     console.log(deal);

@@ -15,5 +15,6 @@ import org.springframework.data.repository.query.Param;
  */
 @Repository
 public interface DealRepo extends JpaRepository<Deal, DealPK> {
-
+    public List<Deal> findByWtbId(WantToBuyListing wtbId);
+    public List<Deal> findByIfsId(ItemForSaleListing ifsId);
 }
