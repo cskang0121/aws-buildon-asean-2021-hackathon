@@ -44,4 +44,11 @@ public class OfferService {
     public List<Offer> saveManyOffers(Iterable<Offer> offers) {
         return offerRepo.saveAll(offers);
     }
+
+    public void deleteByIfsId(Long ifsId) {
+        List<Offer> toDeleteOffer = findByIfsListing(ifsId);
+        for (Offer offer : toDeleteOffer) {
+            offerRepo.delete(offer);
+        }
+    }
 }

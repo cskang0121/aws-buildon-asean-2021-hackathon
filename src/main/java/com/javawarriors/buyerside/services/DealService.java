@@ -44,4 +44,11 @@ public class DealService {
             dealRepo.delete(deal);
         }
     }
+
+    public void deleteByIfsId(Long ifsId) {
+        List<Deal> toDeleteDeal = findByIfsId(ifsId);
+        for (Deal deal : toDeleteDeal) {
+            dealRepo.delete(deal);
+        }
+    }
 }

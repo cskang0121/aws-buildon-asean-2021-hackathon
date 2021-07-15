@@ -19,6 +19,11 @@ public class IFSService {
     @Autowired
     private JwtUserDetailsService userService;
 
+    @Autowired
+    private OfferService offerService;
+    @Autowired
+    private DealService dealService;
+
     // public List<ItemForSaleListing> saveAll(Iterable<ItemForSaleListing>
     // entities) {
     // return ifsRepo.saveAll(entities);
@@ -33,6 +38,8 @@ public class IFSService {
     }
 
     public void deleteById(Long ifsId) {
+        dealService.deleteByIfsId(ifsId);
+        offerService.deleteByIfsId(ifsId);
         ifsRepo.deleteById(ifsId);
     }
 
