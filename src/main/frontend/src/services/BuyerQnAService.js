@@ -9,6 +9,12 @@ class BuyerQnAService {
       headers: authHeader(),
     });
   }
+
+  getQnAsForWtbListing(wtbId) {
+    return axios.get(BUYER_QNA_API_BASE_URL + "/get/wtblisting=" + wtbId, {
+      headers: authHeader(),
+    });
+  }
 }
 
 export default new BuyerQnAService();

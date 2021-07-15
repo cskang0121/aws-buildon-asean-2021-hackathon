@@ -1,4 +1,5 @@
 package com.javawarriors.buyerside.controllers;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.javawarriors.buyerside.entities.*;
@@ -31,5 +32,10 @@ public class BuyerQnAController {
     @PostMapping("/buyer-qna/post/many")
     public List<BuyerQnA> postBuyerQnAs(@RequestBody List<BuyerQnA> buyerQnAs) {
         return buyerQnAService.saveManyBuyerQnAs(buyerQnAs);
+    }
+
+    @GetMapping("/buyer-qna/post/wtblisting={id}")
+    public List<BuyerQnA> getQnAsByWtbListing(@PathVariable Long id) {
+        return buyerQnAService.findByWtbId(id);
     }
 }

@@ -16,5 +16,4 @@ import org.springframework.data.repository.query.Param;
 @Repository
 public interface BuyerQnARepo extends JpaRepository<BuyerQnA, BuyerQnAPK> {
     public List<BuyerQnA> findByWtbListing(WantToBuyListing wtbListing);
-
 }
