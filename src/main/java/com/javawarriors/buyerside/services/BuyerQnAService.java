@@ -22,9 +22,15 @@ public class BuyerQnAService {
         return buyerQnARepo.saveAll(buyerQnAs);
     }
 
-    public List<BuyerQnA> findByWtbListing(Long id) {
-        WantToBuyListing wtbListing = wtbService.findById(id);
+    public List<BuyerQnA> findByWtbId(Long wtbId) {
+        WantToBuyListing wtbListing = wtbService.findById(wtbId);
         return buyerQnARepo.findByWtbListing(wtbListing);
     }
-    
+
+    public void deleteByWtbId(Long wtbId) {
+        List<BuyerQnA> toDeleteQnA = findByWtbId(wtbId);
+        for (BuyerQnA buyerQnA : toDeleteQnA) {
+            buyerQnARepo.delete(buyerQnA);
+        }
+    }
 }
