@@ -34,7 +34,7 @@ public class BuyerQnAController {
         return buyerQnAService.saveManyBuyerQnAs(buyerQnAs);
     }
 
-    @GetMapping("/buyer-qna/post/wtblisting={id}")
+    @GetMapping("/buyer-qna/get/wtblisting={id}")
     public List<BuyerQnA> getQnAsByWtbListing(@PathVariable Long id) {
         return buyerQnAService.findByWtbId(id);
     }

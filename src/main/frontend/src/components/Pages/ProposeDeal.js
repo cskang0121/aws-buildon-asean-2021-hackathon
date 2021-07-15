@@ -58,30 +58,76 @@ export default function ProposeDeal(props) {
   const [useExistingListing, setUseExistingListing] = useState("");
   const [ifsListing, setIfsListing] = useState({});
   const [buyerQnAs, setBuyerQnAs] = useState([]);
+  const [answersList, setAnswersList] = useState([]);
 
+  // Get user
   const [user, setUser] = useState({});
-
   useEffect(() => {
     setUser(UserService.getProfile());
-    console.log(location.state.listing);
+    fetchBuyerQnAs();
+    // console.log(location.state.listing);
   }, []);
 
   // QnA things
   const fetchBuyerQnAs = () => {
     BuyerQnAService.getQnAsForWtbListing(location.state.listing.wtbId).then(
       (res) => {
-        setBuyerQnAs(res);
+        setBuyerQnAs(res.data);
+        let arr = new Array(res.data.length);
+        res.data.map((qn, index) => {
+          const { qnaId, wtbListing, question } = qn;
+          const answerQnA = {
+            deal: {},
+            answerId: qnaId,
+            answer: "",
+          };
+          arr[index] = answerQnA;
+        });
+        setAnswersList([...arr]);
+        //console.log(answersList);
       }
     );
   };
 
-  const renderBuyerQnAs = () => {
-    return (<div>
-      
-    </div>)
-  }
+  const handleAnswerChange = (event, index) => {
+    const { name, value } = event.target;
+    const list = [...answersList];
+    list[index][name] = value;
+    setAnswersList(list);
+  };
 
+  const renderBuyerQnAs = () => {
+    return answersList.map((item, index) => {
+      return (
+        <div key={index}>
+          <h3>
+            {item.answerId}. {buyerQnAs[index].question}
+          </h3>
+          <Form.Row>
+            <Form.Group>
+              <InputGroup>
+                <InputGroup.Prepend>
+                  <InputGroup.Text>Answer:</InputGroup.Text>
+                </InputGroup.Prepend>
+                <FormControl
+                  required
+                  autoComplete="off"
+                  type="text"
+                  name="answer"
+                  value={item.answer}
+                  onChange={(event) => handleAnswerChange(event, index)}
+                />
+              </InputGroup>
+            </Form.Group>
+          </Form.Row>
+        </div>
+      );
+    });
+  };
+
+  // ------------------------------------
   // Post the deal
+  // ------------------------------------
 
   // Create using existing listing
   const createDeal = (e) => {
@@ -159,6 +205,7 @@ export default function ProposeDeal(props) {
       <NavigationBar />
       <h1>Propose Deal for:</h1>
       <h2>{location.state.listing.title}</h2>
+      {renderBuyerQnAs()}
       {showFormOrList()}
     </div>
   );
