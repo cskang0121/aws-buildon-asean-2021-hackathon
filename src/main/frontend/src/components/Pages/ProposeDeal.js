@@ -175,7 +175,7 @@ export default function ProposeDeal(props) {
   };
 
   // Create a new listing
-  const createDealListing = (listing) => {
+  const createDealListing = (listing, e) => {
     if (!checkIfAllAnswered()) {
       alert("Please answer all questions");
       return;
@@ -223,7 +223,7 @@ export default function ProposeDeal(props) {
         return (
           <div>
             <h1>Create new listing</h1>
-            <CreateIFS listingType="d" setDeal={createDealListing} />
+            <CreateIFS listingType="d" setDeal={(listing, event) => createDealListing(listing, event)} />
           </div>
         );
       default:

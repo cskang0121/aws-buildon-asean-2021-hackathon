@@ -28,14 +28,14 @@ export default function BuyerQnAList({ deal }) {
   };
 
   const renderBuyerQnAs = () => {
-    return questionList.map((item, index) => {
+    return questionList.length > 0 && answerList.length > 0 ? questionList.map((item, index) => {
         return (
           <div>
               <h3>{item.qnaId}. {item.question}</h3>
               <p>{answerList[index].answer}</p>
           </div>
         );
-      });
+      }) : <div><p>No questions</p></div>;
   };
 
   return <div>{renderBuyerQnAs()}</div>;

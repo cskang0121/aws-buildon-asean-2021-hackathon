@@ -18,6 +18,8 @@ import Offer from "./components/Pages/MakeOffer";
 import ViewAllReceivedOffers from "./components/Pages/ViewAllReceivedOffers";
 import ViewListingOffers from "./components/Pages/ViewListingOffers";
 import ViewListingDeals from "./components/Pages/ViewListingDeals";
+import ViewSellerQnA from "./components/Pages/ViewSellerQnA";
+import AnswerSellerQnA from "./components/Pages/AnswerSellerQnA";
 
 import AuthenticationService from "./services/AuthenticationService";
 
@@ -87,6 +89,16 @@ function App() {
             path="/view-listing-deals"
             exact
             component={ViewListingDeals}
+          />
+          <PrivateRoute
+            path="/view-seller-qna"
+            exact
+            component={ViewSellerQnA}
+          />
+          <PrivateRoute
+            path="/answer-seller-qna"
+            exact
+            component={AnswerSellerQnA}
           />
         </Switch>
       </Router>

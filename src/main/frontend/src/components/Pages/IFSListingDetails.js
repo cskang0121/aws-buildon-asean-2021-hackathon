@@ -16,6 +16,23 @@ export default function IFSListing(props) {
     setUser(UserService.getProfile());
   }, []);
 
+  // Lead to QnA
+  const viewSellerQnA = (listing) => {
+    history.push({
+      pathname: "/view-seller-qna",
+      state: { listing: listing },
+    });
+  };
+
+  const answerSellerQnA = (listing) => {
+    history.push({
+      pathname: "/answer-seller-qna",
+      state: { listing: listing },
+    });
+  };
+
+  // Lead to Offer
+
   const makeOffer = (listing) => {
     history.push({
       pathname: "/offer",
@@ -135,15 +152,25 @@ export default function IFSListing(props) {
       );
     } else if (location.state.listing.user.uid === user.uid) {
       return (
-        <Button onClick={() => viewOffer(location.state.listing)}>
-          View Offers
-        </Button>
+        <div>
+          <Button onClick={() => answerSellerQnA(location.state.listing)}>
+            View QnA
+          </Button>
+          <Button onClick={() => viewOffer(location.state.listing)}>
+            View Offers
+          </Button>
+        </div>
       );
     } else {
       return (
-        <Button onClick={() => makeOffer(location.state.listing)}>
-          Make Offer
-        </Button>
+        <div>
+          <Button onClick={() => viewSellerQnA(location.state.listing)}>
+            View QnA
+          </Button>
+          <Button onClick={() => makeOffer(location.state.listing)}>
+            Make Offer
+          </Button>
+        </div>
       );
     }
   };
