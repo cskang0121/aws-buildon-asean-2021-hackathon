@@ -20,12 +20,26 @@ public class BuyerQnAPK implements Serializable {
     }
 
     /**
-     * Implementation of the equals method 
-     * 
-     * A History object will be equal to another
-     * if their HistoryPK is equal 
-     * A HistoryPK will be equal to another if their
-     * vesselDetail and queryDate are the same
+     * Getters and setters
+     */
+    public Long getWtbListing() {
+        return this.wtbListing;
+    }
+
+    public void setWtbListing(Long wtbListing) {
+        this.wtbListing = wtbListing;
+    }
+
+    public Long getQnaId() {
+        return this.qnaId;
+    }
+
+    public void setQnaId(Long qnaId) {
+        this.qnaId = qnaId;
+    }
+
+    /**
+     * Implementation of the equals method
      * 
      * @param o object to compare to
      */
@@ -40,7 +54,7 @@ public class BuyerQnAPK implements Serializable {
     }
 
     /**
-     * Implementation of the hashCode method 
+     * Implementation of the hashCode method
      * 
      * @return hash code
      */

@@ -15,6 +15,31 @@ class BuyerQnAService {
       headers: authHeader(),
     });
   }
+
+  postManyAnswerQnAs(answerQnAs) {
+    return axios.post(
+      BUYER_QNA_API_BASE_URL + "/post/many-answers",
+      answerQnAs,
+      {
+        headers: authHeader(),
+      }
+    );
+  }
+
+  getAnswersByDeal(sellerId, wtbId, ifsId) {
+    return axios.get(
+      BUYER_QNA_API_BASE_URL +
+        "/get/answer/seller=" +
+        sellerId +
+        "&wtbid=" +
+        wtbId +
+        "&ifsid=" +
+        ifsId,
+      {
+        headers: authHeader(),
+      }
+    );
+  }
 }
 
 export default new BuyerQnAService();

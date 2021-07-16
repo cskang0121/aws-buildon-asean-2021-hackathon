@@ -5,6 +5,7 @@ import IFSService from "../../services/WTBService";
 import NavigationBar from "../Navbar/NavigationBar";
 import UserService from "../../services/UserService";
 import DealService from "../../services/DealService";
+import BuyerQnAList from "../BuyerQnAList";
 
 export default function IFSListing(props) {
   const history = useHistory();
@@ -123,6 +124,7 @@ export default function IFSListing(props) {
     if (!isDealEmpty(location.state.deal)) {
       return (
         <div>
+          <BuyerQnAList deal={location.state.deal} />
           <Button onClick={(event) => acceptDeal(location.state.deal)}>
             Accept Deal
           </Button>

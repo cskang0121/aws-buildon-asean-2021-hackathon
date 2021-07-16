@@ -15,5 +15,5 @@ import org.springframework.data.repository.query.Param;
  */
 @Repository
 public interface AnswerQnARepo extends JpaRepository<AnswerQnA, AnswerQnAPK> {
-
+    public List<AnswerQnA> findByDeal(Deal deal);
 }

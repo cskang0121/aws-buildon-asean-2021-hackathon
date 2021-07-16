@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1/wtb-listing/")
 public class WTBController {
     /**
      * Connects to the service layer for want to buy listings
@@ -35,23 +35,23 @@ public class WTBController {
 
     Logger logger = LoggerFactory.getLogger(WTBController.class);
 
-    @GetMapping("/wtb-listing/get")
+    @GetMapping("/get")
     public List<WantToBuyListing> getAllWTBListings() {
         return wtbService.findAll();
     }
 
-    @GetMapping("/wtb-listing/get/user={id}")
+    @GetMapping("/get/user={id}")
     public List<WantToBuyListing> getWTBListingsByUser(@PathVariable Long id) {
         return wtbService.findByUser(id);
     }
 
-    @PostMapping("/wtb-listing/post")
+    @PostMapping("/post")
     public WantToBuyListing postWTBListing(@RequestBody WantToBuyListing newWTBListing) {
         wtbService.save(newWTBListing);
         return newWTBListing;
     }
 
-    @PostMapping("/wtb-listing/deleteWTB/post")
+    @PostMapping("/deleteWTB/post")
     public void deleteWTB(@RequestBody WantToBuyListing toDeleteWTBListing) {
         wtbService.deleteById(toDeleteWTBListing.getWtbId());
     }
@@ -60,7 +60,7 @@ public class WTBController {
     // public void editWTB(@RequestBody WantToBuyListing toEditWTBListing) {
     // }
 
-    @GetMapping("/wtb-listing/searchWTB/get")
+    @GetMapping("/searchWTB/get")
     public List<WantToBuyListing> searchWTB(@RequestParam(name = "keyword") String Keyword, @RequestParam(name = "categoryName") String CategoryName) {
         List<WantToBuyListing> listings = wtbService.getSearchResults(Keyword, CategoryName);
         return listings;

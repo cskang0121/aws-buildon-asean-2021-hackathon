@@ -19,6 +19,31 @@ public class AnswerQnAPK implements Serializable {
         this.answerId = answerId;
     }
 
+    /**
+     * Getters and setters
+     */
+
+    public DealPK getDeal() {
+        return this.deal;
+    }
+
+    public void setDeal(DealPK deal) {
+        this.deal = deal;
+    }
+
+    public Long getAnswerId() {
+        return this.answerId;
+    }
+
+    public void setAnswerId(Long answerId) {
+        this.answerId = answerId;
+    }
+
+    /**
+     * Implementation of the equals method
+     * 
+     * @param o object to compare to
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -30,7 +55,7 @@ public class AnswerQnAPK implements Serializable {
     }
 
     /**
-     * Implementation of the hashCode method 
+     * Implementation of the hashCode method
      * 
      * @return hash code
      */

@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1/ifs-listing/")
 public class IFSController {
     /**
      * Connects to the service layer for item for sale listings
@@ -36,33 +36,33 @@ public class IFSController {
 
     Logger logger = LoggerFactory.getLogger(IFSController.class);
 
-    @GetMapping("/ifs-listing/get")
+    @GetMapping("/get")
     public List<ItemForSaleListing> getAllIFSListings() {
         return ifsService.findAll();
     }
 
-    @GetMapping("/ifs-listing/get/user={id}")
+    @GetMapping("/get/user={id}")
     public List<ItemForSaleListing> getIFSListingsByUser(@PathVariable Long id) {
         return ifsService.findByUser(id);
     }
 
-    @GetMapping("/ifs-listing/get/id={id}")
+    @GetMapping("/get/id={id}")
     public ItemForSaleListing getIFSListingsById(@PathVariable Long id) {
         return ifsService.findByListingId(id);
     }
 
-    @PostMapping("/ifs-listing/post")
+    @PostMapping("/post")
     public ItemForSaleListing postIFSListing(@RequestBody ItemForSaleListing newIFSListing) {
         ifsService.save(newIFSListing);
         return newIFSListing;
     }
 
-    @PostMapping("/ifs-listing/deleteIFS/post")
+    @PostMapping("/deleteIFS/post")
     public void deleteIFS(@RequestBody ItemForSaleListing toDeleteIFSListing) {
         ifsService.deleteById(toDeleteIFSListing.getIfsId());
     }
 
-    @GetMapping("/ifs-listing/searchIFS/get")
+    @GetMapping("/searchIFS/get")
     public List<ItemForSaleListing> searchIFS(@RequestParam(name = "keyword") String Keyword, @RequestParam(name = "categoryName") String CategoryName) {
         List<ItemForSaleListing> listings = ifsService.getSearchResults(Keyword, CategoryName);
         return listings;

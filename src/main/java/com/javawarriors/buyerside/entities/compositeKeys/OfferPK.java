@@ -23,12 +23,27 @@ public class OfferPK implements Serializable {
     }
 
     /**
-     * Implementation of the equals method 
-     * 
-     * A History object will be equal to another
-     * if their HistoryPK is equal 
-     * A HistoryPK will be equal to another if their
-     * vesselDetail and queryDate are the same
+     * Getters and setters
+     */
+
+    public Long getBuyer() {
+        return this.buyer;
+    }
+
+    public void setBuyer(Long buyer) {
+        this.buyer = buyer;
+    }
+
+    public Long getIfsListing() {
+        return this.ifsListing;
+    }
+
+    public void setIfsListing(Long ifsListing) {
+        this.ifsListing = ifsListing;
+    }
+
+    /**
+     * Implementation of the equals method
      * 
      * @param o object to compare to
      */
@@ -43,7 +58,7 @@ public class OfferPK implements Serializable {
     }
 
     /**
-     * Implementation of the hashCode method 
+     * Implementation of the hashCode method
      * 
      * @return hash code
      */

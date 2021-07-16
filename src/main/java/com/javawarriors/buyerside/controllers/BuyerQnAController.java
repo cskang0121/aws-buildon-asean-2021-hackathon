@@ -24,18 +24,29 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1/buyer-qna/")
 public class BuyerQnAController {
     @Autowired
     private BuyerQnAService buyerQnAService;
 
-    @PostMapping("/buyer-qna/post/many")
+    @PostMapping("/post/many")
     public List<BuyerQnA> postBuyerQnAs(@RequestBody List<BuyerQnA> buyerQnAs) {
         return buyerQnAService.saveManyBuyerQnAs(buyerQnAs);
     }
 
-    @GetMapping("/buyer-qna/get/wtblisting={id}")
+    @GetMapping("/get/wtblisting={id}")
     public List<BuyerQnA> getQnAsByWtbListing(@PathVariable Long id) {
         return buyerQnAService.findByWtbId(id);
+    }
+
+    @PostMapping("/post/many-answers")
+    public List<AnswerQnA> postAnswerQnAs(@RequestBody List<AnswerQnA> answerQnAs) {
+        return buyerQnAService.saveManyAnswerQnAs(answerQnAs);
+    }
+
+    @GetMapping("/get/answer/seller={sellerId}&wtbid={wtbId}&ifsid={ifsId}")
+    public List<AnswerQnA> getAnswerQnAByDeal(@PathVariable Long sellerId, @PathVariable Long wtbId,
+            @PathVariable Long ifsId) {
+        return buyerQnAService.findAnswerQnAByDeal(sellerId, wtbId, ifsId);
     }
 }

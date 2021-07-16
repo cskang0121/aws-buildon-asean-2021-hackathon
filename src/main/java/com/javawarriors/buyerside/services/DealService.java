@@ -1,6 +1,7 @@
 package com.javawarriors.buyerside.services;
 
 import com.javawarriors.buyerside.entities.*;
+import com.javawarriors.buyerside.entities.compositeKeys.DealPK;
 import com.javawarriors.buyerside.repositories.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,10 @@ public class DealService {
 
     public Deal saveDeal(Deal entity) {
         return dealRepo.save(entity);
+    }
+
+    public Deal findById(DealPK id) {
+        return dealRepo.findById(id).get();
     }
 
     public List<Deal> findByWtbId(Long id) {

@@ -25,7 +25,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1/deal/")
 public class DealController {
     @Autowired
     private DealService dealService;
@@ -35,24 +35,24 @@ public class DealController {
     @Autowired
     private WTBController wtbController;
 
-    @PostMapping("/deal/post")
+    @PostMapping("/post")
     public Deal postDeal(@RequestBody Deal newDeal) {
         newDeal.setDateOfDeal(new Date());
         dealService.saveDeal(newDeal);
         return newDeal;
     }
 
-    @GetMapping("/deal/get/wtblisting={id}")
+    @GetMapping("/get/wtblisting={id}")
     public List<Deal> getDealsByWtbId(@PathVariable Long id) {
         return dealService.findByWtbId(id);
     }
 
-    @GetMapping("/deal/get/ifslisting={id}")
+    @GetMapping("/get/ifslisting={id}")
     public List<Deal> getDealsByIfsId(@PathVariable Long id) {
         return dealService.findByIfsId(id);
     }
 
-    @PostMapping("/deal/post/accept")
+    @PostMapping("/post/accept")
     public List<Deal> postAcceptedDeals(@RequestBody List<Deal> deals) {
         // logger.info(String.valueOf(ifsListing.getStatus()));
         ItemForSaleListing ifsListing = deals.get(0).getIfsId();

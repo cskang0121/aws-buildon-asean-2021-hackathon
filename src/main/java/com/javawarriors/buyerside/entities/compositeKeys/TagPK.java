@@ -23,12 +23,27 @@ public class TagPK implements Serializable {
     }
 
     /**
-     * Implementation of the equals method 
-     * 
-     * A History object will be equal to another
-     * if their HistoryPK is equal 
-     * A HistoryPK will be equal to another if their
-     * vesselDetail and queryDate are the same
+     * Getters and setters
+     */
+
+    public String getTagCategoryName() {
+        return this.tagCategoryName;
+    }
+
+    public void setTagCategoryName(String tagCategoryName) {
+        this.tagCategoryName = tagCategoryName;
+    }
+
+    public String getTagValue() {
+        return this.tagValue;
+    }
+
+    public void setTagValue(String tagValue) {
+        this.tagValue = tagValue;
+    }
+
+    /**
+     * Implementation of the equals method
      * 
      * @param o object to compare to
      */
@@ -43,7 +58,7 @@ public class TagPK implements Serializable {
     }
 
     /**
-     * Implementation of the hashCode method 
+     * Implementation of the hashCode method
      * 
      * @return hash code
      */

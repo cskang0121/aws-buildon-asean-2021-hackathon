@@ -25,7 +25,7 @@ import java.util.Collection;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1/offer/")
 public class OfferController {
 
     @Autowired
@@ -36,30 +36,30 @@ public class OfferController {
 
     Logger logger = LoggerFactory.getLogger(OfferController.class);
 
-    @PostMapping("/offer/post")
+    @PostMapping("/post")
     public Offer postOffer(@RequestBody Offer newOffer) {
         newOffer.setDateOfOffer(new Date());
         offerService.saveOffer(newOffer);
         return newOffer;
     }
 
-    @GetMapping("/offer/get/madeby={id}")
+    @GetMapping("/get/madeby={id}")
     public List<Offer> getOffersMadeByUser(@PathVariable Long id) {
         return offerService.findByUser(id);
     }
 
-    @GetMapping("/offer/get/receivedby={id}")
+    @GetMapping("/get/receivedby={id}")
     public List<Offer> getOffersReceivedByUser(@PathVariable Long id) {
         List<ItemForSaleListing> ifsListings = ifsController.getIFSListingsByUser(id);
         return offerService.findByIfsListingIn(ifsListings);
     }
 
-    @GetMapping("/offer/get/ifslisting={id}")
+    @GetMapping("/get/ifslisting={id}")
     public List<Offer> getOffersByIfsListing(@PathVariable Long id) {
         return offerService.findByIfsListing(id);
     }
 
-    @PostMapping("/offer/post/accept")
+    @PostMapping("/post/accept")
     public List<Offer> postAcceptedOffers(@RequestBody List<Offer> offers) {
         ItemForSaleListing ifsListing = offers.get(0).getIfsListing();
         ifsListing.setStatus('p');

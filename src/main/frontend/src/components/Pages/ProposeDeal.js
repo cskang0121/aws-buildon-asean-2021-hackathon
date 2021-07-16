@@ -68,7 +68,9 @@ export default function ProposeDeal(props) {
     // console.log(location.state.listing);
   }, []);
 
-  // QnA things
+  // ------------------------------------
+  // QnA Things
+  // ------------------------------------
   const fetchBuyerQnAs = () => {
     BuyerQnAService.getQnAsForWtbListing(location.state.listing.wtbId).then(
       (res) => {
@@ -125,6 +127,15 @@ export default function ProposeDeal(props) {
     });
   };
 
+  const checkIfAllAnswered = () => {
+    for (let i = 0; i < answersList.length; i++) {
+      if (answersList[i].answer === "" || answersList[i].answer.length === 0) {
+        return false;
+      }
+    }
+    return true;
+  };
+
   // ------------------------------------
   // Post the deal
   // ------------------------------------
@@ -132,6 +143,10 @@ export default function ProposeDeal(props) {
   // Create using existing listing
   const createDeal = (e) => {
     e.preventDefault();
+    if (!checkIfAllAnswered()) {
+      alert("Please answer all questions");
+      return;
+    }
     let deal = {
       seller: user,
       wtbId: location.state.listing,
@@ -143,14 +158,29 @@ export default function ProposeDeal(props) {
     console.log(deal);
 
     DealService.postDeal(deal).then((res) => {
-      history.push({
-        pathname: "/home",
+      const answers = [...answersList];
+      answers.map((a, index, arr) => {
+        arr[index] = {
+          deal: res.data,
+          answerId: a.answerId,
+          answer: a.answer,
+        };
+      });
+      BuyerQnAService.postManyAnswerQnAs(answers).then((res) => {
+        history.push({
+          pathname: "/home",
+        });
       });
     });
   };
 
   // Create a new listing
   const createDealListing = (listing) => {
+    if (!checkIfAllAnswered()) {
+      alert("Please answer all questions");
+      return;
+    }
+
     let deal = {
       seller: user,
       wtbId: location.state.listing,
@@ -162,8 +192,18 @@ export default function ProposeDeal(props) {
     console.log(deal);
 
     DealService.postDeal(deal).then((res) => {
-      history.push({
-        pathname: "/home",
+      const answers = [...answersList];
+      answers.map((a, index, arr) => {
+        arr[index] = {
+          deal: res.data,
+          answerId: a.answerId,
+          answer: a.answer,
+        };
+      });
+      BuyerQnAService.postManyAnswerQnAs(answers).then((res) => {
+        history.push({
+          pathname: "/home",
+        });
       });
     });
   };
