@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Select from "react-select";
+import {useDropzone} from 'react-dropzone'
 
 import {
   Row,
@@ -19,6 +20,32 @@ import UserService from "../services/UserService";
 
 import { categoryDropdownOptions } from "../util/categories";
 
+function Dropzone(props) {
+  const onDrop = useCallback(acceptedFiles => {
+    const file = acceptedFiles[0];
+    console.log(file);
+    props.setFile(file);
+    // const formData = new FormData();
+    // formData.append("file", file);
+  }, []);
+
+  // postListingImage();
+
+
+  const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+
+  return (
+    <div {...getRootProps()}>
+      <input {...getInputProps()} />
+      {
+        isDragActive ?
+          <p>Drop the picture of the item here ...</p> :
+          <p>Drag 'n' drop the picture of the item here, or click to select files</p>
+      }
+    </div>
+  )
+}
+
 export default function CreateIFS(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -30,6 +57,7 @@ export default function CreateIFS(props) {
   const [isDeliveryDeliver, setIsDeliveryDeliver] = useState(false);
   const [isPaymentCash, setIsPaymentCash] = useState(false);
   const [isPaymentPayNow, setIsPaymentPayNow] = useState(false);
+  const [file, setFile] = useState({});
 
   const history = useHistory();
 
@@ -83,18 +111,27 @@ export default function CreateIFS(props) {
     };
 
     IFSService.postIFSListing(listing).then((res) => {
-      if (props.listingType === "s") {
-        history.push({
-          pathname: "/ifs",
-        });
-      } else {
-        props.setDeal(res.data, e);
-      }
+      const formData = new FormData();
+      formData.append("file", file);
+      IFSService.postListingImage(res.data.ifsId, formData).then((res) => {
+        if (props.listingType === "s") {
+          history.push({
+            pathname: "/ifs",
+          });
+        } else {
+          props.setDeal(res.data, e);
+        }
+      })
     });
   };
 
   return (
     <div>
+      <div>
+        <br />
+        <Dropzone setFile={(file) => setFile(file)} />
+        <br />
+      </div>
       <Row className="justify-content-md-center">
         <Col lg={12}>
           <Form.Row>

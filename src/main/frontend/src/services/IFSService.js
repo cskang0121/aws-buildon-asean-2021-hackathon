@@ -35,6 +35,12 @@ class IFSService {
       headers: authHeader(),
     });
   }
+
+  postListingImage(ifsId, file) {
+    return axios.post(IFS_API_BASE_URL + "/" + ifsId + "/image/upload", file, {
+      headers: {...authHeader(), "Content-Type": "multipart/form-data"},
+    });
+  }
 }
 
 export default new IFSService();
