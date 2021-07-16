@@ -33,18 +33,30 @@ public class WantToBuyListing {
 
     private String categoryName;
 
-    @ManyToMany
-    @JoinTable(
-        name="wtb_tags",
-        joinColumns= {
-            @JoinColumn(name="wtb_id", referencedColumnName = "wtb_id")
-        },
-        inverseJoinColumns = {
-            @JoinColumn(name="tag_category_name", referencedColumnName = "tag_category_name"),
-            @JoinColumn(name="tag_value", referencedColumnName = "tag_value")
-        }
-    )
-    private Set<Tag> tags;
+    private String hashtags;
+
+    private String preferredItemCondition;
+
+    private Boolean isPreferredDeliveryMeet;
+
+    private Boolean isPreferredDeliveryDeliver;
+
+    private Boolean isPreferredPaymentCash;
+
+    private Boolean isPreferredPaymentPayNow;
+
+    // @ManyToMany
+    // @JoinTable(
+    //     name="wtb_tags",
+    //     joinColumns= {
+    //         @JoinColumn(name="wtb_id", referencedColumnName = "wtb_id")
+    //     },
+    //     inverseJoinColumns = {
+    //         @JoinColumn(name="tag_category_name", referencedColumnName = "tag_category_name"),
+    //         @JoinColumn(name="tag_value", referencedColumnName = "tag_value")
+    //     }
+    // )
+    // private Set<Tag> tags;
 
     /** getters and setters for the variables of the WTBlisting */
 
@@ -119,6 +131,53 @@ public class WantToBuyListing {
 	public void setPriceLower(Double priceLower) {
 		this.priceLower = priceLower;
 	}
-    
+
+    public String getHashtags() {
+        return this.hashtags;
+    }
+
+    public void setHashtags(String hashtags) {
+        this.hashtags = hashtags;
+    }
+
+    public String getPreferredItemCondition() {
+        return this.preferredItemCondition;
+    }
+
+    public void setPreferredItemCondition(String preferredItemCondition) {
+        this.preferredItemCondition = preferredItemCondition;
+    }
+
+    public Boolean getIsPreferredDeliveryMeet() {
+        return this.isPreferredDeliveryMeet;
+    }
+
+    public void setIsPreferredDeliveryMeet(Boolean isPreferredDeliveryMeet) {
+        this.isPreferredDeliveryMeet = isPreferredDeliveryMeet;
+    }
+
+    public Boolean getIsPreferredDeliveryDeliver() {
+        return this.isPreferredDeliveryDeliver;
+    }
+
+    public void setIsPreferredDeliveryDeliver(Boolean isPreferredDeliveryDeliver) {
+        this.isPreferredDeliveryDeliver = isPreferredDeliveryDeliver;
+    }
+
+    public Boolean getIsPreferredPaymentCash() {
+        return this.isPreferredPaymentCash;
+    }
+
+    public void setIsPreferredPaymentCash(Boolean isPreferredPaymentCash) {
+        this.isPreferredPaymentCash = isPreferredPaymentCash;
+    }
+
+    public Boolean getIsPreferredPaymentPayNow() {
+        return this.isPreferredPaymentPayNow;
+    }
+
+    public void setIsPreferredPaymentPayNow(Boolean isPreferredPaymentPayNow) {
+        this.isPreferredPaymentPayNow = isPreferredPaymentPayNow;
+    }
 
 }

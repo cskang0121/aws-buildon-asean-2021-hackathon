@@ -8,6 +8,8 @@ import {
   InputGroup,
   FormControl,
   Button,
+  ButtonGroup,
+  ToggleButton,
 } from "react-bootstrap";
 
 import { useHistory } from "react-router";
@@ -24,6 +26,13 @@ export default function CreateWTB(props) {
   const [priceLower, setPriceLower] = useState(0);
   const [priceUpper, setPriceUpper] = useState(0);
   const [categoryName, setCategoryName] = useState("");
+  const [hashtags, setHashtags] = useState("");
+  const [preferredItemCondition, setPreferredItemCondition] = useState("");
+  const [isPreferredDeliveryMeet, setIsPreferredDeliveryMeet] = useState(false);
+  const [isPreferredDeliveryDeliver, setIsPreferredDeliveryDeliver] = useState(false);
+  const [isPreferredPaymentCash, setIsPreferredPaymentCash] = useState(false);
+  const [isPreferredPaymentPayNow, setIsPreferredPaymentPayNow] = useState(false);
+
 
   // QnA things
   const [qnaList, setQnaList] = useState([]);
@@ -45,6 +54,30 @@ export default function CreateWTB(props) {
     setQnaList(list);
   };
 
+    //for itemCondition
+    const preferredItemConditionRadios = [
+      { name: 'Brand New', value: 'Brand New' },
+      { name: 'Like New', value: 'Like New' },
+      { name: 'Well Used', value: 'Well Used' },
+      { name: 'Heavily Used', value: 'Heavily Used' },
+    ];
+  
+    const handleMeetChange = () => {
+      setIsPreferredDeliveryMeet(!isPreferredDeliveryMeet);
+    }
+  
+    const handleDeliverChange = () => {
+      setIsPreferredDeliveryDeliver(!isPreferredDeliveryDeliver);
+    }
+  
+    const handleCashChange = () => {
+      setIsPreferredPaymentCash(!isPreferredPaymentCash);
+    }
+  
+    const handlePayNowChange = () => {
+      setIsPreferredPaymentPayNow(!isPreferredPaymentPayNow);
+    }
+
   // Get user
   const [user, setUser] = useState({});
   useEffect(() => {
@@ -64,6 +97,12 @@ export default function CreateWTB(props) {
       status: "a",
       categoryName: categoryName,
       user: user,
+      hashtags: hashtags,
+      preferredItemCondition: preferredItemCondition,
+      isPreferredDeliveryMeet: isPreferredDeliveryMeet,
+      isPreferredDeliveryDeliver: isPreferredDeliveryDeliver,
+      isPreferredPaymentCash: isPreferredPaymentCash,
+      isPreferredPaymentPayNow: isPreferredPaymentPayNow,
     };
 
     WTBService.postWTBListing(listing).then((res) => {
@@ -147,6 +186,23 @@ export default function CreateWTB(props) {
             <Form.Group>
               <InputGroup>
                 <InputGroup.Prepend>
+                  <InputGroup.Text>Hashtags:</InputGroup.Text>
+                </InputGroup.Prepend>
+                <FormControl
+                  required
+                  autoComplete="off"
+                  type="text"
+                  name="description"
+                  value={hashtags}
+                  onChange={(event) => setHashtags(event.target.value)}
+                />
+              </InputGroup>
+            </Form.Group>
+          </Form.Row>
+          <Form.Row>
+            <Form.Group>
+              <InputGroup>
+                <InputGroup.Prepend>
                   <InputGroup.Text>Price Lower:</InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl
@@ -177,6 +233,7 @@ export default function CreateWTB(props) {
               </InputGroup>
             </Form.Group>
           </Form.Row>
+          <h5>Category</h5>
           <div style={{ width: 600 }}>
             <Select
               options={categoryDropdownOptions}
@@ -184,6 +241,43 @@ export default function CreateWTB(props) {
                 setCategoryName(value.value);
               }}
             />
+          </div>
+          <div>
+          <h5>Preferred Item Condition</h5>
+          <ButtonGroup>
+            {preferredItemConditionRadios.map((radio, idx) => (
+              <ToggleButton
+                key={idx}
+                id={'radio-${idx}'}
+                type="radio"
+                variant={'outline-primary'}
+                name="radio"
+                value={radio.value}
+                checked={preferredItemCondition === radio.value}
+                onChange={(e) => setPreferredItemCondition(e.currentTarget.value)}
+              >
+                {radio.name}
+              </ToggleButton>
+            ))}
+          </ButtonGroup>
+          </div>
+          <div>
+            <h5>Preferred Delivery Method</h5>
+            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+              <Form.Check type="checkbox" label="Meet-up" onChange={(event) => handleMeetChange()}/>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+              <Form.Check type="checkbox" label="Delivery" onChange={(event) => handleDeliverChange()}/>
+            </Form.Group>
+          </div>
+          <div>
+            <h5>Preferred Payment Method</h5>
+            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+              <Form.Check type="checkbox" label="Cash on Meet-up" onChange={(event) => handleCashChange()}/>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+              <Form.Check type="checkbox" label="PayNow" onChange={(event) => handlePayNowChange()}/>
+            </Form.Group>
           </div>
           <Form.Row>
             <Form.Group>

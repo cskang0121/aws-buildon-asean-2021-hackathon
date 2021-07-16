@@ -30,20 +30,32 @@ public class ItemForSaleListing {
 
     private Double price;
 
-    @ManyToMany
-    @JoinTable(
-        name="ifs_tags",
-        joinColumns= {
-            @JoinColumn(name="ifs_id", referencedColumnName ="ifs_id")
-        },
-        inverseJoinColumns = {
-            @JoinColumn(name="tag_category_name", referencedColumnName = "tag_category_name"),
-            @JoinColumn(name="tag_value", referencedColumnName = "tag_value")
-        }
-    )
-    private Set<Tag> tags;
+    // @ManyToMany
+    // @JoinTable(
+    //     name="ifs_tags",
+    //     joinColumns= {
+    //         @JoinColumn(name="ifs_id", referencedColumnName ="ifs_id")
+    //     },
+    //     inverseJoinColumns = {
+    //         @JoinColumn(name="tag_category_name", referencedColumnName = "tag_category_name"),
+    //         @JoinColumn(name="tag_value", referencedColumnName = "tag_value")
+    //     }
+    // )
+    // private Set<Tag> tags;
 
     private String categoryName;
+
+	private String hashtags;
+
+	private String itemCondition;
+
+	private Boolean isDeliveryMeet;
+
+	private Boolean isDeliveryDeliver;
+
+	private Boolean isPaymentCash;
+
+	private Boolean isPaymentPayNow;
 
     public Long getIfsId() {
 		return this.ifsId;
@@ -115,6 +127,54 @@ public class ItemForSaleListing {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+	public String getHashtags() {
+		return this.hashtags;
+	}
+
+	public void setHashtags(String hashtags) {
+		this.hashtags = hashtags;
+	}
+
+	public String getItemCondition() {
+		return this.itemCondition;
+	}
+
+	public void setItemCondition(String itemCondition) {
+		this.itemCondition = itemCondition;
+	}
+
+	public Boolean getIsDeliveryMeet() {
+		return this.isDeliveryMeet;
+	}
+
+	public void setIsDeliveryMeet(Boolean iSDeliveryMeet) {
+		this.isDeliveryMeet = iSDeliveryMeet;
+	}
+
+	public Boolean getIsDeliveryDeliver() {
+		return this.isDeliveryDeliver;
+	}
+
+	public void setIsDeliveryDeliver(Boolean isDeliveryDeliver) {
+		this.isDeliveryDeliver = isDeliveryDeliver;
+	}
+
+	public Boolean getIsPaymentCash() {
+		return this.isPaymentCash;
+	}
+
+	public void setIsPaymentCash(Boolean isPaymentCash) {
+		this.isPaymentCash = isPaymentCash;
+	}
+
+	public Boolean getIsPaymentPayNow() {
+		return this.isPaymentPayNow;
+	}
+
+	public void setIsPaymentPayNow(Boolean isPaymentPayNow) {
+		this.isPaymentPayNow = isPaymentPayNow;
 	}
 
 }
