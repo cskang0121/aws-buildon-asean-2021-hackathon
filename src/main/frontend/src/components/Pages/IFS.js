@@ -4,10 +4,10 @@ import { useHistory } from "react-router";
 import IFSService from "../../services/IFSService";
 import NavigationBar from "../Navbar/NavigationBar";
 import UserService from "../../services/UserService";
-import {
-  base64StringtoFile,
-  extractImageFileExtensionFromBase64,
-} from "../../util/reusableUtils";
+// import {
+//   base64StringtoFile,
+//   extractImageFileExtensionFromBase64,
+// } from "../../util/reusableUtils";
 
 const IFSList = ({ listing, index, deleteIFS }) => {
   const [imgSrc, setImgSrc] = useState("");
@@ -55,6 +55,7 @@ const IFSList = ({ listing, index, deleteIFS }) => {
     </div>
   );
 };
+
 const IFSListings = () => {
   const [listings, setListings] = useState([]);
 

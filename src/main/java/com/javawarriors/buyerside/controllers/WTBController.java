@@ -10,9 +10,11 @@ import com.javawarriors.buyerside.services.*;
 import org.slf4j.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 // import org.springframework.security.core.Authentication;
 // import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -64,6 +66,16 @@ public class WTBController {
     public List<WantToBuyListing> searchWTB(@RequestParam(name = "keyword") String Keyword, @RequestParam(name = "categoryName") String CategoryName) {
         List<WantToBuyListing> listings = wtbService.getSearchResults(Keyword, CategoryName);
         return listings;
+    }
+
+    @PostMapping(path = "{wtbId}/image/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void uploadWTBImage(@PathVariable("wtbId") Long wtbId, @RequestParam("file") MultipartFile file) {
+        wtbService.uploadWTBImage(wtbId, file);
+    }
+
+    @GetMapping(path = "{wtbId}/image/download")
+    public String downloadWTBImage(@PathVariable("wtbId") Long wtbId) {
+        return wtbService.downloadWTBImage(wtbId);
     }
 
 }

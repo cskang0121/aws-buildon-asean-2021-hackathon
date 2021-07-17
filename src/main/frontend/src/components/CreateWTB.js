@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Select from "react-select";
+import { useDropzone } from "react-dropzone";
 
 import {
   Row,
@@ -20,6 +21,47 @@ import BuyerQnAService from "../services/BuyerQnAService";
 
 import { categoryDropdownOptions } from "../util/categories";
 
+const acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg, image/gif'
+
+function Dropzone(props) {
+  const [imgSrc, setImgSrc] = useState(null);
+
+  const onDrop = useCallback((acceptedFiles) => {
+    if (acceptedFiles && acceptedFiles.length > 0){
+          const currentFile = acceptedFiles[0]
+          const myFileItemReader = new FileReader()
+          myFileItemReader.addEventListener("load", ()=>{
+              const myResult = myFileItemReader.result
+              setImgSrc(myResult)
+          }, false)
+
+          myFileItemReader.readAsDataURL(currentFile)
+    }
+    const file = acceptedFiles[0];
+    console.log(file);
+    props.setFile(file);
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
+  return (
+    <div {...getRootProps()}>
+      <input {...getInputProps()} />
+      {isDragActive ? (
+        <p>Drop the picture of the item here ...</p>
+      ) : (
+        <div>
+          {imgSrc !=  null ? <img style={{width:500, height:500, objectFit:"cover"}} src={imgSrc} /> : ''}
+        <p>
+          Drag 'n' drop the picture of the item here, or click to select files
+        </p>
+        </div>
+      )}
+      
+    </div>
+  );
+}
+
 export default function CreateWTB(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -32,7 +74,15 @@ export default function CreateWTB(props) {
   const [isPreferredDeliveryDeliver, setIsPreferredDeliveryDeliver] = useState(false);
   const [isPreferredPaymentCash, setIsPreferredPaymentCash] = useState(false);
   const [isPreferredPaymentPayNow, setIsPreferredPaymentPayNow] = useState(false);
+  const [file, setFile] = useState({});
 
+  const history = useHistory();
+
+  // Get user
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    setUser(UserService.getProfile());
+  }, []);
 
   // QnA things
   const [qnaList, setQnaList] = useState([]);
@@ -78,14 +128,6 @@ export default function CreateWTB(props) {
       setIsPreferredPaymentPayNow(!isPreferredPaymentPayNow);
     }
 
-  // Get user
-  const [user, setUser] = useState({});
-  useEffect(() => {
-    setUser(UserService.getProfile());
-  }, []);
-
-  const history = useHistory();
-
   const createListing = (e) => {
     e.preventDefault();
     let listing = {
@@ -115,6 +157,11 @@ export default function CreateWTB(props) {
         };
       });
       console.log(buyerQnAs);
+
+      const formData = new FormData();
+      formData.append("file", file);
+      WTBService.postListingImage(res.data.wtbId, formData);
+
       BuyerQnAService.postManyBuyerQnAs(buyerQnAs).then((res) => {
         history.push({
           pathname: "/my-listings",
@@ -146,6 +193,11 @@ export default function CreateWTB(props) {
 
   return (
     <div>
+      <div>
+        <br />
+        <Dropzone setFile={(file) => setFile(file)} />
+        <br />
+      </div>
       <Row className="justify-content-md-center">
         <Col lg={12}>
           <Form.Row>

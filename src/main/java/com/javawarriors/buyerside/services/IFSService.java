@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
+// import java.io.IOException;
 import java.util.*;
 
-import static org.apache.http.entity.ContentType.*;
+// import static org.apache.http.entity.ContentType.*;
 
 /**
  * Service layer for handling logic related to item for sale listings
@@ -54,9 +54,9 @@ public class IFSService {
         ifsRepo.deleteById(ifsId);
     }
 
-    public List<ItemForSaleListing> getSearchResults(String keyword) {
-        return ifsRepo.findByTitleContaining(keyword);
-    }
+    // public List<ItemForSaleListing> getSearchResults(String keyword) {
+    //     return ifsRepo.findByTitleContaining(keyword);
+    // }
 
     public List<ItemForSaleListing> findByUser(Long userId) {
         User user = userService.findInRepoById(userId);

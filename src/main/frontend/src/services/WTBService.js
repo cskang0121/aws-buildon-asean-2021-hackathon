@@ -35,6 +35,18 @@ class WTBService {
       headers: authHeader(),
     });
   }
+
+  postListingImage(wtbId, file) {
+    return axios.post(WTB_API_BASE_URL + "/" + wtbId + "/image/upload", file, {
+      headers: { ...authHeader(), "Content-Type": "multipart/form-data" },
+    });
+  }
+
+  getListingImage(wtbId) {
+    return axios.get(WTB_API_BASE_URL + "/" + wtbId + "/image/download", {
+      headers: { ...authHeader() },
+    });
+  }
 }
 
 export default new WTBService();

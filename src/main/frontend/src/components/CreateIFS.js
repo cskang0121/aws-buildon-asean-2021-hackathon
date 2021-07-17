@@ -20,14 +20,14 @@ import UserService from "../services/UserService";
 
 import { categoryDropdownOptions } from "../util/categories";
 
-import {base64StringtoFile,
-  downloadBase64File,
-  extractImageFileExtensionFromBase64,
-  image64toCanvasRef} from "../util/reusableUtils";
+// import {base64StringtoFile,
+//   downloadBase64File,
+//   extractImageFileExtensionFromBase64,
+//   image64toCanvasRef} from "../util/reusableUtils";
 
-const imageMaxSize = 1000000000 // bytes
+// const imageMaxSize = 1000000000 // bytes
 const acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg, image/gif'
-const acceptedFileTypesArray = acceptedFileTypes.split(",").map((item) => {return item.trim()})
+// const acceptedFileTypesArray = acceptedFileTypes.split(",").map((item) => {return item.trim()})
 
 function Dropzone(props) {
   const [imgSrc, setImgSrc] = useState(null);
