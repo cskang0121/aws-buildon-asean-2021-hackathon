@@ -26,13 +26,23 @@ const IFSList = ({ listing, index, deleteIFS }) => {
 
   const getImage = (listing) => {
     IFSService.getListingImage(listing.ifsId).then((res) => {
-      setImgSrc("data:image/jpg;base64," + res.data);
+      const byteCode = res.data;
+      const firstChar = byteCode.charAt(0);
+      var dataType = "";
+      if (firstChar === "/") {
+        dataType = "jpg";
+      } else if (firstChar === "i") {
+        dataType = "png";
+      } else {
+        dataType = "gif";
+      }
+      setImgSrc("data:image/" + dataType + ";base64," + byteCode);
     });
   };
 
   return (
     <div key={index}>
-      {listing.picUri ? <img src={imgSrc} /> : <p>No image found</p>}
+      {listing.picUri ? <img style={{width:500, height:500, objectFit:"cover"}} src={imgSrc} /> : <p>No image found</p>}
       <h2>{listing.title}</h2>
       <p>{listing.description}</p>
       <p>Price: {listing.price}</p>
