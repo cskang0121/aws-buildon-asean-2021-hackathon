@@ -7,6 +7,7 @@ import UserService from "../../services/UserService";
 
 const WTBListings = () => {
   const [listings, setListings] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     fetchListings();
@@ -30,16 +31,22 @@ const WTBListings = () => {
   // }
 
   return listings.map((listing, index) => {
+    const wtbDetails = (listing) => {
+      history.push({
+        pathname: "/wtb-listing-details",
+        state: { listing: listing },
+      });
+    };
     // Make something less ugly lmao
     return (
-      <div>
+      <div key={index}>
         <h2>{listing.title}</h2>
         <p>{listing.description}</p>
         <p>
           Price: {listing.priceLower} - {listing.priceUpper}
         </p>
         <p>
-          <Button>Edit Listing</Button>
+          <Button onClick={() => wtbDetails(listing)}>View Details</Button>
         </p>
         <p>
           <Button onClick={() => deleteWTB(listing)}>Delete Listing</Button>
@@ -52,7 +59,6 @@ const WTBListings = () => {
 export default function WTB(props) {
   return (
     <div>
-      <NavigationBar />
       <h1>Want To Buy Listings</h1>
       <WTBListings />
     </div>

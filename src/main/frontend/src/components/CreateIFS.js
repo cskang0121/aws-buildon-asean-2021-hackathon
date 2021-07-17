@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Select from "react-select";
-import {useDropzone} from 'react-dropzone'
+import { useDropzone } from "react-dropzone";
 
 import {
   Row,
@@ -21,7 +21,7 @@ import UserService from "../services/UserService";
 import { categoryDropdownOptions } from "../util/categories";
 
 function Dropzone(props) {
-  const onDrop = useCallback(acceptedFiles => {
+  const onDrop = useCallback((acceptedFiles) => {
     const file = acceptedFiles[0];
     console.log(file);
     props.setFile(file);
@@ -31,19 +31,20 @@ function Dropzone(props) {
 
   // postListingImage();
 
-
-  const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
     <div {...getRootProps()}>
       <input {...getInputProps()} />
-      {
-        isDragActive ?
-          <p>Drop the picture of the item here ...</p> :
-          <p>Drag 'n' drop the picture of the item here, or click to select files</p>
-      }
+      {isDragActive ? (
+        <p>Drop the picture of the item here ...</p>
+      ) : (
+        <p>
+          Drag 'n' drop the picture of the item here, or click to select files
+        </p>
+      )}
     </div>
-  )
+  );
 }
 
 export default function CreateIFS(props) {
@@ -69,27 +70,27 @@ export default function CreateIFS(props) {
 
   //for itemCondition
   const itemConditionRadios = [
-    { name: 'Brand New', value: 'Brand New' },
-    { name: 'Like New', value: 'Like New' },
-    { name: 'Well Used', value: 'Well Used' },
-    { name: 'Heavily Used', value: 'Heavily Used' },
+    { name: "Brand New", value: "Brand New" },
+    { name: "Like New", value: "Like New" },
+    { name: "Well Used", value: "Well Used" },
+    { name: "Heavily Used", value: "Heavily Used" },
   ];
 
   const handleMeetChange = () => {
     setIsDeliveryMeet(!isDeliveryMeet);
-  }
+  };
 
   const handleDeliverChange = () => {
     setIsDeliveryDeliver(!isDeliveryDeliver);
-  }
+  };
 
   const handleCashChange = () => {
     setIsPaymentCash(!isPaymentCash);
-  }
+  };
 
   const handlePayNowChange = () => {
     setIsPaymentPayNow(!isPaymentPayNow);
-  }
+  };
 
   const createListing = (e) => {
     e.preventDefault();
@@ -116,12 +117,12 @@ export default function CreateIFS(props) {
       IFSService.postListingImage(res.data.ifsId, formData).then((res) => {
         if (props.listingType === "s") {
           history.push({
-            pathname: "/ifs",
+            pathname: "/my-listings",
           });
         } else {
           props.setDeal(res.data, e);
         }
-      })
+      });
     });
   };
 
@@ -212,40 +213,56 @@ export default function CreateIFS(props) {
             />
           </div>
           <div>
-          <h5>Item Condition</h5>
-          <ButtonGroup>
-            {itemConditionRadios.map((radio, idx) => (
-              <ToggleButton
-                key={idx}
-                id={'radio-${idx}'}
-                type="radio"
-                variant={'outline-primary'}
-                name="radio"
-                value={radio.value}
-                checked={itemCondition === radio.value}
-                onChange={(e) => setItemCondition(e.currentTarget.value)}
-              >
-                {radio.name}
-              </ToggleButton>
-            ))}
-          </ButtonGroup>
+            <h5>Item Condition</h5>
+            <ButtonGroup>
+              {itemConditionRadios.map((radio, idx) => (
+                <ToggleButton
+                  key={idx}
+                  id={"radio-${idx}"}
+                  type="radio"
+                  variant={"outline-primary"}
+                  name="radio"
+                  value={radio.value}
+                  checked={itemCondition === radio.value}
+                  onChange={(e) => setItemCondition(e.currentTarget.value)}
+                >
+                  {radio.name}
+                </ToggleButton>
+              ))}
+            </ButtonGroup>
           </div>
           <div>
             <h5>Delivery Method</h5>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Meet-up" onChange={(event) => handleMeetChange()}/>
+              <Form.Check
+                type="checkbox"
+                label="Meet-up"
+                onChange={(event) => handleMeetChange()}
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Delivery" onChange={(event) => handleDeliverChange()}/>
+              <Form.Check
+                type="checkbox"
+                label="Delivery"
+                onChange={(event) => handleDeliverChange()}
+              />
             </Form.Group>
           </div>
           <div>
             <h5>Payment Method</h5>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Cash on Meet-up" onChange={(event) => handleCashChange()}/>
+              <Form.Check
+                type="checkbox"
+                label="Cash on Meet-up"
+                onChange={(event) => handleCashChange()}
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="PayNow" onChange={(event) => handlePayNowChange()}/>
+              <Form.Check
+                type="checkbox"
+                label="PayNow"
+                onChange={(event) => handlePayNowChange()}
+              />
             </Form.Group>
           </div>
           <Button onClick={createListing}> Submit </Button>

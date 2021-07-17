@@ -6,10 +6,16 @@ import IFSService from "../../services/IFSService";
 import NavigationBar from "../Navbar/NavigationBar";
 import { categoryDropdownOptions } from "../../util/categories";
 import Select from "react-select";
+import UserService from "../../services/UserService";
 
 const WTBListings = (props) => {
   const [listings, setListings] = useState([]);
   const history = useHistory();
+  // Get user
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    setUser(UserService.getProfile());
+  }, []);
 
   const fetchListings = () => {
     WTBService.getSearchListings(props.keyword, props.categoryName).then(
@@ -31,21 +37,28 @@ const WTBListings = (props) => {
         state: { listing: listing },
       });
     };
-    return (
-      <div onClick={() => wtbDetails(listing)}>
-        <h2>{listing.title}</h2>
-        <p>{listing.description}</p>
-        <p>
-          Price: {listing.priceLower} - {listing.priceUpper}
-        </p>
-      </div>
-    );
+
+    if (listing.status === "a" && listing.user.uid != user.uid)
+      return (
+        <div onClick={() => wtbDetails(listing)}>
+          <h2>{listing.title}</h2>
+          <p>{listing.description}</p>
+          <p>
+            Price: {listing.priceLower} - {listing.priceUpper}
+          </p>
+        </div>
+      );
   });
 };
 
 const IFSListings = (props) => {
   const [listings, setListings] = useState([]);
   const history = useHistory();
+  // Get user
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    setUser(UserService.getProfile());
+  }, []);
 
   const fetchListings = () => {
     IFSService.getSearchListings(props.keyword, props.categoryName).then(
@@ -67,13 +80,19 @@ const IFSListings = (props) => {
         state: { listing: listing, deal: {} },
       });
     };
-    return (
-      <div onClick={() => ifsDetails(listing)}>
-        <h2>{listing.title}</h2>
-        <p>{listing.description}</p>
-        <p>Price: {listing.price}</p>
-      </div>
-    );
+
+    if (
+      listing.status === "a" &&
+      listing.listingType === "s" &&
+      listing.user.uid != user.uid
+    )
+      return (
+        <div onClick={() => ifsDetails(listing)}>
+          <h2>{listing.title}</h2>
+          <p>{listing.description}</p>
+          <p>Price: {listing.price}</p>
+        </div>
+      );
   });
 };
 

@@ -32,6 +32,8 @@ public class IFSService {
     private OfferService offerService;
     @Autowired
     private DealService dealService;
+    @Autowired
+    private SellerQnAService sellerQnAService;
 
     // public List<ItemForSaleListing> saveAll(Iterable<ItemForSaleListing>
     // entities) {
@@ -47,6 +49,7 @@ public class IFSService {
     }
 
     public void deleteById(Long ifsId) {
+        sellerQnAService.deleteByIfsListing(ifsId);
         dealService.deleteByIfsId(ifsId);
         offerService.deleteByIfsId(ifsId);
         ifsRepo.deleteById(ifsId);
