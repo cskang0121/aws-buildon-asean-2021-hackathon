@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
  * Controller for want to buy listings
  */
 
-
 @CrossOrigin
 @RestController
 @RequestMapping("/api/v1/ifs-listing/")
@@ -64,17 +63,14 @@ public class IFSController {
     }
 
     @GetMapping("/searchIFS/get")
-    public List<ItemForSaleListing> searchIFS(@RequestParam(name = "keyword") String Keyword, @RequestParam(name = "categoryName") String CategoryName) {
+    public List<ItemForSaleListing> searchIFS(@RequestParam(name = "keyword") String Keyword,
+            @RequestParam(name = "categoryName") String CategoryName) {
         List<ItemForSaleListing> listings = ifsService.getSearchResults(Keyword, CategoryName);
         return listings;
     }
 
-    @PostMapping(
-        path = "{ifsId}/image/upload",
-        consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
-        produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    public void uploadIFSImage(@PathVariable("ifs_id") Long ifsId, @RequestParam("file") MultipartFile file) {
+    @PostMapping(path = "{ifsId}/image/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void uploadIFSImage(@PathVariable("ifsId") Long ifsId, @RequestParam("file") MultipartFile file) {
         ifsService.uploadIFSImage(ifsId, file);
     }
 

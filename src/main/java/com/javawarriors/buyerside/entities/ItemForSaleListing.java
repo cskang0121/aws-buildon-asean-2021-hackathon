@@ -10,7 +10,7 @@ import java.util.*;
 @Table(name="item_for_sale_listing")
 public class ItemForSaleListing {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="ifs_id")
     private Long ifsId; 
 

@@ -22,7 +22,7 @@ class IFSService {
 
   getSearchListings(keyword, categoryName) {
     return axios.get(IFS_API_BASE_URL + "/searchIFS/get", {
-      params: { 
+      params: {
         keyword: keyword,
         categoryName: categoryName,
       },
@@ -38,7 +38,7 @@ class IFSService {
 
   postListingImage(ifsId, file) {
     return axios.post(IFS_API_BASE_URL + "/" + ifsId + "/image/upload", file, {
-      headers: {...authHeader(), "Content-Type": "multipart/form-data"},
+      headers: { ...authHeader(), "Content-Type": "multipart/form-data" },
     });
   }
 }
