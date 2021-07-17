@@ -73,11 +73,19 @@ public class IFSService {
     }
 
     public void uploadIFSImage(Long ifsId, MultipartFile file) {
-        String picUri = "s3://" + s3UploadService.upload(ifsId, "IFS", file);
+        String picUri = s3UploadService.upload(ifsId, "IFS", file);
 
         ItemForSaleListing itemForSaleListing = findByListingId(ifsId);
         itemForSaleListing.setPicUri(picUri);
         save(itemForSaleListing);
+    }
+
+    public String downloadIFSImage(Long ifsId) {
+        ItemForSaleListing itemForSaleListing = findByListingId(ifsId);
+        String picUri = itemForSaleListing.getPicUri();
+        byte[] byteArr = s3UploadService.download(picUri);
+        String encodedMime = Base64.getMimeEncoder().encodeToString(byteArr);
+        return encodedMime;
     }
 
 }

@@ -41,6 +41,12 @@ class IFSService {
       headers: { ...authHeader(), "Content-Type": "multipart/form-data" },
     });
   }
+
+  getListingImage(ifsId) {
+    return axios.get(IFS_API_BASE_URL + "/" + ifsId + "/image/download", {
+      headers: { ...authHeader() },
+    });
+  }
 }
 
 export default new IFSService();

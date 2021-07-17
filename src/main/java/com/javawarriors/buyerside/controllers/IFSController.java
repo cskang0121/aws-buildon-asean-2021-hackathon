@@ -74,4 +74,9 @@ public class IFSController {
         ifsService.uploadIFSImage(ifsId, file);
     }
 
+    @GetMapping(path = "{ifsId}/image/download")
+    public String downloadIFSImage(@PathVariable("ifsId") Long ifsId) {
+        return ifsService.downloadIFSImage(ifsId);
+    }
+
 }

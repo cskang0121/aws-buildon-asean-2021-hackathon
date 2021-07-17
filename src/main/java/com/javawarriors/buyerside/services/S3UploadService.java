@@ -14,7 +14,10 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 // import software.amazon.awssdk.services.s3.model.ListObjectsV2Request;
 // import software.amazon.awssdk.services.s3.model.ListObjectsV2Response;
 //import software.amazon.awssdk.services.s3.model.S3Object;
-// import software.amazon.awssdk.services.s3.model.GetObjectRequest;
+import software.amazon.awssdk.services.s3.model.GetObjectRequest;
+import software.amazon.awssdk.services.s3.model.GetObjectResponse;
+import software.amazon.awssdk.core.sync.ResponseTransformer;
+import software.amazon.awssdk.core.ResponseBytes;
 // import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
 // import software.amazon.awssdk.services.s3.model.DeleteBucketRequest;
 // import software.amazon.awssdk.services.s3.model.CreateMultipartUploadRequest;
@@ -92,12 +95,13 @@ public class S3UploadService {
             throw ace;
         } catch (IOException e) {
             logger.error("Something", e);
-        } finally {
-            s3.close();
         }
 
         // Return the filename
-        return String.format("%s/%s", bucket, key);
+        // return String.format("%s/%s", bucket, key);
+
+        // Return the key
+        return key;
     }
 
     private void isImage(MultipartFile file) {
@@ -118,6 +122,23 @@ public class S3UploadService {
         metadata.put("Content-Type", file.getContentType());
         metadata.put("Content-Length", String.valueOf(file.getSize()));
         return metadata;
+    }
+
+    public byte[] download(String picUri) {
+        byte[] byteArr = new byte[0];
+        try {
+            GetObjectRequest getObjectRequest = GetObjectRequest.builder()
+                .bucket(bucket)
+                .key(picUri)
+                .build();
+
+            ResponseBytes<GetObjectResponse> s3Object = s3.getObject(getObjectRequest, ResponseTransformer.toBytes());
+            byteArr = s3Object.asByteArray();
+        } catch(Exception e) {
+            throw new IllegalStateException("Download failed", e);
+        }
+
+        return byteArr;
     }
 
 }
