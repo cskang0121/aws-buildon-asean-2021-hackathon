@@ -29,4 +29,11 @@ public class SellerQnAService {
         return sellerQnARepo.findByIfsListing(ifsListing);
     }
 
+    public void deleteByIfsListing(Long ifsId) {
+        List<SellerQnA> toDeleteQnA = findByIfsListing(ifsId);
+        for (SellerQnA sellerQnA : toDeleteQnA) {
+            sellerQnARepo.delete(sellerQnA);
+        }
+    }
+
 }

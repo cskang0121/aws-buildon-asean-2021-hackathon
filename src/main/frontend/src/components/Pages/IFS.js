@@ -7,6 +7,7 @@ import UserService from "../../services/UserService";
 
 const IFSListings = () => {
   const [listings, setListings] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     fetchListings();
@@ -28,14 +29,21 @@ const IFSListings = () => {
   }
 
   return listings.map((listing, index) => {
+    const ifsDetails = (listing) => {
+      history.push({
+        pathname: "/ifs-listing-details",
+        state: { listing: listing, deal: {} },
+      });
+    };
+
     // Make something less ugly lmao
     return (
-      <div>
+      <div key={index}>
         <h2>{listing.title}</h2>
         <p>{listing.description}</p>
         <p>Price: {listing.price}</p>
         <p>
-          <Button>Edit Listing</Button>
+          <Button onClick={() => ifsDetails(listing)}>View Details</Button>
         </p>
         <p>
           <Button onClick={() => deleteIFS(listing)}>Delete Listing</Button>
@@ -48,7 +56,6 @@ const IFSListings = () => {
 export default function IFS(props) {
   return (
     <div>
-      <NavigationBar />
       <h1>Item For Sale Listings</h1>
       <IFSListings />
     </div>

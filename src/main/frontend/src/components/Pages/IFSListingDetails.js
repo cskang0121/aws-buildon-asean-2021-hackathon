@@ -129,7 +129,7 @@ export default function IFSListing(props) {
             DealService.postAcceptedDeals(arr3).then((res) => {
               console.log(res.data);
               history.push({
-                pathname: "/wtb",
+                pathname: "/my-listings",
               });
             });
           });

@@ -5,8 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import NavigationBar from "./components/Navbar/NavigationBar";
 import Home from "./components/Pages/Home";
 import Register from "./components/Pages/Register";
-import WTB from "./components/Pages/WTB";
-import IFS from "./components/Pages/IFS";
+import ViewMyListings from "./components/Pages/ViewMyListings";
 import CreateListing from "./components/Pages/CreateListing";
 import Login from "./components/Pages/Login";
 import { PrivateRoute } from "./components/PrivateRoute";
@@ -59,9 +58,8 @@ function App() {
           <PrivateRoute path="/home" exact component={Home} />
           <Route path="/register" exact component={Register} />
           <Route path="/login" exact component={Login} />
-          <PrivateRoute path="/wtb" exact component={WTB} />
+          <PrivateRoute path="/my-listings" exact component={ViewMyListings} />
           <PrivateRoute path="/post-listing" exact component={CreateListing} />
-          <PrivateRoute path="/ifs" exact component={IFS} />
           <PrivateRoute path="/search" exact component={Search} />
           <PrivateRoute
             path="/wtb-listing-details"

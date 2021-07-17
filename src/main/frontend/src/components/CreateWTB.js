@@ -117,7 +117,7 @@ export default function CreateWTB(props) {
       console.log(buyerQnAs);
       BuyerQnAService.postManyBuyerQnAs(buyerQnAs).then((res) => {
         history.push({
-          pathname: "/wtb",
+          pathname: "/my-listings",
         });
       });
     });

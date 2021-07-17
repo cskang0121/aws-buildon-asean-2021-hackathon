@@ -85,7 +85,7 @@ export default function CreateIFS(props) {
     IFSService.postIFSListing(listing).then((res) => {
       if (props.listingType === "s") {
         history.push({
-          pathname: "/ifs",
+          pathname: "/my-listings",
         });
       } else {
         props.setDeal(res.data, e);
