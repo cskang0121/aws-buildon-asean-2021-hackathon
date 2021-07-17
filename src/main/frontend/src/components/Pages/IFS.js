@@ -47,8 +47,6 @@ const IFSList = ({ listing, index, deleteIFS }) => {
 };
 const IFSListings = () => {
   const [listings, setListings] = useState([]);
-  
-  const [imgSrc, setImgSrc] = useState("");
 
   useEffect(() => {
     fetchListings();
