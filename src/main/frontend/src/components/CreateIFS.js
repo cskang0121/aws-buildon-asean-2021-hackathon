@@ -20,8 +20,52 @@ import UserService from "../services/UserService";
 
 import { categoryDropdownOptions } from "../util/categories";
 
+import {base64StringtoFile,
+  downloadBase64File,
+  extractImageFileExtensionFromBase64,
+  image64toCanvasRef} from "../util/reusableUtils";
+
+const imageMaxSize = 1000000000 // bytes
+const acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg, image/gif'
+const acceptedFileTypesArray = acceptedFileTypes.split(",").map((item) => {return item.trim()})
+
 function Dropzone(props) {
+  const [imgSrc, setImgSrc] = useState(null);
+
+  // const verifyFile = (files) => {
+  //   if (files && files.length > 0){
+  //       const currentFile = files[0]
+  //       const currentFileType = currentFile.type
+  //       const currentFileSize = currentFile.size
+  //       if(currentFileSize > imageMaxSize) {
+  //           alert("This file is not allowed. " + currentFileSize + " bytes is too large")
+  //           return false
+  //       }
+  //       if (!acceptedFileTypesArray.includes(currentFileType)){
+  //           alert("This file is not allowed. Only images are allowed.")
+  //           return false
+  //       }
+  //       return true
+  //   }
+  // }
+
   const onDrop = useCallback((acceptedFiles) => {
+    if (acceptedFiles && acceptedFiles.length > 0){
+      // const isVerified = this.verifyFile(acceptedFiles)
+      // if (isVerified){
+          // imageBase64Data 
+          const currentFile = acceptedFiles[0]
+          const myFileItemReader = new FileReader()
+          myFileItemReader.addEventListener("load", ()=>{
+              // console.log(myFileItemReader.result)
+              const myResult = myFileItemReader.result
+              setImgSrc(myResult)
+          }, false)
+
+          myFileItemReader.readAsDataURL(currentFile)
+
+      // }
+    }
     const file = acceptedFiles[0];
     console.log(file);
     props.setFile(file);
@@ -39,10 +83,14 @@ function Dropzone(props) {
       {isDragActive ? (
         <p>Drop the picture of the item here ...</p>
       ) : (
+        <div>
+          {imgSrc !=  null ? <img style={{width:500, height:500, objectFit:"cover"}} src={imgSrc} /> : ''}
         <p>
           Drag 'n' drop the picture of the item here, or click to select files
         </p>
+        </div>
       )}
+      
     </div>
   );
 }
