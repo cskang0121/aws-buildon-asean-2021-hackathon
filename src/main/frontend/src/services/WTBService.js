@@ -37,7 +37,7 @@ class WTBService {
     });
   }
 
-  postListingImage(wtbId, file) {
+  async postListingImage(wtbId, file) {
     return axios.post(WTB_API_BASE_URL + "/" + wtbId + "/image/upload", file, {
       headers: { ...authHeader(), "Content-Type": "multipart/form-data" },
     });

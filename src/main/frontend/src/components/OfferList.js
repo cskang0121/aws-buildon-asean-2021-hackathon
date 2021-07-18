@@ -4,6 +4,36 @@ import { useHistory } from "react-router";
 import OfferService from "../services/OfferService";
 import UserService from "../services/UserService";
 
+const styles = {
+  container: {
+    boxShadow: "2px 9px 16px 0px rgba(0,0,0,0.25)",
+    padding: "2%",
+  },
+  buttons: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
+  },
+  textDiv: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
+  },
+  paragraph: {
+    fontFamily: "Inter, sans-serif",
+    fontSize: 18,
+    lineHeight: "120%",
+    margin: 10,
+  },
+  itemName: {
+    fontFamily: "Inter, sans-serif",
+    fontWeight: 600,
+    fontSize: 20,
+    lineHeight: "120%",
+    margin: 10,
+  },
+};
+
 export default function OfferList(props) {
   const [offers, setOffers] = useState([]);
 
@@ -81,15 +111,21 @@ export default function OfferList(props) {
     if (offer.status === "p") {
       // Make something less ugly lmao
       return (
-        <div>
-          <p>
-            {offer.buyer.username} offered you {offer.offeredPrice} for your
-            item:
-          </p>
-          <h2>{offer.ifsListing.title}</h2>
-          <p>Date: {offer.dateOfOffer}</p>
-          <p>
+        <div className="row" style={styles.container}>
+          <div className="col-9" style={styles.textDiv}>
+            <span style={styles.paragraph}>
+              {offer.buyer.username} offered you {offer.offeredPrice} for your
+              item:
+            </span>
+            <span style={styles.itemName}>{offer.ifsListing.title}</span>
+            <span style={styles.paragraph}>
+              Date: {new Date(offer.dateOfOffer).toLocaleDateString("en-gb")}
+            </span>
+          </div>
+          <div className="col-3" style={styles.buttons}>
             <Button
+              size="lg"
+              variant="primary"
               onClick={() => {
                 acceptOffer(offer);
               }}
@@ -97,13 +133,15 @@ export default function OfferList(props) {
               Accept Offer
             </Button>
             <Button
+              size="lg"
+              variant="outline-primary"
               onClick={() => {
                 rejectOffer(offer);
               }}
             >
               Reject Offer
             </Button>
-          </p>
+          </div>
         </div>
       );
     }
