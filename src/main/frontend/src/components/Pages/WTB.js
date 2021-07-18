@@ -36,20 +36,35 @@ const WTBList = ({ listing, index, deleteWTB }) => {
     });
   };
 
-  return (
-    <div key={index}>
-      {listing.picUri ? <img style={{width:500, height:500, objectFit:"cover"}} src={imgSrc} /> : <p>No image found</p>}
-      <h2>{listing.title}</h2>
-      <p>{listing.description}</p>
-      <p>
-        Price: {listing.priceLower} - {listing.priceUpper}
-      </p>
-      <p>
-        <Button onClick={() => wtbDetails(listing)}>View Details</Button>
-      </p>
-      <p>
-        <Button onClick={() => deleteWTB(listing)}>Delete Listing</Button>
-      </p>
+  return ( //card
+    // <div key={index}>
+    //   {listing.picUri ? <img style={{width:500, height:500, objectFit:"cover"}} src={imgSrc} /> : <p>No image found</p>}
+    //   <h2>{listing.title}</h2>
+    //   <p>{listing.description}</p>
+    //   <p>
+    //     <Button onClick={() => wtbDetails(listing)}>View Details</Button>
+    //   </p>
+    //   <p>
+    //     <Button onClick={() => deleteWTB(listing)}>Delete Listing</Button>
+    //   </p>
+    // </div>
+    <div className="row ml-4 mr-4">
+      <div className="col-3 card text-center">
+        {listing.picUri ? <img style={{width:500, height:500, objectFit:"cover"}} src={imgSrc} /> : <p className="text-center">No image found</p>}
+          <div className="card-body">
+            <h5 className="card-title">{listing.title}</h5>
+            <p className="card-text text-justify">{listing.description}</p>
+            <p>
+              <b>Asking Price:</b> S$ {listing.priceLower} - {listing.priceUpper}
+            </p>
+            <p>
+              <Button onClick={() => wtbDetails(listing)}>View Details</Button>
+            </p>
+            <p>
+              <Button className="btn-danger" onClick={() => deleteWTB(listing)}>Delete Listing</Button>
+            </p>
+          </div>
+      </div>
     </div>
   );
 };
@@ -109,7 +124,7 @@ const WTBListings = () => {
 export default function WTB(props) {
   return (
     <div>
-      <h1>Want To Buy Listings</h1>
+      <h1 className="ml-4 mt-4 mb-4">Want To Buy Listings</h1>
       <WTBListings />
     </div>
   );
