@@ -86,9 +86,9 @@ const MeetUpLocationField = (props) => {
               required
               autoComplete="off"
               type="text"
-              name="preferredMeetLocation"
-              value={props.preferredMeetLocation}
-              onChange={(event) => props.setPreferredMeetLocation(event.target.value)}
+              name="preferredMeetUpLocation"
+              value={props.preferredMeetUpLocation}
+              onChange={(event) => props.setPreferredMeetUpLocation(event.target.value)}
             />
           </InputGroup>
         </Form.Group>
@@ -112,7 +112,7 @@ export default function CreateWTB(props) {
   const [isPreferredPaymentPayNow, setIsPreferredPaymentPayNow] =
     useState(false);
   const [file, setFile] = useState({});
-  const [preferredMeetLocation, setPreferredMeetLocation] = useState("");
+  const [preferredMeetUpLocation, setPreferredMeetUpLocation] = useState("");
 
   const history = useHistory();
 
@@ -152,6 +152,9 @@ export default function CreateWTB(props) {
 
   const handleMeetChange = () => {
     setIsPreferredDeliveryMeet(!isPreferredDeliveryMeet);
+    if (isPreferredDeliveryMeet===false) {
+      setPreferredMeetUpLocation("");
+    }
   };
 
   const handleDeliverChange = () => {
@@ -183,7 +186,7 @@ export default function CreateWTB(props) {
       isPreferredDeliveryDeliver: isPreferredDeliveryDeliver,
       isPreferredPaymentCash: isPreferredPaymentCash,
       isPreferredPaymentPayNow: isPreferredPaymentPayNow,
-      preferredMeetLocation: preferredMeetLocation,
+      preferredMeetUpLocation: preferredMeetUpLocation,
     };
 
     WTBService.postWTBListing(listing).then((res) => {
@@ -366,7 +369,7 @@ export default function CreateWTB(props) {
             </Form.Group>
 
             {isPreferredDeliveryMeet ? 
-             <MeetUpLocationField preferredMeetLocation={preferredMeetLocation} setPreferredMeetLocation={setPreferredMeetLocation}/>
+             <MeetUpLocationField preferredMeetUpLocation={preferredMeetUpLocation} setPreferredMeetUpLocation={setPreferredMeetUpLocation}/>
              : ''
             }
 
