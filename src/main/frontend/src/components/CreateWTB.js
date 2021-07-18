@@ -21,21 +21,26 @@ import BuyerQnAService from "../services/BuyerQnAService";
 
 import { categoryDropdownOptions } from "../util/categories";
 
-const acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg, image/gif'
+const acceptedFileTypes =
+  "image/x-png, image/png, image/jpg, image/jpeg, image/gif";
 
 function Dropzone(props) {
   const [imgSrc, setImgSrc] = useState(null);
 
   const onDrop = useCallback((acceptedFiles) => {
-    if (acceptedFiles && acceptedFiles.length > 0){
-          const currentFile = acceptedFiles[0]
-          const myFileItemReader = new FileReader()
-          myFileItemReader.addEventListener("load", ()=>{
-              const myResult = myFileItemReader.result
-              setImgSrc(myResult)
-          }, false)
+    if (acceptedFiles && acceptedFiles.length > 0) {
+      const currentFile = acceptedFiles[0];
+      const myFileItemReader = new FileReader();
+      myFileItemReader.addEventListener(
+        "load",
+        () => {
+          const myResult = myFileItemReader.result;
+          setImgSrc(myResult);
+        },
+        false
+      );
 
-          myFileItemReader.readAsDataURL(currentFile)
+      myFileItemReader.readAsDataURL(currentFile);
     }
     const file = acceptedFiles[0];
     console.log(file);
@@ -51,13 +56,19 @@ function Dropzone(props) {
         <p>Drop the picture of the item here ...</p>
       ) : (
         <div>
-          {imgSrc !=  null ? <img style={{width:500, height:500, objectFit:"cover"}} src={imgSrc} /> : ''}
-        <p>
-          Drag 'n' drop the picture of the item here, or click to select files
-        </p>
+          {imgSrc != null ? (
+            <img
+              style={{ width: 500, height: 500, objectFit: "cover" }}
+              src={imgSrc}
+            />
+          ) : (
+            ""
+          )}
+          <p>
+            Drag 'n' drop the picture of the item here, or click to select files
+          </p>
         </div>
       )}
-      
     </div>
   );
 }
@@ -71,9 +82,11 @@ export default function CreateWTB(props) {
   const [hashtags, setHashtags] = useState("");
   const [preferredItemCondition, setPreferredItemCondition] = useState("");
   const [isPreferredDeliveryMeet, setIsPreferredDeliveryMeet] = useState(false);
-  const [isPreferredDeliveryDeliver, setIsPreferredDeliveryDeliver] = useState(false);
+  const [isPreferredDeliveryDeliver, setIsPreferredDeliveryDeliver] =
+    useState(false);
   const [isPreferredPaymentCash, setIsPreferredPaymentCash] = useState(false);
-  const [isPreferredPaymentPayNow, setIsPreferredPaymentPayNow] = useState(false);
+  const [isPreferredPaymentPayNow, setIsPreferredPaymentPayNow] =
+    useState(false);
   const [file, setFile] = useState({});
 
   const history = useHistory();
@@ -104,29 +117,29 @@ export default function CreateWTB(props) {
     setQnaList(list);
   };
 
-    //for itemCondition
-    const preferredItemConditionRadios = [
-      { name: 'Brand New', value: 'Brand New' },
-      { name: 'Like New', value: 'Like New' },
-      { name: 'Well Used', value: 'Well Used' },
-      { name: 'Heavily Used', value: 'Heavily Used' },
-    ];
-  
-    const handleMeetChange = () => {
-      setIsPreferredDeliveryMeet(!isPreferredDeliveryMeet);
-    }
-  
-    const handleDeliverChange = () => {
-      setIsPreferredDeliveryDeliver(!isPreferredDeliveryDeliver);
-    }
-  
-    const handleCashChange = () => {
-      setIsPreferredPaymentCash(!isPreferredPaymentCash);
-    }
-  
-    const handlePayNowChange = () => {
-      setIsPreferredPaymentPayNow(!isPreferredPaymentPayNow);
-    }
+  //for itemCondition
+  const preferredItemConditionRadios = [
+    { name: "Brand New", value: "Brand New" },
+    { name: "Like New", value: "Like New" },
+    { name: "Well Used", value: "Well Used" },
+    { name: "Heavily Used", value: "Heavily Used" },
+  ];
+
+  const handleMeetChange = () => {
+    setIsPreferredDeliveryMeet(!isPreferredDeliveryMeet);
+  };
+
+  const handleDeliverChange = () => {
+    setIsPreferredDeliveryDeliver(!isPreferredDeliveryDeliver);
+  };
+
+  const handleCashChange = () => {
+    setIsPreferredPaymentCash(!isPreferredPaymentCash);
+  };
+
+  const handlePayNowChange = () => {
+    setIsPreferredPaymentPayNow(!isPreferredPaymentPayNow);
+  };
 
   const createListing = (e) => {
     e.preventDefault();
@@ -160,9 +173,10 @@ export default function CreateWTB(props) {
 
       const formData = new FormData();
       formData.append("file", file);
-      WTBService.postListingImage(res.data.wtbId, formData);
-
-      BuyerQnAService.postManyBuyerQnAs(buyerQnAs).then((res) => {
+      Promise.all([
+        WTBService.postListingImage(res.data.wtbId, formData),
+        BuyerQnAService.postManyBuyerQnAs(buyerQnAs),
+      ]).then((res) => {
         history.push({
           pathname: "/my-listings",
         });
@@ -295,40 +309,58 @@ export default function CreateWTB(props) {
             />
           </div>
           <div>
-          <h5>Preferred Item Condition</h5>
-          <ButtonGroup>
-            {preferredItemConditionRadios.map((radio, idx) => (
-              <ToggleButton
-                key={idx}
-                id={'radio-${idx}'}
-                type="radio"
-                variant={'outline-primary'}
-                name="radio"
-                value={radio.value}
-                checked={preferredItemCondition === radio.value}
-                onChange={(e) => setPreferredItemCondition(e.currentTarget.value)}
-              >
-                {radio.name}
-              </ToggleButton>
-            ))}
-          </ButtonGroup>
+            <h5>Preferred Item Condition</h5>
+            <ButtonGroup>
+              {preferredItemConditionRadios.map((radio, idx) => (
+                <ToggleButton
+                  key={idx}
+                  id={"radio-${idx}"}
+                  type="radio"
+                  variant={"outline-primary"}
+                  name="radio"
+                  value={radio.value}
+                  checked={preferredItemCondition === radio.value}
+                  onChange={(e) =>
+                    setPreferredItemCondition(e.currentTarget.value)
+                  }
+                >
+                  {radio.name}
+                </ToggleButton>
+              ))}
+            </ButtonGroup>
           </div>
           <div>
             <h5>Preferred Delivery Method</h5>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Meet-up" onChange={(event) => handleMeetChange()}/>
+              <Form.Check
+                type="checkbox"
+                label="Meet-up"
+                onChange={(event) => handleMeetChange()}
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Delivery" onChange={(event) => handleDeliverChange()}/>
+              <Form.Check
+                type="checkbox"
+                label="Delivery"
+                onChange={(event) => handleDeliverChange()}
+              />
             </Form.Group>
           </div>
           <div>
             <h5>Preferred Payment Method</h5>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Cash on Meet-up" onChange={(event) => handleCashChange()}/>
+              <Form.Check
+                type="checkbox"
+                label="Cash on Meet-up"
+                onChange={(event) => handleCashChange()}
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="PayNow" onChange={(event) => handlePayNowChange()}/>
+              <Form.Check
+                type="checkbox"
+                label="PayNow"
+                onChange={(event) => handlePayNowChange()}
+              />
             </Form.Group>
           </div>
           <Form.Row>

@@ -26,7 +26,8 @@ import { categoryDropdownOptions } from "../util/categories";
 //   image64toCanvasRef} from "../util/reusableUtils";
 
 // const imageMaxSize = 1000000000 // bytes
-const acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg, image/gif'
+const acceptedFileTypes =
+  "image/x-png, image/png, image/jpg, image/jpeg, image/gif";
 // const acceptedFileTypesArray = acceptedFileTypes.split(",").map((item) => {return item.trim()})
 
 function Dropzone(props) {
@@ -50,19 +51,23 @@ function Dropzone(props) {
   // }
 
   const onDrop = useCallback((acceptedFiles) => {
-    if (acceptedFiles && acceptedFiles.length > 0){
+    if (acceptedFiles && acceptedFiles.length > 0) {
       // const isVerified = this.verifyFile(acceptedFiles)
       // if (isVerified){
-          // imageBase64Data 
-          const currentFile = acceptedFiles[0]
-          const myFileItemReader = new FileReader()
-          myFileItemReader.addEventListener("load", ()=>{
-              // console.log(myFileItemReader.result)
-              const myResult = myFileItemReader.result
-              setImgSrc(myResult)
-          }, false)
+      // imageBase64Data
+      const currentFile = acceptedFiles[0];
+      const myFileItemReader = new FileReader();
+      myFileItemReader.addEventListener(
+        "load",
+        () => {
+          // console.log(myFileItemReader.result)
+          const myResult = myFileItemReader.result;
+          setImgSrc(myResult);
+        },
+        false
+      );
 
-          myFileItemReader.readAsDataURL(currentFile)
+      myFileItemReader.readAsDataURL(currentFile);
 
       // }
     }
@@ -84,13 +89,19 @@ function Dropzone(props) {
         <p>Drop the picture of the item here ...</p>
       ) : (
         <div>
-          {imgSrc !=  null ? <img style={{width:500, height:500, objectFit:"cover"}} src={imgSrc} /> : ''}
-        <p>
-          Drag 'n' drop the picture of the item here, or click to select files
-        </p>
+          {imgSrc != null ? (
+            <img
+              style={{ width: 500, height: 500, objectFit: "cover" }}
+              src={imgSrc}
+            />
+          ) : (
+            ""
+          )}
+          <p>
+            Drag 'n' drop the picture of the item here, or click to select files
+          </p>
         </div>
       )}
-      
     </div>
   );
 }
@@ -162,13 +173,19 @@ export default function CreateIFS(props) {
     IFSService.postIFSListing(listing).then((res) => {
       const formData = new FormData();
       formData.append("file", file);
-      IFSService.postListingImage(res.data.ifsId, formData).then((res) => {
+      let returnIFSId = new Promise((resolve, reject) => {
+        return resolve(res.data);
+      });
+      Promise.all([
+        IFSService.postListingImage(res.data.ifsId, formData),
+        returnIFSId,
+      ]).then((res) => {
         if (props.listingType === "s") {
           history.push({
             pathname: "/my-listings",
           });
         } else {
-          props.setDeal(res.data, e);
+          props.setDeal(res[1], e);
         }
       });
     });

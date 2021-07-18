@@ -4,6 +4,36 @@ import { useHistory } from "react-router";
 import DealService from "../services/DealService";
 import UserService from "../services/UserService";
 
+const styles = {
+  container: {
+    boxShadow: "2px 9px 16px 0px rgba(0,0,0,0.25)",
+    padding: "2%",
+  },
+  buttons: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
+  },
+  textDiv: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
+  },
+  paragraph: {
+    fontFamily: "Inter, sans-serif",
+    fontSize: 18,
+    lineHeight: "120%",
+    margin: 10,
+  },
+  itemName: {
+    fontFamily: "Inter, sans-serif",
+    fontWeight: 600,
+    fontSize: 20,
+    lineHeight: "120%",
+    margin: 10,
+  },
+};
+
 export default function DealList(props) {
   const [deals, setDeals] = useState([]);
   const history = useHistory();
@@ -30,17 +60,25 @@ export default function DealList(props) {
     if (deal.status === "p") {
       // Make something less ugly lmao
       return (
-        <div>
-          <p>{deal.seller.username} offered you an item:</p>
-          <h2>{deal.ifsId.title}</h2>
-          <p>Date: {deal.dateOfDeal}</p>
-          <Button
-            onClick={() => {
-              viewDetails(deal);
-            }}
-          >
-            View Details
-          </Button>
+        <div className="row" style={styles.container}>
+          <div className="col-9" style={styles.textDiv}>
+            <span style={styles.paragraph}>
+              {deal.seller.username} offered you an item:
+            </span>
+            <span style={styles.itemName}>{deal.ifsId.title}</span>
+            <span style={styles.paragraph}>
+              Date: {new Date(deal.dateOfDeal).toLocaleDateString("en-gb")}
+            </span>
+          </div>
+          <div className="col-3" style={styles.buttons}>
+            <Button
+              onClick={() => {
+                viewDetails(deal);
+              }}
+            >
+              View Details
+            </Button>
+          </div>
         </div>
       );
     }
