@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
+import FormControl from 'react-bootstrap/FormControl'
 import { useHistory } from "react-router";
 import WTBService from "../../services/WTBService";
 import IFSService from "../../services/IFSService";
@@ -110,7 +111,7 @@ export default function Search() {
       <div>
         <NavigationBar />
         <div>
-          <select onChange={changeSelectOptionHandler}>
+          <select onChange={changeSelectOptionHandler}  className="custom-select my-1 mr-sm-2">
             <option selected value="ifs">
               Items for Sale Listings
             </option>
@@ -126,8 +127,8 @@ export default function Search() {
           />
         </div>
         <h1>Search</h1>
-        <div className="ui search">
-          <div className="ui icon input">
+        <div className="ui search mt ml-3">
+          <div className="ui icon input my-2 my-lg-0">
             <input
               type="text"
               placeholder="Search WTB Listings"
@@ -147,12 +148,13 @@ export default function Search() {
       <div>
         <NavigationBar />
         <div>
-          <select onChange={changeSelectOptionHandler}>
+          <select onChange={changeSelectOptionHandler } className="custom-select my-1 mr-sm-2">
             <option selected value="ifs">
               Items for Sale Listings
             </option>
             <option value="wtb">Want to Buy Listings</option>
           </select>
+
         </div>
         <div style={{ width: 600 }}>
           <Select
@@ -162,10 +164,11 @@ export default function Search() {
             }}
           />
         </div>
-        <h1>Search</h1>
-        <div className="ui search">
-          <div className="ui icon input">
+        <h1 className="ml-3">Search</h1>
+        <div className="ui search mt ml-3">
+          <div className="ui icon input form-inline my-2 my-lg-0">
             <input
+              className="form-control mr-sm-2"
               type="text"
               placeholder="Search IFS Listings"
               onChange={(event) => {
@@ -174,8 +177,7 @@ export default function Search() {
             ></input>
           </div>
         </div>
-
-        <h2>Items for Sale Listings</h2>
+        <h2 className="mt-4 ml-3">Items for Sale Listings</h2>
         <IFSListings keyword={searchTerm} categoryName={categoryName} />
       </div>
     );
