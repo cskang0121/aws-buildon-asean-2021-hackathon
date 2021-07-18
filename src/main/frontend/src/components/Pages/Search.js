@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Tab, Nav } from "react-bootstrap";
 import FormControl from "react-bootstrap/FormControl";
 import { useHistory, useLocation } from "react-router";
 import WTBService from "../../services/WTBService";
@@ -115,103 +115,85 @@ export default function Search() {
   const changeSelectOptionHandler = (event) => {
     setSelectedListingType(event.target.value);
   };
-
-  if (selectedListingType === "wtb") {
-    return (
-      <div>
-        <NavigationBar />
-        <div>
-          <select
-            onChange={changeSelectOptionHandler}
-            className="custom-select my-1 mr-sm-2"
-          >
-            <option selected value="ifs">
-              Items for Sale Listings
-            </option>
-            <option value="wtb">Want to Buy Listings</option>
-          </select>
+  return (
+    <div>
+      <NavigationBar />
+      <Tab.Container defaultActiveKey="ifs">
+        <div className="row">
+          <Nav fill variant="pills">
+            <Nav.Item>
+              <Nav.Link eventKey="ifs">Items for Sale</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="wtb">Want to Buy</Nav.Link>
+            </Nav.Item>
+          </Nav>
         </div>
-        <div style={{ width: 600 }}>
-          <Select
-            options={categoryDropdownOptions}
-            onChange={(value) => {
-              setCategoryName(value.value);
-            }}
-          />
-        </div>
-        <h1>Search</h1>
-        <div className="ui search mt ml-3">
-          <div className="ui icon input my-2 my-lg-0">
-            {/* <input
+        <Tab.Content>
+          <Tab.Pane eventKey="ifs">
+            <div className="row d-flex">
+              <div className="col-3">
+                <h1>Search</h1>
+                <Select
+                  options={categoryDropdownOptions}
+                  onChange={(value) => {
+                    setCategoryName(value.value);
+                  }}
+                />
+                <div className="col-9">
+                  <p>Test</p>
+                  <IFSListings
+                    keyword={searchTerm}
+                    categoryName={categoryName}
+                  />
+                </div>
+              </div>
+            </div>
+          </Tab.Pane>
+          <Tab.Pane eventKey="wtb">
+            <h1>Search</h1>
+            <div style={{ width: 600 }}>
+              <Select
+                options={categoryDropdownOptions}
+                onChange={(value) => {
+                  setCategoryName(value.value);
+                }}
+              />
+            </div>
+            <div className="ui search mt ml-3">
+              <div className="ui icon input my-2 my-lg-0">
+                {/* <input
               type="text"
               placeholder="Search WTB Listings"
               onChange={(event) => {
                 setSearchTerm(event.target.value);
               }}
             ></input> */}
-          </div>
-        </div>
+              </div>
+            </div>
 
-        <h4>Hashtags</h4>
-        <div className="ui search">
-          <div className="ui icon input">
-            <input
-              type="text"
-              placeholder="Enter #hashtags"
-              onChange={(event) => {
-                setHashtags(event.target.value);
-              }}
-            ></input>
-          </div>
-        </div>
+            <h4>Hashtags</h4>
+            <div className="ui search">
+              <div className="ui icon input">
+                <input
+                  type="text"
+                  placeholder="Enter #hashtags"
+                  onChange={(event) => {
+                    setHashtags(event.target.value);
+                  }}
+                ></input>
+              </div>
+            </div>
 
-        <h2>Want To Buy Listings</h2>
-        <WTBListings
-          keyword={searchTerm}
-          categoryName={categoryName}
-          hashtags={hashtags}
-        />
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <NavigationBar />
-        <div>
-          <select
-            onChange={changeSelectOptionHandler}
-            className="custom-select my-1 mr-sm-2"
-          >
-            <option selected value="ifs">
-              Items for Sale Listings
-            </option>
-            <option value="wtb">Want to Buy Listings</option>
-          </select>
-        </div>
-        <div style={{ width: 600 }}>
-          <Select
-            options={categoryDropdownOptions}
-            onChange={(value) => {
-              setCategoryName(value.value);
-            }}
-          />
-        </div>
-        <h1 className="ml-3">Search</h1>
-        <div className="ui search mt ml-3">
-          <div className="ui icon input form-inline my-2 my-lg-0">
-            {/* <input
-              className="form-control mr-sm-2"
-              type="text"
-              placeholder="Search IFS Listings"
-              onChange={(event) => {
-                setSearchTerm(event.target.value);
-              }}
-            ></input> */}
-          </div>
-        </div>
-        <h2 className="mt-4 ml-3">Items for Sale Listings</h2>
-        <IFSListings keyword={searchTerm} categoryName={categoryName} />
-      </div>
-    );
-  }
+            <h2>Want To Buy Listings</h2>
+            <WTBListings
+              keyword={searchTerm}
+              categoryName={categoryName}
+              hashtags={hashtags}
+            />
+          </Tab.Pane>
+        </Tab.Content>
+      </Tab.Container>
+    </div>
+  );
 }
