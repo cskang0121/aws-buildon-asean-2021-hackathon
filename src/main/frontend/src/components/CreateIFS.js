@@ -106,6 +106,30 @@ function Dropzone(props) {
   );
 }
 
+const MeetUpLocationField = (props) => {
+  return (
+    <div>
+      <Form.Row>
+        <Form.Group>
+          <InputGroup>
+            <InputGroup.Prepend>
+              <InputGroup.Text>Meet Location:</InputGroup.Text>
+            </InputGroup.Prepend>
+            <FormControl
+              required
+              autoComplete="off"
+              type="text"
+              name="meetUpLocation"
+              value={props.meetUpLocation}
+              onChange={(event) => props.setMeetUpLocation(event.target.value)}
+            />
+          </InputGroup>
+        </Form.Group>
+      </Form.Row>
+    </div> 
+  );
+}
+
 export default function CreateIFS(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -118,6 +142,7 @@ export default function CreateIFS(props) {
   const [isPaymentCash, setIsPaymentCash] = useState(false);
   const [isPaymentPayNow, setIsPaymentPayNow] = useState(false);
   const [file, setFile] = useState({});
+  const [meetUpLocation, setMeetUpLocation] = useState("");
 
   const history = useHistory();
 
@@ -137,6 +162,9 @@ export default function CreateIFS(props) {
 
   const handleMeetChange = () => {
     setIsDeliveryMeet(!isDeliveryMeet);
+    if (isDeliveryMeet===false) {
+      setMeetUpLocation("");
+    }
   };
 
   const handleDeliverChange = () => {
@@ -168,6 +196,7 @@ export default function CreateIFS(props) {
       isDeliveryDeliver: isDeliveryDeliver,
       isPaymentCash: isPaymentCash,
       isPaymentPayNow: isPaymentPayNow,
+      meetUpLocation: meetUpLocation,
     };
 
     IFSService.postIFSListing(listing).then((res) => {
@@ -305,6 +334,12 @@ export default function CreateIFS(props) {
                 onChange={(event) => handleMeetChange()}
               />
             </Form.Group>
+
+            {isDeliveryMeet ? 
+             <MeetUpLocationField meetUpLocation={meetUpLocation} setMeetUpLocation={setMeetUpLocation}/>
+             : ''
+            }
+
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
               <Form.Check
                 type="checkbox"
