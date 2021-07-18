@@ -5,8 +5,8 @@ import CreateWTB from "../CreateWTB";
 import NavigationBar from "../Navbar/NavigationBar";
 
 const OPTIONS = [
-  { value: "wtb", label: "wtb" },
-  { value: "ifs", label: "ifs" },
+  { value: "wtb", label: "Buying" },
+  { value: "ifs", label: "Selling" },
 ];
 
 function Toggler({ selected }) {
@@ -19,8 +19,10 @@ export default function CreateListing() {
   return (
     <div>
       <NavigationBar />
-      <h1>Post a Listing</h1>
+      <h1 className="ml-3">Create New Listing</h1>
+      <h4 className="ml-3 mt-3">1. Are you looking to buy or sell an item?</h4>
       <Select
+        className="ml-3 mr-3"
         options={OPTIONS}
         onChange={(value) => {
           setSelected(value.value);
