@@ -57,6 +57,8 @@ public class ItemForSaleListing {
 
 	private Boolean isPaymentPayNow;
 
+	private String meetUpLocation;
+
     public Long getIfsId() {
 		return this.ifsId;
 	}
@@ -175,6 +177,14 @@ public class ItemForSaleListing {
 
 	public void setIsPaymentPayNow(Boolean isPaymentPayNow) {
 		this.isPaymentPayNow = isPaymentPayNow;
+	}
+
+	public String getMeetUpLocation() {
+		return this.meetUpLocation;
+	}
+
+	public void setMeetUpLocation(String meetUpLocation) {
+		this.meetUpLocation = meetUpLocation;
 	}
 
 }

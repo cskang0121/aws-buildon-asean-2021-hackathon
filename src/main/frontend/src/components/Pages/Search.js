@@ -18,9 +18,10 @@ const WTBListings = (props) => {
   }, []);
 
   const fetchListings = () => {
-    WTBService.getSearchListings(props.keyword, props.categoryName).then(
+    WTBService.getSearchListings(props.keyword, props.categoryName, props.hashtags).then(
       (res) => {
         console.log(res.data);
+        console.log(props.hashtags);
         setListings(res.data);
       }
     );
@@ -28,7 +29,7 @@ const WTBListings = (props) => {
 
   useEffect(() => {
     fetchListings();
-  }, [props.keyword, props.categoryName]);
+  }, [props.keyword, props.categoryName, props.hashtags]);
 
   return listings.map((listing, index) => {
     const wtbDetails = (listing) => {
@@ -100,6 +101,7 @@ export default function Search() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedListingType, setSelectedListingType] = useState("");
   const [categoryName, setCategoryName] = useState("");
+  const [hashtags, setHashtags] = useState("");
 
   const changeSelectOptionHandler = (event) => {
     setSelectedListingType(event.target.value);
@@ -138,8 +140,21 @@ export default function Search() {
           </div>
         </div>
 
+        <h4>Hashtags</h4>
+        <div className="ui search">
+          <div className="ui icon input">
+            <input
+              type="text"
+              placeholder="Enter #hashtags"
+              onChange={(event) => {
+                setHashtags(event.target.value);
+              }}
+            ></input>
+          </div>
+        </div>
+
         <h2>Want To Buy Listings</h2>
-        <WTBListings keyword={searchTerm} categoryName={categoryName} />
+        <WTBListings keyword={searchTerm} categoryName={categoryName} hashtags={hashtags} />
       </div>
     );
   } else {

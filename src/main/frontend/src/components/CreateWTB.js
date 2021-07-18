@@ -62,6 +62,30 @@ function Dropzone(props) {
   );
 }
 
+const MeetUpLocationField = (props) => {
+  return (
+    <div>
+      <Form.Row>
+        <Form.Group>
+          <InputGroup>
+            <InputGroup.Prepend>
+              <InputGroup.Text>Preferred Meet Location:</InputGroup.Text>
+            </InputGroup.Prepend>
+            <FormControl
+              required
+              autoComplete="off"
+              type="text"
+              name="preferredMeetLocation"
+              value={props.preferredMeetLocation}
+              onChange={(event) => props.setPreferredMeetLocation(event.target.value)}
+            />
+          </InputGroup>
+        </Form.Group>
+      </Form.Row>
+    </div> 
+  );
+}
+
 export default function CreateWTB(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -75,6 +99,7 @@ export default function CreateWTB(props) {
   const [isPreferredPaymentCash, setIsPreferredPaymentCash] = useState(false);
   const [isPreferredPaymentPayNow, setIsPreferredPaymentPayNow] = useState(false);
   const [file, setFile] = useState({});
+  const [preferredMeetLocation, setPreferredMeetLocation] = useState("");
 
   const history = useHistory();
 
@@ -145,6 +170,7 @@ export default function CreateWTB(props) {
       isPreferredDeliveryDeliver: isPreferredDeliveryDeliver,
       isPreferredPaymentCash: isPreferredPaymentCash,
       isPreferredPaymentPayNow: isPreferredPaymentPayNow,
+      preferredMeetLocation: preferredMeetLocation,
     };
 
     WTBService.postWTBListing(listing).then((res) => {
@@ -244,7 +270,7 @@ export default function CreateWTB(props) {
                   required
                   autoComplete="off"
                   type="text"
-                  name="description"
+                  name="hashtags"
                   value={hashtags}
                   onChange={(event) => setHashtags(event.target.value)}
                 />
@@ -318,6 +344,12 @@ export default function CreateWTB(props) {
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
               <Form.Check type="checkbox" label="Meet-up" onChange={(event) => handleMeetChange()}/>
             </Form.Group>
+
+            {isPreferredDeliveryMeet ? 
+             <MeetUpLocationField preferredMeetLocation={preferredMeetLocation} setPreferredMeetLocation={setPreferredMeetLocation}/>
+             : ''
+            }
+
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
               <Form.Check type="checkbox" label="Delivery" onChange={(event) => handleDeliverChange()}/>
             </Form.Group>

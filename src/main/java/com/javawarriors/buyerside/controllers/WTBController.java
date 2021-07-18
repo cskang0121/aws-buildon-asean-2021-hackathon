@@ -63,8 +63,8 @@ public class WTBController {
     // }
 
     @GetMapping("/searchWTB/get")
-    public List<WantToBuyListing> searchWTB(@RequestParam(name = "keyword") String Keyword, @RequestParam(name = "categoryName") String CategoryName) {
-        List<WantToBuyListing> listings = wtbService.getSearchResults(Keyword, CategoryName);
+    public List<WantToBuyListing> searchWTB(@RequestParam(name = "keyword") String Keyword, @RequestParam(name = "categoryName") String CategoryName, @RequestParam(name = "hashtags") String Hashtags) {
+        List<WantToBuyListing> listings = wtbService.getSearchResults(Keyword, CategoryName, Hashtags);
         return listings;
     }
 
