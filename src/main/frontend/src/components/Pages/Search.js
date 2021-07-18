@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
-import FormControl from 'react-bootstrap/FormControl'
-import { useHistory } from "react-router";
+import FormControl from "react-bootstrap/FormControl";
+import { useHistory, useLocation } from "react-router";
 import WTBService from "../../services/WTBService";
 import IFSService from "../../services/IFSService";
 import NavigationBar from "../Navbar/NavigationBar";
@@ -19,13 +19,15 @@ const WTBListings = (props) => {
   }, []);
 
   const fetchListings = () => {
-    WTBService.getSearchListings(props.keyword, props.categoryName, props.hashtags).then(
-      (res) => {
-        console.log(res.data);
-        console.log(props.hashtags);
-        setListings(res.data);
-      }
-    );
+    WTBService.getSearchListings(
+      props.keyword,
+      props.categoryName,
+      props.hashtags
+    ).then((res) => {
+      console.log(res.data);
+      console.log(props.hashtags);
+      setListings(res.data);
+    });
   };
 
   useEffect(() => {
@@ -104,6 +106,12 @@ export default function Search() {
   const [categoryName, setCategoryName] = useState("");
   const [hashtags, setHashtags] = useState("");
 
+  const location = useLocation();
+
+  useEffect(() => {
+    setSearchTerm(location.state.keyword);
+  }, [location.state.keyword]);
+
   const changeSelectOptionHandler = (event) => {
     setSelectedListingType(event.target.value);
   };
@@ -113,7 +121,10 @@ export default function Search() {
       <div>
         <NavigationBar />
         <div>
-          <select onChange={changeSelectOptionHandler}  className="custom-select my-1 mr-sm-2">
+          <select
+            onChange={changeSelectOptionHandler}
+            className="custom-select my-1 mr-sm-2"
+          >
             <option selected value="ifs">
               Items for Sale Listings
             </option>
@@ -131,13 +142,13 @@ export default function Search() {
         <h1>Search</h1>
         <div className="ui search mt ml-3">
           <div className="ui icon input my-2 my-lg-0">
-            <input
+            {/* <input
               type="text"
               placeholder="Search WTB Listings"
               onChange={(event) => {
                 setSearchTerm(event.target.value);
               }}
-            ></input>
+            ></input> */}
           </div>
         </div>
 
@@ -155,7 +166,11 @@ export default function Search() {
         </div>
 
         <h2>Want To Buy Listings</h2>
-        <WTBListings keyword={searchTerm} categoryName={categoryName} hashtags={hashtags} />
+        <WTBListings
+          keyword={searchTerm}
+          categoryName={categoryName}
+          hashtags={hashtags}
+        />
       </div>
     );
   } else {
@@ -163,13 +178,15 @@ export default function Search() {
       <div>
         <NavigationBar />
         <div>
-          <select onChange={changeSelectOptionHandler } className="custom-select my-1 mr-sm-2">
+          <select
+            onChange={changeSelectOptionHandler}
+            className="custom-select my-1 mr-sm-2"
+          >
             <option selected value="ifs">
               Items for Sale Listings
             </option>
             <option value="wtb">Want to Buy Listings</option>
           </select>
-
         </div>
         <div style={{ width: 600 }}>
           <Select
@@ -182,14 +199,14 @@ export default function Search() {
         <h1 className="ml-3">Search</h1>
         <div className="ui search mt ml-3">
           <div className="ui icon input form-inline my-2 my-lg-0">
-            <input
+            {/* <input
               className="form-control mr-sm-2"
               type="text"
               placeholder="Search IFS Listings"
               onChange={(event) => {
                 setSearchTerm(event.target.value);
               }}
-            ></input>
+            ></input> */}
           </div>
         </div>
         <h2 className="mt-4 ml-3">Items for Sale Listings</h2>
