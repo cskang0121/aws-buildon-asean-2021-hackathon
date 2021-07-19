@@ -12,6 +12,7 @@ import ListingCard from "../ListingCard";
 
 const WTBListings = (props) => {
   const [listings, setListings] = useState([]);
+  // const [imgSrc, setImgSrc] = useState("");
   const history = useHistory();
   // Get user
   const [user, setUser] = useState({});
@@ -33,6 +34,22 @@ const WTBListings = (props) => {
     fetchListings();
   }, [props.keyword, props.categoryName]);
 
+  // const getImage = (listing) => {
+  //   WTBService.getListingImage(listing.wtbId).then((res) => {
+  //     const byteCode = res.data;
+  //     const firstChar = byteCode.charAt(0);
+  //     var dataType = "";
+  //     if (firstChar === "/") {
+  //       dataType = "jpg";
+  //     } else if (firstChar === "i") {
+  //       dataType = "png";
+  //     } else {
+  //       dataType = "gif";
+  //     }
+  //     setImgSrc("data:image/" + dataType + ";base64," + byteCode);
+  //   });
+  // };
+
   return listings.map((listing, index) => {
     const wtbDetails = (listing) => {
       history.push({
@@ -44,6 +61,7 @@ const WTBListings = (props) => {
     if (listing.status === "a" && listing.user.uid != user.uid)
       return (
         <div className="col-3">
+          {/* {getImage(listing)} */}
           <ListingCard
             listingType="WTB"
             listing={listing}
@@ -58,6 +76,7 @@ const WTBListings = (props) => {
 
 const IFSListings = (props) => {
   const [listings, setListings] = useState([]);
+  // const [imgSrc, setImgSrc] = useState("");
   const history = useHistory();
   // Get user
   const [user, setUser] = useState({});
@@ -78,6 +97,22 @@ const IFSListings = (props) => {
     fetchListings();
   }, [props.keyword, props.categoryName]);
 
+  // const getImage = (listing) => {
+  //   IFSService.getListingImage(listing.ifsId).then((res) => {
+  //     const byteCode = res.data;
+  //     const firstChar = byteCode.charAt(0);
+  //     var dataType = "";
+  //     if (firstChar === "/") {
+  //       dataType = "jpg";
+  //     } else if (firstChar === "i") {
+  //       dataType = "png";
+  //     } else {
+  //       dataType = "gif";
+  //     }
+  //     setImgSrc("data:image/" + dataType + ";base64," + byteCode);
+  //   });
+  // };
+
   return listings.map((listing, index) => {
     const ifsDetails = (listing) => {
       history.push({
@@ -93,6 +128,7 @@ const IFSListings = (props) => {
     )
       return (
         <div className="col-3">
+          {/* {getImage(listing)} */}
           <ListingCard
             listingType="IFS"
             listing={listing}

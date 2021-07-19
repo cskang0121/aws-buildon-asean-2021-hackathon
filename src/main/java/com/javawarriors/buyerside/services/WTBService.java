@@ -44,6 +44,7 @@ public class WTBService {
     }
 
     public WantToBuyListing save(WantToBuyListing entity) {
+        entity.setDateOfCreation(new Date());
         return wtbRepo.save(entity);
     }
 

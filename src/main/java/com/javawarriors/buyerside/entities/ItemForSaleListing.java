@@ -59,6 +59,8 @@ public class ItemForSaleListing {
 
 	private String meetUpLocation;
 
+	private Date dateOfCreation;
+
     public Long getIfsId() {
 		return this.ifsId;
 	}
@@ -185,6 +187,14 @@ public class ItemForSaleListing {
 
 	public void setMeetUpLocation(String meetUpLocation) {
 		this.meetUpLocation = meetUpLocation;
+	}
+
+	public Date getDateOfCreation() {
+		return this.dateOfCreation;
+	}
+
+	public void setDateOfCreation(Date dateOfCreation) {
+		this.dateOfCreation = dateOfCreation;
 	}
 
 }

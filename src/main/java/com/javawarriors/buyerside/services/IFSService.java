@@ -44,6 +44,7 @@ public class IFSService {
     }
 
     public ItemForSaleListing save(ItemForSaleListing entity) {
+        entity.setDateOfCreation(new Date());
         return ifsRepo.save(entity);
     }
 

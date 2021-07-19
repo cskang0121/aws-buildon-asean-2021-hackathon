@@ -121,7 +121,7 @@ export default function CreateWTB(props) {
   const [priceLower, setPriceLower] = useState(0);
   const [priceUpper, setPriceUpper] = useState(0);
   const [categoryName, setCategoryName] = useState("");
-  const [hashtags, setHashtags] = useState("");
+  // const [hashtags, setHashtags] = useState("");
   const [preferredItemCondition, setPreferredItemCondition] = useState("");
   const [isPreferredDeliveryMeet, setIsPreferredDeliveryMeet] = useState(false);
   const [isPreferredDeliveryDeliver, setIsPreferredDeliveryDeliver] =
@@ -198,7 +198,7 @@ export default function CreateWTB(props) {
       status: "a",
       categoryName: categoryName,
       user: user,
-      hashtags: hashtags,
+      // hashtags: hashtags,
       preferredItemCondition: preferredItemCondition,
       isPreferredDeliveryMeet: isPreferredDeliveryMeet,
       isPreferredDeliveryDeliver: isPreferredDeliveryDeliver,
@@ -318,7 +318,7 @@ export default function CreateWTB(props) {
               </Col>
             </Row>
           </Form>
-          <Form>
+          {/* <Form>
             <Row>
               <Col>
                 <Form.Group>
@@ -340,7 +340,7 @@ export default function CreateWTB(props) {
                 </Form.Group>
               </Col>
             </Row>
-          </Form>
+          </Form> */}
           <Form.Row>
             <Form.Group>
               <InputGroup>
@@ -426,12 +426,10 @@ export default function CreateWTB(props) {
                 onChange={(event) => handleMeetChange()}
               />
             </Form.Group>
-
             {isPreferredDeliveryMeet ? 
              <MeetUpLocationField preferredMeetUpLocation={preferredMeetUpLocation} setPreferredMeetUpLocation={setPreferredMeetUpLocation}/>
              : ''
             }
-
             <Form.Group className="mb-3 ml-4" controlId="formBasicCheckbox">
               <Form.Check
                 type="checkbox"

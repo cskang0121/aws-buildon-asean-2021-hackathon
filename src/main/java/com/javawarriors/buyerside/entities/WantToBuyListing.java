@@ -47,6 +47,8 @@ public class WantToBuyListing {
     
     private String preferredMeetUpLocation;
 
+    private Date dateOfCreation;
+
     // @ManyToMany
     // @JoinTable(
     //     name="wtb_tags",
@@ -189,5 +191,13 @@ public class WantToBuyListing {
     public void setPreferredMeetUpLocation(String preferredMeetUpLocation) {
         this.preferredMeetUpLocation = preferredMeetUpLocation;
     }
+
+    public Date getDateOfCreation() {
+		return this.dateOfCreation;
+	}
+
+	public void setDateOfCreation(Date dateOfCreation) {
+		this.dateOfCreation = dateOfCreation;
+	}
 
 }

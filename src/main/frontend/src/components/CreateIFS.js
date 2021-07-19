@@ -157,7 +157,7 @@ export default function CreateIFS(props) {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [categoryName, setCategoryName] = useState("");
-  const [hashtags, setHashtags] = useState("");
+  // const [hashtags, setHashtags] = useState("");
   const [itemCondition, setItemCondition] = useState("");
   const [isDeliveryMeet, setIsDeliveryMeet] = useState(false);
   const [isDeliveryDeliver, setIsDeliveryDeliver] = useState(false);
@@ -212,7 +212,7 @@ export default function CreateIFS(props) {
       listingType: props.listingType,
       categoryName: categoryName,
       user: user,
-      hashtags: hashtags,
+      // hashtags: hashtags,
       itemCondition: itemCondition,
       isDeliveryMeet: isDeliveryMeet,
       isDeliveryDeliver: isDeliveryDeliver,
@@ -309,7 +309,7 @@ export default function CreateIFS(props) {
               </Col>
             </Row>
           </Form>
-          <Form>
+          {/* <Form>
             <Row>
               <Col>
                 <Form.Group>
@@ -333,7 +333,7 @@ export default function CreateIFS(props) {
                 </Form.Group>
               </Col>
             </Row>
-          </Form>
+          </Form> */}
           <Form.Row>
             <Form.Group>
               <InputGroup>
@@ -394,6 +394,10 @@ export default function CreateIFS(props) {
                 onChange={(event) => handleMeetChange()}
               />
             </Form.Group>
+            {isDeliveryMeet ? 
+             <MeetUpLocationField meetUpLocation={meetUpLocation} setMeetUpLocation={setMeetUpLocation}/>
+             : ''
+            }
             <Form.Group className="mb-3 ml-4" controlId="formBasicCheckbox">
               <Form.Check
                 type="checkbox"
