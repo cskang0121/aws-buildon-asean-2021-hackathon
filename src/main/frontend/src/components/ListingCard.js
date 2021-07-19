@@ -16,7 +16,7 @@ export default function ListingCard({
   return (
     <div className="card shadow m-1">
       {listing.picUri && imgSrc ? (
-        <img className="card-img-top" style={{ height: "18vw" }} src={imgSrc} />
+        <img className="card-img-top" style={{ height: "18vw", objectFit: "cover" }} src={imgSrc} />
       ) : (
         <p className="text-center">No image found</p>
       )}

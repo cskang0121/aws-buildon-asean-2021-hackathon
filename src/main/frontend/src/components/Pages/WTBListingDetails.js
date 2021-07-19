@@ -10,7 +10,6 @@ export default function WTB(props) {
   const location = useLocation();
   const [user, setUser] = useState({});
   const [imgSrc, setImgSrc] = useState("");
-  const listing = location.state.listing;
 
   useEffect(() => {
     setUser(UserService.getProfile());
@@ -59,8 +58,8 @@ export default function WTB(props) {
   };
 
   useEffect(() => {
-    getImage(listing);
-  }, [listing]);
+    getImage(location.state.listing);
+  }, [location.state.listing]);
 
   return (
 
@@ -68,8 +67,8 @@ export default function WTB(props) {
       <NavigationBar />
       <h1>Listing</h1>
 
-      {listing.picUri && imgSrc ? (
-        <img className="card-img-top" style={{ height: 500, width: 500}} src={imgSrc} />
+      {location.state.listing.picUri && imgSrc ? (
+        <img className="card-img-top" style={{ height: 500, width: 500, objectFit: "cover"}} src={imgSrc} />
       ) : (
         <p className="text-center">No image found</p>
       )}

@@ -216,6 +216,8 @@ export default function Search() {
     setCategoryName(temp);
   }
 
+  
+
   return (
     <div>
       <NavigationBar />
@@ -244,6 +246,15 @@ export default function Search() {
                         handleSetCategoryName(value);
                       }}
                     />
+                    {/* <b>Condition</b>
+                    <Select
+                      closeMenuOnSelect={false}
+                      options={categoryDropdownOptions}
+                      isMulti
+                      onChange={(value) => {
+                        handleSetCategoryName(value);
+                      }}
+                    /> */}
                   </div>
                 </div>
                 <div className="col-9">
