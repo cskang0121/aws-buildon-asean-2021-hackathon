@@ -117,6 +117,22 @@
 			<version>2.16.103</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/software.amazon.awssdk/personalize -->
+		<!-- <dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>personalize</artifactId>
+			<version>2.16.104</version>
+		</dependency> -->
+
+		<!-- https://mvnrepository.com/artifact/software.amazon.awssdk/personalizeruntime -->
+		<dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>personalizeruntime</artifactId>
+			<version>2.16.104</version>
+		</dependency>
+
+
+
 
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>

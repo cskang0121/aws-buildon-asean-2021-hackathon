@@ -68,13 +68,12 @@ const WTBListings = (props) => {
   }, [props.keyword, props.categoryName]);
 
   const fetchListings = () => {
-    WTBService.getSearchListings(
-      props.keyword,
-      props.categoryName,
-    ).then((res) => {
-      console.log(res.data);
-      setListings(res.data);
-    });
+    WTBService.getSearchListings(props.keyword, props.categoryName).then(
+      (res) => {
+        console.log(res.data);
+        setListings(res.data);
+      }
+    );
   };
 
   return listings.map((listing, index) => {
@@ -113,7 +112,7 @@ const IFSList = ({ listing, index }) => {
   const ifsDetails = (listing) => {
     history.push({
       pathname: "/ifs-listing-details",
-      state: { listing: listing },
+      state: { listing: listing, deal: {} },
     });
   };
 
@@ -181,9 +180,7 @@ const IFSListings = (props) => {
       listing.listingType === "s" &&
       listing.user.uid != user.uid
     )
-      return (
-        <IFSList index={index} listing={listing} />
-      );
+      return <IFSList index={index} listing={listing} />;
   });
 };
 
@@ -208,13 +205,13 @@ export default function Search() {
     if (value.length > 0) {
       temp += value[0].value;
     }
-    for (var i=1; i < value.length; i++) {
-      temp += "%"
+    for (var i = 1; i < value.length; i++) {
+      temp += "%";
       temp += value[i].value;
     }
     console.log(temp);
     setCategoryName(temp);
-  }
+  };
 
   return (
     <div>
