@@ -87,7 +87,7 @@ const IFSListings = () => {
 export default function IFS(props) {
   return (
     <div>
-      <h1>Item For Sale Listings</h1>
+      <h1 className="ml-4 mt-4 mb-4">Item For Sale Listings</h1>
       <IFSListings />
     </div>
   );

@@ -53,20 +53,38 @@ function Dropzone(props) {
     <div {...getRootProps()}>
       <input {...getInputProps()} />
       {isDragActive ? (
-        <p>Drop the picture of the item here ...</p>
+        <div>
+        {imgSrc != null ? (
+          <div className="d-flex justify-content-center">
+            <img
+              style={{ width: 400, height: 400, objectFit: "cover" }}
+              src={imgSrc}
+            />
+          </div>
+        ) : (
+          <div className="d-flex container border border-success rounded w-75 align-items-center justify-content-center" style={{height: 200}}>
+            <p className="text-center">
+              Drop your image here
+            </p>
+          </div>
+        )}
+        </div>
       ) : (
         <div>
           {imgSrc != null ? (
-            <img
-              style={{ width: 500, height: 500, objectFit: "cover" }}
-              src={imgSrc}
-            />
+            <div className="d-flex justify-content-center">
+              <img
+                style={{ width: 400, height: 400, objectFit: "cover" }}
+                src={imgSrc}
+              />
+            </div>
           ) : (
-            ""
+            <div className="d-flex container border border-success rounded w-75 align-items-center justify-content-center" style={{height: 200}}>
+              <p className="text-center">
+                Drag and drop an image, or click to browse files
+              </p>
+            </div>
           )}
-          <p>
-            Drag 'n' drop the picture of the item here, or click to select files
-          </p>
         </div>
       )}
     </div>
@@ -80,7 +98,7 @@ const MeetUpLocationField = (props) => {
         <Form.Group>
           <InputGroup>
             <InputGroup.Prepend>
-              <InputGroup.Text>Preferred Meet Location:</InputGroup.Text>
+              <InputGroup.Text className="ml-4">Preferred Meet Location:</InputGroup.Text>
             </InputGroup.Prepend>
             <FormControl
               required
@@ -144,15 +162,15 @@ export default function CreateWTB(props) {
 
   //for itemCondition
   const preferredItemConditionRadios = [
-    { name: "Brand New", value: "Brand New" },
-    { name: "Like New", value: "Like New" },
-    { name: "Well Used", value: "Well Used" },
-    { name: "Heavily Used", value: "Heavily Used" },
+    { name: " Brand New", value: "Brand New" },
+    { name: " Like New", value: "Like New" },
+    { name: " Well Used", value: "Well Used" },
+    { name: " Heavily Used", value: "Heavily Used" },
   ];
 
   const handleMeetChange = () => {
     setIsPreferredDeliveryMeet(!isPreferredDeliveryMeet);
-    if (isPreferredDeliveryMeet===true) {
+    if (isPreferredDeliveryMeet === true) {
       setPreferredMeetUpLocation("");
     }
   };
@@ -216,19 +234,20 @@ export default function CreateWTB(props) {
   const renderQnAFields = () => {
     return qnaList.map((item, index) => {
       return (
-        <InputGroup key={index}>
+        <InputGroup key={index} className="mt-3">
           <InputGroup.Prepend>
-            <InputGroup.Text>Question:</InputGroup.Text>
+            <InputGroup.Text className="ml-4">Question:</InputGroup.Text>
           </InputGroup.Prepend>
           <FormControl
             required
+            placeholder="Write a question..."
             autoComplete="off"
             type="text"
             name="question"
             value={item.question}
             onChange={(event) => handleQnAChange(event, index)}
           />
-          <Button onClick={(event) => handleRemoveQnA(index)}>Remove</Button>
+          <Button className="btn btn-danger"onClick={(event) => handleRemoveQnA(index)}>Remove</Button>
         </InputGroup>
       );
     });
@@ -252,62 +271,81 @@ export default function CreateWTB(props) {
       </div>
       <Row className="justify-content-md-center">
         <Col lg={12}>
+        <h5 className="ml-4 mb-3 mt-4">Item Details</h5>
+          <Form>
+            <Row>
+              <Col>
+                <Form.Group>
+                  <InputGroup>
+                    <InputGroup.Prepend>
+                      <InputGroup.Text className="ml-4">Title:</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl
+                      required
+                      className="mr-4"
+                      placeholder="Enter a title..."
+                      autoComplete="off"
+                      type="text"
+                      name="title"
+                      value={title}
+                      onChange={(event) => setTitle(event.target.value)}
+                    />
+                  </InputGroup>
+                </Form.Group>
+              </Col>
+            </Row>
+          </Form>
+          <Form>
+            <Row>
+              <Col>
+              <Form.Group>
+                  <InputGroup>
+                    <InputGroup.Prepend>
+                      <InputGroup.Text className="ml-4">Description:</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl
+                      required
+                      placeholder="Enter a description of the item..."
+                      className="mr-4"
+                      autoComplete="off"
+                      type="text"
+                      name="description"
+                      value={description}
+                      onChange={(event) => setDescription(event.target.value)}
+                    />
+                  </InputGroup>
+                </Form.Group>
+              </Col>
+            </Row>
+          </Form>
+          <Form>
+            <Row>
+              <Col>
+                <Form.Group>
+                  <InputGroup>
+                    <InputGroup.Prepend>
+                      <InputGroup.Text className="ml-4">Hashtags:</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl
+                      required
+                      className="mr-4"
+                      placeholder="Enter some hashtags..."
+                      autoComplete="off"
+                      type="text"
+                      name="hashtags"
+                      value={hashtags}
+                      onChange={(event) => setHashtags(event.target.value)}
+                    />
+                  </InputGroup>
+                </Form.Group>
+              </Col>
+            </Row>
+          </Form>
           <Form.Row>
             <Form.Group>
               <InputGroup>
                 <InputGroup.Prepend>
-                  <InputGroup.Text>Title:</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                  required
-                  autoComplete="off"
-                  type="text"
-                  name="title"
-                  value={title}
-                  onChange={(event) => setTitle(event.target.value)}
-                />
-              </InputGroup>
-            </Form.Group>
-          </Form.Row>
-          <Form.Row>
-            <Form.Group>
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text>Description:</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                  required
-                  autoComplete="off"
-                  type="text"
-                  name="description"
-                  value={description}
-                  onChange={(event) => setDescription(event.target.value)}
-                />
-              </InputGroup>
-            </Form.Group>
-          </Form.Row>
-          <Form.Row>
-            <Form.Group>
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text>Hashtags:</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                  required
-                  autoComplete="off"
-                  type="text"
-                  name="hashtags"
-                  value={hashtags}
-                  onChange={(event) => setHashtags(event.target.value)}
-                />
-              </InputGroup>
-            </Form.Group>
-          </Form.Row>
-          <Form.Row>
-            <Form.Group>
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text>Price Lower:</InputGroup.Text>
+                  <InputGroup.Text className="ml-4">Price Lower:</InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl
                   required
@@ -324,7 +362,7 @@ export default function CreateWTB(props) {
             <Form.Group>
               <InputGroup>
                 <InputGroup.Prepend>
-                  <InputGroup.Text>Price Upper:</InputGroup.Text>
+                  <InputGroup.Text className="ml-4">Price Upper:</InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl
                   required
@@ -337,9 +375,10 @@ export default function CreateWTB(props) {
               </InputGroup>
             </Form.Group>
           </Form.Row>
-          <h5>Category</h5>
+          <h5 className="ml-4 mt-2">Category</h5>
           {/* <div style={{ width: 600 }}>
             <Select
+              className="ml-4 mt-3"
               options={categoryDropdownOptions}
               onChange={(value) => {
                 setCategoryName(value.value);
@@ -347,7 +386,8 @@ export default function CreateWTB(props) {
             />
           </div> */}
           <div style={{ width: 600 }}>
-            <Select
+            <Select 
+              className="ml-4 mt-3"
               closeMenuOnSelect={false}
               options={categoryDropdownOptions}
               isMulti
@@ -357,8 +397,8 @@ export default function CreateWTB(props) {
             />
           </div>
           <div>
-            <h5>Preferred Item Condition</h5>
-            <ButtonGroup>
+            <h5 className="ml-4 mt-3">Preferred Item Condition</h5>
+            <ButtonGroup className="ml-4 mt-2">
               {preferredItemConditionRadios.map((radio, idx) => (
                 <ToggleButton
                   key={idx}
@@ -378,8 +418,8 @@ export default function CreateWTB(props) {
             </ButtonGroup>
           </div>
           <div>
-            <h5>Preferred Delivery Method</h5>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+            <h5 className="ml-4 mt-3">Preferred Delivery Method</h5>
+            <Form.Group className="mb-3 ml-4 mt-3" controlId="formBasicCheckbox">
               <Form.Check
                 type="checkbox"
                 label="Meet-up"
@@ -392,7 +432,7 @@ export default function CreateWTB(props) {
              : ''
             }
 
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+            <Form.Group className="mb-3 ml-4" controlId="formBasicCheckbox">
               <Form.Check
                 type="checkbox"
                 label="Delivery"
@@ -401,15 +441,15 @@ export default function CreateWTB(props) {
             </Form.Group>
           </div>
           <div>
-            <h5>Preferred Payment Method</h5>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+            <h5 className="ml-4 mt-3">Preferred Payment Method</h5>
+            <Form.Group className="mb-3 ml-4 mt-3" controlId="formBasicCheckbox">
               <Form.Check
                 type="checkbox"
                 label="Cash on Meet-up"
                 onChange={(event) => handleCashChange()}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+            <Form.Group className="mb-3 ml-4" controlId="formBasicCheckbox">
               <Form.Check
                 type="checkbox"
                 label="PayNow"
@@ -419,12 +459,12 @@ export default function CreateWTB(props) {
           </div>
           <Form.Row>
             <Form.Group>
-              <p>QnA</p>
+              <h5 className="ml-4 mt-1">Questions for Sellers</h5>
               {renderQnAFields()}
-              <Button onClick={handleAddQnA}>Add Question</Button>
+              <Button className="ml-4 mt-3" onClick={handleAddQnA}>Add Question</Button>
             </Form.Group>
           </Form.Row>
-          <Button onClick={createListing}> Submit </Button>
+          <Button className="ml-4 mt-3 mb-4 mr-4 btn-success btn-lg" onClick={createListing}>Submit</Button>
         </Col>
       </Row>
     </div>
