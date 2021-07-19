@@ -64,9 +64,16 @@ public class IFSService {
         return ifsRepo.findByUser(user);
     }
 
-    public List<ItemForSaleListing> getSearchResults(String keyword, String categoryName) {
+    public List<ItemForSaleListing> getSearchResults(String keyword, String categoryName, String itemCondition) {
         // return ifsRepo.findByTitleContaining(keyword);
-        return ifsRepo.findByTitleAndCategoryContaining(keyword, categoryName);
+        String[] conditionArr = itemCondition.split("\\|");
+        List<String> conditionList = Arrays.asList(conditionArr);
+        
+        if (conditionList.size() == 1) {
+            return ifsRepo.findByTitleAndCategoryContaining(keyword, categoryName);
+        }
+        
+        return ifsRepo.findByTitleAndCategoryAndConditionContaining(keyword, categoryName, conditionList);
     }
 
     public ItemForSaleListing findByListingId(Long id) {

@@ -10,6 +10,12 @@ import Select from "react-select";
 import UserService from "../../services/UserService";
 import ListingCard from "../ListingCard";
 
+const ITEM_CONDITION = ["Brand New", "Like New", "Well Used", "Heavily Used"];
+
+const condtionDropdownOptions = ITEM_CONDITION.map((condition) => {
+  return { value: condition, label: condition };
+});
+
 const WTBList = ({ listing, index }) => {
   const [imgSrc, setImgSrc] = useState("");
   const history = useHistory();
@@ -156,10 +162,10 @@ const IFSListings = (props) => {
 
   useEffect(() => {
     fetchListings();
-  }, [props.keyword, props.categoryName]);
+  }, [props.keyword, props.categoryName, props.itemCondition]);
 
   const fetchListings = () => {
-    IFSService.getSearchListings(props.keyword, props.categoryName).then(
+    IFSService.getSearchListings(props.keyword, props.categoryName, props.itemCondition).then(
       (res) => {
         console.log(res.data);
         setListings(res.data);
@@ -188,6 +194,7 @@ export default function Search() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedListingType, setSelectedListingType] = useState("");
   const [categoryName, setCategoryName] = useState("");
+  const [itemCondition, setItemCondition] = useState("");
   // const [hashtags, setHashtags] = useState("");
 
   const location = useLocation();
@@ -209,11 +216,25 @@ export default function Search() {
       temp += "%";
       temp += value[i].value;
     }
-    console.log(temp);
+    // console.log(temp);
     setCategoryName(temp);
   };
 
-  
+  const handleSetCondition = (value) => {
+    var temp = "";
+    if (value.length > 0) {
+      temp += value[0].value;
+    }
+    for (var i = 1; i < value.length; i++) {
+      temp += "|";
+      temp += value[i].value;
+    }
+    setItemCondition(temp);
+    console.log("temp");
+    console.log(temp);
+    console.log("itemCondition");
+    console.log(itemCondition);
+  };
 
   return (
     <div>
@@ -252,6 +273,15 @@ export default function Search() {
                         handleSetCategoryName(value);
                       }}
                     /> */}
+                    <b>Condition</b>
+                    <Select
+                      closeMenuOnSelect={false}
+                      options={condtionDropdownOptions}
+                      isMulti
+                      onChange={(value) => {
+                        handleSetCondition(value);
+                      }}
+                    />
                   </div>
                 </div>
                 <div className="col-9">
@@ -259,6 +289,7 @@ export default function Search() {
                     <IFSListings
                       keyword={searchTerm}
                       categoryName={categoryName}
+                      itemCondition={itemCondition}
                     />
                   </div>
                 </div>
