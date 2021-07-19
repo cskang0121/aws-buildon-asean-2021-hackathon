@@ -152,7 +152,7 @@ export default function CreateWTB(props) {
 
   const handleMeetChange = () => {
     setIsPreferredDeliveryMeet(!isPreferredDeliveryMeet);
-    if (isPreferredDeliveryMeet===false) {
+    if (isPreferredDeliveryMeet===true) {
       setPreferredMeetUpLocation("");
     }
   };
@@ -233,6 +233,15 @@ export default function CreateWTB(props) {
       );
     });
   };
+
+  const handleSetCategoryName = (value) => {
+    var temp = "";
+    for (var i=0; i < value.length; i++) {
+      temp += value[i].value;
+      temp += "|"
+    }
+    setCategoryName(temp);
+  }
 
   return (
     <div>
@@ -329,11 +338,21 @@ export default function CreateWTB(props) {
             </Form.Group>
           </Form.Row>
           <h5>Category</h5>
-          <div style={{ width: 600 }}>
+          {/* <div style={{ width: 600 }}>
             <Select
               options={categoryDropdownOptions}
               onChange={(value) => {
                 setCategoryName(value.value);
+              }}
+            />
+          </div> */}
+          <div style={{ width: 600 }}>
+            <Select
+              closeMenuOnSelect={false}
+              options={categoryDropdownOptions}
+              isMulti
+              onChange={(value) => {
+                handleSetCategoryName(value);
               }}
             />
           </div>

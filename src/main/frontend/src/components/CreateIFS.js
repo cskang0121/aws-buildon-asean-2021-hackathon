@@ -162,7 +162,7 @@ export default function CreateIFS(props) {
 
   const handleMeetChange = () => {
     setIsDeliveryMeet(!isDeliveryMeet);
-    if (isDeliveryMeet===false) {
+    if (isDeliveryMeet===true) {
       setMeetUpLocation("");
     }
   };
@@ -219,6 +219,15 @@ export default function CreateIFS(props) {
       });
     });
   };
+
+  const handleSetCategoryName = (value) => {
+    var temp = "";
+    for (var i=0; i < value.length; i++) {
+      temp += value[i].value;
+      temp += "|"
+    }
+    setCategoryName(temp);
+  }
 
   return (
     <div>
@@ -300,9 +309,10 @@ export default function CreateIFS(props) {
           <h5>Category</h5>
           <div style={{ width: 600 }}>
             <Select
+              closeMenuOnSelect={false}
               options={categoryDropdownOptions}
               onChange={(value) => {
-                setCategoryName(value.value);
+                handleSetCategoryName(value);
               }}
             />
           </div>
