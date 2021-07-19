@@ -8,6 +8,7 @@ import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.auth.credentials.AwsSessionCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.personalizeruntime.PersonalizeRuntimeClient;
 
 @Configuration
 public class AWSConfig {
@@ -27,8 +28,15 @@ public class AWSConfig {
     public S3Client s3Client() {
         return S3Client.builder().region(Region.of(region))
                 // .credentialsProvider(DefaultCredentialsProvider.create())
-                .credentialsProvider(StaticCredentialsProvider.create(AwsSessionCredentials.create(accessKey,
-                secretKey, sessionToken)))
+                .credentialsProvider(StaticCredentialsProvider
+                        .create(AwsSessionCredentials.create(accessKey, secretKey, sessionToken)))
+                .build();
+    }
+
+    @Bean(destroyMethod = "close")
+    public PersonalizeRuntimeClient personalizeClient() {
+        return PersonalizeRuntimeClient.builder().region(Region.of(region)).credentialsProvider(
+                StaticCredentialsProvider.create(AwsSessionCredentials.create(accessKey, secretKey, sessionToken)))
                 .build();
     }
 }
