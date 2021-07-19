@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Git Ignoring this so that we all can just leave our application.properties as is
+application.properties
