@@ -19,10 +19,10 @@ export default function CreateListing() {
   return (
     <div>
       <NavigationBar />
-      <h1 className="ml-3">Create New Listing</h1>
-      <h4 className="ml-3 mt-3">1. Are you looking to buy or sell an item?</h4>
+      <h1 className="ml-4 mt-3">Create New Listing</h1>
+      <h4 className="ml-4 mt-3">Are you <b>buying</b> or <b>selling</b> an item?</h4>
       <Select
-        className="ml-3 mr-3"
+        className="ml-4 mr-4 mt-3"
         options={OPTIONS}
         onChange={(value) => {
           setSelected(value.value);

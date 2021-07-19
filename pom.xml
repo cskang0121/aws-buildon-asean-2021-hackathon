@@ -87,11 +87,11 @@
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk -->
 		<!-- AWS SDK for Java 1.x -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk</artifactId>
 			<version>1.12.25</version>
-		</dependency>
+		</dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/software.amazon.awssdk/aws-sdk-java -->
 		<!-- AWS SDK for Java 2.x -->
