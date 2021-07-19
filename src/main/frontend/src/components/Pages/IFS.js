@@ -8,6 +8,7 @@ import UserService from "../../services/UserService";
 //   base64StringtoFile,
 //   extractImageFileExtensionFromBase64,
 // } from "../../util/reusableUtils";
+import ListingCard from "../ListingCard";
 
 const IFSList = ({ listing, index, deleteIFS }) => {
   const [imgSrc, setImgSrc] = useState("");
@@ -41,17 +42,17 @@ const IFSList = ({ listing, index, deleteIFS }) => {
   };
 
   return (
-    <div key={index}>
-      {listing.picUri ? <img style={{width:500, height:500, objectFit:"cover"}} src={imgSrc} /> : <p>No image found</p>}
-      <h2>{listing.title}</h2>
-      <p>{listing.description}</p>
-      <p>Price: {listing.price}</p>
-      <p>
-        <Button onClick={() => ifsDetails(listing)}>View Details</Button>
-      </p>
-      <p>
+    <div key={index} className="col-3">
+      <ListingCard
+        listingType="IFS"
+        listing={listing}
+        imgSrc={imgSrc}
+        deleteMyListing={() => deleteIFS(listing)}
+        listingDetails={() => ifsDetails(listing)}
+      />
+      {/* <p>
         <Button onClick={() => deleteIFS(listing)}>Delete Listing</Button>
-      </p>
+      </p> */}
     </div>
   );
 };
@@ -88,7 +89,9 @@ export default function IFS(props) {
   return (
     <div>
       <h1 className="ml-4 mt-4 mb-4">Item For Sale Listings</h1>
-      <IFSListings />
+      <div className="row ml-4 mr-4">
+        <IFSListings />
+      </div>
     </div>
   );
 }
