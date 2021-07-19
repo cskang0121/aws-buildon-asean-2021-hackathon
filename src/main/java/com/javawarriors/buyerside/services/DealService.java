@@ -20,6 +20,10 @@ public class DealService {
     private WTBService wtbService;
     @Autowired
     private IFSService ifsService;
+    @Autowired
+    private BuyerQnAService buyerQnAService;
+    @Autowired
+    private AnswerQnARepo answerQnARepo;
 
     public Deal saveDeal(Deal entity) {
         return dealRepo.save(entity);
@@ -43,17 +47,25 @@ public class DealService {
         return dealRepo.saveAll(deals);
     }
 
+    public void deleteDeal(Deal deal) {
+        List<AnswerQnA> toDelete = buyerQnAService.findAnswerQnAByDeal(deal.getSeller().getUid(), deal.getWtbId().getWtbId(), deal.getIfsId().getIfsId());
+        for (AnswerQnA answerQnA : toDelete) {
+            answerQnARepo.delete(answerQnA);
+        }
+        dealRepo.delete(deal);
+    }
+
     public void deleteByWtbId(Long wtbId) {
         List<Deal> toDeleteDeal = findByWtbId(wtbId);
         for (Deal deal : toDeleteDeal) {
-            dealRepo.delete(deal);
+            deleteDeal(deal);
         }
     }
 
     public void deleteByIfsId(Long ifsId) {
         List<Deal> toDeleteDeal = findByIfsId(ifsId);
         for (Deal deal : toDeleteDeal) {
-            dealRepo.delete(deal);
+            deleteDeal(deal);
         }
     }
 }

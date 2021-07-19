@@ -23,17 +23,15 @@ const WTBListings = (props) => {
     WTBService.getSearchListings(
       props.keyword,
       props.categoryName,
-      props.hashtags
     ).then((res) => {
       console.log(res.data);
-      console.log(props.hashtags);
       setListings(res.data);
     });
   };
 
   useEffect(() => {
     fetchListings();
-  }, [props.keyword, props.categoryName, props.hashtags]);
+  }, [props.keyword, props.categoryName]);
 
   return listings.map((listing, index) => {
     const wtbDetails = (listing) => {
@@ -111,7 +109,7 @@ export default function Search() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedListingType, setSelectedListingType] = useState("");
   const [categoryName, setCategoryName] = useState("");
-  const [hashtags, setHashtags] = useState("");
+  // const [hashtags, setHashtags] = useState("");
 
   const location = useLocation();
 
@@ -122,6 +120,20 @@ export default function Search() {
   const changeSelectOptionHandler = (event) => {
     setSelectedListingType(event.target.value);
   };
+
+  const handleSetCategoryName = (value) => {
+    var temp = "";
+    if (value.length > 0) {
+      temp += value[0].value;
+    }
+    for (var i=1; i < value.length; i++) {
+      temp += "%"
+      temp += value[i].value;
+    }
+    console.log(temp);
+    setCategoryName(temp);
+  }
+
   return (
     <div>
       <NavigationBar />
@@ -142,9 +154,11 @@ export default function Search() {
               <div className="col-3">
                 <h1>Search</h1>
                 <Select
+                  closeMenuOnSelect={false}
                   options={categoryDropdownOptions}
+                  isMulti
                   onChange={(value) => {
-                    setCategoryName(value.value);
+                    handleSetCategoryName(value);
                   }}
                 />
               </div>
@@ -162,17 +176,15 @@ export default function Search() {
             <div className="row mt-3">
               <div className="col-3">
                 <h1>Search</h1>
-
-                <div>
-                  <Select
-                    options={categoryDropdownOptions}
-                    onChange={(value) => {
-                      setCategoryName(value.value);
-                    }}
-                  />
-                </div>
-
-                <h4>Hashtags</h4>
+                <Select
+                  closeMenuOnSelect={false}
+                  options={categoryDropdownOptions}
+                  isMulti
+                  onChange={(value) => {
+                    handleSetCategoryName(value);
+                  }}
+                />
+                {/* <h4>Hashtags</h4>
                 <div className="ui search">
                   <div className="ui icon input">
                     <input
@@ -183,14 +195,13 @@ export default function Search() {
                       }}
                     ></input>
                   </div>
-                </div>
+                </div> */}
               </div>
               <div className="col-9">
                 <div className="row">
                   <WTBListings
                     keyword={searchTerm}
                     categoryName={categoryName}
-                    hashtags={hashtags}
                   />
                 </div>
               </div>
