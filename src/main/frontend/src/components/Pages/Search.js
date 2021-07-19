@@ -140,8 +140,9 @@ export default function Search() {
           <Tab.Pane eventKey="ifs">
             <div className="row mt-3">
               <div className="col-3">
-                <h1>Search</h1>
+                <h1 className="ml-4 mb-3">Search</h1>
                 <Select
+                  className="ml-4"
                   options={categoryDropdownOptions}
                   onChange={(value) => {
                     setCategoryName(value.value);
@@ -161,10 +162,11 @@ export default function Search() {
           <Tab.Pane eventKey="wtb">
             <div className="row mt-3">
               <div className="col-3">
-                <h1>Search</h1>
+                <h1 className="ml-4 mb-3">Search</h1>
 
                 <div>
                   <Select
+                  className="ml-4"
                     options={categoryDropdownOptions}
                     onChange={(value) => {
                       setCategoryName(value.value);
@@ -172,10 +174,11 @@ export default function Search() {
                   />
                 </div>
 
-                <h4>Hashtags</h4>
+                <h4 className="mt-4 ml-4 mb-3">Hashtags</h4>
                 <div className="ui search">
                   <div className="ui icon input">
                     <input
+                    className="ml-4 form-control mr-4"
                       type="text"
                       placeholder="Enter #hashtags"
                       onChange={(event) => {
@@ -186,7 +189,7 @@ export default function Search() {
                 </div>
               </div>
               <div className="col-9">
-                <div className="row">
+                <div className="row ml-4">
                   <WTBListings
                     keyword={searchTerm}
                     categoryName={categoryName}

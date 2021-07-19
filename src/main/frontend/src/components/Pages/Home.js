@@ -12,9 +12,16 @@ export default function Home() {
   return (
     <div>
       <NavigationBar />
-      <h1>
-        Welcome {user.firstName} {user.lastName}
+      <h1 className="m-5">
+        Welcome, {user.firstName} {user.lastName}!
       </h1>
+      <hr></hr>
+      <div className="container-fluid">
+        <h4 className="ml-5">
+          Recommended For You
+        </h4>
+      </div>
+      <hr></hr>
     </div>
   );
 }
