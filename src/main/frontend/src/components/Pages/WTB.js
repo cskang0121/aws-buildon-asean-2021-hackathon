@@ -4,6 +4,7 @@ import { useHistory } from "react-router";
 import WTBService from "../../services/WTBService";
 import NavigationBar from "../Navbar/NavigationBar";
 import UserService from "../../services/UserService";
+import ListingCard from "../ListingCard";
 
 const WTBList = ({ listing, index, deleteWTB }) => {
   const [imgSrc, setImgSrc] = useState("");
@@ -49,33 +50,14 @@ const WTBList = ({ listing, index, deleteWTB }) => {
     //     <Button onClick={() => deleteWTB(listing)}>Delete Listing</Button>
     //   </p>
     // </div>
-    <div className="col-3">
-      <div className="card m-1">
-        {listing.picUri ? (
-          <img
-            className="card-img-top"
-            style={{ height: "18vw" }}
-            src={imgSrc}
-          />
-        ) : (
-          <p className="text-center">No image found</p>
-        )}
-        <div className="card-body text-center">
-          <h5 className="card-title">{listing.title}</h5>
-          <p className="card-text text-justify">{listing.description}</p>
-          <p>
-            <b>Asking Price:</b> S$ {listing.priceLower} - {listing.priceUpper}
-          </p>
-          <p>
-            <Button onClick={() => wtbDetails(listing)}>View Details</Button>
-          </p>
-          <p>
-            <Button className="btn-danger" onClick={() => deleteWTB(listing)}>
-              Delete Listing
-            </Button>
-          </p>
-        </div>
-      </div>
+    <div key={index} className="col-3">
+      <ListingCard
+        listingType="WTB"
+        listing={listing}
+        imgSrc={imgSrc}
+        deleteMyListing={() => deleteWTB(listing)}
+        listingDetails={() => wtbDetails(listing)}
+      />
     </div>
   );
 };
