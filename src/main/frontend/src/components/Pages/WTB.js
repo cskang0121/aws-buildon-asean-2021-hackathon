@@ -6,6 +6,14 @@ import NavigationBar from "../Navbar/NavigationBar";
 import UserService from "../../services/UserService";
 import ListingCard from "../ListingCard";
 
+const styles = {
+  heading: {
+    fontFamily: "Inter, sans-serif",
+    fontSize: 30,
+    fontWeight: 600,
+  },
+};
+
 const WTBList = ({ listing, index, deleteWTB }) => {
   const [imgSrc, setImgSrc] = useState("");
   const history = useHistory();
@@ -119,9 +127,13 @@ const WTBListings = () => {
 export default function WTB(props) {
   return (
     <div>
-      <h1 className="ml-4 mt-4 mb-4">Want To Buy Listings</h1>
+      <div className="row mt-4 ml-4 mr-4">
+        <span style={styles.heading}>
+          Your "Want to Buy" Listings
+        </span>
+      </div>
 
-      <div className="row ml-4 mr-4">
+      <div className="row mt-4 ml-4 mr-4">
         <WTBListings />
       </div>
     </div>
