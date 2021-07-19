@@ -10,15 +10,62 @@ import Select from "react-select";
 import UserService from "../../services/UserService";
 import ListingCard from "../ListingCard";
 
+const WTBList = ({ listing, index }) => {
+  const [imgSrc, setImgSrc] = useState("");
+  const history = useHistory();
+
+  useEffect(() => {
+    getImage(listing);
+  }, [listing]);
+
+  const wtbDetails = (listing) => {
+    history.push({
+      pathname: "/wtb-listing-details",
+      state: { listing: listing },
+    });
+  };
+
+  const getImage = (listing) => {
+    WTBService.getListingImage(listing.wtbId).then((res) => {
+      const byteCode = res.data;
+      const firstChar = byteCode.charAt(0);
+      var dataType = "";
+      if (firstChar === "/") {
+        dataType = "jpg";
+      } else if (firstChar === "i") {
+        dataType = "png";
+      } else {
+        dataType = "gif";
+      }
+      setImgSrc("data:image/" + dataType + ";base64," + byteCode);
+    });
+  };
+
+  return (
+    <div key={index} className="col-3">
+      <ListingCard
+        listingType="WTB"
+        listing={listing}
+        imgSrc={imgSrc}
+        deleteMyListing={null}
+        listingDetails={() => wtbDetails(listing)}
+      />
+    </div>
+  );
+};
+
 const WTBListings = (props) => {
   const [listings, setListings] = useState([]);
-  // const [imgSrc, setImgSrc] = useState("");
   const history = useHistory();
   // Get user
   const [user, setUser] = useState({});
   useEffect(() => {
     setUser(UserService.getProfile());
   }, []);
+
+  useEffect(() => {
+    fetchListings();
+  }, [props.keyword, props.categoryName]);
 
   const fetchListings = () => {
     WTBService.getSearchListings(
@@ -30,26 +77,6 @@ const WTBListings = (props) => {
     });
   };
 
-  useEffect(() => {
-    fetchListings();
-  }, [props.keyword, props.categoryName]);
-
-  // const getImage = (listing) => {
-  //   WTBService.getListingImage(listing.wtbId).then((res) => {
-  //     const byteCode = res.data;
-  //     const firstChar = byteCode.charAt(0);
-  //     var dataType = "";
-  //     if (firstChar === "/") {
-  //       dataType = "jpg";
-  //     } else if (firstChar === "i") {
-  //       dataType = "png";
-  //     } else {
-  //       dataType = "gif";
-  //     }
-  //     setImgSrc("data:image/" + dataType + ";base64," + byteCode);
-  //   });
-  // };
-
   return listings.map((listing, index) => {
     const wtbDetails = (listing) => {
       history.push({
@@ -60,29 +87,77 @@ const WTBListings = (props) => {
 
     if (listing.status === "a" && listing.user.uid != user.uid)
       return (
-        <div className="col-3">
-          {/* {getImage(listing)} */}
-          <ListingCard
-            listingType="WTB"
-            listing={listing}
-            imgSrc={null}
-            deleteMyListing={null}
-            listingDetails={() => wtbDetails(listing)}
-          />
-        </div>
+        // <div className="col-3">
+        //   {/* {getImage(listing)} */}
+        //   <ListingCard
+        //     listingType="WTB"
+        //     listing={listing}
+        //     imgSrc={null}
+        //     deleteMyListing={null}
+        //     listingDetails={() => wtbDetails(listing)}
+        //   />
+        // </div>
+        <WTBList index={index} listing={listing} />
       );
   });
 };
 
+const IFSList = ({ listing, index }) => {
+  const [imgSrc, setImgSrc] = useState("");
+  const history = useHistory();
+
+  useEffect(() => {
+    getImage(listing);
+  }, [listing]);
+
+  const ifsDetails = (listing) => {
+    history.push({
+      pathname: "/ifs-listing-details",
+      state: { listing: listing },
+    });
+  };
+
+  const getImage = (listing) => {
+    IFSService.getListingImage(listing.ifsId).then((res) => {
+      const byteCode = res.data;
+      const firstChar = byteCode.charAt(0);
+      var dataType = "";
+      if (firstChar === "/") {
+        dataType = "jpg";
+      } else if (firstChar === "i") {
+        dataType = "png";
+      } else {
+        dataType = "gif";
+      }
+      setImgSrc("data:image/" + dataType + ";base64," + byteCode);
+    });
+  };
+
+  return (
+    <div key={index} className="col-3">
+      <ListingCard
+        listingType="IFS"
+        listing={listing}
+        imgSrc={imgSrc}
+        deleteMyListing={null}
+        listingDetails={() => ifsDetails(listing)}
+      />
+    </div>
+  );
+};
+
 const IFSListings = (props) => {
   const [listings, setListings] = useState([]);
-  // const [imgSrc, setImgSrc] = useState("");
   const history = useHistory();
   // Get user
   const [user, setUser] = useState({});
   useEffect(() => {
     setUser(UserService.getProfile());
   }, []);
+
+  useEffect(() => {
+    fetchListings();
+  }, [props.keyword, props.categoryName]);
 
   const fetchListings = () => {
     IFSService.getSearchListings(props.keyword, props.categoryName).then(
@@ -92,26 +167,6 @@ const IFSListings = (props) => {
       }
     );
   };
-
-  useEffect(() => {
-    fetchListings();
-  }, [props.keyword, props.categoryName]);
-
-  // const getImage = (listing) => {
-  //   IFSService.getListingImage(listing.ifsId).then((res) => {
-  //     const byteCode = res.data;
-  //     const firstChar = byteCode.charAt(0);
-  //     var dataType = "";
-  //     if (firstChar === "/") {
-  //       dataType = "jpg";
-  //     } else if (firstChar === "i") {
-  //       dataType = "png";
-  //     } else {
-  //       dataType = "gif";
-  //     }
-  //     setImgSrc("data:image/" + dataType + ";base64," + byteCode);
-  //   });
-  // };
 
   return listings.map((listing, index) => {
     const ifsDetails = (listing) => {
@@ -127,16 +182,7 @@ const IFSListings = (props) => {
       listing.user.uid != user.uid
     )
       return (
-        <div className="col-3">
-          {/* {getImage(listing)} */}
-          <ListingCard
-            listingType="IFS"
-            listing={listing}
-            imgSrc={null}
-            deleteMyListing={null}
-            listingDetails={() => ifsDetails(listing)}
-          />
-        </div>
+        <IFSList index={index} listing={listing} />
       );
   });
 };

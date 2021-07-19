@@ -9,6 +9,8 @@ export default function WTB(props) {
   const history = useHistory();
   const location = useLocation();
   const [user, setUser] = useState({});
+  const [imgSrc, setImgSrc] = useState("");
+  const listing = location.state.listing;
 
   useEffect(() => {
     setUser(UserService.getProfile());
@@ -40,11 +42,37 @@ export default function WTB(props) {
     );
   };
 
+  const getImage = (listing) => {
+    WTBService.getListingImage(listing.wtbId).then((res) => {
+      const byteCode = res.data;
+      const firstChar = byteCode.charAt(0);
+      var dataType = "";
+      if (firstChar === "/") {
+        dataType = "jpg";
+      } else if (firstChar === "i") {
+        dataType = "png";
+      } else {
+        dataType = "gif";
+      }
+      setImgSrc("data:image/" + dataType + ";base64," + byteCode);
+    });
+  };
+
+  useEffect(() => {
+    getImage(listing);
+  }, [listing]);
+
   return (
 
     <div>
       <NavigationBar />
       <h1>Listing</h1>
+
+      {listing.picUri && imgSrc ? (
+        <img className="card-img-top" style={{ height: 500, width: 500}} src={imgSrc} />
+      ) : (
+        <p className="text-center">No image found</p>
+      )}
       
       <h2>{location.state.listing.title}</h2>
       <p>{location.state.listing.description}</p>
