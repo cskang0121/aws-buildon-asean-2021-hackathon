@@ -5,6 +5,7 @@ import com.javawarriors.buyerside.repositories.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 
@@ -22,6 +23,8 @@ public class WTBService {
     private BuyerQnAService buyerQnAService;
     @Autowired
     private DealService dealService;
+    @Autowired
+    private S3UploadService s3UploadService;
 
     // public List<WantToBuyListing> saveAll(Iterable<WantToBuyListing> entities) {
     // return wtbRepo.saveAll(entities);
@@ -50,8 +53,28 @@ public class WTBService {
         wtbRepo.deleteById(wtbId);
     }
 
-    public List<WantToBuyListing> getSearchResults(String keyword, String categoryName) {
+    public List<WantToBuyListing> getSearchResults(String keyword, String categoryName, String hashtags) {
         // return wtbRepo.findByTitleContaining(keyword);
-        return wtbRepo.findByTitleAndCategoryContaining(keyword, categoryName);
+        return wtbRepo.findByTitleAndCategoryAndHashtagsContaining(keyword, categoryName, hashtags);
+    }
+
+    public WantToBuyListing findByListingId(Long id) {
+        return wtbRepo.findById(id).get();
+    }
+
+    public void uploadWTBImage(Long wtbId, MultipartFile file) {
+        String picUri = s3UploadService.upload(wtbId, "WTB", file);
+
+        WantToBuyListing wantToBuyListing = findByListingId(wtbId);
+        wantToBuyListing.setPicUri(picUri);
+        save(wantToBuyListing);
+    }
+
+    public String downloadWTBImage(Long wtbId) {
+        WantToBuyListing wantToBuyListing = findByListingId(wtbId);
+        String picUri = wantToBuyListing.getPicUri();
+        byte[] byteArr = s3UploadService.download(picUri);
+        String encodedMime = Base64.getMimeEncoder().encodeToString(byteArr);
+        return encodedMime;
     }
 }

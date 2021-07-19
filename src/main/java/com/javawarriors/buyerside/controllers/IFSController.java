@@ -11,10 +11,11 @@ import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.slf4j.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 // import org.springframework.security.core.Authentication;
 // import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,7 +23,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 /**
  * Controller for want to buy listings
  */
-
 
 @CrossOrigin
 @RestController
@@ -63,9 +63,20 @@ public class IFSController {
     }
 
     @GetMapping("/searchIFS/get")
-    public List<ItemForSaleListing> searchIFS(@RequestParam(name = "keyword") String Keyword, @RequestParam(name = "categoryName") String CategoryName) {
+    public List<ItemForSaleListing> searchIFS(@RequestParam(name = "keyword") String Keyword,
+            @RequestParam(name = "categoryName") String CategoryName) {
         List<ItemForSaleListing> listings = ifsService.getSearchResults(Keyword, CategoryName);
         return listings;
+    }
+
+    @PostMapping(path = "{ifsId}/image/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void uploadIFSImage(@PathVariable("ifsId") Long ifsId, @RequestParam("file") MultipartFile file) {
+        ifsService.uploadIFSImage(ifsId, file);
+    }
+
+    @GetMapping(path = "{ifsId}/image/download")
+    public String downloadIFSImage(@PathVariable("ifsId") Long ifsId) {
+        return ifsService.downloadIFSImage(ifsId);
     }
 
 }

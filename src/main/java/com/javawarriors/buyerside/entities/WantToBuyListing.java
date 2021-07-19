@@ -44,6 +44,8 @@ public class WantToBuyListing {
     private Boolean isPreferredPaymentCash;
 
     private Boolean isPreferredPaymentPayNow;
+    
+    private String preferredMeetUpLocation;
 
     // @ManyToMany
     // @JoinTable(
@@ -178,6 +180,14 @@ public class WantToBuyListing {
 
     public void setIsPreferredPaymentPayNow(Boolean isPreferredPaymentPayNow) {
         this.isPreferredPaymentPayNow = isPreferredPaymentPayNow;
+    }
+
+    public String getPreferredMeetUpLocation() {
+        return this.preferredMeetUpLocation;
+    }
+
+    public void setPreferredMeetUpLocation(String preferredMeetUpLocation) {
+        this.preferredMeetUpLocation = preferredMeetUpLocation;
     }
 
 }

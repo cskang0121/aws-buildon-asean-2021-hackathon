@@ -20,11 +20,12 @@ class WTBService {
     });
   }
 
-  getSearchListings(keyword, categoryName) {
+  getSearchListings(keyword, categoryName, hashtags) {
     return axios.get(WTB_API_BASE_URL + "/searchWTB/get", {
       params: { 
         keyword: keyword, 
         categoryName: categoryName,
+        hashtags: hashtags
       },
       headers: authHeader(),
     });
@@ -33,6 +34,18 @@ class WTBService {
   getCurrentUserWTBListings(uid) {
     return axios.get(WTB_API_BASE_URL + "/get/user=" + uid, {
       headers: authHeader(),
+    });
+  }
+
+  async postListingImage(wtbId, file) {
+    return axios.post(WTB_API_BASE_URL + "/" + wtbId + "/image/upload", file, {
+      headers: { ...authHeader(), "Content-Type": "multipart/form-data" },
+    });
+  }
+
+  getListingImage(wtbId) {
+    return axios.get(WTB_API_BASE_URL + "/" + wtbId + "/image/download", {
+      headers: { ...authHeader() },
     });
   }
 }

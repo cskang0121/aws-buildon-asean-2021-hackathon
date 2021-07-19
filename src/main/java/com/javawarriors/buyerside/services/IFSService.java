@@ -2,11 +2,17 @@ package com.javawarriors.buyerside.services;
 
 import com.javawarriors.buyerside.entities.*;
 import com.javawarriors.buyerside.repositories.*;
+// import com.javawarriors.buyerside.bucket.*;
+// import com.javawarriors.buyerside.fileStore.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+// import java.io.IOException;
 import java.util.*;
+
+// import static org.apache.http.entity.ContentType.*;
 
 /**
  * Service layer for handling logic related to item for sale listings
@@ -25,6 +31,8 @@ public class IFSService {
     private DealService dealService;
     @Autowired
     private SellerQnAService sellerQnAService;
+    @Autowired
+    private S3UploadService s3UploadService;
 
     // public List<ItemForSaleListing> saveAll(Iterable<ItemForSaleListing>
     // entities) {
@@ -46,9 +54,9 @@ public class IFSService {
         ifsRepo.deleteById(ifsId);
     }
 
-    public List<ItemForSaleListing> getSearchResults(String keyword) {
-        return ifsRepo.findByTitleContaining(keyword);
-    }
+    // public List<ItemForSaleListing> getSearchResults(String keyword) {
+    //     return ifsRepo.findByTitleContaining(keyword);
+    // }
 
     public List<ItemForSaleListing> findByUser(Long userId) {
         User user = userService.findInRepoById(userId);
@@ -63,4 +71,21 @@ public class IFSService {
     public ItemForSaleListing findByListingId(Long id) {
         return ifsRepo.findById(id).get();
     }
+
+    public void uploadIFSImage(Long ifsId, MultipartFile file) {
+        String picUri = s3UploadService.upload(ifsId, "IFS", file);
+
+        ItemForSaleListing itemForSaleListing = findByListingId(ifsId);
+        itemForSaleListing.setPicUri(picUri);
+        save(itemForSaleListing);
+    }
+
+    public String downloadIFSImage(Long ifsId) {
+        ItemForSaleListing itemForSaleListing = findByListingId(ifsId);
+        String picUri = itemForSaleListing.getPicUri();
+        byte[] byteArr = s3UploadService.download(picUri);
+        String encodedMime = Base64.getMimeEncoder().encodeToString(byteArr);
+        return encodedMime;
+    }
+
 }
