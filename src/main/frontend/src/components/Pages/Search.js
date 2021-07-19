@@ -126,72 +126,75 @@ export default function Search() {
     <div>
       <NavigationBar />
       <Tab.Container defaultActiveKey="ifs">
-        <div className="row">
-          <Nav fill variant="pills">
-            <Nav.Item>
-              <Nav.Link eventKey="ifs">Items for Sale</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="wtb">Want to Buy</Nav.Link>
-            </Nav.Item>
-          </Nav>
-        </div>
+        <Nav fill variant="pills">
+          <Nav.Item>
+            <Nav.Link eventKey="ifs">Items for Sale</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey="wtb">Want to Buy</Nav.Link>
+          </Nav.Item>
+        </Nav>
         <Tab.Content>
           <Tab.Pane eventKey="ifs">
-            <div className="row mt-3">
-              <div className="col-3">
-                <h1>Search</h1>
-                <Select
-                  options={categoryDropdownOptions}
-                  onChange={(value) => {
-                    setCategoryName(value.value);
-                  }}
-                />
-              </div>
-              <div className="col-9">
-                <div className="row">
-                  <IFSListings
-                    keyword={searchTerm}
-                    categoryName={categoryName}
-                  />
+            <div className="container-fluid">
+              <div className="row mt-3 vh-100">
+                <div className="col-3 shadow-sm">
+                  <h1>Search</h1>
+                  <div className="border-bottom p-3">
+                    <b>Category</b>
+                    <Select
+                      options={categoryDropdownOptions}
+                      onChange={(value) => {
+                        setCategoryName(value.value);
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className="col-9">
+                  <div className="row">
+                    <IFSListings
+                      keyword={searchTerm}
+                      categoryName={categoryName}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
           </Tab.Pane>
           <Tab.Pane eventKey="wtb">
-            <div className="row mt-3">
-              <div className="col-3">
-                <h1>Search</h1>
+            <div className="container-fluid">
+              <div className="row mt-3 vh-100">
+                <div className="col-3 shadow-sm">
+                  <h1>Search</h1>
 
-                <div>
                   <Select
                     options={categoryDropdownOptions}
                     onChange={(value) => {
                       setCategoryName(value.value);
                     }}
                   />
-                </div>
 
-                <h4>Hashtags</h4>
-                <div className="ui search">
-                  <div className="ui icon input">
-                    <input
-                      type="text"
-                      placeholder="Enter #hashtags"
-                      onChange={(event) => {
-                        setHashtags(event.target.value);
-                      }}
-                    ></input>
+                  <h4>Hashtags</h4>
+                  <div className="ui search">
+                    <div className="ui icon input">
+                      <input
+                        type="text"
+                        placeholder="Enter #hashtags"
+                        onChange={(event) => {
+                          setHashtags(event.target.value);
+                        }}
+                      ></input>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="col-9">
-                <div className="row">
-                  <WTBListings
-                    keyword={searchTerm}
-                    categoryName={categoryName}
-                    hashtags={hashtags}
-                  />
+                <div className="col-9">
+                  <div className="row">
+                    <WTBListings
+                      keyword={searchTerm}
+                      categoryName={categoryName}
+                      hashtags={hashtags}
+                    />
+                  </div>
                 </div>
               </div>
             </div>

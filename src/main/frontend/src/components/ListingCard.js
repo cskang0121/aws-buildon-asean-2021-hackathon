@@ -1,6 +1,11 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 
+const styles = {
+  text: {
+    fontFamily: "Inter, sans-serif",
+  },
+};
 export default function ListingCard({
   listingType,
   listing,
@@ -9,13 +14,13 @@ export default function ListingCard({
   listingDetails,
 }) {
   return (
-    <div className="card m-1">
+    <div className="card shadow m-1">
       {listing.picUri && imgSrc ? (
         <img className="card-img-top" style={{ height: "18vw" }} src={imgSrc} />
       ) : (
         <p className="text-center">No image found</p>
       )}
-      <div className="card-body text-center">
+      <div className="card-body text-center" style={styles.text}>
         <h5 className="card-title">{listing.title}</h5>
         <p className="card-text text-justify">{listing.description}</p>
         {listingType === "WTB" ? (
