@@ -31,17 +31,22 @@ export default function WTB(props) {
 
   const toggleButton = () => {
     return location.state.listing.user.uid === user.uid ? (
-      <div className="text-center">
+      <div className="d-flex flex-column">
         <Button
-          className="text-center"
+          size="lg"
+          className="m-2"
           onClick={() => viewDeal(location.state.listing)}
         >
           View Deals
         </Button>
       </div>
     ) : (
-      <div className="text-center">
-        <Button onClick={() => makeDeal(location.state.listing)}>
+      <div className="d-flex flex-column">
+        <Button
+          size="lg"
+          className="m-2"
+          onClick={() => makeDeal(location.state.listing)}
+        >
           Propose Deal
         </Button>
       </div>
@@ -71,26 +76,62 @@ export default function WTB(props) {
   return (
     <div>
       <NavigationBar />
-      <h1>Listing</h1>
-
-      {location.state.listing.picUri && imgSrc ? (
-        <img
-          style={{ height: 500, width: 500, objectFit: "cover" }}
-          src={imgSrc}
-        />
-      ) : (
-        <p className="text-center">No image found</p>
-      )}
-
-      <h2 className="m-4 text-center">{location.state.listing.title}</h2>
-      <p className="ml-5 mr-5 text-justify">
-        {location.state.listing.description}
-      </p>
-      <p className="text-center">
-        <b>Asking Price:</b> S${location.state.listing.priceLower} -{" "}
-        {location.state.listing.priceUpper}
-      </p>
-      {toggleButton()}
+      <div className="container">
+        <div className="row shadow-lg p-5 mt-5">
+          <div
+            className="col-6"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {location.state.listing.picUri && imgSrc ? (
+              <img
+                className="rounded"
+                style={{ height: 500, width: 500, objectFit: "cover" }}
+                src={imgSrc}
+              />
+            ) : (
+              <p className="text-center">No image found</p>
+            )}
+          </div>
+          <div className="col-6">
+            <div className="row">
+              <div className="col-9">
+                <h2>{location.state.listing.title}</h2>
+              </div>
+              <div className="col-3">
+                <h4>
+                  <span className="badge badge-pill badge-info">Buying</span>
+                </h4>
+              </div>
+            </div>
+            <div className="row">
+              <h3>
+                S${location.state.listing.priceLower} -{" "}
+                {location.state.listing.priceUpper}
+              </h3>
+            </div>
+            <div className="row">
+              <div className="col-4">
+                <p>{location.state.listing.preferredItemCondition}</p>
+              </div>
+              <div className="col-4">
+                <p>Delivery Method</p>
+              </div>
+              <div className="col-4">
+                <p>Location</p>
+              </div>
+            </div>
+            <div className="row  pt-2 pb-2 border-top border-bottom">
+              <b>Description</b>
+              <p>{location.state.listing.description}</p>
+            </div>
+            <div className="row mt-2">{toggleButton()}</div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
