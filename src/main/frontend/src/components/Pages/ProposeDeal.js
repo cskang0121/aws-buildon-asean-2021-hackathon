@@ -102,17 +102,18 @@ export default function ProposeDeal(props) {
     return answersList.map((item, index) => {
       return (
         <div key={index}>
-          <h3>
+          <h4 className="ml-4">
             {item.answerId}. {buyerQnAs[index].question}
-          </h3>
+          </h4>
           <Form.Row>
-            <Form.Group>
+            <Form.Group className="ml-4 container-fluid mr-4">
               <InputGroup>
                 <InputGroup.Prepend>
                   <InputGroup.Text>Answer:</InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl
                   required
+                  placeholder="Write your answers here..."
                   autoComplete="off"
                   type="text"
                   name="answer"
@@ -229,13 +230,13 @@ export default function ProposeDeal(props) {
         ]);
       default:
         return ([
-          <div className="position-relative">
-            <Button className="ml-5 mt-4 mb-4" onClick={(event) => setUseExistingListing("Y")}>
+          <div className="position-relative text-center ml-5 mr-5">
+            <Button className="mt-4 mb-4" onClick={(event) => setUseExistingListing("Y")}>
               Use Existing Listing
             </Button>
           </div>,
-          <div className="mx-auto">
-            <Button className="ml-5" onClick={(event) => setUseExistingListing("N")}>
+          <div className="text-center ml-5 mr-5">
+            <Button onClick={(event) => setUseExistingListing("N")}>
               Create New Listing
             </Button>
           </div>
