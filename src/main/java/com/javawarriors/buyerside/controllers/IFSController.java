@@ -66,8 +66,9 @@ public class IFSController {
     public List<ItemForSaleListing> searchIFS(
             @RequestParam(name = "keyword") String Keyword,
             @RequestParam(name = "categoryName") String CategoryName,
-            @RequestParam(name = "itemCondition") String itemCondition) {
-        List<ItemForSaleListing> listings = ifsService.getSearchResults(Keyword, CategoryName, itemCondition);
+            @RequestParam(name = "itemCondition") String itemCondition,
+            @RequestParam(name = "searchLocation") String searchLocation) {
+        List<ItemForSaleListing> listings = ifsService.getSearchResults(Keyword, CategoryName, itemCondition, searchLocation);
         return listings;
     }
 

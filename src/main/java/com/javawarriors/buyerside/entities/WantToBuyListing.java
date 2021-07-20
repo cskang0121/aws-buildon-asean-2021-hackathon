@@ -33,8 +33,6 @@ public class WantToBuyListing {
 
     private String categoryName;
 
-    private String hashtags;
-
     private String preferredItemCondition;
 
     private Boolean isPreferredDeliveryMeet;
@@ -135,14 +133,6 @@ public class WantToBuyListing {
 	public void setPriceLower(Double priceLower) {
 		this.priceLower = priceLower;
 	}
-
-    public String getHashtags() {
-        return this.hashtags;
-    }
-
-    public void setHashtags(String hashtags) {
-        this.hashtags = hashtags;
-    }
 
     public String getPreferredItemCondition() {
         return this.preferredItemCondition;

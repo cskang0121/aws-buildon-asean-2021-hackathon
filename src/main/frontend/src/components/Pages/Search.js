@@ -9,12 +9,17 @@ import { categoryDropdownOptions } from "../../util/categories";
 import Select from "react-select";
 import UserService from "../../services/UserService";
 import ListingCard from "../ListingCard";
+import { ctSubcategoryDropdownOptions } from "../../util/ctSubcategories";
+import { fhSubcategoryDropdownOptions } from "../../util/fhSubcategories";
+import { mgSubcategoryDropdownOptions } from "../../util/mgSubcategories";
 
 const ITEM_CONDITION = ["Brand New", "Like New", "Well Used", "Heavily Used"];
 
 const condtionDropdownOptions = ITEM_CONDITION.map((condition) => {
   return { value: condition, label: condition };
 });
+
+let subCategoryOptions = null;
 
 const WTBList = ({ listing, index }) => {
   const [imgSrc, setImgSrc] = useState("");
@@ -71,10 +76,10 @@ const WTBListings = (props) => {
 
   useEffect(() => {
     fetchListings();
-  }, [props.keyword, props.categoryName, props.itemCondition]);
+  }, [props.keyword, props.fullCategoryName, props.itemCondition, props.searchLocation]);
 
   const fetchListings = () => {
-    WTBService.getSearchListings(props.keyword, props.categoryName, props.itemCondition).then(
+    WTBService.getSearchListings(props.keyword, props.fullCategoryName, props.itemCondition, props.searchLocation).then(
       (res) => {
         console.log(res.data);
         setListings(res.data);
@@ -162,10 +167,10 @@ const IFSListings = (props) => {
 
   useEffect(() => {
     fetchListings();
-  }, [props.keyword, props.categoryName, props.itemCondition]);
+  }, [props.keyword, props.fullCategoryName, props.itemCondition, props.searchLocation]);
 
   const fetchListings = () => {
-    IFSService.getSearchListings(props.keyword, props.categoryName, props.itemCondition).then(
+    IFSService.getSearchListings(props.keyword, props.fullCategoryName, props.itemCondition, props.searchLocation).then(
       (res) => {
         console.log(res.data);
         setListings(res.data);
@@ -194,7 +199,9 @@ export default function Search() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedListingType, setSelectedListingType] = useState("");
   const [categoryName, setCategoryName] = useState("");
+  const [fullCategoryName, setFullCategoryName] = useState("");
   const [itemCondition, setItemCondition] = useState("");
+  const [searchLocation, setSearchLocation] = useState("");
   // const [hashtags, setHashtags] = useState("");
 
   const location = useLocation();
@@ -203,21 +210,27 @@ export default function Search() {
     setSearchTerm(location.state.keyword);
   }, [location.state.keyword]);
 
-  const changeSelectOptionHandler = (event) => {
-    setSelectedListingType(event.target.value);
-  };
+  // const changeSelectOptionHandler = (event) => {
+  //   setSelectedListingType(event.target.value);
+  // };
 
   const handleSetCategoryName = (value) => {
+    console.log(value);    
+    setCategoryName(value);
+    setFullCategoryName(value);
+  };
+
+  const handleSetFullCategoryName = (value) => {
     var temp = "";
-    if (value.length > 0) {
-      temp += value[0].value;
-    }
-    for (var i = 1; i < value.length; i++) {
+    for (var i = 0; i < value.length; i++) {
       temp += "%";
       temp += value[i].value;
     }
-    // console.log(temp);
-    setCategoryName(temp);
+    console.log(temp);
+    var fullName = categoryName;
+    fullName += temp;
+    console.log(fullName);
+    setFullCategoryName(fullName);
   };
 
   const handleSetCondition = (value) => {
@@ -232,16 +245,24 @@ export default function Search() {
     setItemCondition(temp);
   };
 
+  if (categoryName === "Computers & Tech") {
+    subCategoryOptions = ctSubcategoryDropdownOptions;
+  } else if (categoryName === "Furniture & Home Living") {
+    subCategoryOptions = fhSubcategoryDropdownOptions;
+  } else if (categoryName === "Mobile Phones & Gadgets") {
+    subCategoryOptions = mgSubcategoryDropdownOptions;
+  }
+
   return (
     <div>
       <NavigationBar />
       <Tab.Container defaultActiveKey="ifs">
         <Nav fill variant="pills">
           <Nav.Item>
-            <Nav.Link eventKey="ifs">Items for Sale</Nav.Link>
+            <Nav.Link onSelect={(event) => setFullCategoryName("")}eventKey="ifs">Items for Sale</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="wtb">Want to Buy</Nav.Link>
+            <Nav.Link onSelect={(event) => setFullCategoryName("")}eventKey="wtb">Want to Buy</Nav.Link>
           </Nav.Item>
         </Nav>
         <Tab.Content>
@@ -253,13 +274,24 @@ export default function Search() {
                   <div className="border-bottom p-3">
                     <b>Category</b>
                     <Select
-                      closeMenuOnSelect={false}
                       options={categoryDropdownOptions}
-                      isMulti
                       onChange={(value) => {
-                        handleSetCategoryName(value);
+                        handleSetCategoryName(value.value);
                       }}
                     />
+                    { subCategoryOptions !== null ?
+                      <div>
+                        <b>SubCategory</b>
+                        <Select
+                          closeMenuOnSelect={false}
+                          options={subCategoryOptions}
+                          isMulti
+                          onChange={(value) => {
+                            handleSetFullCategoryName(value);
+                          }}
+                        />
+                      </div> : ''
+                    }
                     <b>Condition</b>
                     <Select
                       closeMenuOnSelect={false}
@@ -269,14 +301,23 @@ export default function Search() {
                         handleSetCondition(value);
                       }}
                     />
+                    <b>Location</b>
+                    <input
+                      class="form-control mr-sm-2"
+                      type="search"
+                      placeholder="Search for a Location"
+                      value={searchLocation}
+                      onChange={(event) => setSearchLocation(event.target.value)}
+                    />
                   </div>
                 </div>
                 <div className="col-9">
                   <div className="row">
                     <IFSListings
                       keyword={searchTerm}
-                      categoryName={categoryName}
+                      fullCategoryName={fullCategoryName}
                       itemCondition={itemCondition}
+                      searchLocation={searchLocation}
                     />
                   </div>
                 </div>
@@ -291,31 +332,50 @@ export default function Search() {
                   <div className="border-bottom p-3">
                     <b>Category</b>
                     <Select
-                      closeMenuOnSelect={false}
                       options={categoryDropdownOptions}
-                      isMulti
                       onChange={(value) => {
-                        handleSetCategoryName(value);
+                        handleSetCategoryName(value.value);
                       }}
                     />
+                    { subCategoryOptions !== null ?
+                      <div>
+                        <b>SubCategory</b>
+                        <Select
+                          closeMenuOnSelect={false}
+                          options={subCategoryOptions}
+                          isMulti
+                          onChange={(value) => {
+                            handleSetFullCategoryName(value);
+                          }}
+                        />
+                      </div> : ''
+                    }
                     <b>Condition</b>
                     <Select
-                      closeMenuOnSelect={false}
+                      // closeMenuOnSelect={false}
                       options={condtionDropdownOptions}
                       isMulti
                       onChange={(value) => {
                         handleSetCondition(value);
                       }}
                     />
+                    <b>Location</b>
+                    <input
+                      class="form-control mr-sm-2"
+                      type="search"
+                      placeholder="Search for a Location"
+                      value={searchLocation}
+                      onChange={(event) => setSearchLocation(event.target.value)}
+                    />
                   </div>
-                  
                 </div>
                 <div className="col-9">
                   <div className="row ml-4">
                     <WTBListings
                       keyword={searchTerm}
-                      categoryName={categoryName}
+                      fullCategoryName={fullCategoryName}
                       itemCondition={itemCondition}
+                      searchLocation={searchLocation}
                     />
                   </div>
                 </div>

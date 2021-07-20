@@ -64,16 +64,16 @@ public class IFSService {
         return ifsRepo.findByUser(user);
     }
 
-    public List<ItemForSaleListing> getSearchResults(String keyword, String categoryName, String itemCondition) {
+    public List<ItemForSaleListing> getSearchResults(String keyword, String categoryName, String itemCondition, String searchLocation) {
         // return ifsRepo.findByTitleContaining(keyword);
         if (itemCondition.equals("")) {
-            return ifsRepo.findByTitleAndCategoryContaining(keyword, categoryName);
+            return ifsRepo.findByTitleAndCategoryAndLocationContaining(keyword, categoryName, searchLocation);
         }
 
         String[] conditionArr = itemCondition.split("\\|");
         List<String> conditionList = Arrays.asList(conditionArr);
         
-        return ifsRepo.findByTitleAndCategoryAndConditionContaining(keyword, categoryName, conditionList);
+        return ifsRepo.findByTitleAndCategoryAndConditionAndLocationContaining(keyword, categoryName, conditionList, searchLocation);
     }
 
     public ItemForSaleListing findByListingId(Long id) {
