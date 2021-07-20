@@ -29,10 +29,20 @@ class BuyersideApplicationTests {
 
 	@Test
 	public void testCustomQuery() {
-		String keyword = "p";
-		String categoryName = "Electronics";
-		List<ItemForSaleListing> listings = ifsService.getSearchResults(keyword, categoryName);
+		String keyword = "";
+		String categoryName = "";
+		String itemCondition = "";
+		String[] conditionArr = itemCondition.split("\\|");
+		
+		List<ItemForSaleListing> listings = ifsService.getSearchResults(keyword, categoryName, itemCondition);
 
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println(conditionArr.length);
+		for (String string : conditionArr) {
+			System.out.println(string);
+		}
 		System.out.println();
 		System.out.println();
 		System.out.println();

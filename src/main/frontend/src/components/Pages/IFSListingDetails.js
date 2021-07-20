@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useHistory, useLocation } from "react-router";
-import IFSService from "../../services/WTBService";
+import IFSService from "../../services/IFSService";
 import NavigationBar from "../Navbar/NavigationBar";
 import UserService from "../../services/UserService";
 import DealService from "../../services/DealService";
@@ -11,6 +11,7 @@ export default function IFSListing(props) {
   const history = useHistory();
   const location = useLocation();
   const [user, setUser] = useState({});
+  const [imgSrc, setImgSrc] = useState("");
 
   useEffect(() => {
     setUser(UserService.getProfile());
@@ -175,10 +176,36 @@ export default function IFSListing(props) {
     }
   };
 
+  const getImage = (listing) => {
+    IFSService.getListingImage(listing.ifsId).then((res) => {
+      const byteCode = res.data;
+      const firstChar = byteCode.charAt(0);
+      var dataType = "";
+      if (firstChar === "/") {
+        dataType = "jpg";
+      } else if (firstChar === "i") {
+        dataType = "png";
+      } else {
+        dataType = "gif";
+      }
+      setImgSrc("data:image/" + dataType + ";base64," + byteCode);
+    });
+  };
+
+  useEffect(() => {
+    getImage(location.state.listing);
+  }, [location.state.listing]);
+
   return (
     <div>
       <NavigationBar />
       <h1>Listing</h1>
+
+      {location.state.listing.picUri && imgSrc ? (
+        <img className="card-img-top" style={{ height: 500, width: 500, objectFit: "cover"}} src={imgSrc} />
+      ) : (
+        <p className="text-center">No image found</p>
+      )}
 
       <h2>{location.state.listing.title}</h2>
       <p>{location.state.listing.description}</p>

@@ -20,6 +20,9 @@ public interface IFSRepo extends JpaRepository<ItemForSaleListing, Long> {
     @Query(value = "select * from item_for_sale_listing ifs where ifs.title like %:keyword% and ifs.category_name like %:categoryName%", nativeQuery = true)
     public List<ItemForSaleListing> findByTitleAndCategoryContaining(@Param("keyword") String keyword, @Param("categoryName") String categoryName);
 
+    @Query(value = "select * from item_for_sale_listing ifs where ifs.title like %:keyword% and ifs.category_name like %:categoryName% and ifs.item_condition in :conditionList", nativeQuery = true)
+    public List<ItemForSaleListing> findByTitleAndCategoryAndConditionContaining(@Param("keyword") String keyword, @Param("categoryName") String categoryName, @Param("conditionList") Collection<String> conditionList);
+
     public List<ItemForSaleListing> findByUser(User user);
 
 }
