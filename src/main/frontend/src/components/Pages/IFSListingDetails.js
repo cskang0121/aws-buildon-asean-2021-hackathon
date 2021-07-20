@@ -153,22 +153,38 @@ export default function IFSListing(props) {
       );
     } else if (location.state.listing.user.uid === user.uid) {
       return (
-        <div>
-          <Button onClick={() => answerSellerQnA(location.state.listing)}>
+        <div className="d-flex flex-column">
+          <Button
+            size="lg"
+            className="m-2"
+            onClick={() => answerSellerQnA(location.state.listing)}
+          >
             View QnA
           </Button>
-          <Button onClick={() => viewOffer(location.state.listing)}>
+          <Button
+            size="lg"
+            className="m-2"
+            onClick={() => viewOffer(location.state.listing)}
+          >
             View Offers
           </Button>
         </div>
       );
     } else {
       return (
-        <div>
-          <Button onClick={() => viewSellerQnA(location.state.listing)}>
+        <div className="d-flex flex-column">
+          <Button
+            size="lg"
+            className="m-2"
+            onClick={() => viewSellerQnA(location.state.listing)}
+          >
             View QnA
           </Button>
-          <Button onClick={() => makeOffer(location.state.listing)}>
+          <Button
+            size="lg"
+            className="m-2"
+            onClick={() => makeOffer(location.state.listing)}
+          >
             Make Offer
           </Button>
         </div>
@@ -199,18 +215,59 @@ export default function IFSListing(props) {
   return (
     <div>
       <NavigationBar />
-      <h1>Listing</h1>
-
-      {location.state.listing.picUri && imgSrc ? (
-        <img className="card-img-top" style={{ height: 500, width: 500, objectFit: "cover"}} src={imgSrc} />
-      ) : (
-        <p className="text-center">No image found</p>
-      )}
-
-      <h2>{location.state.listing.title}</h2>
-      <p>{location.state.listing.description}</p>
-      <p>Price: {location.state.listing.price}</p>
-      {toggleButton()}
+      <div className="container">
+        <div className="row shadow-lg p-5 mt-5">
+          <div
+            className="col-6"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {location.state.listing.picUri && imgSrc ? (
+              <img
+                className="rounded"
+                style={{ height: 500, width: 500, objectFit: "cover" }}
+                src={imgSrc}
+              />
+            ) : (
+              <p className="text-center">No image found</p>
+            )}
+          </div>
+          <div className="col-6">
+            <div className="row">
+              <div className="col-9">
+                <h2>{location.state.listing.title}</h2>
+              </div>
+              <div className="col-3">
+                <h4>
+                  <span className="badge badge-pill badge-info">Selling</span>
+                </h4>
+              </div>
+            </div>
+            <div className="row">
+              <h3>S${location.state.listing.price}</h3>
+            </div>
+            <div className="row">
+              <div className="col-4">
+                <p>{location.state.listing.itemCondition}</p>
+              </div>
+              <div className="col-4">
+                <p>Delivery Method</p>
+              </div>
+              <div className="col-4">
+                <p>Location</p>
+              </div>
+            </div>
+            <div className="row  pt-2 pb-2 border-top border-bottom">
+              <b>Description</b>
+              <p>{location.state.listing.description}</p>
+            </div>
+            <div className="row mt-2">{toggleButton()}</div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
