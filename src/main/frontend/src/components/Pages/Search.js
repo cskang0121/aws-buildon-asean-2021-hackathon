@@ -230,10 +230,11 @@ export default function Search() {
             <div className="container-fluid">
               <div className="row mt-3 vh-100">
                 <div className="col-3 shadow-sm">
-                  <h1>Search</h1>
+                  <h1 className="ml-4 mb-3">Search</h1>
                   <div className="border-bottom p-3">
                     <b>Category</b>
                     <Select
+                      className="ml-4"
                       closeMenuOnSelect={false}
                       options={categoryDropdownOptions}
                       isMulti
@@ -258,10 +259,11 @@ export default function Search() {
             <div className="container-fluid">
               <div className="row mt-3 vh-100">
                 <div className="col-3 shadow-sm">
-                  <h1>Search</h1>
+                  <h1 className="ml-4 mb-3">Search</h1>
 
                   <Select
                     closeMenuOnSelect={false}
+                    className="ml-4"
                     options={categoryDropdownOptions}
                     isMulti
                     onChange={(value) => {
@@ -283,7 +285,7 @@ export default function Search() {
                   </div> */}
                 </div>
                 <div className="col-9">
-                  <div className="row">
+                  <div className="row ml-4">
                     <WTBListings
                       keyword={searchTerm}
                       categoryName={categoryName}

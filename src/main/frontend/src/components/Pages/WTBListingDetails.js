@@ -19,8 +19,8 @@ export default function WTB(props) {
   const makeDeal = (listing) => {
     history.push({
       pathname: "/deal",
-      state: { listing: listing }
-      });
+      state: { listing: listing },
+    });
   };
 
   const viewDeal = (listing) => {
@@ -32,13 +32,20 @@ export default function WTB(props) {
 
   const toggleButton = () => {
     return location.state.listing.user.uid === user.uid ? (
-      <Button onClick={() => viewDeal(location.state.listing)}>
-        View Deals
-      </Button>
+      <div className="text-center">
+        <Button
+          className="text-center"
+          onClick={() => viewDeal(location.state.listing)}
+        >
+          View Deals
+        </Button>
+      </div>
     ) : (
-      <Button onClick={() => makeDeal(location.state.listing)}>
-        Propose Deal
-      </Button>
+      <div className="text-center">
+        <Button onClick={() => makeDeal(location.state.listing)}>
+          Propose Deal
+        </Button>
+      </div>
     );
   };
 
@@ -63,21 +70,23 @@ export default function WTB(props) {
   }, [listing]);
 
   return (
-
     <div>
       <NavigationBar />
       <h1>Listing</h1>
 
       {listing.picUri && imgSrc ? (
-        <img className="card-img-top" style={{ height: 500, width: 500}} src={imgSrc} />
+        <img style={{ height: 500, width: 500 }} src={imgSrc} />
       ) : (
         <p className="text-center">No image found</p>
       )}
-      
-      <h2>{location.state.listing.title}</h2>
-      <p>{location.state.listing.description}</p>
-      <p>
-        Price: {location.state.listing.priceLower} - {location.state.listing.priceUpper}
+
+      <h2 className="m-4 text-center">{location.state.listing.title}</h2>
+      <p className="ml-5 mr-5 text-justify">
+        {location.state.listing.description}
+      </p>
+      <p className="text-center">
+        <b>Asking Price:</b> S${location.state.listing.priceLower} -{" "}
+        {location.state.listing.priceUpper}
       </p>
       {toggleButton()}
     </div>

@@ -38,7 +38,7 @@ function UseExistingListing({ user, setIfsListing }) {
     // Make something less ugly lmao
     return (
       <div>
-        <h2>{listing.title}</h2>
+        <h2 className="m-4">{listing.title}</h2>
         <p>{listing.description}</p>
         <p>Price: {listing.price}</p>
         <p>
@@ -220,31 +220,34 @@ export default function ProposeDeal(props) {
           </div>
         );
       case "N":
-        return (
+        return ([
+          <hr></hr>,
           <div>
-            <h1>Create new listing</h1>
+            <h1 className="m-4">Create New Listing</h1>
             <CreateIFS listingType="d" setDeal={(listing, event) => createDealListing(listing, event)} />
           </div>
-        );
+        ]);
       default:
-        return (
-          <div>
-            <Button onClick={(event) => setUseExistingListing("Y")}>
+        return ([
+          <div className="position-relative">
+            <Button className="ml-5 mt-4 mb-4" onClick={(event) => setUseExistingListing("Y")}>
               Use Existing Listing
             </Button>
-            <Button onClick={(event) => setUseExistingListing("N")}>
+          </div>,
+          <div className="mx-auto">
+            <Button className="ml-5" onClick={(event) => setUseExistingListing("N")}>
               Create New Listing
             </Button>
           </div>
-        );
+        ]);
     }
   };
 
   return (
     <div>
       <NavigationBar />
-      <h1>Propose Deal for:</h1>
-      <h2>{location.state.listing.title}</h2>
+      <h1 className="m-4">Proposing Deal for:</h1>
+      <h2 className="m-4">{location.state.listing.title}</h2>
       {renderBuyerQnAs()}
       {showFormOrList()}
     </div>
