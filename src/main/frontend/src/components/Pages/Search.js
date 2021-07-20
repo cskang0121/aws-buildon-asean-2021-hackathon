@@ -71,10 +71,10 @@ const WTBListings = (props) => {
 
   useEffect(() => {
     fetchListings();
-  }, [props.keyword, props.categoryName]);
+  }, [props.keyword, props.categoryName, props.itemCondition]);
 
   const fetchListings = () => {
-    WTBService.getSearchListings(props.keyword, props.categoryName).then(
+    WTBService.getSearchListings(props.keyword, props.categoryName, props.itemCondition).then(
       (res) => {
         console.log(res.data);
         setListings(res.data);
@@ -230,10 +230,6 @@ export default function Search() {
       temp += value[i].value;
     }
     setItemCondition(temp);
-    console.log("temp");
-    console.log(temp);
-    console.log("itemCondition");
-    console.log(itemCondition);
   };
 
   return (
@@ -257,7 +253,6 @@ export default function Search() {
                   <div className="border-bottom p-3">
                     <b>Category</b>
                     <Select
-                      className="ml-4"
                       closeMenuOnSelect={false}
                       options={categoryDropdownOptions}
                       isMulti
@@ -265,15 +260,6 @@ export default function Search() {
                         handleSetCategoryName(value);
                       }}
                     />
-                    {/* <b>Condition</b>
-                    <Select
-                      closeMenuOnSelect={false}
-                      options={categoryDropdownOptions}
-                      isMulti
-                      onChange={(value) => {
-                        handleSetCategoryName(value);
-                      }}
-                    /> */}
                     <b>Condition</b>
                     <Select
                       closeMenuOnSelect={false}
@@ -302,36 +288,34 @@ export default function Search() {
               <div className="row mt-3 vh-100">
                 <div className="col-3 shadow-sm">
                   <h1 className="ml-4 mb-3">Search</h1>
-
-                  <Select
-                    closeMenuOnSelect={false}
-                    className="ml-4"
-                    options={categoryDropdownOptions}
-                    isMulti
-                    onChange={(value) => {
-                      handleSetCategoryName(value);
-                    }}
-                  />
-
-                  {/* <h4>Hashtags</h4>
-                  <div className="ui search">
-                    <div className="ui icon input">
-                      <input
-                        type="text"
-                        placeholder="Enter #hashtags"
-                        onChange={(event) => {
-                          setHashtags(event.target.value);
-                        }}
-                      ></input>
-                    </div>
-                  </div> */}
+                  <div className="border-bottom p-3">
+                    <b>Category</b>
+                    <Select
+                      closeMenuOnSelect={false}
+                      options={categoryDropdownOptions}
+                      isMulti
+                      onChange={(value) => {
+                        handleSetCategoryName(value);
+                      }}
+                    />
+                    <b>Condition</b>
+                    <Select
+                      closeMenuOnSelect={false}
+                      options={condtionDropdownOptions}
+                      isMulti
+                      onChange={(value) => {
+                        handleSetCondition(value);
+                      }}
+                    />
+                  </div>
+                  
                 </div>
                 <div className="col-9">
                   <div className="row ml-4">
                     <WTBListings
                       keyword={searchTerm}
                       categoryName={categoryName}
-                      // hashtags={hashtags}
+                      itemCondition={itemCondition}
                     />
                   </div>
                 </div>

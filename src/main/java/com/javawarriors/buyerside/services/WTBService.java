@@ -54,10 +54,17 @@ public class WTBService {
         wtbRepo.deleteById(wtbId);
     }
 
-    public List<WantToBuyListing> getSearchResults(String keyword, String categoryName) {
+    public List<WantToBuyListing> getSearchResults(String keyword, String categoryName, String itemCondition) {
         // return wtbRepo.findByTitleContaining(keyword);
         // return wtbRepo.findByTitleAndCategoryAndHashtagsContaining(keyword, categoryName, hashtags);
-        return wtbRepo.findByTitleAndCategoryContaining(keyword, categoryName);
+        if (itemCondition.equals("")) {
+            return wtbRepo.findByTitleAndCategoryContaining(keyword, categoryName);
+        }
+
+        String[] conditionArr = itemCondition.split("\\|");
+        List<String> conditionList = Arrays.asList(conditionArr);
+        
+        return wtbRepo.findByTitleAndCategoryAndConditionContaining(keyword, categoryName, conditionList);
     }
 
     public WantToBuyListing findByListingId(Long id) {
