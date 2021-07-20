@@ -45,8 +45,6 @@ public class ItemForSaleListing {
 
     private String categoryName;
 
-	private String hashtags;
-
 	private String itemCondition;
 
 	private Boolean isDeliveryMeet;
@@ -131,14 +129,6 @@ public class ItemForSaleListing {
 
 	public void setPrice(Double price) {
 		this.price = price;
-	}
-
-	public String getHashtags() {
-		return this.hashtags;
-	}
-
-	public void setHashtags(String hashtags) {
-		this.hashtags = hashtags;
 	}
 
 	public String getItemCondition() {

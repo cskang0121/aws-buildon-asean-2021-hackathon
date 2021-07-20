@@ -19,11 +19,19 @@ import IFSService from "../services/IFSService";
 import UserService from "../services/UserService";
 
 import { categoryDropdownOptions } from "../util/categories";
+import { ctSubcategoryDropdownOptions } from "../util/ctSubcategories";
+import { fhSubcategoryDropdownOptions } from "../util/fhSubcategories";
+import { mgSubcategoryDropdownOptions } from "../util/mgSubcategories";
 
 // import {base64StringtoFile,
 //   downloadBase64File,
 //   extractImageFileExtensionFromBase64,
 //   image64toCanvasRef} from "../util/reusableUtils";
+
+let tempArr = [];
+let subCategoryOptions = tempArr.map((options) => {
+  return { value: options, label: options };
+});
 
 // const imageMaxSize = 1000000000 // bytes
 const acceptedFileTypes =
@@ -157,6 +165,7 @@ export default function CreateIFS(props) {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [categoryName, setCategoryName] = useState("");
+  const [fullCategoryName, setFullCategoryName] = useState("");
   // const [hashtags, setHashtags] = useState("");
   const [itemCondition, setItemCondition] = useState("");
   const [isDeliveryMeet, setIsDeliveryMeet] = useState(false);
@@ -210,7 +219,7 @@ export default function CreateIFS(props) {
       price: price,
       status: "a",
       listingType: props.listingType,
-      categoryName: categoryName,
+      categoryName: fullCategoryName,
       user: user,
       // hashtags: hashtags,
       itemCondition: itemCondition,
@@ -242,14 +251,26 @@ export default function CreateIFS(props) {
     });
   };
 
+  if (categoryName === "Computers & Tech") {
+    subCategoryOptions = ctSubcategoryDropdownOptions;
+  } else if (categoryName === "Furniture & Home Living") {
+    subCategoryOptions = fhSubcategoryDropdownOptions;
+  } else if (categoryName === "Mobile Phones & Gadgets") {
+    subCategoryOptions = mgSubcategoryDropdownOptions;
+  }
+
   const handleSetCategoryName = (value) => {
     var temp = "";
-    for (var i=0; i < value.length; i++) {
+    for (var i = 0; i < value.length; i++) {
+      temp += "|";
       temp += value[i].value;
-      temp += "|"
     }
-    setCategoryName(temp);
-  }
+    console.log(temp);
+    var fullName = categoryName;
+    fullName += temp;
+    console.log(fullName);
+    setFullCategoryName(fullName);
+  };
 
   return (
     <div>
@@ -355,8 +376,18 @@ export default function CreateIFS(props) {
           <div style={{ width: 600 }}>
             <Select
               className="ml-4 mt-3"
-              closeMenuOnSelect={false}
               options={categoryDropdownOptions}
+              onChange={(value) => {
+                setCategoryName(value.value);
+              }}
+            />
+          </div>
+          <h5 className="ml-4 mt-2">Subcategories</h5>
+          <div style={{ width: 600 }}>
+            <Select
+              className="ml-4 mt-3"
+              closeMenuOnSelect={false}
+              options={subCategoryOptions}
               isMulti
               onChange={(value) => {
                 handleSetCategoryName(value);

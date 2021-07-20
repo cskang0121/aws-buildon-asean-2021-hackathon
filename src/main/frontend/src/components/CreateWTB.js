@@ -20,6 +20,14 @@ import UserService from "../services/UserService";
 import BuyerQnAService from "../services/BuyerQnAService";
 
 import { categoryDropdownOptions } from "../util/categories";
+import { ctSubcategoryDropdownOptions } from "../util/ctSubcategories";
+import { fhSubcategoryDropdownOptions } from "../util/fhSubcategories";
+import { mgSubcategoryDropdownOptions } from "../util/mgSubcategories";
+
+let tempArr = [];
+let subCategoryOptions = tempArr.map((options) => {
+  return { value: options, label: options };
+});
 
 const acceptedFileTypes =
   "image/x-png, image/png, image/jpg, image/jpeg, image/gif";
@@ -121,6 +129,7 @@ export default function CreateWTB(props) {
   const [priceLower, setPriceLower] = useState(0);
   const [priceUpper, setPriceUpper] = useState(0);
   const [categoryName, setCategoryName] = useState("");
+  const [fullCategoryName, setFullCategoryName] = useState("");
   // const [hashtags, setHashtags] = useState("");
   const [preferredItemCondition, setPreferredItemCondition] = useState("");
   const [isPreferredDeliveryMeet, setIsPreferredDeliveryMeet] = useState(false);
@@ -196,7 +205,7 @@ export default function CreateWTB(props) {
       priceLower: priceLower,
       priceUpper: priceUpper,
       status: "a",
-      categoryName: categoryName,
+      categoryName: fullCategoryName,
       user: user,
       // hashtags: hashtags,
       preferredItemCondition: preferredItemCondition,
@@ -253,14 +262,26 @@ export default function CreateWTB(props) {
     });
   };
 
+  if (categoryName === "Computers & Tech") {
+    subCategoryOptions = ctSubcategoryDropdownOptions;
+  } else if (categoryName === "Furniture & Home Living") {
+    subCategoryOptions = fhSubcategoryDropdownOptions;
+  } else if (categoryName === "Mobile Phones & Gadgets") {
+    subCategoryOptions = mgSubcategoryDropdownOptions;
+  }
+
   const handleSetCategoryName = (value) => {
     var temp = "";
-    for (var i=0; i < value.length; i++) {
+    for (var i = 0; i < value.length; i++) {
+      temp += "|";
       temp += value[i].value;
-      temp += "|"
     }
-    setCategoryName(temp);
-  }
+    console.log(temp);
+    var fullName = categoryName;
+    fullName += temp;
+    console.log(fullName);
+    setFullCategoryName(fullName);
+  };
 
   return (
     <div>
@@ -376,20 +397,21 @@ export default function CreateWTB(props) {
             </Form.Group>
           </Form.Row>
           <h5 className="ml-4 mt-2">Category</h5>
-          {/* <div style={{ width: 600 }}>
-            <Select
+          <div style={{ width: 600 }}>
+            <Select 
               className="ml-4 mt-3"
               options={categoryDropdownOptions}
               onChange={(value) => {
                 setCategoryName(value.value);
               }}
             />
-          </div> */}
+          </div>
+          <h5 className="ml-4 mt-2">Subcategories</h5>
           <div style={{ width: 600 }}>
-            <Select 
+            <Select
               className="ml-4 mt-3"
               closeMenuOnSelect={false}
-              options={categoryDropdownOptions}
+              options={subCategoryOptions}
               isMulti
               onChange={(value) => {
                 handleSetCategoryName(value);
