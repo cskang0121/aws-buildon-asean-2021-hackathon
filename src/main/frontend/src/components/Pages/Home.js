@@ -11,7 +11,9 @@ function RecommendedItems() {
   }, []);
 
   const fetchRecommendations = () => {
-    RecommendService.getRecsByItemId(1).then((res) => setRecs(res.data));
+    RecommendService.getRecsByItemId(1)
+      .then((res) => setRecs(res.data))
+      .catch((err) => console.log(err));
   };
 
   return recs.map((rec, index) => {
@@ -35,7 +37,7 @@ export default function Home() {
       <hr></hr>
       <div className="container-fluid">
         <h4 className="ml-5">Recommended For You</h4>
-        <RecommendedItems />
+        {/* <RecommendedItems /> */}
       </div>
       <hr></hr>
     </div>
