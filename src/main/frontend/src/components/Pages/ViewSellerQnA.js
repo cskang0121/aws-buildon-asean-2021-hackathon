@@ -27,11 +27,15 @@ const SellerQnAList = (props) => {
 
   return sellerQnAs.map((item, index) => {
     return (
-      <div key={index}>
-        <h3>
-          {index + 1}. {item.question}
-        </h3>
-        <p>Answer: {item.answer}</p>
+      <div class="card">
+        <div class="card-body">
+          <div key={index}>
+            <h4>
+              {index + 1}. {item.question}
+            </h4>
+            <p>Answer: {item.answer}</p>
+          </div>
+        </div>
       </div>
     );
   });
@@ -47,6 +51,7 @@ export default function ViewSellerQnA() {
   return (
     <div>
       <NavigationBar />
+      <h2 className="m-4 text-center">Questions & Answers</h2>
       <SellerQnAList
         rerender={reRender}
         setrerender={(state) => setReRender(state)}
@@ -58,7 +63,9 @@ export default function ViewSellerQnA() {
         onHide={() => setShow(false)}
         ifsListing={location.state.listing}
       />
-      <Button onClick={() => setShow(true)}>Ask a Question</Button>
+      <div className="text-center m-4">
+        <Button onClick={() => setShow(true)}>Ask a Question</Button>
+      </div>
     </div>
   );
 }

@@ -22,7 +22,6 @@ export default function ListingCard({
       )}
       <div className="card-body text-center" style={styles.text}>
         <h5 className="card-title">{listing.title}</h5>
-        <p className="card-text text-justify">{listing.description}</p>
         {listingType === "WTB" ? (
           <p>
             <b>Asking Price:</b> S$ {listing.priceLower} - {listing.priceUpper}
@@ -48,3 +47,5 @@ export default function ListingCard({
     </div>
   );
 }
+
+

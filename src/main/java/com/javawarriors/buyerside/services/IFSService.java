@@ -66,12 +66,12 @@ public class IFSService {
 
     public List<ItemForSaleListing> getSearchResults(String keyword, String categoryName, String itemCondition) {
         // return ifsRepo.findByTitleContaining(keyword);
-        String[] conditionArr = itemCondition.split("\\|");
-        List<String> conditionList = Arrays.asList(conditionArr);
-        
-        if (conditionList.size() == 1) {
+        if (itemCondition.equals("")) {
             return ifsRepo.findByTitleAndCategoryContaining(keyword, categoryName);
         }
+
+        String[] conditionArr = itemCondition.split("\\|");
+        List<String> conditionList = Arrays.asList(conditionArr);
         
         return ifsRepo.findByTitleAndCategoryAndConditionContaining(keyword, categoryName, conditionList);
     }

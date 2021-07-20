@@ -85,22 +85,26 @@ const SellerQnAList = (props) => {
     };
 
     return (
-      <div key={index}>
-        <h3>
-          {index + 1}. {item.question}
-        </h3>
-        <Form>
-          <Form.Label>
-            <p>Answer:</p>
-          </Form.Label>
-          <FormField
-            index={index}
-            item={item}
-            editAnswer={editAnswer}
-            setEditAnswer={setEditAnswer}
-          />
-          <Button onClick={() => handleShowForm(index)}>Edit Answer</Button>
-        </Form>
+      <div class="card">
+        <div class="card-body">
+          <div key={index}>
+            <h4>
+              {index + 1}. {item.question}
+            </h4>
+            <Form>
+              <Form.Label>
+                <h6>Answer:</h6>
+              </Form.Label>
+              <FormField
+                index={index}
+                item={item}
+                editAnswer={editAnswer}
+                setEditAnswer={setEditAnswer}
+              />
+              <Button className="mt-4" onClick={() => handleShowForm(index)}>Edit Answer</Button>
+            </Form>
+          </div>
+        </div>
       </div>
     );
   });
@@ -117,6 +121,7 @@ export default function AnswerSellerQnA() {
   return (
     <div>
       <NavigationBar />
+      <h3 className="m-4 text-center">Questions & Answers</h3>,
       <SellerQnAList ifsListing={location.state.listing} />
     </div>
   );

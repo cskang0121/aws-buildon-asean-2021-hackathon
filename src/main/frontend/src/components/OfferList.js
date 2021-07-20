@@ -114,7 +114,7 @@ export default function OfferList(props) {
         <div className="row" style={styles.container}>
           <div className="col-9" style={styles.textDiv}>
             <span style={styles.paragraph}>
-              {offer.buyer.username} offered you {offer.offeredPrice} for your
+              {offer.buyer.username} offered you S${offer.offeredPrice} for your
               item:
             </span>
             <span style={styles.itemName}>{offer.ifsListing.title}</span>

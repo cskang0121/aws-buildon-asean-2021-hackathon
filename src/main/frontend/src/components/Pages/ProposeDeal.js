@@ -30,22 +30,57 @@ function UseExistingListing({ user, setIfsListing }) {
     });
   };
 
+  const styles = {
+    text: {
+      fontFamily: "Inter, sans-serif",
+    },
+  };
+
   useEffect(() => {
     fetchListings();
   }, []);
 
   return listings.map((listing, index) => {
     // Make something less ugly lmao
+
     return (
-      <div>
-        <h2 className="m-4">{listing.title}</h2>
-        <p>{listing.description}</p>
-        <p>Price: {listing.price}</p>
-        <p>
-          <Button onClick={(event) => setIfsListing(listing)}>
-            Select Listing
-          </Button>
-        </p>
+      /*Old Code*/
+      // <div>
+      //   <h2 className="m-4">{listing.title}</h2>
+      //   <p className="ml-4">{listing.description}</p>
+      //   <p className="ml-4">Price: {listing.price}</p>
+      //   <p>
+      //     <Button className="ml-4" onClick={(event) => setIfsListing(listing)}>
+      //       Select Listing
+      //     </Button>
+      //   </p>
+      // </div>
+      
+      /*New Code: CHANGE IMG SRC PLS*/
+      <div className="container-fluid">
+        <div className="row ml-4 mr-4">
+          <div key={index} className="col-3">
+            <div className="card shadow m-1">
+            {/* {listing.picUri && imgSrc ? (
+                <img className="card-img-top" style={{ height: "18vw", objectFit: "cover" }} src={imgSrc} />
+              ) : (
+                <p className="text-center">No image found</p>
+              )} */}
+              <img className="card-img-top" style={{ height: "18vw", objectFit: "cover" }} src={"https://www.news-medical.net/image.axd?picture=2018%2F4%2Fshutterstock_By_spkphotostock.jpg"} />
+                  <div className="card-body text-center" style={styles.text}>
+                    <h5 className="card-title">{listing.title}</h5>
+                      <p>
+                        <b>Price:</b> S$ {listing.price}
+                      </p>
+                      <p>
+                        <Button onClick={(event) => setIfsListing(listing)}>
+                          Select Listing
+                        </Button>
+                      </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   });
@@ -215,9 +250,11 @@ export default function ProposeDeal(props) {
       case "Y":
         return (
           <div>
-            <h1>Use existing listing</h1>
+            <h1 className="ml-4">Use existing listing:</h1>
             <UseExistingListing user={user} setIfsListing={setIfsListing} />
-            <Button onClick={createDeal}> Submit </Button>
+            <div className="text-center m-4 ">
+              <Button className="btn btn-block btn-success" onClick={createDeal}> Submit </Button>
+            </div>
           </div>
         );
       case "N":
