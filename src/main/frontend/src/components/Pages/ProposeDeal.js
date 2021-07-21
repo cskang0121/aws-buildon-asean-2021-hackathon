@@ -30,22 +30,56 @@ function UseExistingListing({ user, setIfsListing }) {
     });
   };
 
+  const styles = {
+    text: {
+      fontFamily: "Inter, sans-serif",
+    },
+  };
+
   useEffect(() => {
     fetchListings();
   }, []);
 
   return listings.map((listing, index) => {
-    // Make something less ugly lmao
+
     return (
-      <div>
-        <h2 className="m-4">{listing.title}</h2>
-        <p>{listing.description}</p>
-        <p>Price: {listing.price}</p>
-        <p>
-          <Button onClick={(event) => setIfsListing(listing)}>
-            Select Listing
-          </Button>
-        </p>
+      /*Old Code*/
+      // <div>
+      //   <h2 className="m-4">{listing.title}</h2>
+      //   <p className="ml-4">{listing.description}</p>
+      //   <p className="ml-4">Price: {listing.price}</p>
+      //   <p>
+      //     <Button className="ml-4" onClick={(event) => setIfsListing(listing)}>
+      //       Select Listing
+      //     </Button>
+      //   </p>
+      // </div>
+      
+      /*New Code: CHANGE IMG SRC PLS*/
+      <div className="container-fluid">
+        <div className="row ml-4 mr-4">
+          <div key={index} className="col-3">
+            <div className="card shadow m-1">
+            {/* {listing.picUri && imgSrc ? (
+                <img className="card-img-top" style={{ height: "18vw", objectFit: "cover" }} src={imgSrc} />
+              ) : (
+                <p className="text-center">No image found</p>
+              )} */}
+              <img className="card-img-top" style={{ height: "18vw", objectFit: "cover" }} src={"https://www.news-medical.net/image.axd?picture=2018%2F4%2Fshutterstock_By_spkphotostock.jpg"} />
+                  <div className="card-body text-center" style={styles.text}>
+                    <h5 className="card-title">{listing.title}</h5>
+                      <p>
+                        <b>Price:</b> S$ {listing.price}
+                      </p>
+                      <p>
+                        <Button onClick={(event) => setIfsListing(listing)}>
+                          Select Listing
+                        </Button>
+                      </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   });
@@ -102,17 +136,18 @@ export default function ProposeDeal(props) {
     return answersList.map((item, index) => {
       return (
         <div key={index}>
-          <h3>
+          <h4 className="ml-4">
             {item.answerId}. {buyerQnAs[index].question}
-          </h3>
+          </h4>
           <Form.Row>
-            <Form.Group>
+            <Form.Group className="ml-4 container-fluid mr-4">
               <InputGroup>
                 <InputGroup.Prepend>
                   <InputGroup.Text>Answer:</InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl
                   required
+                  placeholder="Write your answers here..."
                   autoComplete="off"
                   type="text"
                   name="answer"
@@ -214,9 +249,11 @@ export default function ProposeDeal(props) {
       case "Y":
         return (
           <div>
-            <h1>Use existing listing</h1>
+            <h1 className="ml-4">Use existing listing:</h1>
             <UseExistingListing user={user} setIfsListing={setIfsListing} />
-            <Button onClick={createDeal}> Submit </Button>
+            <div className="text-center m-4 ">
+              <Button className="btn btn-block btn-success" onClick={createDeal}> Submit </Button>
+            </div>
           </div>
         );
       case "N":
@@ -229,13 +266,13 @@ export default function ProposeDeal(props) {
         ]);
       default:
         return ([
-          <div className="position-relative">
-            <Button className="ml-5 mt-4 mb-4" onClick={(event) => setUseExistingListing("Y")}>
+          <div className="position-relative text-center ml-5 mr-5">
+            <Button className="mt-4 mb-4" onClick={(event) => setUseExistingListing("Y")}>
               Use Existing Listing
             </Button>
           </div>,
-          <div className="mx-auto">
-            <Button className="ml-5" onClick={(event) => setUseExistingListing("N")}>
+          <div className="text-center ml-5 mr-5">
+            <Button onClick={(event) => setUseExistingListing("N")}>
               Create New Listing
             </Button>
           </div>

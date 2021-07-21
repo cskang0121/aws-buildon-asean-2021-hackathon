@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Controller for Recommendations
@@ -28,6 +29,24 @@ public class PersonalizeController {
 
     @GetMapping("/get/itemid={itemId}")
     public List<String> getRecommendationsForItem(@PathVariable Long itemId) {
-        return personalizeService.getRecs(itemId);
+        return personalizeService.getSIMSRecs(itemId);
     }
+
+    @GetMapping("/get/wtb/user={userId}")
+    public List<WantToBuyListing> getWTBRecsForUser(@PathVariable Long userId) {
+        return personalizeService.getUserWTBRecs(userId);
+    }
+
+    @GetMapping("/get/ifs/user={userId}")
+    public List<ItemForSaleListing> getIFSRecsForUser(@PathVariable Long userId) {
+        return personalizeService.getUserIFSRecs(userId);
+    }
+
+    @PostMapping("/post/event/create/ifs")
+    public void deleteIFS(@RequestHeader Map<String, String> headers,
+    @RequestBody ItemForSaleListing toDeleteIFSListing) {
+        //personalizeService.deleteById(toDeleteIFSListing.getIfsId());
+    }
+
+
 }

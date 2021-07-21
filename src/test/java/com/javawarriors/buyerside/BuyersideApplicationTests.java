@@ -27,30 +27,30 @@ class BuyersideApplicationTests {
 	void contextLoads() {
 	}
 
-	@Test
-	public void testCustomQuery() {
-		String keyword = "";
-		String categoryName = "";
-		String itemCondition = "";
-		String[] conditionArr = itemCondition.split("\\|");
+	// @Test
+	// public void testCustomQuery() {
+	// 	String keyword = "";
+	// 	String categoryName = "";
+	// 	String itemCondition = "";
+	// 	String[] conditionArr = itemCondition.split("\\|");
 		
-		List<ItemForSaleListing> listings = ifsService.getSearchResults(keyword, categoryName, itemCondition);
+	// 	List<ItemForSaleListing> listings = ifsService.getSearchResults(keyword, categoryName, itemCondition);
 
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println(conditionArr.length);
-		for (String string : conditionArr) {
-			System.out.println(string);
-		}
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println(listings);
-		System.out.println();
-		System.out.println();
-		System.out.println();
-	}
+	// 	System.out.println();
+	// 	System.out.println();
+	// 	System.out.println();
+	// 	System.out.println(conditionArr.length);
+	// 	for (String string : conditionArr) {
+	// 		System.out.println(string);
+	// 	}
+	// 	System.out.println();
+	// 	System.out.println();
+	// 	System.out.println();
+	// 	System.out.println(listings);
+	// 	System.out.println();
+	// 	System.out.println();
+	// 	System.out.println();
+	// }
 
 	@Test
 	public void testBuyerQnACustomQuery() {

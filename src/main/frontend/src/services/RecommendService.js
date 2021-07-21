@@ -9,6 +9,18 @@ class RecommendService {
       headers: authHeader(),
     });
   }
+
+  getWTBRecsByUserId(uid) {
+    return axios.get(RECOMMEND_API_BASE_URL + "/get/wtb/user=" + uid, {
+      headers: authHeader(),
+    });
+  }
+
+  getIFSRecsByUserId(uid) {
+    return axios.get(RECOMMEND_API_BASE_URL + "/get/ifs/user=" + uid, {
+      headers: authHeader(),
+    });
+  }
 }
 
 export default new RecommendService();

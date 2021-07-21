@@ -10,6 +10,14 @@ import UserService from "../../services/UserService";
 // } from "../../util/reusableUtils";
 import ListingCard from "../ListingCard";
 
+const styles = {
+  heading: {
+    fontFamily: "Inter, sans-serif",
+    fontSize: 30,
+    fontWeight: 600,
+  },
+};
+
 const IFSList = ({ listing, index, deleteIFS }) => {
   const [imgSrc, setImgSrc] = useState("");
   const history = useHistory();
@@ -88,7 +96,11 @@ const IFSListings = () => {
 export default function IFS(props) {
   return (
     <div>
-      <h1 className="ml-4 mt-4 mb-4">Item For Sale Listings</h1>
+      <h1 style={{
+        fontFamily: "Inter, sans-serif",
+        fontSize: 30,
+        fontWeight: 600,}}
+        className="ml-4 mt-4 mb-4">Your "Item For Sale" Listings</h1>
       <div className="row ml-4 mr-4">
         <IFSListings />
       </div>

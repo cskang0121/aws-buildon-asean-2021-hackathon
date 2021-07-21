@@ -140,16 +140,19 @@ export default function IFSListing(props) {
   // Button toggle
   const toggleButton = () => {
     if (!isDealEmpty(location.state.deal)) {
-      return (
+      return ([
         <div>
           <BuyerQnAList deal={location.state.deal} />
-          <Button onClick={(event) => acceptDeal(location.state.deal)}>
+        </div>,
+        <div className="text-center">
+          <Button className="mr-5 btn btn-success" onClick={(event) => acceptDeal(location.state.deal)}>
             Accept Deal
           </Button>
-          <Button onClick={(event) => rejectDeal(location.state.deal)}>
+          <Button className="ml-5 btn btn-danger" onClick={(event) => rejectDeal(location.state.deal)}>
             Reject Deal
           </Button>
         </div>
+      ]
       );
     } else if (location.state.listing.user.uid === user.uid) {
       return (

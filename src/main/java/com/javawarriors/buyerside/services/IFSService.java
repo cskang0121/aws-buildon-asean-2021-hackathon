@@ -43,6 +43,10 @@ public class IFSService {
         return ifsRepo.findAll();
     }
 
+    public List<ItemForSaleListing> findAllById(Iterable<Long> ids) {
+        return ifsRepo.findAllById(ids);
+    }
+
     public ItemForSaleListing save(ItemForSaleListing entity) {
         entity.setDateOfCreation(new Date());
         return ifsRepo.save(entity);
@@ -56,7 +60,7 @@ public class IFSService {
     }
 
     // public List<ItemForSaleListing> getSearchResults(String keyword) {
-    //     return ifsRepo.findByTitleContaining(keyword);
+    // return ifsRepo.findByTitleContaining(keyword);
     // }
 
     public List<ItemForSaleListing> findByUser(Long userId) {
@@ -64,7 +68,8 @@ public class IFSService {
         return ifsRepo.findByUser(user);
     }
 
-    public List<ItemForSaleListing> getSearchResults(String keyword, String categoryName, String itemCondition, String searchLocation) {
+    public List<ItemForSaleListing> getSearchResults(String keyword, String categoryName, String itemCondition,
+            String searchLocation) {
         // return ifsRepo.findByTitleContaining(keyword);
         if (itemCondition.equals("")) {
             return ifsRepo.findByTitleAndCategoryAndLocationContaining(keyword, categoryName, searchLocation);
@@ -72,8 +77,9 @@ public class IFSService {
 
         String[] conditionArr = itemCondition.split("\\|");
         List<String> conditionList = Arrays.asList(conditionArr);
-        
-        return ifsRepo.findByTitleAndCategoryAndConditionAndLocationContaining(keyword, categoryName, conditionList, searchLocation);
+
+        return ifsRepo.findByTitleAndCategoryAndConditionAndLocationContaining(keyword, categoryName, conditionList,
+                searchLocation);
     }
 
     public ItemForSaleListing findByListingId(Long id) {
