@@ -1,22 +1,15 @@
 package com.javawarriors.buyerside.controllers;
 
 import java.util.*;
-
-import javax.servlet.http.HttpServletRequest;
-
 import com.javawarriors.buyerside.entities.*;
 import com.javawarriors.buyerside.services.*;
-
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.slf4j.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 // import org.springframework.security.core.Authentication;
 // import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 

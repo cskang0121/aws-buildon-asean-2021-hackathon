@@ -1,7 +1,6 @@
 package com.javawarriors.buyerside.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.javawarriors.buyerside.entities.compositeKeys.*;
 import javax.persistence.*;
 import java.util.*;
 
