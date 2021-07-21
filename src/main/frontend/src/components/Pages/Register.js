@@ -45,10 +45,11 @@ export default function Register() {
   return (
     <div>
       <NavigationBar />
+      <h3 className="m-5">Register a new Account</h3>
       <Row className="justify-content-md-center">
         <Col lg={12}>
           <Form.Row>
-            <Form.Group>
+            <Form.Group className="ml-5 mb-4">
               <InputGroup>
                 <InputGroup.Prepend>
                   <InputGroup.Text>Username:</InputGroup.Text>
@@ -65,7 +66,7 @@ export default function Register() {
             </Form.Group>
           </Form.Row>
           <Form.Row>
-            <Form.Group>
+            <Form.Group className="ml-5 mb-4">
               <InputGroup>
                 <InputGroup.Prepend>
                   <InputGroup.Text>Email:</InputGroup.Text>
@@ -82,7 +83,7 @@ export default function Register() {
             </Form.Group>
           </Form.Row>
           <Form.Row>
-            <Form.Group>
+            <Form.Group className="ml-5 mb-4">
               <InputGroup>
                 <InputGroup.Prepend>
                   <InputGroup.Text>Password:</InputGroup.Text>
@@ -99,7 +100,7 @@ export default function Register() {
             </Form.Group>
           </Form.Row>
           <Form.Row>
-            <Form.Group>
+            <Form.Group className="ml-5 mb-4">
               <InputGroup>
                 <InputGroup.Prepend>
                   <InputGroup.Text>First Name:</InputGroup.Text>
@@ -116,7 +117,7 @@ export default function Register() {
             </Form.Group>
           </Form.Row>
           <Form.Row>
-            <Form.Group>
+            <Form.Group className="ml-5 mb-4">
               <InputGroup>
                 <InputGroup.Prepend>
                   <InputGroup.Text>Last Name:</InputGroup.Text>
@@ -133,7 +134,7 @@ export default function Register() {
             </Form.Group>
           </Form.Row>
           <Form.Row>
-            <Form.Group>
+            <Form.Group className="ml-5">
               <InputGroup>
                 <InputGroup.Prepend>
                   <InputGroup.Text>Location:</InputGroup.Text>
@@ -149,7 +150,7 @@ export default function Register() {
               </InputGroup>
             </Form.Group>
           </Form.Row>
-          <Button onClick={createUser}> Submit </Button>
+          <Button className="m-5 btn btn-success" onClick={createUser}> Submit </Button>
         </Col>
       </Row>
     </div>
