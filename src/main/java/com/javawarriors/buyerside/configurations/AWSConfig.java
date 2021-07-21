@@ -9,6 +9,7 @@ import software.amazon.awssdk.auth.credentials.AwsSessionCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.personalizeruntime.PersonalizeRuntimeClient;
+//import software.amazon.awssdk.services.personalizeevents.PersonalizeEventsClient;
 
 @Configuration
 public class AWSConfig {
@@ -39,4 +40,11 @@ public class AWSConfig {
                 StaticCredentialsProvider.create(AwsSessionCredentials.create(accessKey, secretKey, sessionToken)))
                 .build();
     }
+
+    // @Bean(destroyMethod = "close")
+    // public PersonalizeEventsClient personalizeEventsClient() {
+    //     return PersonalizeEventsClient.builder().region(Region.of(region)).credentialsProvider(
+    //             StaticCredentialsProvider.create(AwsSessionCredentials.create(accessKey, secretKey, sessionToken)))
+    //             .build();
+    // }
 }

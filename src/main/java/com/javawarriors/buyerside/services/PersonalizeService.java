@@ -1,5 +1,6 @@
 package com.javawarriors.buyerside.services;
 
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,13 +11,13 @@ import software.amazon.awssdk.services.personalizeruntime.model.GetRecommendatio
 import software.amazon.awssdk.services.personalizeruntime.model.PredictedItem;
 import software.amazon.awssdk.awscore.exception.AwsServiceException;
 
-import software.amazon.awssdk.services.personalizeevents.PersonalizeEventsClient;
-import software.amazon.awssdk.services.personalizeevents.model.Event;
-import software.amazon.awssdk.services.personalizeevents.model.PutEventsRequest;
-import software.amazon.awssdk.services.personalizeevents.model.PersonalizeEventsException;
+// import software.amazon.awssdk.services.personalizeevents.PersonalizeEventsClient;
+// import software.amazon.awssdk.services.personalizeevents.model.Event;
+// import software.amazon.awssdk.services.personalizeevents.model.PutEventsRequest;
+// import software.amazon.awssdk.services.personalizeevents.model.PersonalizeEventsException;
+//import java.time.Instant;
 
 import java.util.List;
-import java.time.Instant;
 
 import com.javawarriors.buyerside.entities.ItemForSaleListing;
 import com.javawarriors.buyerside.entities.WantToBuyListing;
@@ -28,8 +29,8 @@ public class PersonalizeService {
     @Autowired
     private PersonalizeRuntimeClient personalizeRuntimeClient;
 
-    @Autowired
-    private PersonalizeEventsClient personalizeEventsClient;
+    // @Autowired
+    // private PersonalizeEventsClient personalizeEventsClient;
 
     @Value("${aws.personalize.wtb.campaign_arn_item}")
     private String campaignArnWTBSIMS;
@@ -106,19 +107,32 @@ public class PersonalizeService {
         return itemIdsList;
     }
 
-    public void putEvents(String trackingId, String sessionId, String userId, String itemId) {
-        try {
-            Event event = Event.builder().sentAt(Instant.ofEpochMilli(System.currentTimeMillis() + 10 * 60 * 1000))
-                    .itemId(itemId).eventType("typePlaceholder").build();
+    // public void putEventCreateIFS(ItemForSaleListing ifsListing, String
+    // sessionId) {
+    // String userId = String.format("U%02d", ifsListing.getUser().getUid());
+    // String itemId = String.format("IFS%02d", ifsListing.getIfsId());
+    // putEvents("f45457e5-5b91-4beb-9800-cd7665828eaa", sessionId, userId, itemId,
+    // "post");
+    // }
 
-            PutEventsRequest putEventsRequest = PutEventsRequest.builder().trackingId(trackingId).userId(userId)
-                    .sessionId(sessionId).eventList(event).build();
+    // public void putEvents(String trackingId, String sessionId, String userId,
+    // String itemId, String eventType) {
+    // try {
+    // Event event =
+    // Event.builder().sentAt(Instant.ofEpochMilli(System.currentTimeMillis() + 10 *
+    // 60 * 1000))
+    // .itemId(itemId).eventType(eventType).build();
 
-            int responseCode = personalizeEventsClient.putEvents(putEventsRequest).sdkHttpResponse().statusCode();
-            System.out.println("Response code: " + responseCode);
+    // PutEventsRequest putEventsRequest =
+    // PutEventsRequest.builder().trackingId(trackingId).userId(userId)
+    // .sessionId(sessionId).eventList(event).build();
 
-        } catch (PersonalizeEventsException e) {
-            System.out.println(e.awsErrorDetails().errorMessage());
-        }
-    }
+    // int responseCode =
+    // personalizeEventsClient.putEvents(putEventsRequest).sdkHttpResponse().statusCode();
+    // System.out.println("Response code: " + responseCode);
+
+    // } catch (PersonalizeEventsException e) {
+    // System.out.println(e.awsErrorDetails().errorMessage());
+    // }
+    // }
 }

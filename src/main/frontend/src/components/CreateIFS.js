@@ -17,6 +17,7 @@ import { useHistory } from "react-router";
 
 import IFSService from "../services/IFSService";
 import UserService from "../services/UserService";
+import RecommendService from "../services/RecommendService";
 
 import { categoryDropdownOptions } from "../util/categories";
 import { ctSubcategoryDropdownOptions } from "../util/ctSubcategories";
@@ -425,10 +426,14 @@ export default function CreateIFS(props) {
                 onChange={(event) => handleMeetChange()}
               />
             </Form.Group>
-            {isDeliveryMeet ? 
-             <MeetUpLocationField meetUpLocation={meetUpLocation} setMeetUpLocation={setMeetUpLocation}/>
-             : ''
-            }
+            {isDeliveryMeet ? (
+              <MeetUpLocationField
+                meetUpLocation={meetUpLocation}
+                setMeetUpLocation={setMeetUpLocation}
+              />
+            ) : (
+              ""
+            )}
             <Form.Group className="mb-3 ml-4" controlId="formBasicCheckbox">
               <Form.Check
                 type="checkbox"

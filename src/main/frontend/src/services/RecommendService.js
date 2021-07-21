@@ -21,6 +21,16 @@ class RecommendService {
       headers: authHeader(),
     });
   }
+
+  // putEventsPostIfsListing(ifsListing) {
+  //   return axios.post(
+  //     RECOMMEND_API_BASE_URL + "/post/event/create/ifs",
+  //     ifsListing,
+  //     {
+  //       headers: authHeader(),
+  //     }
+  //   );
+  // }
 }
 
 export default new RecommendService();

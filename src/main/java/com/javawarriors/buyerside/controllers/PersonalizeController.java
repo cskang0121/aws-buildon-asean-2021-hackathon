@@ -42,11 +42,13 @@ public class PersonalizeController {
         return personalizeService.getUserIFSRecs(userId);
     }
 
-    @PostMapping("/post/event/create/ifs")
-    public void deleteIFS(@RequestHeader Map<String, String> headers,
-    @RequestBody ItemForSaleListing toDeleteIFSListing) {
-        //personalizeService.deleteById(toDeleteIFSListing.getIfsId());
-    }
-
+    // @PostMapping("/post/event/create/ifs")
+    // public void putEventCreateIFS(@RequestHeader Map<String, String> headers,
+    //         @RequestBody ItemForSaleListing ifsListing) {
+    //     // personalizeService.deleteById(toDeleteIFSListing.getIfsId());
+    //     String jwtToken = headers.get("Authorization");
+    //     String sessionToken = jwtToken.substring(8);
+    //     personalizeService.putEventCreateIFS(ifsListing, sessionToken);
+    // }
 
 }
