@@ -1,45 +1,16 @@
 package com.javawarriors.buyerside.services;
 
-import com.javawarriors.buyerside.entities.*;
-import com.javawarriors.buyerside.repositories.*;
-import com.javawarriors.buyerside.bucket.*;
-import com.javawarriors.buyerside.fileStore.*;
-
 import software.amazon.awssdk.services.s3.S3Client;
-//import software.amazon.awssdk.services.s3.paginators.ListObjectsV2Iterable;
 import software.amazon.awssdk.core.sync.RequestBody;
-//import software.amazon.awssdk.services.s3.model.S3Exception;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
-//import software.amazon.awssdk.services.s3.model.PutObjectResponse;
-// import software.amazon.awssdk.services.s3.model.ListObjectsV2Request;
-// import software.amazon.awssdk.services.s3.model.ListObjectsV2Response;
-//import software.amazon.awssdk.services.s3.model.S3Object;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.GetObjectResponse;
 import software.amazon.awssdk.core.sync.ResponseTransformer;
 import software.amazon.awssdk.core.ResponseBytes;
-// import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
-// import software.amazon.awssdk.services.s3.model.DeleteBucketRequest;
-// import software.amazon.awssdk.services.s3.model.CreateMultipartUploadRequest;
-// import software.amazon.awssdk.services.s3.model.CreateMultipartUploadResponse;
-// import software.amazon.awssdk.services.s3.model.CompletedMultipartUpload;
-//import software.amazon.awssdk.services.s3.model.CreateBucketRequest;
-//import software.amazon.awssdk.services.s3.model.CompletedPart;
-//import software.amazon.awssdk.services.s3.model.CreateBucketConfiguration;
-// import software.amazon.awssdk.services.s3.model.UploadPartRequest;
-//import software.amazon.awssdk.services.s3.model.CompleteMultipartUploadRequest;
-//import software.amazon.awssdk.services.s3.waiters.S3Waiter;
 import software.amazon.awssdk.core.exception.SdkClientException;
 import software.amazon.awssdk.core.exception.SdkServiceException;
-//import software.amazon.awssdk.services.s3.model.HeadBucketRequest;
-//import software.amazon.awssdk.services.s3.model.HeadBucketResponse;
 import org.springframework.beans.factory.annotation.Value;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
-//import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
-//import software.amazon.awssdk.regions.Region;
 
-import java.nio.ByteBuffer;
 import org.slf4j.*;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -41,7 +41,6 @@ function UseExistingListing({ user, setIfsListing }) {
   }, []);
 
   return listings.map((listing, index) => {
-    // Make something less ugly lmao
 
     return (
       /*Old Code*/

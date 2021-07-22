@@ -34,6 +34,10 @@ public class WTBService {
         return wtbRepo.findById(id).get();
     }
 
+    public List<WantToBuyListing> findAllById(Iterable<Long> ids) {
+        return wtbRepo.findAllById(ids);
+    }
+
     public List<WantToBuyListing> findAll() {
         return wtbRepo.findAll();
     }
