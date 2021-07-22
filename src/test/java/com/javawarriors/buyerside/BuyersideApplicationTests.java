@@ -32,9 +32,10 @@ class BuyersideApplicationTests {
 		String keyword = "";
 		String categoryName = "";
 		String itemCondition = "";
+		String searchLocation= "";
 		String[] conditionArr = itemCondition.split("\\|");
 		
-		List<ItemForSaleListing> listings = ifsService.getSearchResults(keyword, categoryName, itemCondition);
+		List<ItemForSaleListing> listings = ifsService.getSearchResults(keyword, categoryName, itemCondition, searchLocation);
 
 		System.out.println();
 		System.out.println();

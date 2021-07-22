@@ -8,6 +8,7 @@ import {
   InputGroup,
   FormControl,
   Button,
+  Card,
 } from "react-bootstrap";
 
 import AuthenticationService from "../../services/AuthenticationService";
@@ -40,45 +41,46 @@ export default function Login() {
   return (
     <div>
       <NavigationBar />
-      <Row className="justify-content-md-center">
-        <Col lg={12}>
-          <Form.Row>
-            <Form.Group>
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text>Username:</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                  required
-                  autoComplete="off"
-                  type="text"
-                  name="username"
-                  value={username}
-                  onChange={(event) => setUsername(event.target.value)}
-                />
-              </InputGroup>
-            </Form.Group>
-          </Form.Row>
-          <Form.Row>
-            <Form.Group>
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text>Password:</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                  required
-                  autoComplete="off"
-                  type="password"
-                  name="password"
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                />
-              </InputGroup>
-            </Form.Group>
-          </Form.Row>
-          <Button onClick={login}> Submit </Button>
-        </Col>
-      </Row>
+      <Card className="text-center">
+        <Card.Header><h4>Welcome!</h4></Card.Header>
+        <Card.Body>
+          <Card.Title className="mt-4">Enter your login details</Card.Title>
+            <Card.Text>
+              <div class="form-row m-4">
+                  <div class="input-group input-group-lg col-md-3 mx-auto">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text">Username:</span>
+                      </div>
+                      <FormControl
+                        required
+                        autoComplete="off"
+                        type="text"
+                        name="username"
+                        value={username}
+                        onChange={(event) => setUsername(event.target.value)}
+                      />
+                </div>
+              </div>
+              <div class="form-row ml-4 mr-4 mb-5">
+                  <div class="input-group input-group-lg col-md-3 mx-auto">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text">Password:</span>
+                      </div>
+                      <FormControl
+                        required
+                        autoComplete="off"
+                        type="password"
+                        name="password"
+                        value={password}
+                        onChange={(event) => setPassword(event.target.value)}
+                      />
+                </div>
+              </div>
+          <Button className="mb-4" onClick={login}> Submit </Button>
+          </Card.Text>
+        </Card.Body>
+        <Card.Footer className="text-muted">A new C2C experience</Card.Footer>
+      </Card>
     </div>
   );
 }

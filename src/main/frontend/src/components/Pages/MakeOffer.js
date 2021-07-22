@@ -47,9 +47,8 @@ export default function MakeOffer(props) {
   return (
     <div>
       <NavigationBar />
-      <Row className="justify-content-md-center">
-        <Col lg={12}>
-          <Form.Row>
+      <h3 className="text-center m-5">How much are you offering?</h3>
+      <div className="row justify-content-center m-5">
             <Form.Group>
               <InputGroup>
                 <InputGroup.Prepend>
@@ -65,10 +64,11 @@ export default function MakeOffer(props) {
                 />
               </InputGroup>
             </Form.Group>
-          </Form.Row>
-          <Button onClick={createOffer}> Submit </Button>
-        </Col>
-      </Row>
+      </div>
+      <div className="text-center">
+        <Button className="btn btn-success" onClick={createOffer}> Submit </Button>
+      </div>
+      
     </div>
   );
 }
