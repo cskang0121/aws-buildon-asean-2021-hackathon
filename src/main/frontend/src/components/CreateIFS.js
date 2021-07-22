@@ -260,6 +260,12 @@ export default function CreateIFS(props) {
   }
 
   const handleSetCategoryName = (value) => {
+    console.log(value);    
+    setCategoryName(value);
+    setFullCategoryName(value);
+  };
+
+  const handleSetFullCategoryName = (value) => {
     var temp = "";
     for (var i = 0; i < value.length; i++) {
       temp += "|";
@@ -378,7 +384,7 @@ export default function CreateIFS(props) {
               className="ml-4 mt-3"
               options={categoryDropdownOptions}
               onChange={(value) => {
-                setCategoryName(value.value);
+                handleSetCategoryName(value.value);
               }}
             />
           </div>
@@ -390,7 +396,7 @@ export default function CreateIFS(props) {
               options={subCategoryOptions}
               isMulti
               onChange={(value) => {
-                handleSetCategoryName(value);
+                handleSetFullCategoryName(value);
               }}
             />
           </div>
