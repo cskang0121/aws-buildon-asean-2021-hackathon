@@ -1,7 +1,8 @@
 import axios from "axios";
 import authHeader from "../util/authHeader";
+import { API_BASE_URL } from "../util/apiBaseUrl";
 
-const GET_PROFILE_URL = "http://localhost:8080/api/v1/get-profile";
+const GET_PROFILE_URL = `${API_BASE_URL}/get-profile`;
 
 class UserService {
   // Put profile in local storage
