@@ -18,9 +18,59 @@ import IFSService from "../../services/IFSService";
 import CreateIFS from "../CreateIFS";
 import BuyerQnAService from "../../services/BuyerQnAService";
 
+function ExistingIFS({ listing, index, setIfsListing }) {
+  const [imgSrc, setImgSrc] = useState("");
+
+  useEffect(() => {
+    getImage(listing);
+  }, [listing]);
+
+  const getImage = (listing) => {
+    IFSService.getListingImage(listing.ifsId).then((res) => {
+      const byteCode = res.data;
+      const firstChar = byteCode.charAt(0);
+      var dataType = "";
+      if (firstChar === "/") {
+        dataType = "jpg";
+      } else if (firstChar === "i") {
+        dataType = "png";
+      } else {
+        dataType = "gif";
+      }
+      setImgSrc("data:image/" + dataType + ";base64," + byteCode);
+    });
+  };
+
+  return (
+    <div key={index} className="col-3">
+      <div className="card shadow m-1">
+        {listing.picUri && imgSrc ? (
+          <img
+            className="card-img-top"
+            style={{ height: "18vw", objectFit: "cover" }}
+            src={imgSrc}
+          />
+        ) : (
+          <p className="text-center">No image found</p>
+        )}
+        <div className="card-body text-center">
+          <h5 className="card-title">{listing.title}</h5>
+          <p>
+            <b>Price:</b> S$ {listing.price}
+          </p>
+          <p>
+            <Button onClick={(event) => setIfsListing(listing)}>
+              Select Listing
+            </Button>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function UseExistingListing({ user, setIfsListing }) {
   const [listings, setListings] = useState([]);
-  const [currentListing, setCurrentListing] = useState({});
 
   const fetchListings = () => {
     console.log(user);
@@ -41,7 +91,6 @@ function UseExistingListing({ user, setIfsListing }) {
   }, []);
 
   return listings.map((listing, index) => {
-
     return (
       /*Old Code*/
       // <div>
@@ -54,33 +103,14 @@ function UseExistingListing({ user, setIfsListing }) {
       //     </Button>
       //   </p>
       // </div>
-      
+
       /*New Code: CHANGE IMG SRC PLS*/
-      <div className="container-fluid">
-        <div className="row ml-4 mr-4">
-          <div key={index} className="col-3">
-            <div className="card shadow m-1">
-            {/* {listing.picUri && imgSrc ? (
-                <img className="card-img-top" style={{ height: "18vw", objectFit: "cover" }} src={imgSrc} />
-              ) : (
-                <p className="text-center">No image found</p>
-              )} */}
-              <img className="card-img-top" style={{ height: "18vw", objectFit: "cover" }} src={"https://www.news-medical.net/image.axd?picture=2018%2F4%2Fshutterstock_By_spkphotostock.jpg"} />
-                  <div className="card-body text-center" style={styles.text}>
-                    <h5 className="card-title">{listing.title}</h5>
-                      <p>
-                        <b>Price:</b> S$ {listing.price}
-                      </p>
-                      <p>
-                        <Button onClick={(event) => setIfsListing(listing)}>
-                          Select Listing
-                        </Button>
-                      </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
+      <ExistingIFS
+        listing={listing}
+        index={index}
+        setIfsListing={setIfsListing}
+      />
     );
   });
 }
@@ -250,24 +280,38 @@ export default function ProposeDeal(props) {
         return (
           <div>
             <h1 className="ml-4">Use existing listing:</h1>
-            <UseExistingListing user={user} setIfsListing={setIfsListing} />
+            <div className="row ml-4 mr-4">
+              <UseExistingListing user={user} setIfsListing={setIfsListing} />
+            </div>
             <div className="text-center m-4 ">
-              <Button className="btn btn-block btn-success" onClick={createDeal}> Submit </Button>
+              <Button
+                className="btn btn-block btn-success"
+                onClick={createDeal}
+              >
+                {" "}
+                Submit{" "}
+              </Button>
             </div>
           </div>
         );
       case "N":
-        return ([
+        return [
           <hr></hr>,
           <div>
             <h1 className="m-4">Create New Listing</h1>
-            <CreateIFS listingType="d" setDeal={(listing, event) => createDealListing(listing, event)} />
-          </div>
-        ]);
+            <CreateIFS
+              listingType="d"
+              setDeal={(listing, event) => createDealListing(listing, event)}
+            />
+          </div>,
+        ];
       default:
-        return ([
+        return [
           <div className="position-relative text-center ml-5 mr-5">
-            <Button className="mt-4 mb-4" onClick={(event) => setUseExistingListing("Y")}>
+            <Button
+              className="mt-4 mb-4"
+              onClick={(event) => setUseExistingListing("Y")}
+            >
               Use Existing Listing
             </Button>
           </div>,
@@ -275,8 +319,8 @@ export default function ProposeDeal(props) {
             <Button onClick={(event) => setUseExistingListing("N")}>
               Create New Listing
             </Button>
-          </div>
-        ]);
+          </div>,
+        ];
     }
   };
 
