@@ -160,7 +160,7 @@ export default function OffersActiveList(props) {
       if (props.origin == "received") {
         return (
           <span style={styles.paragraph}>
-            Status: Accepted, please confirm transaction once complete
+            Status: Awaiting your confirmation
           </span>
         );
       } else if (props.origin == "made") {
@@ -175,7 +175,7 @@ export default function OffersActiveList(props) {
       if (props.origin == "made") {
         return (
           <span style={styles.paragraph}>
-            Status: Accepted, please confirm transaction once complete
+            Status: Awaiting your confirmation
           </span>
         );
       } else if (props.origin == "received") {
