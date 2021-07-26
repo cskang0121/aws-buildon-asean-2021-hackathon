@@ -58,17 +58,20 @@ public class WTBService {
         wtbRepo.deleteById(wtbId);
     }
 
-    public List<WantToBuyListing> getSearchResults(String keyword, String categoryName, String itemCondition, String searchLocation) {
+    public List<WantToBuyListing> getSearchResults(String keyword, String categoryName, String itemCondition,
+            String searchLocation) {
         // return wtbRepo.findByTitleContaining(keyword);
-        // return wtbRepo.findByTitleAndCategoryAndHashtagsContaining(keyword, categoryName, hashtags);
+        // return wtbRepo.findByTitleAndCategoryAndHashtagsContaining(keyword,
+        // categoryName, hashtags);
         if (itemCondition.equals("")) {
             return wtbRepo.findByTitleAndCategoryAndLocationContaining(keyword, categoryName, searchLocation);
         }
 
         String[] conditionArr = itemCondition.split("\\|");
         List<String> conditionList = Arrays.asList(conditionArr);
-        
-        return wtbRepo.findByTitleAndCategoryAndConditionAndLocationContaining(keyword, categoryName, conditionList, searchLocation);
+
+        return wtbRepo.findByTitleAndCategoryAndConditionAndLocationContaining(keyword, categoryName, conditionList,
+                searchLocation);
     }
 
     public WantToBuyListing findByListingId(Long id) {
@@ -89,5 +92,10 @@ public class WTBService {
         byte[] byteArr = s3UploadService.download(picUri);
         String encodedMime = Base64.getMimeEncoder().encodeToString(byteArr);
         return encodedMime;
+    }
+
+    public List<WantToBuyListing> findByUserAndStatus(Long userId, Character status) {
+        User user = userService.findInRepoById(userId);
+        return wtbRepo.findByUserAndStatus(user, status);
     }
 }

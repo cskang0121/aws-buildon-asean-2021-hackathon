@@ -111,7 +111,7 @@ export default function OfferList(props) {
     if (offer.status === "p") {
       // Make something less ugly lmao
       return (
-        <div className="row" style={styles.container}>
+        <div key={index} className="row" style={styles.container}>
           <div className="col-9" style={styles.textDiv}>
             <span style={styles.paragraph}>
               {offer.buyer.username} offered you S${offer.offeredPrice} for your

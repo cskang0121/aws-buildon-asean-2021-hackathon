@@ -19,6 +19,8 @@ import ViewListingOffers from "./components/Pages/ViewListingOffers";
 import ViewListingDeals from "./components/Pages/ViewListingDeals";
 import ViewSellerQnA from "./components/Pages/ViewSellerQnA";
 import AnswerSellerQnA from "./components/Pages/AnswerSellerQnA";
+import ViewTransactionHistory from "./components/Pages/ViewTransactionHistory";
+import ViewActiveTransactions from "./components/Pages/ViewActiveTransactions";
 
 import AuthenticationService from "./services/AuthenticationService";
 
@@ -97,6 +99,16 @@ function App() {
             path="/answer-seller-qna"
             exact
             component={AnswerSellerQnA}
+          />
+          <PrivateRoute
+            path="/transaction-history"
+            exact
+            component={ViewTransactionHistory}
+          />
+          <PrivateRoute
+            path="/transaction-active"
+            exact
+            component={ViewActiveTransactions}
           />
         </Switch>
       </Router>

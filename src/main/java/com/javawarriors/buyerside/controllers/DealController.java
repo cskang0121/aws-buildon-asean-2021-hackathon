@@ -1,4 +1,5 @@
 package com.javawarriors.buyerside.controllers;
+
 import com.javawarriors.buyerside.entities.*;
 import com.javawarriors.buyerside.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,11 @@ public class DealController {
     private IFSController ifsController;
     @Autowired
     private WTBController wtbController;
+
+    @GetMapping("/get/madeby={id}")
+    public List<Deal> getDealsMadeByUser(@PathVariable Long id) {
+        return dealService.findByUser(id);
+    }
 
     @PostMapping("/post")
     public Deal postDeal(@RequestBody Deal newDeal) {
@@ -53,6 +59,27 @@ public class DealController {
         wtbListing.setStatus('p');
         wtbController.postWTBListing(wtbListing);
         return dealService.saveManyDeals(deals);
+    }
+
+    @PostMapping("/post/confirm")
+    public Deal postConfirmDeal(@RequestBody Deal deal) {
+        if (deal.getStatus().equals(Character.toString('c'))) {
+
+            ItemForSaleListing ifsListing = deal.getIfsId();
+            ifsListing.setStatus('u');
+            ifsController.postIFSListing(ifsListing);
+
+            WantToBuyListing wtbListing = deal.getWtbId();
+            wtbListing.setStatus('u');
+            wtbController.postWTBListing(wtbListing);
+        }
+        return dealService.saveDeal(deal);
+    }
+
+    @GetMapping("/get/accept/receivedby={id}")
+    public List<Deal> getAcceptedDealsReceivedByUser(@PathVariable Long id) {
+        List<WantToBuyListing> wantToBuyListings = wtbController.getWTBListingsByUserAndStatus(id, 'p');
+        return dealService.findByWtbIdIn(wantToBuyListings);
     }
 
 }

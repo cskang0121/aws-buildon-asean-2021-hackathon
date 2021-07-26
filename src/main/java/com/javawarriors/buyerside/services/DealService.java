@@ -24,6 +24,8 @@ public class DealService {
     private BuyerQnAService buyerQnAService;
     @Autowired
     private AnswerQnARepo answerQnARepo;
+    @Autowired
+    private JwtUserDetailsService userService;
 
     public Deal saveDeal(Deal entity) {
         return dealRepo.save(entity);
@@ -67,5 +69,14 @@ public class DealService {
         for (Deal deal : toDeleteDeal) {
             deleteDeal(deal);
         }
+    }
+
+    public List<Deal> findByUser(Long userId) {
+        User user = userService.findInRepoById(userId);
+        return dealRepo.findBySeller(user);
+    }
+
+    public List<Deal> findByWtbIdIn(Collection<WantToBuyListing> wtbListings) {
+        return dealRepo.findByWtbIdIn(wtbListings);
     }
 }

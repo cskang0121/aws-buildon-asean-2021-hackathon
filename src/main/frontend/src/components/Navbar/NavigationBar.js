@@ -35,29 +35,6 @@ export default function NavigationBar() {
     });
   };
 
-  // return (
-  //   <Navbar bg="dark" variant="dark">
-  //     <Navbar.Brand href="/home">Navbar</Navbar.Brand>
-  //     <Nav className="mr-auto">
-  //       {loggedIn ? (
-  //           <div className="d-flex flex-row">
-  //             <Nav.Link href="/home">Home</Nav.Link>
-  //             <Nav.Link href="/my-listings">My Listings</Nav.Link>
-  //             <Nav.Link href="/search">Search</Nav.Link>
-  //             <Nav.Link href="/post-listing">Buy / Sell</Nav.Link>
-  //             <Nav.Link href="/received-offers">View All Offers</Nav.Link>
-  //             <Nav.Link className="justify-content-end" onClick={logout}>Logout</Nav.Link>
-  //           </div>
-  //       ) : (
-  //         <div className="d-flex flex-row">
-  //           <Nav.Link href="/register">Sign Up</Nav.Link>
-  //           <Nav.Link href="/login">Login</Nav.Link>
-  //         </div>
-  //       )}
-  //     </Nav>
-  //   </Navbar>
-  // );
-
   //post listing + search
   return (
     <nav class="navbar navbar-expand-md navbar-light bg-light">
@@ -111,7 +88,13 @@ export default function NavigationBar() {
                     My Listings
                   </a>
                   <a class="dropdown-item" href="/received-offers">
-                    View Offers
+                    View Received Offers
+                  </a>
+                  <a class="dropdown-item" href="/transaction-active">
+                    View Active Transactions
+                  </a>
+                  <a class="dropdown-item" href="/transaction-history">
+                    View Transaction History
                   </a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" onClick={logout}>

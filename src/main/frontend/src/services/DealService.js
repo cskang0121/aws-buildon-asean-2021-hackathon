@@ -27,6 +27,24 @@ class DealService {
       headers: authHeader(),
     });
   }
+
+  getCurrentUserDealsMade(uid) {
+    return axios.get(DEAL_API_BASE_URL + "/get/madeby=" + uid, {
+      headers: authHeader(),
+    });
+  }
+
+  getCurrentUserReceivedAcceptedDeals(uid) {
+    return axios.get(DEAL_API_BASE_URL + "/get/accept/receivedby=" + uid, {
+      headers: authHeader(),
+    });
+  }
+
+  postConfirmDeal(deal) {
+    return axios.post(DEAL_API_BASE_URL + "/post/confirm", deal, {
+      headers: authHeader(),
+    });
+  }
 }
 
 export default new DealService();

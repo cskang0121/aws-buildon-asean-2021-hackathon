@@ -27,6 +27,18 @@ class OfferService {
       headers: authHeader(),
     });
   }
+
+  getCurrentUserOffersMade(uid) {
+    return axios.get(OFFER_API_BASE_URL + "/get/madeby=" + uid, {
+      headers: authHeader(),
+    });
+  }
+
+  postConfirmOffer(offer) {
+    return axios.post(OFFER_API_BASE_URL + "/post/confirm", offer, {
+      headers: authHeader(),
+    });
+  }
 }
 
 export default new OfferService();
