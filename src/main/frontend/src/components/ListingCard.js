@@ -36,7 +36,7 @@ export default function ListingCard({
         </p>
         {deleteMyListing ? (
           <p>
-            <Button className="btn-danger" onClick={deleteMyListing}>
+            <Button variant="danger" onClick={deleteMyListing}>
               Delete Listing
             </Button>
           </p>

@@ -63,7 +63,7 @@ export default function NavigationBar() {
               onChange={(event) => setKeyword(event.target.value)}
             />
             <button
-              class="btn btn-outline-success my-2 my-sm-0"
+              class="btn btn-outline-primary my-2 my-sm-0"
               onClick={(event) => handleOnSearchSubmit(event)}
             >
               Search
@@ -103,7 +103,7 @@ export default function NavigationBar() {
                 </div>
               </li>
               <li class="nav-item">
-                <a class="btn btn-success ml-4 mr-2" href="/post-listing">
+                <a class="btn btn-primary ml-4 mr-2" href="/post-listing">
                   Buy/Sell
                 </a>
               </li>

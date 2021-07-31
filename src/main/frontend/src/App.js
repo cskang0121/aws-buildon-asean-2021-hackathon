@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+import "./custom.scss";
+//import "bootstrap/dist/css/bootstrap.min.css";
+
 
 import NavigationBar from "./components/Navbar/NavigationBar";
 import Home from "./components/Pages/Home";
