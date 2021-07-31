@@ -1,5 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
 // change the theme
 $primary: #9d4edd;
+$info: #5a189a;
+
+$font-family-sans-serif: "Inter", sans-serif;
 
 // Import Bootstrap and its default variables
 @import "~bootstrap/scss/bootstrap.scss";
+
+.nav-underline .nav-item .nav-link.active {
+  border-bottom: 5px solid $primary;
+}
+
+.badge-info {
+    background-color: #C77DFF;
+}

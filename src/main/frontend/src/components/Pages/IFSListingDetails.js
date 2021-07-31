@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Badge } from "react-bootstrap";
 import { useHistory, useLocation } from "react-router";
 import IFSService from "../../services/IFSService";
 import NavigationBar from "../Navbar/NavigationBar";
@@ -140,20 +140,25 @@ export default function IFSListing(props) {
   // Button toggle
   const toggleButton = () => {
     if (!isDealEmpty(location.state.deal)) {
-      return ([
+      return [
         <div>
           <BuyerQnAList deal={location.state.deal} />
         </div>,
         <div className="text-center">
-          <Button className="mr-5 btn btn-success" onClick={(event) => acceptDeal(location.state.deal)}>
+          <Button
+            className="mr-5 btn btn-success"
+            onClick={(event) => acceptDeal(location.state.deal)}
+          >
             Accept Deal
           </Button>
-          <Button className="ml-5 btn btn-danger" onClick={(event) => rejectDeal(location.state.deal)}>
+          <Button
+            className="ml-5 btn btn-danger"
+            onClick={(event) => rejectDeal(location.state.deal)}
+          >
             Reject Deal
           </Button>
-        </div>
-      ]
-      );
+        </div>,
+      ];
     } else if (location.state.listing.user.uid === user.uid) {
       return (
         <div className="d-flex flex-column">
@@ -215,6 +220,26 @@ export default function IFSListing(props) {
     getImage(location.state.listing);
   }, [location.state.listing]);
 
+  const getDeliveryMethod = (listing) => {
+    if (listing.isDeliveryDeliver && listing.isDeliveryMeet) {
+      return `Delivery, Meet Up (${location.state.listing.meetUpLocation})`;
+    } else if (listing.isDeliveryDeliver) {
+      return "Delivery";
+    } else if (listing.isDeliveryMeet) {
+      return `Meet Up (${location.state.listing.meetUpLocation})`;
+    }
+  };
+
+  const getPaymentMethod = (listing) => {
+    if (listing.isPaymentCash && listing.isPaymentPayNow) {
+      return "PayNow, Cash";
+    } else if (listing.isPaymentCash) {
+      return "Cash";
+    } else if (listing.isPaymentPayNow) {
+      return "PayNow";
+    }
+  };
+
   return (
     <div>
       <NavigationBar />
@@ -245,7 +270,9 @@ export default function IFSListing(props) {
               </div>
               <div className="col-3">
                 <h4>
-                  <span className="badge badge-pill badge-info">Selling</span>
+                  <Badge pills variant="info">
+                    Selling
+                  </Badge>
                 </h4>
               </div>
             </div>
@@ -257,10 +284,10 @@ export default function IFSListing(props) {
                 <p>{location.state.listing.itemCondition}</p>
               </div>
               <div className="col-4">
-                <p>Delivery Method</p>
+                <p>{getDeliveryMethod(location.state.listing)}</p>
               </div>
               <div className="col-4">
-                <p>Location</p>
+                <p>{getPaymentMethod(location.state.listing)}</p>
               </div>
             </div>
             <div className="row  pt-2 pb-2 border-top border-bottom">

@@ -73,6 +73,26 @@ export default function WTB(props) {
     getImage(location.state.listing);
   }, [location.state.listing]);
 
+  const getDeliveryMethod = (listing) => {
+    if (listing.isPreferredDeliveryDeliver && listing.isPreferredDeliveryMeet) {
+      return `Delivery, Meet Up (${location.state.listing.preferredMeetUpLocation})`;
+    } else if (listing.isPreferredDeliveryDeliver) {
+      return "Delivery";
+    } else if (listing.isPreferredDeliveryMeet) {
+      return `Meet Up (${location.state.listing.preferredMeetUpLocation})`;
+    }
+  };
+
+  const getPaymentMethod = (listing) => {
+    if (listing.isPreferredPaymentCash && listing.isPreferredPaymentPayNow) {
+      return "PayNow, Cash";
+    } else if (listing.isPreferredPaymentCash) {
+      return "Cash";
+    } else if (listing.isPreferredPaymentPayNow) {
+      return "PayNow";
+    }
+  };
+
   return (
     <div>
       <NavigationBar />
@@ -118,10 +138,10 @@ export default function WTB(props) {
                 <p>{location.state.listing.preferredItemCondition}</p>
               </div>
               <div className="col-4">
-                <p>Delivery Method</p>
+                <p>{getDeliveryMethod(location.state.listing)}</p>
               </div>
               <div className="col-4">
-                <p>Location</p>
+                <p>{getPaymentMethod(location.state.listing)}</p>
               </div>
             </div>
             <div className="row  pt-2 pb-2 border-top border-bottom">
