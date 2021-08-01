@@ -85,7 +85,7 @@ const SellerQnAList = (props) => {
     };
 
     return (
-      <div class="card">
+      <div class="card mb-4 ml-6 mr-6 pt-3 pb-3 pl-4 pr-5">
         <div class="card-body">
           <div key={index}>
             <h4>
@@ -93,7 +93,7 @@ const SellerQnAList = (props) => {
             </h4>
             <Form>
               <Form.Label>
-                <h6>Answer:</h6>
+                <h6 class="mt-3">Answer:</h6>
               </Form.Label>
               <FormField
                 index={index}
@@ -121,7 +121,7 @@ export default function AnswerSellerQnA() {
   return (
     <div>
       <NavigationBar />
-      <h3 className="m-4 text-center">Questions & Answers</h3>,
+      <h2 className="m-4 text-center">Questions & Answers</h2>,
       <SellerQnAList ifsListing={location.state.listing} />
     </div>
   );

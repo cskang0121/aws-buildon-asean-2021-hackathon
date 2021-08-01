@@ -27,13 +27,13 @@ const SellerQnAList = (props) => {
 
   return sellerQnAs.map((item, index) => {
     return (
-      <div class="card">
+      <div class="card mb-4 ml-6 mr-6 pt-3 pb-3 pl-4 pr-5">
         <div class="card-body">
           <div key={index}>
             <h4>
               {index + 1}. {item.question}
             </h4>
-            <p>Answer: {item.answer}</p>
+            <p class="mt-3">Answer: {item.answer}</p>
           </div>
         </div>
       </div>
