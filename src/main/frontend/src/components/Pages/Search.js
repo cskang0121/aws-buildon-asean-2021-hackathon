@@ -12,6 +12,7 @@ import ListingCard from "../ListingCard";
 import { ctSubcategoryDropdownOptions } from "../../util/ctSubcategories";
 import { fhSubcategoryDropdownOptions } from "../../util/fhSubcategories";
 import { mgSubcategoryDropdownOptions } from "../../util/mgSubcategories";
+import { reactSelectTheme } from "../../util/customThemes";
 
 const ITEM_CONDITION = ["Brand New", "Like New", "Well Used", "Heavily Used"];
 
@@ -303,6 +304,7 @@ export default function Search() {
                     </div>
                     <Select
                       options={categoryDropdownOptions}
+                      theme={reactSelectTheme}
                       onChange={(value) => {
                         handleSetCategoryName(value.value);
                       }}
@@ -316,6 +318,7 @@ export default function Search() {
                       <Select
                         closeMenuOnSelect={false}
                         options={subCategoryOptions}
+                        theme={reactSelectTheme}
                         isMulti
                         onChange={(value) => {
                           handleSetFullCategoryName(value);
@@ -332,6 +335,7 @@ export default function Search() {
                     <Select
                       closeMenuOnSelect={false}
                       options={condtionDropdownOptions}
+                      theme={reactSelectTheme}
                       isMulti
                       onChange={(value) => {
                         handleSetCondition(value);
@@ -377,6 +381,7 @@ export default function Search() {
                     </div>
                     <Select
                       options={categoryDropdownOptions}
+                      theme={reactSelectTheme}
                       onChange={(value) => {
                         handleSetCategoryName(value.value);
                       }}
@@ -390,6 +395,7 @@ export default function Search() {
                       <Select
                         closeMenuOnSelect={false}
                         options={subCategoryOptions}
+                        theme={reactSelectTheme}
                         isMulti
                         onChange={(value) => {
                           handleSetFullCategoryName(value);
@@ -406,6 +412,7 @@ export default function Search() {
                     <Select
                       closeMenuOnSelect={false}
                       options={condtionDropdownOptions}
+                      theme={reactSelectTheme}
                       isMulti
                       onChange={(value) => {
                         handleSetCondition(value);

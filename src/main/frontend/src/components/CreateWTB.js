@@ -23,6 +23,9 @@ import { categoryDropdownOptions } from "../util/categories";
 import { ctSubcategoryDropdownOptions } from "../util/ctSubcategories";
 import { fhSubcategoryDropdownOptions } from "../util/fhSubcategories";
 import { mgSubcategoryDropdownOptions } from "../util/mgSubcategories";
+import { reactSelectTheme } from "../util/customThemes";
+
+import { FaAngleRight } from "react-icons/fa";
 
 let tempArr = [];
 let subCategoryOptions = tempArr.map((options) => {
@@ -62,20 +65,21 @@ function Dropzone(props) {
       <input {...getInputProps()} />
       {isDragActive ? (
         <div>
-        {imgSrc != null ? (
-          <div className="d-flex justify-content-center">
-            <img
-              style={{ width: 400, height: 400, objectFit: "cover" }}
-              src={imgSrc}
-            />
-          </div>
-        ) : (
-          <div className="d-flex container border border-success rounded w-75 align-items-center justify-content-center" style={{height: 200}}>
-            <p className="text-center">
-              Drop your image here
-            </p>
-          </div>
-        )}
+          {imgSrc != null ? (
+            <div className="d-flex justify-content-center">
+              <img
+                style={{ width: 400, height: 400, objectFit: "cover" }}
+                src={imgSrc}
+              />
+            </div>
+          ) : (
+            <div
+              className="d-flex ml-3 border border-success rounded w-75 align-items-center justify-content-center"
+              style={{ height: 200 }}
+            >
+              <p className="text-center">Drop your image here</p>
+            </div>
+          )}
         </div>
       ) : (
         <div>
@@ -87,7 +91,10 @@ function Dropzone(props) {
               />
             </div>
           ) : (
-            <div className="d-flex container border border-success rounded w-75 align-items-center justify-content-center" style={{height: 200}}>
+            <div
+              className="d-flex ml-3 border border-primary rounded w-75 align-items-center justify-content-center"
+              style={{ height: 200 }}
+            >
               <p className="text-center">
                 Drag and drop an image, or click to browse files
               </p>
@@ -106,7 +113,9 @@ const MeetUpLocationField = (props) => {
         <Form.Group>
           <InputGroup>
             <InputGroup.Prepend>
-              <InputGroup.Text className="ml-4">Preferred Meet Location:</InputGroup.Text>
+              <InputGroup.Text className="ml-4">
+                Preferred Meet Location:
+              </InputGroup.Text>
             </InputGroup.Prepend>
             <FormControl
               required
@@ -114,14 +123,16 @@ const MeetUpLocationField = (props) => {
               type="text"
               name="preferredMeetUpLocation"
               value={props.preferredMeetUpLocation}
-              onChange={(event) => props.setPreferredMeetUpLocation(event.target.value)}
+              onChange={(event) =>
+                props.setPreferredMeetUpLocation(event.target.value)
+              }
             />
           </InputGroup>
         </Form.Group>
       </Form.Row>
-    </div> 
+    </div>
   );
-}
+};
 
 export default function CreateWTB(props) {
   const [title, setTitle] = useState("");
@@ -229,8 +240,20 @@ export default function CreateWTB(props) {
 
       const formData = new FormData();
       formData.append("file", file);
+      const optionalImage = WTBService.postListingImage(
+        res.data.wtbId,
+        formData
+      )
+        .then((res) => {
+          return new Promise((resolve, reject) => {
+            return resolve(res);
+          });
+        })
+        .catch((err) => {
+          return null;
+        });
       Promise.all([
-        WTBService.postListingImage(res.data.wtbId, formData),
+        optionalImage,
         BuyerQnAService.postManyBuyerQnAs(buyerQnAs),
       ]).then((res) => {
         history.push({
@@ -256,7 +279,12 @@ export default function CreateWTB(props) {
             value={item.question}
             onChange={(event) => handleQnAChange(event, index)}
           />
-          <Button className="btn btn-danger"onClick={(event) => handleRemoveQnA(index)}>Remove</Button>
+          <Button
+            className="btn btn-danger"
+            onClick={(event) => handleRemoveQnA(index)}
+          >
+            Remove
+          </Button>
         </InputGroup>
       );
     });
@@ -271,11 +299,11 @@ export default function CreateWTB(props) {
   }
 
   const handleSetCategoryName = (value) => {
-    console.log(value);    
+    console.log(value);
     setCategoryName(value);
     setFullCategoryName(value);
   };
-  
+
   const handleSetFullCategoryName = (value) => {
     var temp = "";
     for (var i = 0; i < value.length; i++) {
@@ -291,25 +319,22 @@ export default function CreateWTB(props) {
 
   return (
     <div>
-      <div>
-        <br />
-        <Dropzone setFile={(file) => setFile(file)} />
-        <br />
-      </div>
       <Row className="justify-content-md-center">
-        <Col lg={12}>
-        <h5 className="ml-4 mb-3 mt-4">Item Details</h5>
+        <Col className="shadow-sm" lg={4}>
+          <Dropzone setFile={(file) => setFile(file)} />
+        </Col>
+        <Col lg={8} className="py-3 px-5 shadow">
+          <h5 className="mb-3">Item Details</h5>
           <Form>
-            <Row>
+            <Form.Row>
               <Col>
                 <Form.Group>
                   <InputGroup>
                     <InputGroup.Prepend>
-                      <InputGroup.Text className="ml-4">Title:</InputGroup.Text>
+                      <InputGroup.Text>Title:</InputGroup.Text>
                     </InputGroup.Prepend>
                     <FormControl
                       required
-                      className="mr-4"
                       placeholder="Enter a title..."
                       autoComplete="off"
                       type="text"
@@ -320,23 +345,21 @@ export default function CreateWTB(props) {
                   </InputGroup>
                 </Form.Group>
               </Col>
-            </Row>
-          </Form>
-          <Form>
+            </Form.Row>
             <Row>
               <Col>
-              <Form.Group>
+                <Form.Group>
                   <InputGroup>
                     <InputGroup.Prepend>
-                      <InputGroup.Text className="ml-4">Description:</InputGroup.Text>
+                      <InputGroup.Text>Description:</InputGroup.Text>
                     </InputGroup.Prepend>
                     <FormControl
                       required
                       placeholder="Enter a description of the item..."
-                      className="mr-4"
                       autoComplete="off"
                       type="text"
                       name="description"
+                      as="textarea"
                       value={description}
                       onChange={(event) => setDescription(event.target.value)}
                     />
@@ -344,8 +367,7 @@ export default function CreateWTB(props) {
                 </Form.Group>
               </Col>
             </Row>
-          </Form>
-          {/* <Form>
+            {/* <Form>
             <Row>
               <Col>
                 <Form.Group>
@@ -368,129 +390,165 @@ export default function CreateWTB(props) {
               </Col>
             </Row>
           </Form> */}
-          <Form.Row>
-            <Form.Group>
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text className="ml-4">Price Lower:</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                  required
-                  autoComplete="off"
-                  type="number"
-                  name="priceLower"
-                  value={priceLower}
-                  onChange={(event) => setPriceLower(event.target.value)}
+            <Form.Row>
+              <Col lg={6}>
+                <Form.Group>
+                  <InputGroup>
+                    <InputGroup.Prepend>
+                      <InputGroup.Text>Price Lower:</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl
+                      required
+                      autoComplete="off"
+                      type="number"
+                      name="priceLower"
+                      value={priceLower}
+                      onChange={(event) => setPriceLower(event.target.value)}
+                    />
+                  </InputGroup>
+                </Form.Group>
+              </Col>
+              <Col lg={6}>
+                <Form.Group>
+                  <InputGroup>
+                    <InputGroup.Prepend>
+                      <InputGroup.Text>Price Upper:</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl
+                      required
+                      autoComplete="off"
+                      type="number"
+                      name="priceUpper"
+                      value={priceUpper}
+                      onChange={(event) => setPriceUpper(event.target.value)}
+                    />
+                  </InputGroup>
+                </Form.Group>
+              </Col>
+            </Form.Row>
+            <Form.Row>
+              <Col lg={6}>
+                <h5 className="mt-2">Category</h5>
+                <div>
+                  <Select
+                    className="mt-3"
+                    options={categoryDropdownOptions}
+                    theme={reactSelectTheme}
+                    onChange={(value) => {
+                      handleSetCategoryName(value.value);
+                    }}
+                  />
+                </div>
+              </Col>
+              <Col lg={6}>
+                <h5 className="mt-2">Subcategories</h5>
+                <div>
+                  <Select
+                    className="mt-3"
+                    closeMenuOnSelect={false}
+                    options={subCategoryOptions}
+                    theme={reactSelectTheme}
+                    isMulti
+                    onChange={(value) => {
+                      handleSetFullCategoryName(value);
+                    }}
+                  />
+                </div>
+              </Col>
+            </Form.Row>
+            <Form.Row>
+              <h5 className="mt-3">Preferred Item Condition</h5>
+            </Form.Row>
+
+            <Form.Row>
+              <ButtonGroup className="mt-2">
+                {preferredItemConditionRadios.map((radio, idx) => (
+                  <ToggleButton
+                    className="toggleable"
+                    style={{ zIndex: 0 }}
+                    key={idx}
+                    id={`radio-${idx}`}
+                    type="radio"
+                    variant="outline-primary"
+                    name="radio"
+                    value={radio.value}
+                    checked={preferredItemCondition === radio.value}
+                    onChange={(e) =>
+                      setPreferredItemCondition(e.currentTarget.value)
+                    }
+                  >
+                    {radio.name}
+                  </ToggleButton>
+                ))}
+              </ButtonGroup>
+            </Form.Row>
+            <Form.Row>
+              <h5 className="mt-3">Preferred Delivery Method</h5>
+            </Form.Row>
+            <Form.Row>
+              <Form.Group className="mb-3 mt-3" controlId="formBasicCheckbox">
+                <Form.Check
+                  type="checkbox"
+                  label="Meet-up"
+                  onChange={(event) => handleMeetChange()}
                 />
-              </InputGroup>
-            </Form.Group>
-          </Form.Row>
-          <Form.Row>
-            <Form.Group>
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text className="ml-4">Price Upper:</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                  required
-                  autoComplete="off"
-                  type="number"
-                  name="priceUpper"
-                  value={priceUpper}
-                  onChange={(event) => setPriceUpper(event.target.value)}
+              </Form.Group>
+            </Form.Row>
+            <Form.Row>
+              {isPreferredDeliveryMeet ? (
+                <MeetUpLocationField
+                  preferredMeetUpLocation={preferredMeetUpLocation}
+                  setPreferredMeetUpLocation={setPreferredMeetUpLocation}
                 />
-              </InputGroup>
-            </Form.Group>
-          </Form.Row>
-          <h5 className="ml-4 mt-2">Category</h5>
-          <div style={{ width: 600 }}>
-            <Select 
-              className="ml-4 mt-3"
-              options={categoryDropdownOptions}
-              onChange={(value) => {
-                handleSetCategoryName(value.value);
-              }}
-            />
-          </div>
-          <h5 className="ml-4 mt-2">Subcategories</h5>
-          <div style={{ width: 600 }}>
-            <Select
-              className="ml-4 mt-3"
-              closeMenuOnSelect={false}
-              options={subCategoryOptions}
-              isMulti
-              onChange={(value) => {
-                handleSetFullCategoryName(value);
-              }}
-            />
-          </div>
-          <div>
-            <h5 className="ml-4 mt-3">Preferred Item Condition</h5>
-            <ButtonGroup className="ml-4 mt-2">
-              {preferredItemConditionRadios.map((radio, idx) => (
-                <ToggleButton
-                  key={idx}
-                  id={"radio-${idx}"}
-                  type="radio"
-                  variant={"outline-primary"}
-                  name="radio"
-                  value={radio.value}
-                  checked={preferredItemCondition === radio.value}
-                  onChange={(e) =>
-                    setPreferredItemCondition(e.currentTarget.value)
-                  }
-                >
-                  {radio.name}
-                </ToggleButton>
-              ))}
-            </ButtonGroup>
-          </div>
-          <div>
-            <h5 className="ml-4 mt-3">Preferred Delivery Method</h5>
-            <Form.Group className="mb-3 ml-4 mt-3" controlId="formBasicCheckbox">
-              <Form.Check
-                type="checkbox"
-                label="Meet-up"
-                onChange={(event) => handleMeetChange()}
-              />
-            </Form.Group>
-            {isPreferredDeliveryMeet ? 
-             <MeetUpLocationField preferredMeetUpLocation={preferredMeetUpLocation} setPreferredMeetUpLocation={setPreferredMeetUpLocation}/>
-             : ''
-            }
-            <Form.Group className="mb-3 ml-4" controlId="formBasicCheckbox">
-              <Form.Check
-                type="checkbox"
-                label="Delivery"
-                onChange={(event) => handleDeliverChange()}
-              />
-            </Form.Group>
-          </div>
-          <div>
-            <h5 className="ml-4 mt-3">Preferred Payment Method</h5>
-            <Form.Group className="mb-3 ml-4 mt-3" controlId="formBasicCheckbox">
-              <Form.Check
-                type="checkbox"
-                label="Cash on Meet-up"
-                onChange={(event) => handleCashChange()}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3 ml-4" controlId="formBasicCheckbox">
-              <Form.Check
-                type="checkbox"
-                label="PayNow"
-                onChange={(event) => handlePayNowChange()}
-              />
-            </Form.Group>
-          </div>
-          <Form.Row>
-            <Form.Group>
-              <h5 className="ml-4 mt-1">Questions for Sellers</h5>
-              {renderQnAFields()}
-              <Button className="ml-4 mt-3" onClick={handleAddQnA}>Add Question</Button>
-            </Form.Group>
-          </Form.Row>
-          <Button className="ml-4 mt-3 mb-4 mr-4 btn-success btn-lg" onClick={createListing}>Submit</Button>
+              ) : (
+                ""
+              )}
+            </Form.Row>
+            <Form.Row>
+              <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                <Form.Check
+                  type="checkbox"
+                  label="Delivery"
+                  onChange={(event) => handleDeliverChange()}
+                />
+              </Form.Group>
+            </Form.Row>
+            <Form.Row>
+              <h5 className="mt-3">Preferred Payment Method</h5>
+            </Form.Row>
+            <Form.Row>
+              <Form.Group className="mb-3 mt-3" controlId="formBasicCheckbox">
+                <Form.Check
+                  type="checkbox"
+                  label="Cash on Meet-up"
+                  onChange={(event) => handleCashChange()}
+                />
+              </Form.Group>
+            </Form.Row>
+            <Form.Row>
+              <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                <Form.Check
+                  type="checkbox"
+                  label="PayNow"
+                  onChange={(event) => handlePayNowChange()}
+                />
+              </Form.Group>
+            </Form.Row>
+            <Form.Row>
+              <Form.Group>
+                <h5 className="mt-1">Questions for Sellers</h5>
+                {renderQnAFields()}
+                <Button className="mt-3" onClick={handleAddQnA}>
+                  Add Question
+                </Button>
+              </Form.Group>
+            </Form.Row>
+            <Form.Row className="flex-row-reverse">
+              <Button className="mt-3 btn-lg" onClick={createListing}>
+                List your request <FaAngleRight />
+              </Button>
+            </Form.Row>
+          </Form>
         </Col>
       </Row>
     </div>

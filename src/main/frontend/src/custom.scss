@@ -14,5 +14,31 @@ $font-family-sans-serif: "Inter", sans-serif;
 }
 
 .badge-info {
-    background-color: #C77DFF;
+  background-color: #c77dff;
+}
+
+.toggleable > input[type="radio"] {
+  display: none;
+}
+
+.btn-outline-primary.active {
+  background-color: $primary !important;
+  border-color: $primary !important;
+}
+
+// .input-group-prepend {
+//   flex: 0 0 20%;
+// }
+
+// // .input-group-prepend .input-group-text {
+// //   width: 100%;
+// // }
+
+.input-group-prepend.login {
+  width: 40%;
+}
+
+.input-group-prepend.login .input-group-text {
+  width: 100%;
+  overflow: hidden;
 }

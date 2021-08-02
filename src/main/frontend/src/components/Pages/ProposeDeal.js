@@ -7,6 +7,8 @@ import {
   InputGroup,
   FormControl,
   Button,
+  Tab,
+  Nav,
 } from "react-bootstrap";
 
 import { useHistory, useLocation } from "react-router";
@@ -69,7 +71,7 @@ function ExistingIFS({ listing, index, setIfsListing }) {
   );
 }
 
-function UseExistingListing({ user, setIfsListing }) {
+function UseExistingListing({ user, setIfsListing, useExistingListing }) {
   const [listings, setListings] = useState([]);
 
   const fetchListings = () => {
@@ -87,8 +89,11 @@ function UseExistingListing({ user, setIfsListing }) {
   };
 
   useEffect(() => {
-    fetchListings();
-  }, []);
+    if (useExistingListing) {
+      fetchListings();
+      console.log("fetching");
+    }
+  }, [useExistingListing]);
 
   return listings.map((listing, index) => {
     return (
@@ -119,7 +124,7 @@ export default function ProposeDeal(props) {
   const history = useHistory();
   const location = useLocation();
 
-  const [useExistingListing, setUseExistingListing] = useState("");
+  const [useExistingListing, setUseExistingListing] = useState(true);
   const [ifsListing, setIfsListing] = useState({});
   const [buyerQnAs, setBuyerQnAs] = useState([]);
   const [answersList, setAnswersList] = useState([]);
@@ -233,7 +238,7 @@ export default function ProposeDeal(props) {
       });
       BuyerQnAService.postManyAnswerQnAs(answers).then((res) => {
         history.push({
-          pathname: "/home",
+          pathname: "/transaction-active",
         });
       });
     });
@@ -267,70 +272,150 @@ export default function ProposeDeal(props) {
       });
       BuyerQnAService.postManyAnswerQnAs(answers).then((res) => {
         history.push({
-          pathname: "/home",
+          pathname: "/transaction-active",
         });
       });
     });
   };
 
   // Use Existing Listing or Create New One
-  const showFormOrList = () => {
-    switch (useExistingListing) {
-      case "Y":
-        return (
-          <div>
-            <h1 className="ml-4">Use existing listing:</h1>
-            <div className="row ml-4 mr-4">
-              <UseExistingListing user={user} setIfsListing={setIfsListing} />
-            </div>
-            <div className="text-center m-4 ">
-              <Button
-                className="btn btn-block btn-success"
-                onClick={createDeal}
-              >
-                {" "}
-                Submit{" "}
-              </Button>
-            </div>
-          </div>
-        );
-      case "N":
-        return [
-          <hr></hr>,
-          <div>
-            <h1 className="m-4">Create New Listing</h1>
-            <CreateIFS
-              listingType="d"
-              setDeal={(listing, event) => createDealListing(listing, event)}
-            />
-          </div>,
-        ];
-      default:
-        return [
-          <div className="position-relative text-center ml-5 mr-5">
-            <Button
-              className="mt-4 mb-4"
-              onClick={(event) => setUseExistingListing("Y")}
-            >
-              Use Existing Listing
-            </Button>
-          </div>,
-          <div className="text-center ml-5 mr-5">
-            <Button onClick={(event) => setUseExistingListing("N")}>
-              Create New Listing
-            </Button>
-          </div>,
-        ];
-    }
-  };
+  // const showFormOrList = () => {
+  //   switch (useExistingListing) {
+  //     case "Y":
+  //       return (
+  //         <div className="d-flex flex-column justify-content-space-around">
+  //           <div className="text-center ml-5 mr-5">
+  //             <Button
+  //               className="m-4"
+  //               onClick={(event) => setUseExistingListing("N")}
+  //             >
+  //               Create New Listing
+  //             </Button>
+  //           </div>
+  //           <hr></hr>
+  //           <h1 className="m-4">Use Existing Listing</h1>
+  //           <div className="row m-4">
+  //             <UseExistingListing user={user} setIfsListing={setIfsListing} />
+  //           </div>
+  //           <div className="text-center m-4 ">
+  //             <Button className="btn btn-block" onClick={createDeal}>
+  //               {" "}
+  //               Submit{" "}
+  //             </Button>
+  //           </div>
+  //         </div>
+  //       );
+  //     case "N":
+  //       return (
+  //         <div>
+  //           <div className="text-center ml-5 mr-5">
+  //             <Button
+  //               className="m-4"
+  //               onClick={(event) => setUseExistingListing("Y")}
+  //             >
+  //               Use Existing Listing
+  //             </Button>
+  //           </div>
+  //           <hr></hr>
+  //           <div>
+  //             <h1 className="m-4">Create New Listing</h1>
+  //             <CreateIFS
+  //               listingType="d"
+  //               setDeal={(listing, event) => createDealListing(listing, event)}
+  //             />
+  //           </div>
+  //         </div>
+  //       );
+  //     default:
+  //       return (
+  //         <div className="d-flex justify-content-center align-items-center ml-5 mr-5">
+  //           <Button
+  //             className="m-4"
+  //             onClick={(event) => setUseExistingListing("Y")}
+  //           >
+  //             Use Existing Listing
+  //           </Button>
+  //           <Button
+  //             className="m-4"
+  //             onClick={(event) => setUseExistingListing("N")}
+  //           >
+  //             Create New Listing
+  //           </Button>
+  //         </div>
+  //       );
+  //   }
+  // };
 
   return (
     <div>
       <NavigationBar />
-      <h1 className="m-4">Proposing Deal for:</h1>
-      <h2 className="m-4">{location.state.listing.title}</h2>
-      {renderBuyerQnAs()}
-      {showFormOrList()}
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-4">
+            <h2 className="m-4">You are proposing a deal for:</h2>
+            <h4 className="mx-4">{location.state.listing.title}</h4>
+            <hr />
+            <div className="mx-4">
+              <b>Requested by: </b> {location.state.listing.user.username}
+            </div>
+            <div className="mx-4 my-2">
+              <b>Price Range: </b> S$ {location.state.listing.priceLower} - {location.state.listing.priceUpper}
+            </div>
+            <p className="m-4">{location.state.listing.description}</p>
+            <hr />
+            {renderBuyerQnAs()}
+          </div>
+          <div className="col-lg-8 shadow-sm">
+            <Tab.Container defaultActiveKey="existingListing">
+              <Nav fill variant="pills" className="my-4">
+                <Nav.Item>
+                  <Nav.Link
+                    eventKey="existingListing"
+                    onSelect={(event) => setUseExistingListing(true)}
+                  >
+                    Use Existing Listing
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link
+                    eventKey="createListing"
+                    onSelect={(event) => setUseExistingListing(false)}
+                  >
+                    Create New Listing
+                  </Nav.Link>
+                </Nav.Item>
+              </Nav>
+              <Tab.Content>
+                <Tab.Pane eventKey="existingListing">
+                  <div>
+                    <div className="row">
+                      <UseExistingListing
+                        user={user}
+                        setIfsListing={setIfsListing}
+                        useExistingListing={useExistingListing}
+                      />
+                    </div>
+                    <div className="row my-4">
+                      <Button className="btn btn-block" onClick={createDeal}>
+                        {" "}
+                        Submit{" "}
+                      </Button>
+                    </div>
+                  </div>
+                </Tab.Pane>
+                <Tab.Pane eventKey="createListing">
+                  <CreateIFS
+                    listingType="d"
+                    setDeal={(listing, event) =>
+                      createDealListing(listing, event)
+                    }
+                  />
+                </Tab.Pane>
+              </Tab.Content>
+            </Tab.Container>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

@@ -39,7 +39,7 @@ export default function MakeOffer(props) {
 
     OfferService.postOffer(offer).then((res) => {
       history.push({
-        pathname: "/home",
+        pathname: "/transaction-active",
       });
     });
   };

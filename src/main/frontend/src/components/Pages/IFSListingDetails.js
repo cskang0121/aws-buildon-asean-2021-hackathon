@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Badge } from "react-bootstrap";
 import { useHistory, useLocation } from "react-router";
+import { FaBoxOpen, FaHandHoldingUsd, FaLocationArrow } from 'react-icons/fa';
 import IFSService from "../../services/IFSService";
 import NavigationBar from "../Navbar/NavigationBar";
 import UserService from "../../services/UserService";
@@ -280,14 +281,14 @@ export default function IFSListing(props) {
               <h3>S${location.state.listing.price}</h3>
             </div>
             <div className="row">
-              <div className="col-4">
-                <p>{location.state.listing.itemCondition}</p>
+              <div className="col-3">
+                <p><FaBoxOpen style={{color: "#5A189A"}}/> {location.state.listing.itemCondition}</p>
+              </div>
+              <div className="col-5">
+                <p><FaLocationArrow style={{color: "#5A189A"}}/> {getDeliveryMethod(location.state.listing)}</p>
               </div>
               <div className="col-4">
-                <p>{getDeliveryMethod(location.state.listing)}</p>
-              </div>
-              <div className="col-4">
-                <p>{getPaymentMethod(location.state.listing)}</p>
+                <p><FaHandHoldingUsd style={{color: "#5A189A"}}/> {getPaymentMethod(location.state.listing)}</p>
               </div>
             </div>
             <div className="row  pt-2 pb-2 border-top border-bottom">
