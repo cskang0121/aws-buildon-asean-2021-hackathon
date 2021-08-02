@@ -8,6 +8,7 @@ const styles = {
   container: {
     boxShadow: "2px 9px 16px 0px rgba(0,0,0,0.25)",
     padding: "2%",
+    marginTop: 20,
   },
   buttons: {
     display: "flex",
@@ -58,7 +59,7 @@ export default function DealsHistoryList(props) {
             You proposed a deal to {deal.wtbId.user.username}'s request:
           </span>
           <span style={styles.itemName}>{deal.wtbId.title}</span>
-          <span style={styles.paragraph}>Item: ${deal.ifsId.title}</span>
+          <span style={styles.paragraph}>Item: {deal.ifsId.title}</span>
           <span style={styles.paragraph}>
             Date: {new Date(deal.dateOfDeal).toLocaleDateString("en-gb")}
           </span>

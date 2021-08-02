@@ -9,8 +9,9 @@ const styles = {
     fontFamily: "Inter, sans-serif",
     fontWeight: 600,
     fontSize: 40,
-    marginBottom: 20,
-    marginTop: 20,
+    marginBottom: 40,
+    marginTop: 40,
+    textAlign: "center",
   },
 };
 
