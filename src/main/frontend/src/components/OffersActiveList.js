@@ -7,6 +7,7 @@ const styles = {
   container: {
     boxShadow: "2px 9px 16px 0px rgba(0,0,0,0.25)",
     padding: "2%",
+    marginTop: 20,
   },
   buttons: {
     display: "flex",

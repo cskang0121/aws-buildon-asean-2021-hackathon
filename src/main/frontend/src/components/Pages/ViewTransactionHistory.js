@@ -10,6 +10,17 @@ const styles = {
     fontWeight: 600,
     fontSize: 40,
     marginBottom: 20,
+    marginTop: 40,
+    textAlign: "center",
+  },
+};
+
+const stylesv2 = {
+  title: {
+    fontFamily: "Inter, sans-serif",
+    fontWeight: 500,
+    fontSize: 35,
+    marginBottom: 20,
     marginTop: 20,
   },
 };
@@ -19,41 +30,41 @@ export default function ViewTransactionHistory(props) {
     <div>
       <NavigationBar />
       <Tab.Container defaultActiveKey="offers">
-        <Nav fill variant="pills">
+        <Nav fill variant="underline">
           <Nav.Item>
-            <Nav.Link eventKey="offers">Offers</Nav.Link>
+            <Nav.Link eventKey="offers">Received Offers</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="deals">Deals</Nav.Link>
+            <Nav.Link eventKey="deals">Received Deals</Nav.Link>
           </Nav.Item>
         </Nav>
         <Tab.Content>
           <Tab.Pane eventKey="offers">
-            <div className="container">
-              <div className="row">
-                <span style={styles.title}>View all received offers</span>
-              </div>
-              <div className="row">
-                <span style={styles.title}>Rejected Offers</span>
+            <div className="container mb-5">
+              {/* <div className="row">
+                <span style={styles.title}>View All Received Offers</span>
+              </div> */}
+              <div className="row mt-4">
+                <span style={stylesv2.title}>Rejected Offers</span>
               </div>
               <OffersHistoryList status="r" />
-              <div className="row">
-                <span style={styles.title}>Confirmed Offers</span>
+              <div className="row mt-5">
+                <span style={stylesv2.title}>Confirmed Offers</span>
               </div>
               <OffersHistoryList status="c" />
             </div>
           </Tab.Pane>
           <Tab.Pane eventKey="deals">
-            <div className="container">
-              <div className="row">
-                <span style={styles.title}>View all received deals</span>
-              </div>
-              <div className="row">
-                <span style={styles.title}>Rejected Deals</span>
+            <div className="container mb-5">
+              {/* <div className="row">
+                <span style={styles.title}>View All Received Deals</span>
+              </div> */}
+              <div className="row mt-4">
+                <span style={stylesv2.title}>Rejected Deals</span>
               </div>
               <DealsHistoryList status="r" />
-              <div className="row">
-                <span style={styles.title}>Confirmed Deals</span>
+              <div className="row mt-5">
+                <span style={stylesv2.title}>Confirmed Deals</span>
               </div>
               <DealsHistoryList status="c" />
             </div>

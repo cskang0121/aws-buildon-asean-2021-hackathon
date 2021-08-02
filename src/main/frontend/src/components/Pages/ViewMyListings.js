@@ -9,9 +9,9 @@ export default function ViewMyListings() {
     <div>
       <NavigationBar />
       <Tab.Container defaultActiveKey="ifs">
-        <Nav fill variant="pills" className="ml-0 mr-0">
+        <Nav fill variant="underline" className="ml-0 mr-0">
           <Nav.Item>
-            <Nav.Link eventKey="ifs">Items for Sale</Nav.Link>
+            <Nav.Link eventKey="ifs">Item for Sale</Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link eventKey="wtb">Want to Buy</Nav.Link>
@@ -19,14 +19,16 @@ export default function ViewMyListings() {
         </Nav>
         <Tab.Content>
           <Tab.Pane eventKey="ifs">
-            <div className="container-fluid">
+            {/* <div className="container-fluid"> */}
+            <div className="container">
               <div className="row">
                 <IFS />
               </div>
             </div>
           </Tab.Pane>
           <Tab.Pane eventKey="wtb">
-            <div className="container-fluid">
+            {/* <div className="container-fluid"> */}
+            <div className="container">
               <div className="row">
                 <WTB />
               </div>
