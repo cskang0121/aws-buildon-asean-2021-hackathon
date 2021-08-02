@@ -53,18 +53,18 @@ public class PersonalizeService {
     private IFSService ifsService;
 
     public List<WantToBuyListing> getUserWTBRecs(Long userId) {
-        List<Long> itemIdsList = getUserRecs(userId, campaignArnWTBUser, filterArnWTBUser);
+        List<Long> itemIdsList = getUserRecs(userId, campaignArnWTBUser, filterArnWTBUser, "WTB");
         List<WantToBuyListing> recommendedListings = wtbService.findAllById(itemIdsList);
         return recommendedListings;
     }
 
     public List<ItemForSaleListing> getUserIFSRecs(Long userId) {
-        List<Long> itemIdsList = getUserRecs(userId, campaignArnIFSUser, filterArnIFSUser);
+        List<Long> itemIdsList = getUserRecs(userId, campaignArnIFSUser, filterArnIFSUser, "IFS");
         List<ItemForSaleListing> recommendedListings = ifsService.findAllById(itemIdsList);
         return recommendedListings;
     }
 
-    private List<Long> getUserRecs(Long userId, String campaignArn, String filterArn) {
+    private List<Long> getUserRecs(Long userId, String campaignArn, String filterArn, String prefix) {
         List<Long> itemIdsList = new ArrayList<>();
         try {
             GetRecommendationsRequest recommendationsRequest = GetRecommendationsRequest.builder()
@@ -76,8 +76,10 @@ public class PersonalizeService {
             List<PredictedItem> items = recommendationsResponse.itemList();
 
             for (PredictedItem item : items) {
-                String formattedId = item.itemId().substring(3);
-                itemIdsList.add(Long.parseLong(formattedId));
+                if (item.itemId().startsWith(prefix)) {
+                    String formattedId = item.itemId().substring(3);
+                    itemIdsList.add(Long.parseLong(formattedId));
+                }
             }
         } catch (AwsServiceException e) {
             System.err.println(e.awsErrorDetails().errorMessage());

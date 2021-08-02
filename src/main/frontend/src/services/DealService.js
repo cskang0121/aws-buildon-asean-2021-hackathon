@@ -40,6 +40,12 @@ class DealService {
     });
   }
 
+  getCurrentUserReceivedDeals(uid) {
+    return axios.get(DEAL_API_BASE_URL + "/get/receivedby=" + uid, {
+      headers: authHeader(),
+    });
+  }
+
   postConfirmDeal(deal) {
     return axios.post(DEAL_API_BASE_URL + "/post/confirm", deal, {
       headers: authHeader(),

@@ -38,7 +38,7 @@ export default function NavigationBar() {
 
   //post listing + search
   return (
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top shadow-sm">
       <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
         <a class="navbar-brand dark-text" href="/home">
           <Logo width={150}/>
@@ -90,6 +90,9 @@ export default function NavigationBar() {
                   </a>
                   <a class="dropdown-item" href="/received-offers">
                     View Received Offers
+                  </a>
+                  <a class="dropdown-item" href="/received-deals">
+                    View Received Deals
                   </a>
                   <a class="dropdown-item" href="/transaction-active">
                     View Active Transactions

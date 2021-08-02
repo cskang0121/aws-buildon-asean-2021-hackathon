@@ -3,7 +3,6 @@ import "./App.css";
 import "./custom.scss";
 //import "bootstrap/dist/css/bootstrap.min.css";
 
-
 import NavigationBar from "./components/Navbar/NavigationBar";
 import Home from "./components/Pages/Home";
 import Register from "./components/Pages/Register";
@@ -23,6 +22,7 @@ import ViewSellerQnA from "./components/Pages/ViewSellerQnA";
 import AnswerSellerQnA from "./components/Pages/AnswerSellerQnA";
 import ViewTransactionHistory from "./components/Pages/ViewTransactionHistory";
 import ViewActiveTransactions from "./components/Pages/ViewActiveTransactions";
+import ViewAllReceivedDeals from "./components/Pages/ViewAllReceivedDeals";
 
 import AuthenticationService from "./services/AuthenticationService";
 
@@ -81,6 +81,11 @@ function App() {
             path="/received-offers"
             exact
             component={ViewAllReceivedOffers}
+          />
+          <PrivateRoute
+            path="/received-deals"
+            exact
+            component={ViewAllReceivedDeals}
           />
           <PrivateRoute
             path="/view-listing-offers"
