@@ -73,11 +73,8 @@ function Dropzone(props) {
       {isDragActive ? (
         <div>
           {imgSrc != null ? (
-            <div className="d-flex justify-content-center">
-              <img
-                style={{ width: 400, height: 400, objectFit: "cover" }}
-                src={imgSrc}
-              />
+            <div className="square">
+              <img src={imgSrc} />
             </div>
           ) : (
             <div
@@ -91,24 +88,8 @@ function Dropzone(props) {
       ) : (
         <div>
           {imgSrc != null ? (
-            <div
-              className="d-flex justify-content-center"
-              style={{
-                width: "100%",
-                paddingBottom: "100%",
-                position: "relative",
-                overflow: "hidden",
-              }}
-            >
-              <img
-                style={{
-                  minWidth: "100%",
-                  minHeight: "100%",
-                  objectFit: "cover",
-                  float: "left"
-                }}
-                src={imgSrc}
-              />
+            <div className="square">
+              <img src={imgSrc} />
             </div>
           ) : (
             <div
@@ -281,7 +262,7 @@ export default function CreateIFS(props) {
               <Col>
                 <Form.Group>
                   <InputGroup>
-                    <InputGroup.Prepend>
+                    <InputGroup.Prepend className="create-listing-input">
                       <InputGroup.Text>Title:</InputGroup.Text>
                     </InputGroup.Prepend>
                     <FormControl
@@ -301,7 +282,7 @@ export default function CreateIFS(props) {
               <Col>
                 <Form.Group>
                   <InputGroup>
-                    <InputGroup.Prepend>
+                    <InputGroup.Prepend className="create-listing-input">
                       <InputGroup.Text>Description:</InputGroup.Text>
                     </InputGroup.Prepend>
                     <FormControl

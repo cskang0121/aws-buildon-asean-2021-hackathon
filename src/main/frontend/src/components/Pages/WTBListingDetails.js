@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useHistory, useLocation } from "react-router";
-import { FaBoxOpen, FaHandHoldingUsd, FaLocationArrow } from 'react-icons/fa';
+import {
+  FaBoxOpen,
+  FaHandHoldingUsd,
+  FaLocationArrow,
+  FaRegCommentDots,
+} from "react-icons/fa";
 import WTBService from "../../services/WTBService";
 import NavigationBar from "../Navbar/NavigationBar";
 import UserService from "../../services/UserService";
@@ -43,6 +48,9 @@ export default function WTB(props) {
       </div>
     ) : (
       <div className="d-flex flex-column">
+        <Button className="mx-2" size="lg" variant="outline-primary">
+          <FaRegCommentDots /> Chat with {location.state.listing.user.username}
+        </Button>
         <Button
           size="lg"
           className="m-2"
@@ -136,13 +144,22 @@ export default function WTB(props) {
             </div>
             <div className="row">
               <div className="col-3">
-                <p><FaBoxOpen style={{color: "#5A189A"}}/> {location.state.listing.preferredItemCondition}</p>
+                <p>
+                  <FaBoxOpen style={{ color: "#5A189A" }} />{" "}
+                  {location.state.listing.preferredItemCondition}
+                </p>
               </div>
               <div className="col-5">
-                <p><FaLocationArrow style={{color: "#5A189A"}}/> {getDeliveryMethod(location.state.listing)}</p>
+                <p>
+                  <FaLocationArrow style={{ color: "#5A189A" }} />{" "}
+                  {getDeliveryMethod(location.state.listing)}
+                </p>
               </div>
               <div className="col-4">
-                <p><FaHandHoldingUsd style={{color: "#5A189A"}}/> {getPaymentMethod(location.state.listing)}</p>
+                <p>
+                  <FaHandHoldingUsd style={{ color: "#5A189A" }} />{" "}
+                  {getPaymentMethod(location.state.listing)}
+                </p>
               </div>
             </div>
             <div className="row  pt-2 pb-2 border-top border-bottom">

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import DealService from "../services/DealService";
 import UserService from "../services/UserService";
+import { FaRegCommentDots } from "react-icons/fa";
 
 const styles = {
   container: {
@@ -201,6 +202,9 @@ export default function DealsActiveList(props) {
           {statusMessage(deal)}
         </div>
         <div className="col-3" style={styles.buttons}>
+          <Button size="lg" variant="outline-primary">
+            <FaRegCommentDots /> Chat
+          </Button>
           {confirmButton(deal)}
         </div>
       </div>

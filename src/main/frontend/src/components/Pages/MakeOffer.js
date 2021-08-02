@@ -47,9 +47,24 @@ export default function MakeOffer(props) {
   return (
     <div>
       <NavigationBar />
-      <h3 className="text-center m-5">How much are you offering?</h3>
-      <div className="row justify-content-center m-5">
-            <Form.Group>
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-4 shadow-sm">
+            <h2 className="m-4">You are making an offer for:</h2>
+            <h4 className="mx-4">{location.state.listing.title}</h4>
+            <hr />
+            <div className="mx-4">
+              <b>Posted by: </b> {location.state.listing.user.username}
+            </div>
+            <div className="mx-4 my-2">
+              <b>Price: </b> S$ {location.state.listing.price}
+            </div>
+            <p className="m-4">{location.state.listing.description}</p>
+            <hr />
+          </div>
+          <div className="col-lg-8 shadow-sm d-flex flex-column justify-content-center align-items-center p-4">
+            <h3 className="text-center my-4">How much are you offering?</h3>
+            <Form.Group className="my-4">
               <InputGroup>
                 <InputGroup.Prepend>
                   <InputGroup.Text>Price Offer:</InputGroup.Text>
@@ -64,11 +79,15 @@ export default function MakeOffer(props) {
                 />
               </InputGroup>
             </Form.Group>
+            <div className="text-center my-4">
+              <Button size="lg" onClick={createOffer}>
+                {" "}
+                Submit{" "}
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="text-center">
-        <Button className="btn btn-success" onClick={createOffer}> Submit </Button>
-      </div>
-      
     </div>
   );
 }

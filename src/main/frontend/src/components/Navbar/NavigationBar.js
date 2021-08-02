@@ -3,6 +3,7 @@ import { Navbar, Nav } from "react-bootstrap";
 import AuthenticationService from "../../services/AuthenticationService";
 import { useHistory } from "react-router";
 import UserService from "../../services/UserService";
+import { ReactComponent as Logo } from './logo-final-optimized.svg';
 
 export default function NavigationBar() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -40,7 +41,7 @@ export default function NavigationBar() {
     <nav class="navbar navbar-expand-md navbar-light bg-light">
       <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
         <a class="navbar-brand dark-text" href="/home">
-          Home
+          <Logo width={150}/>
         </a>
         <button
           class="navbar-toggler"

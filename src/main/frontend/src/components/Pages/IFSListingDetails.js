@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Button, Badge } from "react-bootstrap";
 import { useHistory, useLocation } from "react-router";
-import { FaBoxOpen, FaHandHoldingUsd, FaLocationArrow } from 'react-icons/fa';
+import {
+  FaBoxOpen,
+  FaHandHoldingUsd,
+  FaLocationArrow,
+  FaRegCommentDots,
+  FaRegQuestionCircle,
+} from "react-icons/fa";
 import IFSService from "../../services/IFSService";
 import NavigationBar from "../Navbar/NavigationBar";
 import UserService from "../../services/UserService";
@@ -147,7 +153,7 @@ export default function IFSListing(props) {
         </div>,
         <div className="text-center">
           <Button
-            className="mr-5 btn btn-success"
+            className="mr-5 btn"
             onClick={(event) => acceptDeal(location.state.deal)}
           >
             Accept Deal
@@ -165,10 +171,11 @@ export default function IFSListing(props) {
         <div className="d-flex flex-column">
           <Button
             size="lg"
+            variant="outline-primary"
             className="m-2"
             onClick={() => answerSellerQnA(location.state.listing)}
           >
-            View QnA
+            <FaRegQuestionCircle /> View QnA
           </Button>
           <Button
             size="lg"
@@ -182,13 +189,20 @@ export default function IFSListing(props) {
     } else {
       return (
         <div className="d-flex flex-column">
-          <Button
-            size="lg"
-            className="m-2"
-            onClick={() => viewSellerQnA(location.state.listing)}
-          >
-            View QnA
-          </Button>
+          <div className="btn-group">
+            <Button
+              size="lg"
+              className="mx-2"
+              variant="outline-primary"
+              onClick={() => viewSellerQnA(location.state.listing)}
+            >
+              <FaRegQuestionCircle /> View QnA
+            </Button>
+            <Button className="mx-2" size="lg" variant="outline-primary">
+              <FaRegCommentDots /> Chat with{" "}
+              {location.state.listing.user.username}
+            </Button>
+          </div>
           <Button
             size="lg"
             className="m-2"
@@ -282,16 +296,25 @@ export default function IFSListing(props) {
             </div>
             <div className="row">
               <div className="col-3">
-                <p><FaBoxOpen style={{color: "#5A189A"}}/> {location.state.listing.itemCondition}</p>
+                <p>
+                  <FaBoxOpen style={{ color: "#5A189A" }} />{" "}
+                  {location.state.listing.itemCondition}
+                </p>
               </div>
               <div className="col-5">
-                <p><FaLocationArrow style={{color: "#5A189A"}}/> {getDeliveryMethod(location.state.listing)}</p>
+                <p>
+                  <FaLocationArrow style={{ color: "#5A189A" }} />{" "}
+                  {getDeliveryMethod(location.state.listing)}
+                </p>
               </div>
               <div className="col-4">
-                <p><FaHandHoldingUsd style={{color: "#5A189A"}}/> {getPaymentMethod(location.state.listing)}</p>
+                <p>
+                  <FaHandHoldingUsd style={{ color: "#5A189A" }} />{" "}
+                  {getPaymentMethod(location.state.listing)}
+                </p>
               </div>
             </div>
-            <div className="row  pt-2 pb-2 border-top border-bottom">
+            <div className="row pt-2 pb-2 border-top border-bottom">
               <b>Description</b>
               <p>{location.state.listing.description}</p>
             </div>

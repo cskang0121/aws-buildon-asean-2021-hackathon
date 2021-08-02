@@ -124,7 +124,7 @@ export default function ProposeDeal(props) {
   const history = useHistory();
   const location = useLocation();
 
-  const [useExistingListing, setUseExistingListing] = useState(true);
+  const [useExistingListing, setUseExistingListing] = useState(null);
   const [ifsListing, setIfsListing] = useState({});
   const [buyerQnAs, setBuyerQnAs] = useState([]);
   const [answersList, setAnswersList] = useState([]);
@@ -132,6 +132,7 @@ export default function ProposeDeal(props) {
   // Get user
   const [user, setUser] = useState({});
   useEffect(() => {
+    setUseExistingListing(true);
     setUser(UserService.getProfile());
     fetchBuyerQnAs();
     // console.log(location.state.listing);
@@ -171,11 +172,11 @@ export default function ProposeDeal(props) {
     return answersList.map((item, index) => {
       return (
         <div key={index}>
-          <h4 className="ml-4">
+          <b className="ml-4">
             {item.answerId}. {buyerQnAs[index].question}
-          </h4>
-          <Form.Row>
-            <Form.Group className="ml-4 container-fluid mr-4">
+          </b>
+          <Form.Row className="my-2 ml-4">
+            <Form.Group>
               <InputGroup>
                 <InputGroup.Prepend>
                   <InputGroup.Text>Answer:</InputGroup.Text>
@@ -359,7 +360,8 @@ export default function ProposeDeal(props) {
               <b>Requested by: </b> {location.state.listing.user.username}
             </div>
             <div className="mx-4 my-2">
-              <b>Price Range: </b> S$ {location.state.listing.priceLower} - {location.state.listing.priceUpper}
+              <b>Price Range: </b> S$ {location.state.listing.priceLower} -{" "}
+              {location.state.listing.priceUpper}
             </div>
             <p className="m-4">{location.state.listing.description}</p>
             <hr />
@@ -367,7 +369,7 @@ export default function ProposeDeal(props) {
           </div>
           <div className="col-lg-8 shadow-sm">
             <Tab.Container defaultActiveKey="existingListing">
-              <Nav fill variant="pills" className="my-4">
+              <Nav fill variant="underline" className="my-4">
                 <Nav.Item>
                   <Nav.Link
                     eventKey="existingListing"

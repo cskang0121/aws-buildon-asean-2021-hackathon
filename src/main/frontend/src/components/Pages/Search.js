@@ -176,6 +176,7 @@ const IFSListings = (props) => {
 
   useEffect(() => {
     fetchListings();
+    console.log(props.keyword);
   }, [
     props.keyword,
     props.fullCategoryName,
@@ -213,7 +214,8 @@ const IFSListings = (props) => {
 };
 
 export default function Search() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const location = useLocation();
+  const [searchTerm, setSearchTerm] = useState(location.state.keyword);
   const [selectedListingType, setSelectedListingType] = useState("");
   const [categoryName, setCategoryName] = useState("");
   const [fullCategoryName, setFullCategoryName] = useState("");
@@ -221,7 +223,7 @@ export default function Search() {
   const [searchLocation, setSearchLocation] = useState("");
   // const [hashtags, setHashtags] = useState("");
 
-  const location = useLocation();
+  
 
   useEffect(() => {
     setSearchTerm(location.state.keyword);

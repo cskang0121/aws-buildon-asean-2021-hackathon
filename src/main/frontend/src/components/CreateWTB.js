@@ -66,11 +66,8 @@ function Dropzone(props) {
       {isDragActive ? (
         <div>
           {imgSrc != null ? (
-            <div className="d-flex justify-content-center">
-              <img
-                style={{ width: 400, height: 400, objectFit: "cover" }}
-                src={imgSrc}
-              />
+            <div className="square">
+              <img src={imgSrc} />
             </div>
           ) : (
             <div
@@ -84,11 +81,8 @@ function Dropzone(props) {
       ) : (
         <div>
           {imgSrc != null ? (
-            <div className="d-flex justify-content-center">
-              <img
-                style={{ width: 400, height: 400, objectFit: "cover" }}
-                src={imgSrc}
-              />
+            <div className="square">
+              <img src={imgSrc} />
             </div>
           ) : (
             <div
@@ -268,7 +262,7 @@ export default function CreateWTB(props) {
       return (
         <InputGroup key={index} className="mt-3">
           <InputGroup.Prepend>
-            <InputGroup.Text className="ml-4">Question:</InputGroup.Text>
+            <InputGroup.Text>Question:</InputGroup.Text>
           </InputGroup.Prepend>
           <FormControl
             required
@@ -330,7 +324,7 @@ export default function CreateWTB(props) {
               <Col>
                 <Form.Group>
                   <InputGroup>
-                    <InputGroup.Prepend>
+                    <InputGroup.Prepend className="create-listing-input">
                       <InputGroup.Text>Title:</InputGroup.Text>
                     </InputGroup.Prepend>
                     <FormControl
@@ -350,7 +344,7 @@ export default function CreateWTB(props) {
               <Col>
                 <Form.Group>
                   <InputGroup>
-                    <InputGroup.Prepend>
+                    <InputGroup.Prepend  className="create-listing-input">
                       <InputGroup.Text>Description:</InputGroup.Text>
                     </InputGroup.Prepend>
                     <FormControl
