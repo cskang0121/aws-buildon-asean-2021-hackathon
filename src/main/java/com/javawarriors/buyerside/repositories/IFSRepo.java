@@ -17,10 +17,10 @@ public interface IFSRepo extends JpaRepository<ItemForSaleListing, Long> {
 
     public List<ItemForSaleListing> findByTitleContaining(String keyword);
 
-    @Query(value = "select * from item_for_sale_listing ifs where ifs.title like %:keyword% and ifs.category_name like %:categoryName% and ifs.meet_up_location like %:searchLocation%", nativeQuery = true)
+    @Query(value = "select * from item_for_sale_listing ifs where (ifs.title like %:keyword% or ifs.category_name like %:keyword%) and ifs.category_name like %:categoryName% and ifs.meet_up_location like %:searchLocation%", nativeQuery = true)
     public List<ItemForSaleListing> findByTitleAndCategoryAndLocationContaining(@Param("keyword") String keyword, @Param("categoryName") String categoryName, @Param("searchLocation") String searchLocation);
 
-    @Query(value = "select * from item_for_sale_listing ifs where ifs.title like %:keyword% and ifs.category_name like %:categoryName% and ifs.item_condition in :conditionList and ifs.meet_up_location like %:searchLocation%", nativeQuery = true)
+    @Query(value = "select * from item_for_sale_listing ifs where (ifs.title like %:keyword% or ifs.category_name like %:keyword%) and ifs.category_name like %:categoryName% and ifs.item_condition in :conditionList and ifs.meet_up_location like %:searchLocation%", nativeQuery = true)
     public List<ItemForSaleListing> findByTitleAndCategoryAndConditionAndLocationContaining(@Param("keyword") String keyword, @Param("categoryName") String categoryName, @Param("conditionList") Collection<String> conditionList, @Param("searchLocation") String searchLocation);
 
     public List<ItemForSaleListing> findByUser(User user);
