@@ -14,5 +14,25 @@ $font-family-sans-serif: "Inter", sans-serif;
 }
 
 .badge-info {
-    background-color: #C77DFF;
+  background-color: #c77dff;
+}
+
+// Form Formatting for Login Page
+.input-group-prepend.login-page{
+  width: 30%;
+}
+
+.input-group-prepend.login-page .input-group-text {
+  width: 100%;
+  overflow: hidden;
+}
+
+// Form Formatting for Registration Page
+.input-group-prepend.register-page{
+  width: 30%;
+}
+
+.input-group-prepend.register-page .input-group-text {
+  width: 100%;
+  overflow: hidden;
 }
