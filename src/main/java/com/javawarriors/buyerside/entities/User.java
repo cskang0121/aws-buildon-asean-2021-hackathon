@@ -15,7 +15,7 @@ public class User {
      * user's unique user id which is automatically generated
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long uid;
 
     /**
@@ -76,12 +76,12 @@ public class User {
      */
 
     public Long getUid() {
-		return this.uid;
-	}
+        return this.uid;
+    }
 
-	public void setUid(Long uid) {
-		this.uid = uid;
-	}
+    public void setUid(Long uid) {
+        this.uid = uid;
+    }
 
     public String getEmail() {
         return this.email;
