@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import UserService from "../../services/UserService";
 import NavigationBar from "../Navbar/NavigationBar";
 import RecommendService from "../../services/RecommendService";
+import WTBService from "../../services/WTBService";
+import IFSService from "../../services/IFSService";
 import ListingCard from "../ListingCard";
 import banner from "../../img/homepage_banner.png";
 
@@ -44,12 +46,44 @@ function RecommendedItems({ uid, type }) {
   };
 
   return recs.map((rec, index) => {
+    const getImage = (listing) => {
+      if(type === "IFS") {
+        IFSService.getListingImage(listing.ifsId).then((res) => {
+          const byteCode = res.data;
+          const firstChar = byteCode.charAt(0);
+          var dataType = "";
+          if (firstChar === "/") {
+            dataType = "jpg";
+          } else if (firstChar === "i") {
+            dataType = "png";
+          } else {
+            dataType = "gif";
+          }
+          return ("data:image/" + dataType + ";base64," + byteCode);
+        });
+      } else if (type === "WTB") {
+        WTBService.getListingImage(listing.wtbId).then((res) => {
+          const byteCode = res.data;
+          const firstChar = byteCode.charAt(0);
+          var dataType = "";
+          if (firstChar === "/") {
+            dataType = "jpg";
+          } else if (firstChar === "i") {
+            dataType = "png";
+          } else {
+            dataType = "gif";
+          }
+          return ("data:image/" + dataType + ";base64," + byteCode);
+        });
+      }
+    };
+
     return (
       <div key={index} className="col-3">
         <ListingCard
           listingType={type}
           listing={rec}
-          imgSrc={null}
+          imgSrc={getImage(rec)}
           deleteMyListing={null}
           listingDetails={() => {
             listingDetails(rec);
@@ -73,9 +107,9 @@ export default function Home() {
       <div style={{height: "85vh", overflow: "hidden", borderBottom: "purple"}}>
           <img src={banner} style={{display: "block", maxHeight: "100%", margin: "auto", marginBottom: "8px"}}/> 
       </div>
-      <div className="container-fluid">
+      {/* <div className="container-fluid">
         <h2 className="mx-5 mt-4">What would you like to do today?</h2>
-      </div>
+      </div> */}
       <Tab.Container defaultActiveKey="ifs">
         <Nav fill variant="pills" className="border ml-0 mr-0 my-5">
           <Nav.Item>
