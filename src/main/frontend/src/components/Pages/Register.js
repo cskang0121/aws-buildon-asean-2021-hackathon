@@ -8,6 +8,7 @@ import {
   InputGroup,
   FormControl,
   Button,
+  Card,
 } from "react-bootstrap";
 
 import NavigationBar from "../Navbar/NavigationBar";
@@ -45,112 +46,110 @@ export default function Register() {
   return (
     <div>
       <NavigationBar />
-      <h3 className="m-5">Register a new Account</h3>
+      <h3 className="m-5 mb-2" style={{fontSize: "22px", textAlign: "center"}}>Register a new account!</h3>
       <Row className="justify-content-md-center">
         <Col lg={12}>
-          <Form.Row>
-            <Form.Group className="ml-5 mb-4">
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text>Username:</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                  required
-                  autoComplete="off"
-                  type="text"
-                  name="username"
-                  value={username}
-                  onChange={(event) => setUsername(event.target.value)}
-                />
-              </InputGroup>
-            </Form.Group>
-          </Form.Row>
-          <Form.Row>
-            <Form.Group className="ml-5 mb-4">
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text>Email:</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                  required
-                  autoComplete="off"
-                  type="text"
-                  name="email"
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                />
-              </InputGroup>
-            </Form.Group>
-          </Form.Row>
-          <Form.Row>
-            <Form.Group className="ml-5 mb-4">
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text>Password:</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                  required
-                  autoComplete="off"
-                  type="password"
-                  name="password"
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                />
-              </InputGroup>
-            </Form.Group>
-          </Form.Row>
-          <Form.Row>
-            <Form.Group className="ml-5 mb-4">
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text>First Name:</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                  required
-                  autoComplete="off"
-                  type="text"
-                  name="firstName"
-                  value={firstName}
-                  onChange={(event) => setFirstName(event.target.value)}
-                />
-              </InputGroup>
-            </Form.Group>
-          </Form.Row>
-          <Form.Row>
-            <Form.Group className="ml-5 mb-4">
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text>Last Name:</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                  required
-                  autoComplete="off"
-                  type="text"
-                  name="lastName"
-                  value={lastName}
-                  onChange={(event) => setLastName(event.target.value)}
-                />
-              </InputGroup>
-            </Form.Group>
-          </Form.Row>
-          <Form.Row>
-            <Form.Group className="ml-5">
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text>Location:</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                  required
-                  autoComplete="off"
-                  type="text"
-                  name="location"
-                  value={location}
-                  onChange={(event) => setLocation(event.target.value)}
-                />
-              </InputGroup>
-            </Form.Group>
-          </Form.Row>
-          <Button className="m-5 btn btn-success" onClick={createUser}> Submit </Button>
+          <div class="form-row m-5 mb-4">
+                  <div class="input-group input-group-lg col-md-6 mx-auto">
+                      <div class="input-group-prepend register-page">
+                          <span class="input-group-text">Username</span>
+                      </div>
+                      <FormControl
+                        required
+                        autoComplete="off"
+                        type="text"
+                        name="username"
+                        value={username}
+                        onChange={(event) => setUsername(event.target.value)}
+                      />
+                </div>
+              </div>
+
+              <div class="form-row ml-5 mr-5 mb-4">
+                  <div class="input-group input-group-lg col-md-6 mx-auto">
+                      <div class="input-group-prepend register-page">
+                          <span class="input-group-text col-md-13">Email</span>
+                      </div>
+                      <FormControl
+                        required
+                        autoComplete="off"
+                        type="text"
+                        name="email"
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
+                      />
+                </div>
+              </div>
+
+              <div class="form-row ml-5 mr-5 mb-4">
+                  <div class="input-group input-group-lg col-md-6 mx-auto">
+                      <div class="input-group-prepend register-page">
+                          <span class="input-group-text col-md-13">Password</span>
+                      </div>
+                      <FormControl
+                        required
+                        autoComplete="off"
+                        type="password"
+                        name="password"
+                        value={password}
+                        onChange={(event) => setPassword(event.target.value)}
+                      />
+                </div>
+              </div>
+
+              <div class="form-row ml-5 mr-5 mb-4">
+                  <div class="input-group input-group-lg col-md-6 mx-auto">
+                      <div class="input-group-prepend register-page">
+                          <span class="input-group-text col-md-13">First Name</span>
+                      </div>
+                      <FormControl
+                        required
+                        autoComplete="off"
+                        type="text"
+                        name="firstName"
+                        value={firstName}
+                        onChange={(event) => setFirstName(event.target.value)}
+                      />
+                </div>
+              </div>
+
+              <div class="form-row ml-5 mr-5 mb-4">
+                  <div class="input-group input-group-lg col-md-6 mx-auto">
+                      <div class="input-group-prepend register-page">
+                          <span class="input-group-text col-md-13">Last Name</span>
+                      </div>
+                      <FormControl
+                        required
+                        autoComplete="off"
+                        type="text"
+                        name="lastName"
+                        value={lastName}
+                        onChange={(event) => setLastName(event.target.value)}
+                      />
+                </div>
+              </div>
+
+              <div class="form-row ml-5 mr-5 mb-5">
+                  <div class="input-group input-group-lg col-md-6 mx-auto">
+                      <div class="input-group-prepend register-page">
+                          <span class="input-group-text col-md-13">Location</span>
+                      </div>
+                      <FormControl
+                        required
+                        autoComplete="off"
+                        type="text"
+                        name="location"
+                        value={location}
+                        onChange={(event) => setLocation(event.target.value)}
+                      />
+                </div>
+              </div>
+
+              <Button className="mb-5 btn" style={{display: "block", margin: "0 auto"}}onClick={createUser}> Submit </Button>
+
+              <Card className="text-center">
+              <Card.Footer className="text-muted">A new C2C experience</Card.Footer>
+              </Card>
         </Col>
       </Row>
     </div>
