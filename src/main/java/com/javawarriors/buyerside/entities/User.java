@@ -15,7 +15,7 @@ public class User {
      * user's unique user id which is automatically generated
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long uid;
 
     /**
