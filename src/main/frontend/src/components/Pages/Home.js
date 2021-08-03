@@ -11,6 +11,74 @@ import { Tab, Nav } from "react-bootstrap";
 
 import { useHistory } from "react-router-dom";
 
+function IFSRec({ rec, listingDetails }) {
+  const [imgSrc, setImgSrc] = useState("");
+
+  const getImage = (listing) => {
+    IFSService.getListingImage(listing.ifsId).then((res) => {
+      const byteCode = res.data;
+      const firstChar = byteCode.charAt(0);
+      var dataType = "";
+      if (firstChar === "/") {
+        dataType = "jpg";
+      } else if (firstChar === "i") {
+        dataType = "png";
+      } else {
+        dataType = "gif";
+      }
+      setImgSrc("data:image/" + dataType + ";base64," + byteCode);
+    });
+  };
+
+  useEffect(() => {
+    getImage(rec);
+  }, [rec]);
+
+  return (
+    <ListingCard
+      listingType="IFS"
+      listing={rec}
+      imgSrc={imgSrc}
+      deleteMyListing={null}
+      listingDetails={listingDetails}
+    />
+  );
+}
+
+function WTBRec({ rec, listingDetails }) {
+  const [imgSrc, setImgSrc] = useState("");
+
+  const getImage = (listing) => {
+    WTBService.getListingImage(listing.wtbId).then((res) => {
+      const byteCode = res.data;
+      const firstChar = byteCode.charAt(0);
+      var dataType = "";
+      if (firstChar === "/") {
+        dataType = "jpg";
+      } else if (firstChar === "i") {
+        dataType = "png";
+      } else {
+        dataType = "gif";
+      }
+      setImgSrc("data:image/" + dataType + ";base64," + byteCode);
+    });
+  };
+
+  useEffect(() => {
+    getImage(rec);
+  }, [rec]);
+
+  return (
+    <ListingCard
+      listingType="WTB"
+      listing={rec}
+      imgSrc={imgSrc}
+      deleteMyListing={null}
+      listingDetails={listingDetails}
+    />
+  );
+}
+
 function RecommendedItems({ uid, type }) {
   const [recs, setRecs] = useState([]);
   const history = useHistory();
@@ -46,51 +114,29 @@ function RecommendedItems({ uid, type }) {
   };
 
   return recs.map((rec, index) => {
-    const getImage = (listing) => {
-      if(type === "IFS") {
-        IFSService.getListingImage(listing.ifsId).then((res) => {
-          const byteCode = res.data;
-          const firstChar = byteCode.charAt(0);
-          var dataType = "";
-          if (firstChar === "/") {
-            dataType = "jpg";
-          } else if (firstChar === "i") {
-            dataType = "png";
-          } else {
-            dataType = "gif";
-          }
-          return ("data:image/" + dataType + ";base64," + byteCode);
-        });
-      } else if (type === "WTB") {
-        WTBService.getListingImage(listing.wtbId).then((res) => {
-          const byteCode = res.data;
-          const firstChar = byteCode.charAt(0);
-          var dataType = "";
-          if (firstChar === "/") {
-            dataType = "jpg";
-          } else if (firstChar === "i") {
-            dataType = "png";
-          } else {
-            dataType = "gif";
-          }
-          return ("data:image/" + dataType + ";base64," + byteCode);
-        });
-      }
-    };
-
-    return (
-      <div key={index} className="col-3">
-        <ListingCard
-          listingType={type}
-          listing={rec}
-          imgSrc={getImage(rec)}
-          deleteMyListing={null}
-          listingDetails={() => {
-            listingDetails(rec);
-          }}
-        />
-      </div>
-    );
+    if (type === "IFS") {
+      return (
+        <div key={index} className="col-3">
+          <IFSRec
+            rec={rec}
+            listingDetails={() => {
+              listingDetails(rec);
+            }}
+          />
+        </div>
+      );
+    } else if (type === "WTB") {
+      return (
+        <div key={index} className="col-3">
+          <WTBRec
+            rec={rec}
+            listingDetails={() => {
+              listingDetails(rec);
+            }}
+          />
+        </div>
+      );
+    }
   });
 }
 
@@ -104,8 +150,18 @@ export default function Home() {
   return (
     <div>
       <NavigationBar />
-      <div style={{height: "85vh", overflow: "hidden", borderBottom: "purple"}}>
-          <img src={banner} style={{display: "block", maxHeight: "100%", margin: "auto", marginBottom: "8px"}}/> 
+      <div
+        style={{ height: "85vh", overflow: "hidden", borderBottom: "purple" }}
+      >
+        <img
+          src={banner}
+          style={{
+            display: "block",
+            maxHeight: "100%",
+            margin: "auto",
+            marginBottom: "8px",
+          }}
+        />
       </div>
       {/* <div className="container-fluid">
         <h2 className="mx-5 mt-4">What would you like to do today?</h2>
