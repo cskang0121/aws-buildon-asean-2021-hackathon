@@ -82,4 +82,10 @@ public class DealController {
         return dealService.findByWtbIdIn(wantToBuyListings);
     }
 
+    @GetMapping("/get/receivedby={id}")
+    public List<Deal> getDealsReceivedByUser(@PathVariable Long id) {
+        List<WantToBuyListing> wantToBuyListings = wtbController.getWTBListingsByUserAndStatus(id, 'a');
+        return dealService.findByWtbIdIn(wantToBuyListings);
+    }
+
 }

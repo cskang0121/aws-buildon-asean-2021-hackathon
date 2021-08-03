@@ -2,10 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 
 import {
-  Row,
-  Col,
-  Form,
-  InputGroup,
   FormControl,
   Button,
   Card,
@@ -74,9 +70,12 @@ export default function Login() {
                         value={password}
                         onChange={(event) => setPassword(event.target.value)}
                       />
-                </div>
-              </div>
-          <Button className="mb-4" onClick={login}> Submit </Button>
+                  </div>
+              </div>          
+            <Button className="mb-4" onClick={login}>
+              {" "}
+              Submit{" "}
+            </Button>
           </Card.Text>
         </Card.Body>
         <Card.Footer className="text-muted">A new C2C experience</Card.Footer>

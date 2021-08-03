@@ -43,10 +43,17 @@ export default function DealList(props) {
   }, []);
 
   const fetchDeals = () => {
-    DealService.getDealsForWtbListing(props.view).then((res) => {
-      setDeals(res.data);
-      console.log(deals);
-    });
+    if (props.view === "all") {
+      DealService.getCurrentUserReceivedDeals(
+        UserService.getProfile().uid
+      ).then((res) => {
+        setDeals(res.data);
+      });
+    } else {
+      DealService.getDealsForWtbListing(props.view).then((res) => {
+        setDeals(res.data);
+      });
+    }
   };
 
   return deals.map((deal, index) => {

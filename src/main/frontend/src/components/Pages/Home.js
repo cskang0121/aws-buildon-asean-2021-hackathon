@@ -3,7 +3,7 @@ import UserService from "../../services/UserService";
 import NavigationBar from "../Navbar/NavigationBar";
 import RecommendService from "../../services/RecommendService";
 import ListingCard from "../ListingCard";
-import banner from "../homepage_banner-02.png";
+import banner from "../../img/homepage_banner.png";
 
 import { Tab, Nav } from "react-bootstrap";
 

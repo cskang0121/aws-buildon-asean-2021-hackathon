@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import OfferService from "../services/OfferService";
 import UserService from "../services/UserService";
+import { FaRegCommentDots } from "react-icons/fa";
 
 const styles = {
   container: {
@@ -78,14 +79,14 @@ export default function OffersActiveList(props) {
   const confirmTransaction = (offer) => {
     let confirmedOffer = { ...offer };
     if (offer.status === "a") {
-      if (props.origin == "received") {
+      if (props.origin === "received") {
         confirmedOffer.status = "2";
       } else if (props.origin == "made") {
         confirmedOffer.status = "1";
       }
-    } else if (offer.status == "1" && props.origin == "received") {
+    } else if (offer.status === "1" && props.origin === "received") {
       confirmedOffer.status = "c";
-    } else if (offer.status == "2" && props.origin == "made") {
+    } else if (offer.status === "2" && props.origin === "made") {
       confirmedOffer.status = "c";
     }
 
@@ -157,14 +158,14 @@ export default function OffersActiveList(props) {
           Status: Accepted, please confirm transaction once complete
         </span>
       );
-    } else if (offer.status == "1") {
-      if (props.origin == "received") {
+    } else if (offer.status === "1") {
+      if (props.origin === "received") {
         return (
           <span style={styles.paragraph}>
             Status: Awaiting your confirmation
           </span>
         );
-      } else if (props.origin == "made") {
+      } else if (props.origin === "made") {
         return (
           <span style={styles.paragraph}>
             Status: Confirmed, awaiting {offer.ifsListing.user.username}'s
@@ -172,14 +173,14 @@ export default function OffersActiveList(props) {
           </span>
         );
       }
-    } else if (offer.status == "2") {
-      if (props.origin == "made") {
+    } else if (offer.status === "2") {
+      if (props.origin === "made") {
         return (
           <span style={styles.paragraph}>
             Status: Awaiting your confirmation
           </span>
         );
-      } else if (props.origin == "received") {
+      } else if (props.origin === "received") {
         return (
           <span style={styles.paragraph}>
             Status: Confirmed, awaiting {offer.buyer.username}'s confirmation
@@ -204,6 +205,7 @@ export default function OffersActiveList(props) {
           {statusMessage(offer)}
         </div>
         <div className="col-3" style={styles.buttons}>
+          <Button size="lg" variant="outline-primary"><FaRegCommentDots /> Chat</Button>
           {confirmButton(offer)}
         </div>
       </div>

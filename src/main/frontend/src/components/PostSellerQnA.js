@@ -80,7 +80,7 @@ export default function PostSellerQnA(props) {
         <Button variant="secondary" onClick={props.onHide}>
           Close
         </Button>
-        <Button variant="btn btn-success primary" onClick={createQuestion}>
+        <Button variant="primary" onClick={createQuestion}>
           Submit
         </Button>
       </Modal.Footer>
