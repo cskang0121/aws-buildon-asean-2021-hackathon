@@ -48,7 +48,12 @@ export default function WTB(props) {
       </div>
     ) : (
       <div className="d-flex flex-column">
-        <Button className="mx-2" size="lg" variant="outline-primary">
+        <Button
+          className="mx-2"
+          size="lg"
+          variant="outline-primary"
+          onClick={(event) => chat(event, location.state.listing)}
+        >
           <FaRegCommentDots /> Chat with {location.state.listing.user.username}
         </Button>
         <Button
@@ -100,6 +105,14 @@ export default function WTB(props) {
     } else if (listing.isPreferredPaymentPayNow) {
       return "PayNow";
     }
+  };
+
+  const chat = (e, listing) => {
+    e.preventDefault();
+    history.push({
+      pathname: "/chat",
+      state: { otherUser: listing.user },
+    });
   };
 
   return (

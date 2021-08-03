@@ -198,7 +198,12 @@ export default function IFSListing(props) {
             >
               <FaRegQuestionCircle /> View QnA
             </Button>
-            <Button className="mx-2" size="lg" variant="outline-primary">
+            <Button
+              className="mx-2"
+              size="lg"
+              variant="outline-primary"
+              onClick={(event) => chat(event, location.state.listing)}
+            >
               <FaRegCommentDots /> Chat with{" "}
               {location.state.listing.user.username}
             </Button>
@@ -253,6 +258,14 @@ export default function IFSListing(props) {
     } else if (listing.isPaymentPayNow) {
       return "PayNow";
     }
+  };
+
+  const chat = (e, listing) => {
+    e.preventDefault();
+    history.push({
+      pathname: "/chat",
+      state: { otherUser: listing.user },
+    });
   };
 
   return (
