@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useHistory, useLocation } from "react-router";
+import {
+  FaBoxOpen,
+  FaHandHoldingUsd,
+  FaLocationArrow,
+  FaRegCommentDots,
+} from "react-icons/fa";
 import WTBService from "../../services/WTBService";
 import NavigationBar from "../Navbar/NavigationBar";
 import UserService from "../../services/UserService";
@@ -43,6 +49,14 @@ export default function WTB(props) {
     ) : (
       <div className="d-flex flex-column">
         <Button
+          className="mx-2"
+          size="lg"
+          variant="outline-primary"
+          onClick={(event) => chat(event, location.state.listing)}
+        >
+          <FaRegCommentDots /> Chat with {location.state.listing.user.username}
+        </Button>
+        <Button
           size="lg"
           className="m-2"
           onClick={() => makeDeal(location.state.listing)}
@@ -72,6 +86,34 @@ export default function WTB(props) {
   useEffect(() => {
     getImage(location.state.listing);
   }, [location.state.listing]);
+
+  const getDeliveryMethod = (listing) => {
+    if (listing.isPreferredDeliveryDeliver && listing.isPreferredDeliveryMeet) {
+      return `Delivery, Meet Up (${location.state.listing.preferredMeetUpLocation})`;
+    } else if (listing.isPreferredDeliveryDeliver) {
+      return "Delivery";
+    } else if (listing.isPreferredDeliveryMeet) {
+      return `Meet Up (${location.state.listing.preferredMeetUpLocation})`;
+    }
+  };
+
+  const getPaymentMethod = (listing) => {
+    if (listing.isPreferredPaymentCash && listing.isPreferredPaymentPayNow) {
+      return "PayNow, Cash";
+    } else if (listing.isPreferredPaymentCash) {
+      return "Cash";
+    } else if (listing.isPreferredPaymentPayNow) {
+      return "PayNow";
+    }
+  };
+
+  const chat = (e, listing) => {
+    e.preventDefault();
+    history.push({
+      pathname: "/chat",
+      state: { otherUser: listing.user },
+    });
+  };
 
   return (
     <div>
@@ -114,14 +156,23 @@ export default function WTB(props) {
               </h3>
             </div>
             <div className="row">
-              <div className="col-4">
-                <p>{location.state.listing.preferredItemCondition}</p>
+              <div className="col-3">
+                <p>
+                  <FaBoxOpen style={{ color: "#5A189A" }} />{" "}
+                  {location.state.listing.preferredItemCondition}
+                </p>
+              </div>
+              <div className="col-5">
+                <p>
+                  <FaLocationArrow style={{ color: "#5A189A" }} />{" "}
+                  {getDeliveryMethod(location.state.listing)}
+                </p>
               </div>
               <div className="col-4">
-                <p>Delivery Method</p>
-              </div>
-              <div className="col-4">
-                <p>Location</p>
+                <p>
+                  <FaHandHoldingUsd style={{ color: "#5A189A" }} />{" "}
+                  {getPaymentMethod(location.state.listing)}
+                </p>
               </div>
             </div>
             <div className="row  pt-2 pb-2 border-top border-bottom">

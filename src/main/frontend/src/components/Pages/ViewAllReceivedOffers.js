@@ -9,8 +9,9 @@ const styles = {
     fontFamily: "Inter, sans-serif",
     fontWeight: 600,
     fontSize: 40,
-    marginBottom: 20,
-    marginTop: 20,
+    marginBottom: 40,
+    marginTop: 40,
+    textAlign: "center",
   },
 };
 
@@ -20,7 +21,7 @@ export default function ViewAllReceivedOffers(props) {
       <NavigationBar />
       <div className="container">
         <div className="row">
-          <span style={styles.title}>View all received offers</span>
+          <span style={styles.title}>View All Received Offers</span>
         </div>
         <OfferList view="all" />
       </div>

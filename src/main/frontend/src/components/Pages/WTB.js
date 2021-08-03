@@ -9,8 +9,11 @@ import ListingCard from "../ListingCard";
 const styles = {
   heading: {
     fontFamily: "Inter, sans-serif",
-    fontSize: 30,
+    fontSize: 40,
     fontWeight: 600,
+    marginTop: 20,
+    marginBottom: 20,
+    textAlign: "center",
   },
 };
 
@@ -128,9 +131,9 @@ export default function WTB(props) {
   return (
     <div>
       <div className="row mt-4 ml-4 mr-4">
-        <span style={styles.heading}>
+        {/* <span style={styles.heading}>
           Your "Want to Buy" Listings
-        </span>
+        </span> */}
       </div>
 
       <div className="row mt-4 ml-4 mr-4">

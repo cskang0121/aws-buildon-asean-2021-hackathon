@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
-import { useHistory, useLocation } from "react-router";
+import { useHistory } from "react-router";
 import NavigationBar from "../Navbar/NavigationBar";
-import OfferList from "../OfferList";
+import DealList from "../DealList";
 
 const styles = {
   title: {
@@ -15,16 +15,15 @@ const styles = {
   },
 };
 
-export default function ViewListingOffers(props) {
-  const location = useLocation();
+export default function ViewAllReceivedDeals(props) {
   return (
     <div>
       <NavigationBar />
       <div className="container">
         <div className="row">
-            <span style={styles.title}>View all received offers</span>
+          <span style={styles.title}>View All Received Deals</span>
         </div>
-        <OfferList view={location.state.listing.ifsId} />
+        <DealList view="all" />
       </div>
     </div>
   );

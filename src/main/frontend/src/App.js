@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+import "./custom.scss";
+//import "bootstrap/dist/css/bootstrap.min.css";
 
 import NavigationBar from "./components/Navbar/NavigationBar";
 import Home from "./components/Pages/Home";
@@ -19,6 +20,10 @@ import ViewListingOffers from "./components/Pages/ViewListingOffers";
 import ViewListingDeals from "./components/Pages/ViewListingDeals";
 import ViewSellerQnA from "./components/Pages/ViewSellerQnA";
 import AnswerSellerQnA from "./components/Pages/AnswerSellerQnA";
+import ViewTransactionHistory from "./components/Pages/ViewTransactionHistory";
+import ViewActiveTransactions from "./components/Pages/ViewActiveTransactions";
+import ViewAllReceivedDeals from "./components/Pages/ViewAllReceivedDeals";
+import Chat from "./components/Pages/Chat";
 
 import AuthenticationService from "./services/AuthenticationService";
 
@@ -79,6 +84,11 @@ function App() {
             component={ViewAllReceivedOffers}
           />
           <PrivateRoute
+            path="/received-deals"
+            exact
+            component={ViewAllReceivedDeals}
+          />
+          <PrivateRoute
             path="/view-listing-offers"
             exact
             component={ViewListingOffers}
@@ -97,6 +107,21 @@ function App() {
             path="/answer-seller-qna"
             exact
             component={AnswerSellerQnA}
+          />
+          <PrivateRoute
+            path="/transaction-history"
+            exact
+            component={ViewTransactionHistory}
+          />
+          <PrivateRoute
+            path="/transaction-active"
+            exact
+            component={ViewActiveTransactions}
+          />
+          <PrivateRoute
+            path="/chat"
+            exact
+            component={Chat}
           />
         </Switch>
       </Router>

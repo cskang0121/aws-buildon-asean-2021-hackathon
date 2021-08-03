@@ -12,6 +12,7 @@ import ListingCard from "../ListingCard";
 import { ctSubcategoryDropdownOptions } from "../../util/ctSubcategories";
 import { fhSubcategoryDropdownOptions } from "../../util/fhSubcategories";
 import { mgSubcategoryDropdownOptions } from "../../util/mgSubcategories";
+import { reactSelectTheme } from "../../util/customThemes";
 
 const ITEM_CONDITION = ["Brand New", "Like New", "Well Used", "Heavily Used"];
 
@@ -76,15 +77,23 @@ const WTBListings = (props) => {
 
   useEffect(() => {
     fetchListings();
-  }, [props.keyword, props.fullCategoryName, props.itemCondition, props.searchLocation]);
+  }, [
+    props.keyword,
+    props.fullCategoryName,
+    props.itemCondition,
+    props.searchLocation,
+  ]);
 
   const fetchListings = () => {
-    WTBService.getSearchListings(props.keyword, props.fullCategoryName, props.itemCondition, props.searchLocation).then(
-      (res) => {
-        console.log(res.data);
-        setListings(res.data);
-      }
-    );
+    WTBService.getSearchListings(
+      props.keyword,
+      props.fullCategoryName,
+      props.itemCondition,
+      props.searchLocation
+    ).then((res) => {
+      console.log(res.data);
+      setListings(res.data);
+    });
   };
 
   return listings.map((listing, index) => {
@@ -167,15 +176,24 @@ const IFSListings = (props) => {
 
   useEffect(() => {
     fetchListings();
-  }, [props.keyword, props.fullCategoryName, props.itemCondition, props.searchLocation]);
+    console.log(props.keyword);
+  }, [
+    props.keyword,
+    props.fullCategoryName,
+    props.itemCondition,
+    props.searchLocation,
+  ]);
 
   const fetchListings = () => {
-    IFSService.getSearchListings(props.keyword, props.fullCategoryName, props.itemCondition, props.searchLocation).then(
-      (res) => {
-        console.log(res.data);
-        setListings(res.data);
-      }
-    );
+    IFSService.getSearchListings(
+      props.keyword,
+      props.fullCategoryName,
+      props.itemCondition,
+      props.searchLocation
+    ).then((res) => {
+      console.log(res.data);
+      setListings(res.data);
+    });
   };
 
   return listings.map((listing, index) => {
@@ -196,7 +214,8 @@ const IFSListings = (props) => {
 };
 
 export default function Search() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const location = useLocation();
+  const [searchTerm, setSearchTerm] = useState(location.state.keyword);
   const [selectedListingType, setSelectedListingType] = useState("");
   const [categoryName, setCategoryName] = useState("");
   const [fullCategoryName, setFullCategoryName] = useState("");
@@ -204,7 +223,7 @@ export default function Search() {
   const [searchLocation, setSearchLocation] = useState("");
   // const [hashtags, setHashtags] = useState("");
 
-  const location = useLocation();
+  
 
   useEffect(() => {
     setSearchTerm(location.state.keyword);
@@ -215,7 +234,7 @@ export default function Search() {
   // };
 
   const handleSetCategoryName = (value) => {
-    console.log(value);    
+    console.log(value);
     setCategoryName(value);
     setFullCategoryName(value);
   };
@@ -257,12 +276,22 @@ export default function Search() {
     <div>
       <NavigationBar />
       <Tab.Container defaultActiveKey="ifs">
-        <Nav fill variant="pills">
+        <Nav fill variant="underline">
           <Nav.Item>
-            <Nav.Link onSelect={(event) => setFullCategoryName("")}eventKey="ifs">Items for Sale</Nav.Link>
+            <Nav.Link
+              onSelect={(event) => setFullCategoryName("")}
+              eventKey="ifs"
+            >
+              Items for Sale
+            </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link onSelect={(event) => setFullCategoryName("")}eventKey="wtb">Want to Buy</Nav.Link>
+            <Nav.Link
+              onSelect={(event) => setFullCategoryName("")}
+              eventKey="wtb"
+            >
+              Want to Buy
+            </Nav.Link>
           </Nav.Item>
         </Nav>
         <Tab.Content>
@@ -270,49 +299,68 @@ export default function Search() {
             <div className="container-fluid">
               <div className="row mt-3 vh-100">
                 <div className="col-3 shadow-sm">
-                  <h1 className="ml-4 mb-3">Search</h1>
+                  <b className="ml-3 mb-3">FILTER BY</b>
                   <div className="border-bottom p-3">
-                    <b>Category</b>
+                    <div className="pb-1">
+                      <b>Category</b>
+                    </div>
                     <Select
                       options={categoryDropdownOptions}
+                      theme={reactSelectTheme}
                       onChange={(value) => {
                         handleSetCategoryName(value.value);
                       }}
                     />
-                    { subCategoryOptions !== null ?
-                      <div>
-                        <b>SubCategory</b>
-                        <Select
-                          closeMenuOnSelect={false}
-                          options={subCategoryOptions}
-                          isMulti
-                          onChange={(value) => {
-                            handleSetFullCategoryName(value);
-                          }}
-                        />
-                      </div> : ''
-                    }
-                    <b>Condition</b>
+                  </div>
+                  {subCategoryOptions !== null ? (
+                    <div className="border-bottom p-3">
+                      <div className="pb-1">
+                        <b>Sub Category</b>
+                      </div>
+                      <Select
+                        closeMenuOnSelect={false}
+                        options={subCategoryOptions}
+                        theme={reactSelectTheme}
+                        isMulti
+                        onChange={(value) => {
+                          handleSetFullCategoryName(value);
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                  <div className="border-bottom p-3">
+                    <div className="pb-1">
+                      <b>Condition</b>
+                    </div>
                     <Select
                       closeMenuOnSelect={false}
                       options={condtionDropdownOptions}
+                      theme={reactSelectTheme}
                       isMulti
                       onChange={(value) => {
                         handleSetCondition(value);
                       }}
                     />
-                    <b>Location</b>
+                  </div>
+                  <div className="border-bottom p-3">
+                    <div className="pb-1">
+                      <b>Location</b>
+                    </div>
                     <input
                       class="form-control mr-sm-2"
                       type="search"
                       placeholder="Search for a Location"
                       value={searchLocation}
-                      onChange={(event) => setSearchLocation(event.target.value)}
+                      onChange={(event) =>
+                        setSearchLocation(event.target.value)
+                      }
                     />
                   </div>
                 </div>
                 <div className="col-9">
-                  <div className="row">
+                  <div className="row ml-4">
                     <IFSListings
                       keyword={searchTerm}
                       fullCategoryName={fullCategoryName}
@@ -328,44 +376,63 @@ export default function Search() {
             <div className="container-fluid">
               <div className="row mt-3 vh-100">
                 <div className="col-3 shadow-sm">
-                  <h1 className="ml-4 mb-3">Search</h1>
+                  <b className="ml-3 mb-3">FILTER BY</b>
                   <div className="border-bottom p-3">
-                    <b>Category</b>
+                    <div className="pb-1">
+                      <b>Category</b>
+                    </div>
                     <Select
                       options={categoryDropdownOptions}
+                      theme={reactSelectTheme}
                       onChange={(value) => {
                         handleSetCategoryName(value.value);
                       }}
                     />
-                    { subCategoryOptions !== null ?
-                      <div>
-                        <b>SubCategory</b>
-                        <Select
-                          closeMenuOnSelect={false}
-                          options={subCategoryOptions}
-                          isMulti
-                          onChange={(value) => {
-                            handleSetFullCategoryName(value);
-                          }}
-                        />
-                      </div> : ''
-                    }
-                    <b>Condition</b>
+                  </div>
+                  {subCategoryOptions !== null ? (
+                    <div className="border-bottom p-3">
+                      <div className="pb-1">
+                        <b>Sub Category</b>
+                      </div>
+                      <Select
+                        closeMenuOnSelect={false}
+                        options={subCategoryOptions}
+                        theme={reactSelectTheme}
+                        isMulti
+                        onChange={(value) => {
+                          handleSetFullCategoryName(value);
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                  <div className="border-bottom p-3">
+                    <div className="pb-1">
+                      <b>Condition</b>
+                    </div>
                     <Select
-                      // closeMenuOnSelect={false}
+                      closeMenuOnSelect={false}
                       options={condtionDropdownOptions}
+                      theme={reactSelectTheme}
                       isMulti
                       onChange={(value) => {
                         handleSetCondition(value);
                       }}
                     />
-                    <b>Location</b>
+                  </div>
+                  <div className="border-bottom p-3">
+                    <div className="pb-1">
+                      <b>Location</b>
+                    </div>
                     <input
                       class="form-control mr-sm-2"
                       type="search"
                       placeholder="Search for a Location"
                       value={searchLocation}
-                      onChange={(event) => setSearchLocation(event.target.value)}
+                      onChange={(event) =>
+                        setSearchLocation(event.target.value)
+                      }
                     />
                   </div>
                 </div>

@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Badge } from "react-bootstrap";
 import { useHistory, useLocation } from "react-router";
+import {
+  FaBoxOpen,
+  FaHandHoldingUsd,
+  FaLocationArrow,
+  FaRegCommentDots,
+  FaRegQuestionCircle,
+} from "react-icons/fa";
 import IFSService from "../../services/IFSService";
 import NavigationBar from "../Navbar/NavigationBar";
 import UserService from "../../services/UserService";
@@ -140,29 +147,35 @@ export default function IFSListing(props) {
   // Button toggle
   const toggleButton = () => {
     if (!isDealEmpty(location.state.deal)) {
-      return ([
+      return [
         <div>
           <BuyerQnAList deal={location.state.deal} />
         </div>,
         <div className="text-center">
-          <Button className="mr-5 btn btn-success" onClick={(event) => acceptDeal(location.state.deal)}>
+          <Button
+            className="mr-5 btn"
+            onClick={(event) => acceptDeal(location.state.deal)}
+          >
             Accept Deal
           </Button>
-          <Button className="ml-5 btn btn-danger" onClick={(event) => rejectDeal(location.state.deal)}>
+          <Button
+            className="ml-5 btn btn-danger"
+            onClick={(event) => rejectDeal(location.state.deal)}
+          >
             Reject Deal
           </Button>
-        </div>
-      ]
-      );
+        </div>,
+      ];
     } else if (location.state.listing.user.uid === user.uid) {
       return (
         <div className="d-flex flex-column">
           <Button
             size="lg"
+            variant="outline-primary"
             className="m-2"
             onClick={() => answerSellerQnA(location.state.listing)}
           >
-            View QnA
+            <FaRegQuestionCircle /> View QnA
           </Button>
           <Button
             size="lg"
@@ -176,13 +189,25 @@ export default function IFSListing(props) {
     } else {
       return (
         <div className="d-flex flex-column">
-          <Button
-            size="lg"
-            className="m-2"
-            onClick={() => viewSellerQnA(location.state.listing)}
-          >
-            View QnA
-          </Button>
+          <div className="btn-group">
+            <Button
+              size="lg"
+              className="mx-2"
+              variant="outline-primary"
+              onClick={() => viewSellerQnA(location.state.listing)}
+            >
+              <FaRegQuestionCircle /> View QnA
+            </Button>
+            <Button
+              className="mx-2"
+              size="lg"
+              variant="outline-primary"
+              onClick={(event) => chat(event, location.state.listing)}
+            >
+              <FaRegCommentDots /> Chat with{" "}
+              {location.state.listing.user.username}
+            </Button>
+          </div>
           <Button
             size="lg"
             className="m-2"
@@ -215,6 +240,34 @@ export default function IFSListing(props) {
     getImage(location.state.listing);
   }, [location.state.listing]);
 
+  const getDeliveryMethod = (listing) => {
+    if (listing.isDeliveryDeliver && listing.isDeliveryMeet) {
+      return `Delivery, Meet Up (${location.state.listing.meetUpLocation})`;
+    } else if (listing.isDeliveryDeliver) {
+      return "Delivery";
+    } else if (listing.isDeliveryMeet) {
+      return `Meet Up (${location.state.listing.meetUpLocation})`;
+    }
+  };
+
+  const getPaymentMethod = (listing) => {
+    if (listing.isPaymentCash && listing.isPaymentPayNow) {
+      return "PayNow, Cash";
+    } else if (listing.isPaymentCash) {
+      return "Cash";
+    } else if (listing.isPaymentPayNow) {
+      return "PayNow";
+    }
+  };
+
+  const chat = (e, listing) => {
+    e.preventDefault();
+    history.push({
+      pathname: "/chat",
+      state: { otherUser: listing.user },
+    });
+  };
+
   return (
     <div>
       <NavigationBar />
@@ -245,7 +298,9 @@ export default function IFSListing(props) {
               </div>
               <div className="col-3">
                 <h4>
-                  <span className="badge badge-pill badge-info">Selling</span>
+                  <Badge pills variant="info">
+                    Selling
+                  </Badge>
                 </h4>
               </div>
             </div>
@@ -253,17 +308,26 @@ export default function IFSListing(props) {
               <h3>S${location.state.listing.price}</h3>
             </div>
             <div className="row">
-              <div className="col-4">
-                <p>{location.state.listing.itemCondition}</p>
+              <div className="col-3">
+                <p>
+                  <FaBoxOpen style={{ color: "#5A189A" }} />{" "}
+                  {location.state.listing.itemCondition}
+                </p>
+              </div>
+              <div className="col-5">
+                <p>
+                  <FaLocationArrow style={{ color: "#5A189A" }} />{" "}
+                  {getDeliveryMethod(location.state.listing)}
+                </p>
               </div>
               <div className="col-4">
-                <p>Delivery Method</p>
-              </div>
-              <div className="col-4">
-                <p>Location</p>
+                <p>
+                  <FaHandHoldingUsd style={{ color: "#5A189A" }} />{" "}
+                  {getPaymentMethod(location.state.listing)}
+                </p>
               </div>
             </div>
-            <div className="row  pt-2 pb-2 border-top border-bottom">
+            <div className="row pt-2 pb-2 border-top border-bottom">
               <b>Description</b>
               <p>{location.state.listing.description}</p>
             </div>

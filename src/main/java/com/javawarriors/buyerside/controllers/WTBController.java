@@ -79,4 +79,8 @@ public class WTBController {
         return wtbService.downloadWTBImage(wtbId);
     }
 
+    public List<WantToBuyListing> getWTBListingsByUserAndStatus(Long userId, Character status) {
+        return wtbService.findByUserAndStatus(userId, status);
+    }
+
 }

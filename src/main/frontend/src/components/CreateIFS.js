@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import Select from "react-select";
 import { useDropzone } from "react-dropzone";
 
+import { FaAngleRight } from "react-icons/fa";
+
 import {
   Row,
   Col,
@@ -17,7 +19,6 @@ import { useHistory } from "react-router";
 
 import IFSService from "../services/IFSService";
 import UserService from "../services/UserService";
-import RecommendService from "../services/RecommendService";
 
 import { categoryDropdownOptions } from "../util/categories";
 import { ctSubcategoryDropdownOptions } from "../util/ctSubcategories";
@@ -28,6 +29,8 @@ import { mgSubcategoryDropdownOptions } from "../util/mgSubcategories";
 //   downloadBase64File,
 //   extractImageFileExtensionFromBase64,
 //   image64toCanvasRef} from "../util/reusableUtils";
+
+import { reactSelectTheme } from "../util/customThemes";
 
 let tempArr = [];
 let subCategoryOptions = tempArr.map((options) => {
@@ -42,34 +45,13 @@ const acceptedFileTypes =
 function Dropzone(props) {
   const [imgSrc, setImgSrc] = useState(null);
 
-  // const verifyFile = (files) => {
-  //   if (files && files.length > 0){
-  //       const currentFile = files[0]
-  //       const currentFileType = currentFile.type
-  //       const currentFileSize = currentFile.size
-  //       if(currentFileSize > imageMaxSize) {
-  //           alert("This file is not allowed. " + currentFileSize + " bytes is too large")
-  //           return false
-  //       }
-  //       if (!acceptedFileTypesArray.includes(currentFileType)){
-  //           alert("This file is not allowed. Only images are allowed.")
-  //           return false
-  //       }
-  //       return true
-  //   }
-  // }
-
   const onDrop = useCallback((acceptedFiles) => {
     if (acceptedFiles && acceptedFiles.length > 0) {
-      // const isVerified = this.verifyFile(acceptedFiles)
-      // if (isVerified){
-      // imageBase64Data
       const currentFile = acceptedFiles[0];
       const myFileItemReader = new FileReader();
       myFileItemReader.addEventListener(
         "load",
         () => {
-          // console.log(myFileItemReader.result)
           const myResult = myFileItemReader.result;
           setImgSrc(myResult);
         },
@@ -77,17 +59,11 @@ function Dropzone(props) {
       );
 
       myFileItemReader.readAsDataURL(currentFile);
-
-      // }
     }
     const file = acceptedFiles[0];
     console.log(file);
     props.setFile(file);
-    // const formData = new FormData();
-    // formData.append("file", file);
   }, []);
-
-  // postListingImage();
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
@@ -97,15 +73,12 @@ function Dropzone(props) {
       {isDragActive ? (
         <div>
           {imgSrc != null ? (
-            <div className="d-flex justify-content-center">
-              <img
-                style={{ width: 400, height: 400, objectFit: "cover" }}
-                src={imgSrc}
-              />
+            <div className="square">
+              <img src={imgSrc} />
             </div>
           ) : (
             <div
-              className="d-flex container border border-success rounded w-75 align-items-center justify-content-center"
+              className="d-flex ml-3 border border-success rounded w-75 align-items-center justify-content-center"
               style={{ height: 200 }}
             >
               <p className="text-center">Drop your image here</p>
@@ -115,15 +88,12 @@ function Dropzone(props) {
       ) : (
         <div>
           {imgSrc != null ? (
-            <div className="d-flex justify-content-center">
-              <img
-                style={{ width: 400, height: 400, objectFit: "cover" }}
-                src={imgSrc}
-              />
+            <div className="square">
+              <img src={imgSrc} />
             </div>
           ) : (
             <div
-              className="d-flex container border border-success rounded w-75 align-items-center justify-content-center"
+              className="d-flex border border-primary ml-3 rounded w-75 align-items-center justify-content-center"
               style={{ height: 200 }}
             >
               <p className="text-center">
@@ -261,7 +231,7 @@ export default function CreateIFS(props) {
   }
 
   const handleSetCategoryName = (value) => {
-    console.log(value);    
+    console.log(value);
     setCategoryName(value);
     setFullCategoryName(value);
   };
@@ -281,25 +251,22 @@ export default function CreateIFS(props) {
 
   return (
     <div>
-      <div>
-        <br />
-        <Dropzone setFile={(file) => setFile(file)} />
-        <br />
-      </div>
       <Row className="justify-content-md-center">
-        <Col lg={12}>
-          <h5 className="ml-4 mb-3 mt-4">Item Details</h5>
+        <Col className="shadow-sm" lg={4}>
+          <Dropzone setFile={(file) => setFile(file)} />
+        </Col>
+        <Col lg={8} className="shadow py-3 px-5">
+          <h5 className="mb-3">Item Details</h5>
           <Form>
-            <Row>
+            <Form.Row>
               <Col>
                 <Form.Group>
                   <InputGroup>
-                    <InputGroup.Prepend>
-                      <InputGroup.Text className="ml-4">Title:</InputGroup.Text>
+                    <InputGroup.Prepend className="create-listing-input">
+                      <InputGroup.Text>Title:</InputGroup.Text>
                     </InputGroup.Prepend>
                     <FormControl
                       required
-                      className="mr-4"
                       placeholder="Enter a title..."
                       autoComplete="off"
                       type="text"
@@ -310,23 +277,19 @@ export default function CreateIFS(props) {
                   </InputGroup>
                 </Form.Group>
               </Col>
-            </Row>
-          </Form>
-          <Form>
-            <Row>
+            </Form.Row>
+            <Form.Row>
               <Col>
                 <Form.Group>
                   <InputGroup>
-                    <InputGroup.Prepend>
-                      <InputGroup.Text className="ml-4">
-                        Description:
-                      </InputGroup.Text>
+                    <InputGroup.Prepend className="create-listing-input">
+                      <InputGroup.Text>Description:</InputGroup.Text>
                     </InputGroup.Prepend>
                     <FormControl
                       required
-                      className="mr-4"
                       placeholder="Enter a description of the item..."
                       autoComplete="off"
+                      as="textarea"
                       type="text"
                       name="description"
                       value={description}
@@ -335,9 +298,9 @@ export default function CreateIFS(props) {
                   </InputGroup>
                 </Form.Group>
               </Col>
-            </Row>
-          </Form>
-          {/* <Form>
+            </Form.Row>
+
+            {/* <Form>
             <Row>
               <Col>
                 <Form.Group>
@@ -362,119 +325,136 @@ export default function CreateIFS(props) {
               </Col>
             </Row>
           </Form> */}
-          <Form.Row>
-            <Form.Group>
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text className="ml-4">Price:</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                  required
-                  autoComplete="off"
-                  type="number"
-                  name="price"
-                  value={price}
-                  onChange={(event) => setPrice(event.target.value)}
+            <Form.Row>
+              <Col lg={5}>
+                <Form.Group>
+                  <InputGroup>
+                    <InputGroup.Prepend>
+                      <InputGroup.Text>Price:</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl
+                      required
+                      autoComplete="off"
+                      type="number"
+                      name="price"
+                      value={price}
+                      onChange={(event) => setPrice(event.target.value)}
+                    />
+                  </InputGroup>
+                </Form.Group>
+              </Col>
+            </Form.Row>
+            <Form.Row>
+              <Col lg={6}>
+                <h5 className="mt-2">Category</h5>
+                <div>
+                  <Select
+                    className="mt-3"
+                    options={categoryDropdownOptions}
+                    theme={reactSelectTheme}
+                    onChange={(value) => {
+                      handleSetCategoryName(value.value);
+                    }}
+                  />
+                </div>
+              </Col>
+              <Col lg={6}>
+                <h5 className="mt-2">Subcategories</h5>
+                <div>
+                  <Select
+                    className="mt-3"
+                    closeMenuOnSelect={false}
+                    options={subCategoryOptions}
+                    theme={reactSelectTheme}
+                    isMulti
+                    onChange={(value) => {
+                      handleSetFullCategoryName(value);
+                    }}
+                  />
+                </div>
+              </Col>
+            </Form.Row>
+            <Form.Row>
+              <h5 className="mt-3">Item Condition</h5>
+            </Form.Row>
+            <Form.Row>
+              <ButtonGroup style={{ zIndex: 0 }} className="mt-2">
+                {itemConditionRadios.map((radio, idx) => (
+                  <ToggleButton
+                    className="toggleable"
+                    key={idx}
+                    id={`radio-${idx}`}
+                    type="radio"
+                    variant="outline-primary"
+                    name="radio"
+                    value={radio.value}
+                    checked={itemCondition === radio.value}
+                    onChange={(e) => setItemCondition(e.currentTarget.value)}
+                  >
+                    {radio.name}
+                  </ToggleButton>
+                ))}
+              </ButtonGroup>
+            </Form.Row>
+            <Form.Row>
+              <h5 className="mt-3">Delivery Method</h5>
+            </Form.Row>
+            <Form.Row>
+              <Form.Group className="mb-3 mt-3" controlId="formBasicCheckbox">
+                <Form.Check
+                  type="checkbox"
+                  label="Meet-up"
+                  onChange={(event) => handleMeetChange()}
                 />
-              </InputGroup>
-            </Form.Group>
-          </Form.Row>
-          <h5 className="ml-4 mt-2">Category</h5>
-          <div style={{ width: 600 }}>
-            <Select
-              className="ml-4 mt-3"
-              options={categoryDropdownOptions}
-              onChange={(value) => {
-                handleSetCategoryName(value.value);
-              }}
-            />
-          </div>
-          <h5 className="ml-4 mt-2">Subcategories</h5>
-          <div style={{ width: 600 }}>
-            <Select
-              className="ml-4 mt-3"
-              closeMenuOnSelect={false}
-              options={subCategoryOptions}
-              isMulti
-              onChange={(value) => {
-                handleSetFullCategoryName(value);
-              }}
-            />
-          </div>
-          <div>
-            <h5 className="ml-4 mt-3">Item Condition</h5>
-            <ButtonGroup className="ml-4 mt-2">
-              {itemConditionRadios.map((radio, idx) => (
-                <ToggleButton
-                  key={idx}
-                  id={"radio-${idx}"}
-                  type="radio"
-                  variant={"outline-primary"}
-                  name="radio"
-                  value={radio.value}
-                  checked={itemCondition === radio.value}
-                  onChange={(e) => setItemCondition(e.currentTarget.value)}
-                >
-                  {radio.name}
-                </ToggleButton>
-              ))}
-            </ButtonGroup>
-          </div>
-          <div>
-            <h5 className="ml-4 mt-3">Delivery Method</h5>
-            <Form.Group
-              className="mb-3 ml-4 mt-3"
-              controlId="formBasicCheckbox"
-            >
-              <Form.Check
-                type="checkbox"
-                label="Meet-up"
-                onChange={(event) => handleMeetChange()}
-              />
-            </Form.Group>
-            {isDeliveryMeet ? (
-              <MeetUpLocationField
-                meetUpLocation={meetUpLocation}
-                setMeetUpLocation={setMeetUpLocation}
-              />
-            ) : (
-              ""
-            )}
-            <Form.Group className="mb-3 ml-4" controlId="formBasicCheckbox">
-              <Form.Check
-                type="checkbox"
-                label="Delivery"
-                onChange={(event) => handleDeliverChange()}
-              />
-            </Form.Group>
-          </div>
-          <div>
-            <h5 className="ml-4 mt-3">Payment Method</h5>
-            <Form.Group
-              className="mb-3 ml-4 mt-3"
-              controlId="formBasicCheckbox"
-            >
-              <Form.Check
-                type="checkbox"
-                label="Cash on Meet-up"
-                onChange={(event) => handleCashChange()}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3 ml-4" controlId="formBasicCheckbox">
-              <Form.Check
-                type="checkbox"
-                label="PayNow"
-                onChange={(event) => handlePayNowChange()}
-              />
-            </Form.Group>
-          </div>
-          <Button
-            className="ml-4 mt-3 mb-4 mr-4 btn-success btn-lg"
-            onClick={createListing}
-          >
-            {" "}
-            Submit{" "}
-          </Button>
+              </Form.Group>
+            </Form.Row>
+            <Form.Row>
+              {isDeliveryMeet ? (
+                <MeetUpLocationField
+                  meetUpLocation={meetUpLocation}
+                  setMeetUpLocation={setMeetUpLocation}
+                />
+              ) : (
+                ""
+              )}
+            </Form.Row>
+
+            <Form.Row>
+              <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                <Form.Check
+                  type="checkbox"
+                  label="Delivery"
+                  onChange={(event) => handleDeliverChange()}
+                />
+              </Form.Group>
+            </Form.Row>
+            <Form.Row>
+              <h5 className="mt-3">Payment Method</h5>
+            </Form.Row>
+            <Form.Row>
+              <Form.Group className="mb-3 mt-3" controlId="formBasicCheckbox">
+                <Form.Check
+                  type="checkbox"
+                  label="Cash on Meet-up"
+                  onChange={(event) => handleCashChange()}
+                />
+              </Form.Group>
+            </Form.Row>
+            <Form.Row>
+              <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                <Form.Check
+                  type="checkbox"
+                  label="PayNow"
+                  onChange={(event) => handlePayNowChange()}
+                />
+              </Form.Group>
+            </Form.Row>
+            <Form.Row className="flex-row-reverse">
+              <Button className="mt-3 btn-lg" onClick={createListing}>
+                List your item <FaAngleRight />
+              </Button>
+            </Form.Row>
+          </Form>
         </Col>
       </Row>
     </div>

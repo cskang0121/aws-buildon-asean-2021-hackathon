@@ -36,8 +36,8 @@ public class OfferController {
     @PostMapping("/post")
     public Offer postOffer(@RequestBody Offer newOffer) {
         newOffer.setDateOfOffer(new Date());
-        offerService.saveOffer(newOffer);
-        return newOffer;
+        return offerService.saveOffer(newOffer);
+
     }
 
     @GetMapping("/get/madeby={id}")
@@ -61,8 +61,18 @@ public class OfferController {
         ItemForSaleListing ifsListing = offers.get(0).getIfsListing();
         ifsListing.setStatus('p');
         ifsController.postIFSListing(ifsListing);
-        //logger.info(String.valueOf(ifsListing.getStatus()));
+        // logger.info(String.valueOf(ifsListing.getStatus()));
         return offerService.saveManyOffers(offers);
     }
-    
+
+    @PostMapping("/post/confirm")
+    public Offer postConfirmOffer(@RequestBody Offer offer) {
+        if (offer.getStatus().equals('c')) {
+            ItemForSaleListing ifsListing = offer.getIfsListing();
+            ifsListing.setStatus('u');
+            ifsController.postIFSListing(ifsListing);
+        }
+        return offerService.saveOffer(offer);
+    }
+
 }

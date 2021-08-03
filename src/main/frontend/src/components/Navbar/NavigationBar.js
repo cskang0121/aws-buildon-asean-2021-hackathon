@@ -3,6 +3,7 @@ import { Navbar, Nav } from "react-bootstrap";
 import AuthenticationService from "../../services/AuthenticationService";
 import { useHistory } from "react-router";
 import UserService from "../../services/UserService";
+import { ReactComponent as Logo } from './logo-final-optimized.svg';
 
 export default function NavigationBar() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -35,35 +36,12 @@ export default function NavigationBar() {
     });
   };
 
-  // return (
-  //   <Navbar bg="dark" variant="dark">
-  //     <Navbar.Brand href="/home">Navbar</Navbar.Brand>
-  //     <Nav className="mr-auto">
-  //       {loggedIn ? (
-  //           <div className="d-flex flex-row">
-  //             <Nav.Link href="/home">Home</Nav.Link>
-  //             <Nav.Link href="/my-listings">My Listings</Nav.Link>
-  //             <Nav.Link href="/search">Search</Nav.Link>
-  //             <Nav.Link href="/post-listing">Buy / Sell</Nav.Link>
-  //             <Nav.Link href="/received-offers">View All Offers</Nav.Link>
-  //             <Nav.Link className="justify-content-end" onClick={logout}>Logout</Nav.Link>
-  //           </div>
-  //       ) : (
-  //         <div className="d-flex flex-row">
-  //           <Nav.Link href="/register">Sign Up</Nav.Link>
-  //           <Nav.Link href="/login">Login</Nav.Link>
-  //         </div>
-  //       )}
-  //     </Nav>
-  //   </Navbar>
-  // );
-
   //post listing + search
   return (
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top shadow-sm">
       <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
         <a class="navbar-brand dark-text" href="/home">
-          Home
+          <Logo width={150}/>
         </a>
         <button
           class="navbar-toggler"
@@ -86,7 +64,7 @@ export default function NavigationBar() {
               onChange={(event) => setKeyword(event.target.value)}
             />
             <button
-              class="btn btn-outline-success my-2 my-sm-0"
+              class="btn btn-outline-primary my-2 my-sm-0"
               onClick={(event) => handleOnSearchSubmit(event)}
             >
               Search
@@ -111,7 +89,16 @@ export default function NavigationBar() {
                     My Listings
                   </a>
                   <a class="dropdown-item" href="/received-offers">
-                    View Offers
+                    View Received Offers
+                  </a>
+                  <a class="dropdown-item" href="/received-deals">
+                    View Received Deals
+                  </a>
+                  <a class="dropdown-item" href="/transaction-active">
+                    View Active Transactions
+                  </a>
+                  <a class="dropdown-item" href="/transaction-history">
+                    View Transaction History
                   </a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" onClick={logout}>
@@ -120,7 +107,7 @@ export default function NavigationBar() {
                 </div>
               </li>
               <li class="nav-item">
-                <a class="btn btn-success ml-4 mr-2" href="/post-listing">
+                <a class="btn btn-primary ml-4 mr-2" href="/post-listing">
                   Buy/Sell
                 </a>
               </li>
