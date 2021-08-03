@@ -56,14 +56,6 @@ export default function Login() {
                         onChange={(event) => setUsername(event.target.value)}
                       />
                 </div>
-                <FormControl
-                  required
-                  autoComplete="off"
-                  type="text"
-                  name="username"
-                  value={username}
-                  onChange={(event) => setUsername(event.target.value)}
-                />
               </div>
               <div class="form-row ml-5 mr-5 mb-5">
                   <div class="input-group input-group-lg col-md-6 mx-auto">
@@ -79,14 +71,6 @@ export default function Login() {
                         onChange={(event) => setPassword(event.target.value)}
                       />
                   </div>
-                <FormControl
-                  required
-                  autoComplete="off"
-                  type="password"
-                  name="password"
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                />
               </div>          
             <Button className="mb-4" onClick={login}>
               {" "}

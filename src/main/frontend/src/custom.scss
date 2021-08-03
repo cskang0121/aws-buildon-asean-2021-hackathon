@@ -15,8 +15,6 @@ $font-family-sans-serif: "Inter", sans-serif;
 
 .badge-info {
   background-color: #c77dff;
-<<<<<<< HEAD
-=======
 }
 
 // Form Formatting for Login Page
@@ -24,21 +22,11 @@ $font-family-sans-serif: "Inter", sans-serif;
   width: 30%;
 }
 
-.input-group-prepend.login-page .input-group-text {
-  width: 100%;
-  overflow: hidden;
-}
-
 // Form Formatting for Registration Page
 .input-group-prepend.register-page{
   width: 30%;
 }
 
-.input-group-prepend.register-page .input-group-text {
-  width: 100%;
-  overflow: hidden;
->>>>>>> efb4dccdbb3c34b60e12cb0f3a67375201698ca8
-}
 
 .toggleable > input[type="radio"] {
   display: none;
@@ -57,9 +45,6 @@ $font-family-sans-serif: "Inter", sans-serif;
 // //   width: 100%;
 // // }
 
-.input-group-prepend.login {
-  width: 40%;
-}
 
 .input-group-prepend.create-listing-input {
   width: 15%;
