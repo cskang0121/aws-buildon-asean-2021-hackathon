@@ -26,7 +26,7 @@ Therefore, our solution for encouraging the sale of pre-owned items is to introd
 
 ## Deployment
 
-Our project is deployed using AWS on Amazon Cloud with the help of **Elastic Beanstalk** to automatically provision resources such as EC2 instances and Elastic Load Balancer to host the REST API back-end (coded in Java using SpringBoot) and **Amazon S3 static website hosting** to host the React application front-end. Additionally, Amazon S3 is also used to store our media. **Amazon Personalize** is used for our recommendation system.
+Our project is deployed using AWS on Amazon Cloud with the help of **Elastic Beanstalk** to automatically provision resources such as EC2 instances and Elastic Load Balancer to host the REST API back-end (coded in Java using SpringBoot) and **Amazon S3 static website hosting** to host the React application front-end. Additionally, Amazon S3 is also used to store our media (such as images) to be displayed on the application and the training data for Amazon Personalize. **Amazon Personalize** is used for our recommendation system. **Amazon RDS** is used for our MySQL database.
 
 **Link to our prototype**: http://javawarriors-buyerside-731098be-456e-4ed6-995e.s3-website-us-east-1.amazonaws.com/
 
