@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
-import { useHistory } from "react-router";
 import BuyerQnAService from "../services/BuyerQnAService";
 
 export default function BuyerQnAList({ deal }) {
