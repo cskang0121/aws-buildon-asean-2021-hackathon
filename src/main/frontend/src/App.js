@@ -23,6 +23,7 @@ import AnswerSellerQnA from "./components/Pages/AnswerSellerQnA";
 import ViewTransactionHistory from "./components/Pages/ViewTransactionHistory";
 import ViewActiveTransactions from "./components/Pages/ViewActiveTransactions";
 import ViewAllReceivedDeals from "./components/Pages/ViewAllReceivedDeals";
+import Chat from "./components/Pages/Chat";
 
 import AuthenticationService from "./services/AuthenticationService";
 
@@ -116,6 +117,11 @@ function App() {
             path="/transaction-active"
             exact
             component={ViewActiveTransactions}
+          />
+          <PrivateRoute
+            path="/chat"
+            exact
+            component={Chat}
           />
         </Switch>
       </Router>

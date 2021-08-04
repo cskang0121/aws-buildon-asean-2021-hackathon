@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import OfferService from "../services/OfferService";
 import UserService from "../services/UserService";
 import { FaRegCommentDots } from "react-icons/fa";
+import { useHistory } from "react-router";
 
 const styles = {
   container: {
@@ -37,6 +38,7 @@ const styles = {
 
 export default function OffersActiveList(props) {
   const [offers, setOffers] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     fetchOffers();
@@ -190,6 +192,14 @@ export default function OffersActiveList(props) {
     }
   };
 
+  const chat = (e, offer) => {
+    e.preventDefault();
+    history.push({
+      pathname: "/chat",
+      state: { otherUser: offer.ifsListing.user },
+    });
+  };
+
   return offers.map((offer, index) => {
     return (
       <div key={index} className="row" style={styles.container}>
@@ -205,7 +215,13 @@ export default function OffersActiveList(props) {
           {statusMessage(offer)}
         </div>
         <div className="col-3" style={styles.buttons}>
-          <Button size="lg" variant="outline-primary"><FaRegCommentDots /> Chat</Button>
+          <Button
+            size="lg"
+            variant="outline-primary"
+            onClick={(event) => chat(event, offer)}
+          >
+            <FaRegCommentDots /> Chat
+          </Button>
           {confirmButton(offer)}
         </div>
       </div>

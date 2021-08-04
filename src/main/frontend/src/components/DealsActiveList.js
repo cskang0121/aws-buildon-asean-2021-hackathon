@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import DealService from "../services/DealService";
 import UserService from "../services/UserService";
 import { FaRegCommentDots } from "react-icons/fa";
+import { useHistory } from "react-router";
 
 const styles = {
   container: {
@@ -37,6 +38,7 @@ const styles = {
 
 export default function DealsActiveList(props) {
   const [deals, setDeals] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     fetchDeals();
@@ -187,6 +189,14 @@ export default function DealsActiveList(props) {
     }
   };
 
+  const chat = (e, deal) => {
+    e.preventDefault();
+    history.push({
+      pathname: "/chat",
+      state: { otherUser: deal.wtbId.user },
+    });
+  };
+
   return deals.map((deal, index) => {
     return (
       <div key={index} className="row" style={styles.container}>
@@ -202,7 +212,11 @@ export default function DealsActiveList(props) {
           {statusMessage(deal)}
         </div>
         <div className="col-3" style={styles.buttons}>
-          <Button size="lg" variant="outline-primary">
+          <Button
+            size="lg"
+            variant="outline-primary"
+            onClick={(event) => chat(event, deal)}
+          >
             <FaRegCommentDots /> Chat
           </Button>
           {confirmButton(deal)}

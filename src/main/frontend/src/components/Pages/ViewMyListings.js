@@ -31,7 +31,7 @@ export default function ViewMyListings() {
   return (
     <div>
       <NavigationBar />
-      <Tab.Container id="left-tabs-example" defaultActiveKey="ifs">
+      <Tab.Container defaultActiveKey="ifs">
         <Row>
           <Col sm={2}>
             <div className="row mt-4">
