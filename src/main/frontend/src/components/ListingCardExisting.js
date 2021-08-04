@@ -31,11 +31,6 @@ export default function ListingCard({
               <b>Price:</b> S$ {listing.price}
             </p>
           )}
-          <p>
-            {/* <Button onClick={(event) => setIfsListing(listing)}>
-              Select Listing
-            </Button> */}
-          </p>
         </div>
       </div>
   );

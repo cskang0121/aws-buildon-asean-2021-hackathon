@@ -109,7 +109,6 @@ export default function OfferList(props) {
 
   return offers.map((offer, index) => {
     if (offer.status === "p") {
-      // Make something less ugly lmao
       return (
         <div key={index} className="row" style={styles.container}>
           <div className="col-9" style={styles.textDiv}>

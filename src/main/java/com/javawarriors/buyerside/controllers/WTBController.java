@@ -9,8 +9,6 @@ import org.slf4j.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-// import org.springframework.security.core.Authentication;
-// import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -54,10 +52,6 @@ public class WTBController {
     public void deleteWTB(@RequestBody WantToBuyListing toDeleteWTBListing) {
         wtbService.deleteById(toDeleteWTBListing.getWtbId());
     }
-
-    // @PostMapping("/wtb-listing/editWTB/post")
-    // public void editWTB(@RequestBody WantToBuyListing toEditWTBListing) {
-    // }
 
     @GetMapping("/searchWTB/get")
     public List<WantToBuyListing> searchWTB(

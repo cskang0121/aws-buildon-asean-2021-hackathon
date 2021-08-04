@@ -135,7 +135,6 @@ export default function CreateWTB(props) {
   const [priceUpper, setPriceUpper] = useState(0);
   const [categoryName, setCategoryName] = useState("");
   const [fullCategoryName, setFullCategoryName] = useState("");
-  // const [hashtags, setHashtags] = useState("");
   const [preferredItemCondition, setPreferredItemCondition] = useState("");
   const [isPreferredDeliveryMeet, setIsPreferredDeliveryMeet] = useState(false);
   const [isPreferredDeliveryDeliver, setIsPreferredDeliveryDeliver] =
@@ -212,7 +211,6 @@ export default function CreateWTB(props) {
       status: "a",
       categoryName: fullCategoryName,
       user: user,
-      // hashtags: hashtags,
       preferredItemCondition: preferredItemCondition,
       isPreferredDeliveryMeet: isPreferredDeliveryMeet,
       isPreferredDeliveryDeliver: isPreferredDeliveryDeliver,
@@ -361,29 +359,6 @@ export default function CreateWTB(props) {
                 </Form.Group>
               </Col>
             </Row>
-            {/* <Form>
-            <Row>
-              <Col>
-                <Form.Group>
-                  <InputGroup>
-                    <InputGroup.Prepend>
-                      <InputGroup.Text className="ml-4">Hashtags:</InputGroup.Text>
-                    </InputGroup.Prepend>
-                    <FormControl
-                      required
-                      className="mr-4"
-                      placeholder="Enter some hashtags..."
-                      autoComplete="off"
-                      type="text"
-                      name="hashtags"
-                      value={hashtags}
-                      onChange={(event) => setHashtags(event.target.value)}
-                    />
-                  </InputGroup>
-                </Form.Group>
-              </Col>
-            </Row>
-          </Form> */}
             <Form.Row>
               <Col lg={6}>
                 <Form.Group>

@@ -60,9 +60,6 @@ public class WTBService {
 
     public List<WantToBuyListing> getSearchResults(String keyword, String categoryName, String itemCondition,
             String searchLocation) {
-        // return wtbRepo.findByTitleContaining(keyword);
-        // return wtbRepo.findByTitleAndCategoryAndHashtagsContaining(keyword,
-        // categoryName, hashtags);
         if (itemCondition.equals("")) {
             return wtbRepo.findByTitleAndCategoryAndLocationContaining(keyword, categoryName, searchLocation);
         }

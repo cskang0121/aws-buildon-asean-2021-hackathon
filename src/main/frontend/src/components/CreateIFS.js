@@ -137,7 +137,6 @@ export default function CreateIFS(props) {
   const [price, setPrice] = useState(0);
   const [categoryName, setCategoryName] = useState("");
   const [fullCategoryName, setFullCategoryName] = useState("");
-  // const [hashtags, setHashtags] = useState("");
   const [itemCondition, setItemCondition] = useState("");
   const [isDeliveryMeet, setIsDeliveryMeet] = useState(false);
   const [isDeliveryDeliver, setIsDeliveryDeliver] = useState(false);
@@ -192,7 +191,6 @@ export default function CreateIFS(props) {
       listingType: props.listingType,
       categoryName: fullCategoryName,
       user: user,
-      // hashtags: hashtags,
       itemCondition: itemCondition,
       isDeliveryMeet: isDeliveryMeet,
       isDeliveryDeliver: isDeliveryDeliver,
@@ -299,32 +297,6 @@ export default function CreateIFS(props) {
                 </Form.Group>
               </Col>
             </Form.Row>
-
-            {/* <Form>
-            <Row>
-              <Col>
-                <Form.Group>
-                  <InputGroup>
-                    <InputGroup.Prepend>
-                      <InputGroup.Text className="ml-4">
-                        Hashtags:
-                      </InputGroup.Text>
-                    </InputGroup.Prepend>
-                    <FormControl
-                      required
-                      className="mr-4"
-                      placeholder="Enter some hashtags..."
-                      autoComplete="off"
-                      type="text"
-                      name="description"
-                      value={hashtags}
-                      onChange={(event) => setHashtags(event.target.value)}
-                    />
-                  </InputGroup>
-                </Form.Group>
-              </Col>
-            </Row>
-          </Form> */}
             <Form.Row>
               <Col lg={5}>
                 <Form.Group>

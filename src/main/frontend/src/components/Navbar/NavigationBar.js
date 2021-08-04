@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Navbar, Nav } from "react-bootstrap";
 import AuthenticationService from "../../services/AuthenticationService";
 import { useHistory } from "react-router";
 import UserService from "../../services/UserService";
