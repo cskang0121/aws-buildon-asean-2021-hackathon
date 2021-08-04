@@ -39,7 +39,6 @@ public class S3UploadService {
 
         // 2. Check if file is an image
         isImage(file);
-        // int mB = 1024 * 1024;
 
         Map<String, String> metadata = extractMetadata(file);
 
@@ -67,9 +66,6 @@ public class S3UploadService {
         } catch (IOException e) {
             logger.error("Something", e);
         }
-
-        // Return the filename
-        // return String.format("%s/%s", bucket, key);
 
         // Return the key
         return key;

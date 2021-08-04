@@ -221,7 +221,6 @@ export default function Search() {
   const [fullCategoryName, setFullCategoryName] = useState("");
   const [itemCondition, setItemCondition] = useState("");
   const [searchLocation, setSearchLocation] = useState("");
-  // const [hashtags, setHashtags] = useState("");
 
   
 

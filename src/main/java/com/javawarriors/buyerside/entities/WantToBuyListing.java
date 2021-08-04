@@ -47,21 +47,6 @@ public class WantToBuyListing {
 
     private Date dateOfCreation;
 
-    // @ManyToMany
-    // @JoinTable(
-    //     name="wtb_tags",
-    //     joinColumns= {
-    //         @JoinColumn(name="wtb_id", referencedColumnName = "wtb_id")
-    //     },
-    //     inverseJoinColumns = {
-    //         @JoinColumn(name="tag_category_name", referencedColumnName = "tag_category_name"),
-    //         @JoinColumn(name="tag_value", referencedColumnName = "tag_value")
-    //     }
-    // )
-    // private Set<Tag> tags;
-
-    /** getters and setters for the variables of the WTBlisting */
-
 	public Long getWtbId() {
 		return this.wtbId;
 	}

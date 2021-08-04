@@ -29,19 +29,6 @@ public class ItemForSaleListing {
 
     private Double price;
 
-    // @ManyToMany
-    // @JoinTable(
-    //     name="ifs_tags",
-    //     joinColumns= {
-    //         @JoinColumn(name="ifs_id", referencedColumnName ="ifs_id")
-    //     },
-    //     inverseJoinColumns = {
-    //         @JoinColumn(name="tag_category_name", referencedColumnName = "tag_category_name"),
-    //         @JoinColumn(name="tag_value", referencedColumnName = "tag_value")
-    //     }
-    // )
-    // private Set<Tag> tags;
-
     private String categoryName;
 
 	private String itemCondition;

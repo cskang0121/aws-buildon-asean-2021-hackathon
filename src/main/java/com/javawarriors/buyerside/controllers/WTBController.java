@@ -55,10 +55,6 @@ public class WTBController {
         wtbService.deleteById(toDeleteWTBListing.getWtbId());
     }
 
-    // @PostMapping("/wtb-listing/editWTB/post")
-    // public void editWTB(@RequestBody WantToBuyListing toEditWTBListing) {
-    // }
-
     @GetMapping("/searchWTB/get")
     public List<WantToBuyListing> searchWTB(
             @RequestParam(name = "keyword") String Keyword, 
