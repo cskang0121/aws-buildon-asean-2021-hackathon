@@ -53,28 +53,27 @@ export default function PostSellerQnA(props) {
       centered
     >
       <Modal.Header>
-        <Modal.Title id="contained-modal-title-vcenter">
+        <Modal.Title className="pt-2 pb-2 pl-4" id="contained-modal-title-vcenter">
           Ask a Question
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form.Row>
-          <Form.Group>
-            <InputGroup>
-              <InputGroup.Prepend>
-                <InputGroup.Text>Question:</InputGroup.Text>
-              </InputGroup.Prepend>
-              <FormControl
-                required
-                autoComplete="off"
-                type="text"
-                name="question"
-                value={question.question}
-                onChange={(event) => handleChange(event)}
-              />
-            </InputGroup>
-          </Form.Group>
-        </Form.Row>
+        <Form.Group className="pl-5 pt-4 pb-2 pr-5">
+          <InputGroup>
+            <InputGroup.Prepend>
+              <InputGroup.Text>Question:</InputGroup.Text>
+            </InputGroup.Prepend>
+            <FormControl
+              required
+              placeholder="Enter your question here..."
+              autoComplete="off"
+              type="text"
+              name="question"
+              value={question.question}
+              onChange={(event) => handleChange(event)}
+            />
+          </InputGroup>
+        </Form.Group>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={props.onHide}>
