@@ -36,4 +36,4 @@ Some of our prototype's features may not be available 24/7 due to the limitation
 ## Relevant Links
 - **Prototype**: http://javawarriors-buyerside-731098be-456e-4ed6-995e.s3-website-us-east-1.amazonaws.com/
 - **Demo Video**: https://youtu.be/Kw7XWziG3Dc
-- **Slide Deck**:
+- **Slide Deck**: https://drive.google.com/file/d/1Ribh03ELP6BpN_GcL1ktx5xv1h0Pn8Zz/view?usp=sharing
