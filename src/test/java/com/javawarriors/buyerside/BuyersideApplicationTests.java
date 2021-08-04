@@ -13,56 +13,57 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class BuyersideApplicationTests {
-	@Autowired 
-	IFSRepo ifsRepo;
-	@Autowired 
-	IFSService ifsService;
+	// @Autowired
+	// IFSRepo ifsRepo;
+	// @Autowired
+	// IFSService ifsService;
 
-	@Autowired
-	BuyerQnARepo buyerQnARepo;
-	@Autowired
-	BuyerQnAService buyerQnAService;
-
-	@Test
-	void contextLoads() {
-	}
+	// @Autowired
+	// BuyerQnARepo buyerQnARepo;
+	// @Autowired
+	// BuyerQnAService buyerQnAService;
 
 	// @Test
-	// public void testCustomQuery() {
-	// 	String keyword = "";
-	// 	String categoryName = "";
-	// 	String itemCondition = "";
-	// 	String[] conditionArr = itemCondition.split("\\|");
-		
-	// 	List<ItemForSaleListing> listings = ifsService.getSearchResults(keyword, categoryName, itemCondition);
-
-	// 	System.out.println();
-	// 	System.out.println();
-	// 	System.out.println();
-	// 	System.out.println(conditionArr.length);
-	// 	for (String string : conditionArr) {
-	// 		System.out.println(string);
-	// 	}
-	// 	System.out.println();
-	// 	System.out.println();
-	// 	System.out.println();
-	// 	System.out.println(listings);
-	// 	System.out.println();
-	// 	System.out.println();
-	// 	System.out.println();
+	// void contextLoads() {
 	// }
 
-	@Test
-	public void testBuyerQnACustomQuery() {
-		Long wtbId = (long) 1;
-		List<BuyerQnA> list = buyerQnAService.findByWtbId(wtbId);
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println(list);
-		System.out.println();
-		System.out.println();
-		System.out.println();
-	}
+	// // @Test
+	// // public void testCustomQuery() {
+	// // String keyword = "";
+	// // String categoryName = "";
+	// // String itemCondition = "";
+	// // String[] conditionArr = itemCondition.split("\\|");
+
+	// // List<ItemForSaleListing> listings = ifsService.getSearchResults(keyword,
+	// categoryName, itemCondition);
+
+	// // System.out.println();
+	// // System.out.println();
+	// // System.out.println();
+	// // System.out.println(conditionArr.length);
+	// // for (String string : conditionArr) {
+	// // System.out.println(string);
+	// // }
+	// // System.out.println();
+	// // System.out.println();
+	// // System.out.println();
+	// // System.out.println(listings);
+	// // System.out.println();
+	// // System.out.println();
+	// // System.out.println();
+	// // }
+
+	// @Test
+	// public void testBuyerQnACustomQuery() {
+	// Long wtbId = (long) 1;
+	// List<BuyerQnA> list = buyerQnAService.findByWtbId(wtbId);
+	// System.out.println();
+	// System.out.println();
+	// System.out.println();
+	// System.out.println(list);
+	// System.out.println();
+	// System.out.println();
+	// System.out.println();
+	// }
 
 }

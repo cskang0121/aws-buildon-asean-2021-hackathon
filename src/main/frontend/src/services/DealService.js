@@ -1,7 +1,8 @@
 import axios from "axios";
 import authHeader from "../util/authHeader";
+import { API_BASE_URL } from "../util/apiBaseUrl";
 
-const DEAL_API_BASE_URL = "http://localhost:8080/api/v1/deal";
+const DEAL_API_BASE_URL = `${API_BASE_URL}/deal`;
 
 class DealService {
   postDeal(deal) {
